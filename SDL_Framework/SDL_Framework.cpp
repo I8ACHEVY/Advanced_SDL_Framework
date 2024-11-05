@@ -2,11 +2,20 @@
 //
 
 #include <iostream>
+#include <SDL.h>
 
-int main()
+int main(int argc, char* args[])
 {
-    std::cout << "Hello World!\n";
-    std::cout << "STL Advanced Framework";
+    if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0)
+    {
+        std::cerr << "SDL could not init, error: " << SDL_GetError() << std::endl;
+        return -1;
+    }
+
+    std::cout << "STL Advanced Framework\n";
+
+    SDL_Quit();
+    return 0;
 }
 
 
