@@ -3,11 +3,8 @@
 
 #include <iostream>
 #include <SDL.h>
+#include "Graphics.h"
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-SDL_Window* window = nullptr;
-SDL_Renderer* renderer = nullptr;
 bool quit = false;
 
 int main(int argc, char* args[])
