@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include <iostream>
 
-namespace SDLFramework
+namespace SDL_Framework
 {
 	class Graphics{
 	public:

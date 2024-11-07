@@ -1,6 +1,6 @@
 #include "Graphics.h"
 
-namespace SDLFramework
+namespace SDL_Framework
 {
 	Graphics* Graphics::sInstance = nullptr;
 	bool Graphics::sInitialized = false;
@@ -30,16 +30,48 @@ namespace SDLFramework
 		SDL_RenderPresent(mRenderer);
 	}
 
-	Graphics();
-	~Graphics();
+	Graphics::Graphics() : mRenderer(){
+		sInitialized = Init();
+	}
+	Graphics::~Graphics() {
+		// Destroy renderer
+		SDL_DestroyRenderer(mRenderer);
+		//Destroy the window
+		SDL_DestroyWindow(mWindow);
+	}
 
-	bool Init();
+	bool Graphics::Init() {
+		// Initialize SDL subsystem
+		if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0)
+		{
+			std::cerr << "SDL could not init, error: " << SDL_GetError() << std::endl;
+			return false;
+		}
 
+		std::cout << "STL Advanced Framework\n";
 
-	static Graphics* sInstance;
-	static bool sInitialized;
+		mWindow = SDL_CreateWindow(
+			"SDL Tutorial",
+			SDL_WINDOWPOS_UNDEFINED,
+			SDL_WINDOWPOS_UNDEFINED,
+			SCREEN_WIDTH,
+			SCREEN_HEIGHT,
+			SDL_WINDOW_SHOWN
+		);
 
-	SDL_Window* window = nullptr;
-	SDL_Renderer* renderer = nullptr;
+		if (mWindow == nullptr)
+		{
+			std::cerr << "Unable to create a window. SDL_Error: "
+				<< SDL_GetError() << std::endl;
+		}
 
+		mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
+		if (mRenderer == nullptr)
+		{
+			std::cerr << "Unable to get renderer. SDL_Error: "
+				<< SDL_GetError() << std::endl;
+			return false;
+		}
+		return true;
+	}
 }
