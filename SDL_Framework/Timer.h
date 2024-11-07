@@ -9,10 +9,10 @@ namespace SDL_Framework {
 		static void Release();
 
 		void Reset();
-		float DeltaTime();
+		float DeltaTime() const;
 
 		void TimeScale(float timeScale);
-		float TimeScale();
+		float TimeScale() const;
 
 		void Update();
 
