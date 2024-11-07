@@ -43,7 +43,7 @@ namespace SDL_Framework {
 	}
 
 	void GameManager::LateUpdate() {
-		std::cout << std::endl;
+
 	}
 
 	void GameManager::Render() {

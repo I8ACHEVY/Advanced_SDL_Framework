@@ -42,9 +42,9 @@ namespace SDL_Framework
 
 	bool Graphics::Init() {
 		// Initialize SDL subsystem
-		if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0)
-		{
-			std::cerr << "SDL could not init, error: " << SDL_GetError() << std::endl;
+		if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0){
+			std::cerr << "SDL could not init, error: " << SDL_GetError() 
+				      << std::endl;
 			return false;
 		}
 
@@ -62,14 +62,14 @@ namespace SDL_Framework
 		if (mWindow == nullptr)
 		{
 			std::cerr << "Unable to create a window. SDL_Error: "
-				<< SDL_GetError() << std::endl;
+				      << SDL_GetError() << std::endl;
 		}
 
 		mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
 		if (mRenderer == nullptr)
 		{
 			std::cerr << "Unable to get renderer. SDL_Error: "
-				<< SDL_GetError() << std::endl;
+				      << SDL_GetError() << std::endl;
 			return false;
 		}
 		return true;

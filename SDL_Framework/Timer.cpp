@@ -19,7 +19,7 @@ namespace SDL_Framework {
 		mStartTicks = SDL_GetTicks();
 	}
 
-	float Timer::DeltaTime() const {
+	float Timer::DeltaTime() {
 		return mDeltaTime;
 	}
 
