@@ -30,7 +30,7 @@ namespace SDL_Framework
 		SDL_RenderPresent(mRenderer);
 	}
 
-	Graphics::Graphics() : mRenderer(){
+	Graphics::Graphics() : mRenderer(nullptr), mWindow(nullptr){
 		sInitialized = Init();
 	}
 	Graphics::~Graphics() {
@@ -63,6 +63,7 @@ namespace SDL_Framework
 		{
 			std::cerr << "Unable to create a window. SDL_Error: "
 				      << SDL_GetError() << std::endl;
+			return false; //end if window creations fails
 		}
 
 		mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
@@ -70,6 +71,7 @@ namespace SDL_Framework
 		{
 			std::cerr << "Unable to get renderer. SDL_Error: "
 				      << SDL_GetError() << std::endl;
+			SDL_DestroyWindow(mWindow); // cleanup window before returning
 			return false;
 		}
 		return true;

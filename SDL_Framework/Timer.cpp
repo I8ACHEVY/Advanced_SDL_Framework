@@ -16,7 +16,7 @@ namespace SDL_Framework {
 	}
 
 	void Timer::Reset() {
-		mStartTicks = SDL_GetTicks();
+		mStartTicks = SDL_GetTicks(); // get performance counter?
 	}
 
 	float Timer::DeltaTime() const{
@@ -31,7 +31,7 @@ namespace SDL_Framework {
 		return mTimeScale;
 	}
 
-	void Timer::Update() {
+	void Timer::Update() {		//get performance frequency?
 		mElapsedTicks = SDL_GetTicks() - mStartTicks;  // calc diff in time in m/s 
 		mDeltaTime = mElapsedTicks * 0.001f;			// convert from m/s to seconds
 	}
