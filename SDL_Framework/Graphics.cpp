@@ -22,6 +22,29 @@ namespace SDL_Framework
 		return sInitialized;
 	}
 
+	SDL_Texture* Graphics::LoadTexture(std::string path) {
+		SDL_Texture* tex = nullptr;
+
+		SDL_Surface* surface = IMG_Load(path.c_str());
+
+		if (surface == nullptr) {
+			std::cerr << "unable to load " << path << ". IMG Error: "
+				<< IMG_GetError() << std::endl;
+			return nullptr;
+		}
+
+		tex = SDL_CreateTextureFromSurface(mRenderer, surface);
+
+		if (tex == nullptr) {
+			std::cerr << "Unable to create texture from surface. IMG Error: "
+				<< IMG_GetError() << std::endl;
+			SDL_FreeSurface(surface);
+		}
+
+		SDL_FreeSurface(surface);
+		return tex;
+	}
+
 	void Graphics::ClearBackBuffer() {
 		SDL_RenderClear(mRenderer);
 	}

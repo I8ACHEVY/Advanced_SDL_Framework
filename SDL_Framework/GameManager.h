@@ -22,8 +22,9 @@ namespace SDL_Framework {
 		const int FRAME_RATE = 60;
 		static GameManager* sInstance;
 		bool mQuit;
+		
 		mParent;
-			mChild;
+		mChild;
 
 		Graphics* mGraphics;
 		Timer* mTimer;

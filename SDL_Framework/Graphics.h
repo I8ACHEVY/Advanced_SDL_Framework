@@ -1,6 +1,8 @@
 #pragma once
 #include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
+#include<string>
 
 namespace SDL_Framework
 {
@@ -12,6 +14,10 @@ namespace SDL_Framework
 		static Graphics* Instance();
 		static void Release();
 		static bool Initialized();
+
+		SDL_Texture* LoadTexture(std::string path);
+		void DrawTexture(SDL_Texture* texture, SDL_Rect* srcRect = nullptr, 
+			SDL_Rect* dstRect = nullptr, float angle = 0.0f, SDL_RendererFlip = SDL_FLIP_NONE);
 
 		void ClearBackBuffer();
 		void Render();
