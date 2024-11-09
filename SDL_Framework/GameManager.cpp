@@ -40,7 +40,7 @@ namespace SDL_Framework {
 		}
 	}
 	void GameManager::Update() {
-		std::cout << "Delta Time: " << mTimer->DeltaTime() << std::endl;
+		//std::cout << "Delta Time: " << mTimer->DeltaTime() << std::endl;
 	}
 
 	void GameManager::LateUpdate() {
@@ -60,6 +60,19 @@ namespace SDL_Framework {
 		}
 
 		mTimer = Timer::Instance();
+
+		mParent = new GameEntity(100.0f, 400.0f);
+		mChild = new GameEntity(100.0f, 500.0f);
+
+		printf("Child local pos: (%f,%f) \n",
+			mChild->Position(GameEntity::Local).x,
+			mChild->Position(GameEntity::Local).y);
+
+		mChild->Parent(mParent);
+
+		printf("Child local pos: (%f,%f) \n",
+			mChild->Position(GameEntity::Local).x,
+			mChild->Position(GameEntity::Local).y);
 	}
 
 	GameManager::~GameManager() {

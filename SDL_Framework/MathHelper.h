@@ -60,7 +60,7 @@ namespace SDL_Framework {
 		return start + dir * mag * time;
 	}
 
-	inline Vector2 RotateVector(const Vector2& vec, float& angle) {
+	inline Vector2 RotateVector(const Vector2& vec, float angle) {
 		float radAngle = (float)(angle * DEG_TO_RAD);	//convert degrees to radians
 		
 		return Vector2((float)vec.x * cos(radAngle) - vec.y * sin(radAngle),	//rotated x pos
