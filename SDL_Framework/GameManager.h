@@ -1,5 +1,6 @@
 #pragma once
 #include "Graphics.h"
+#include "GameEntity.h"
 #include "Timer.h"
 
 namespace SDL_Framework {
@@ -24,7 +25,7 @@ namespace SDL_Framework {
 		bool mQuit;
 		
 		GameEntity* mParent;
-		mChild;
+		GameEntity* mChild;
 
 		Graphics* mGraphics;
 		Timer* mTimer;
