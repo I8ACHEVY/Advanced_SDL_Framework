@@ -23,7 +23,7 @@ namespace SDL_Framework {
 		static GameManager* sInstance;
 		bool mQuit;
 		
-		mParent;
+		GameEntity* mParent;
 		mChild;
 
 		Graphics* mGraphics;

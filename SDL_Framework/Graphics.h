@@ -17,7 +17,7 @@ namespace SDL_Framework
 
 		SDL_Texture* LoadTexture(std::string path);
 		void DrawTexture(SDL_Texture* texture, SDL_Rect* srcRect = nullptr, 
-			SDL_Rect* dstRect = nullptr, float angle = 0.0f, SDL_RendererFlip = SDL_FLIP_NONE);
+			SDL_Rect* dstRect = nullptr, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 		void ClearBackBuffer();
 		void Render();

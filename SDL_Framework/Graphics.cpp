@@ -34,15 +34,20 @@ namespace SDL_Framework
 		}
 
 		tex = SDL_CreateTextureFromSurface(mRenderer, surface);
+		SDL_FreeSurface(surface);
 
 		if (tex == nullptr) {
 			std::cerr << "Unable to create texture from surface. IMG Error: "
 				<< IMG_GetError() << std::endl;
 			SDL_FreeSurface(surface);
+			return nullptr;
 		}
-
-		SDL_FreeSurface(surface);
 		return tex;
+	}
+
+	void Graphics::DrawTexture(SDL_Texture* texture, SDL_Rect* srcRect, SDL_Rect* dstRect,
+		float angle, SDL_RendererFlip) {
+		//
 	}
 
 	void Graphics::ClearBackBuffer() {
