@@ -26,6 +26,9 @@ namespace SDL_Framework {
 		void Parent(GameEntity* parent);
 		GameEntity* Parent();
 
+		void Translate(Vector2 vec, Space space = Local);
+		void Rotate(float amount);
+
 		virtual void Update() {};
 		virtual void Render() {};
 

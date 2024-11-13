@@ -2,6 +2,8 @@
 #include "Graphics.h"
 #include "GameEntity.h"
 #include "Timer.h"
+#include "Texture.h"
+#include "InputManager.h"
 
 namespace SDL_Framework {
 	class GameManager {
@@ -24,11 +26,16 @@ namespace SDL_Framework {
 		static GameManager* sInstance;
 		bool mQuit;
 		
-		GameEntity* mParent;
-		GameEntity* mChild;
+		//GameEntity* mParent;
+		//GameEntity* mChild;
 
 		Graphics* mGraphics;
 		Timer* mTimer;
+		AssetManager* mAssetManager;
+		InputManager* mInputManager;
+
+		Texture* mTex;
+		Texture* mRedShip;
 
 		SDL_Event mEvents;
 	};

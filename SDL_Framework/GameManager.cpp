@@ -41,6 +41,31 @@ namespace SDL_Framework {
 	}
 	void GameManager::Update() {
 		//std::cout << "Delta Time: " << mTimer->DeltaTime() << std::endl;
+
+		mInputManager->Update();
+
+		if (mInputManager->KeyDown(SDL_SCANCODE_W)) {
+			mTex->Translate(Vector2(0, -40.0f) * mTimer->DeltaTime(), GameEntity::World);
+		}
+		else if (mInputManager->KeyDown(SDL_SCANCODE_S)) {
+			mTex->Translate(Vector2(0, 40.0f) * mTimer->DeltaTime(), GameEntity::World);
+		}
+
+		if (mInputManager->KeyPressed(SDL_SCANCODE_SPACE)) {
+			std::cout << "Space pressed!" << std::endl;
+		}
+		if (mInputManager->KeyReleased(SDL_SCANCODE_SPACE)) {
+			std::cout << "Space released!" << std::endl;
+		}
+
+		if (mInputManager->MouseButtonPressed(InputManager::Left)) {
+			std::cout << "Left mouse button pressed!" << std::endl;
+		}
+
+		if (mInputManager->MouseButtonReleased(InputManager::Left)) {
+			std::cout << "Left mouse button released!" << std::endl;
+		}
+
 	}
 
 	void GameManager::LateUpdate() {
@@ -49,6 +74,10 @@ namespace SDL_Framework {
 
 	void GameManager::Render() {
 		mGraphics->ClearBackBuffer();
+
+		mRedShip->Render();
+		mTex->Render();
+
 		mGraphics->Render();
 	}
 
@@ -60,28 +89,54 @@ namespace SDL_Framework {
 		}
 
 		mTimer = Timer::Instance();
+		mAssetManager = AssetManager::Instance();
+		mInputManager = InputManager::Instance();
 
-		mParent = new GameEntity(100.0f, 400.0f);
-		mChild = new GameEntity(100.0f, 500.0f);
+		mTex = new Texture("SpriteSheet.png", 182, 54, 22, 22);
+		mTex->Scale(Vector2(1.5f, 1.5f));
 
-		printf("Child local pos: (%f,%f) \n",
-			mChild->Position(GameEntity::Local).x,
-			mChild->Position(GameEntity::Local).y);
+		mTex->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f,
+			Graphics::SCREEN_HEIGHT * 0.5f));
 
-		mChild->Parent(mParent);
+		mRedShip = new Texture("SpriteSheet.png", 182, 78, 20, 20);
 
-		printf("Child local pos: (%f,%f) \n",
-			mChild->Position(GameEntity::Local).x,
-			mChild->Position(GameEntity::Local).y);
+		mRedShip->Scale(Vector2(1.5f, 1.5f));
+		mRedShip->Position(Vector2(Graphics::SCREEN_WIDTH * 0.4f, Graphics::SCREEN_HEIGHT * 0.5f));
+
+		//mParent = new GameEntity(100.0f, 400.0f);
+		//mChild = new GameEntity(100.0f, 500.0f);
+
+		//printf("Child local pos: (%f,%f) \n",
+		//	mChild->Position(GameEntity::Local).x,
+		//	mChild->Position(GameEntity::Local).y);
+
+		//mChild->Parent(mParent);
+
+		//printf("Child local pos: (%f,%f) \n",
+		//	mChild->Position(GameEntity::Local).x,
+		//	mChild->Position(GameEntity::Local).y);
 	}
 
 	GameManager::~GameManager() {
+		//Release pointers/ variables
+		delete mTex;
+		mTex = nullptr;
+
+		delete mRedShip;
+		mRedShip = nullptr;
+
 		//Release modules
 		Graphics::Release();
 		mGraphics = nullptr;
 
 		Timer::Release();
 		mTimer = nullptr;
+
+		AssetManager::Release();
+		mAssetManager = nullptr;
+
+		InputManager::Release();
+		mInputManager = nullptr;
 
 		// terminate SDL subsystems
 		SDL_Quit();

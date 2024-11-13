@@ -123,6 +123,7 @@
     <PostBuildEvent>
       <Command>copy /y "$(ProjectDir)..\dep\devel\x64\*.dll" "$(OutDir)
  
+xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -147,6 +148,7 @@
     <PostBuildEvent>
       <Command>copy /y "$(ProjectDir)..\dep\devel\x64\*.dll" "$(OutDir)
  
+xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -155,7 +157,9 @@
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="SDL_Framework.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,7 +167,9 @@
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="MathHelper.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

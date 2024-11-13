@@ -98,6 +98,19 @@ namespace SDL_Framework {
 		}
 	}
 
+	void GameEntity::Translate(Vector2 vec, Space space) {
+		if (space == World) {
+			mPosition += vec;
+		}
+		else {
+			mPosition += RotateVector(vec, Rotation());
+		}
+	}
+
+	void GameEntity::Rotate(float amount) {
+		mRotation += amount;
+	}
+
 	GameEntity* GameEntity::Parent() {
 		return mParent;
 	}
