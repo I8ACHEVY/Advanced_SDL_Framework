@@ -1,6 +1,9 @@
-//#define _CRT_SECURE_DEPRECATE_MEMORY	//memcpy
-//#include <memory.h>					//memcpy
-#include <string>
+#define _CRT_SECURE_DEPRECATE_MEMORY	//memcpy
+#define _CRT_SECURE_NO_WARNINGS
+#include <memory.h>					//memcpy
+
+//#include <string>
+
 #include "InputManager.h"
 
 

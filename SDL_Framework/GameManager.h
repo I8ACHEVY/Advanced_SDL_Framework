@@ -25,6 +25,12 @@ namespace SDL_Framework {
 		const int FRAME_RATE = 60;
 		static GameManager* sInstance;
 		bool mQuit;
+
+		float mScaleTimeZ;
+		float mScaleTimeC;
+
+		float mScaleTimeM;
+		float mScaleTimePER;
 		
 		//GameEntity* mParent;
 		//GameEntity* mChild;
