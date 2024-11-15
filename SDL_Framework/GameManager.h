@@ -4,9 +4,6 @@
 #include "InputManager.h"
 #include "GameEntity.h"
 
-//#include "Timer.h"
-//#include "Texture.h"
-
 namespace SDL_Framework {
 	class GameManager {
 	public:
@@ -42,7 +39,6 @@ namespace SDL_Framework {
 		AssetManager* mAssetManager;
 		InputManager* mInputManager;
 
-		//Texture* mTex;
 		AnimatedTexture* mTex;
 		AnimatedTexture* mRedShip;
 

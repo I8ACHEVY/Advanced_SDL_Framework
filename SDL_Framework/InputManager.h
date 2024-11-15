@@ -2,6 +2,8 @@
 
 #include <SDL.h>
 #include "MathHelper.h"
+//#define _CRT_SECURE_DEPRECATE_MEMORY
+//#include <memory.h>
 
 namespace SDL_Framework {
 	class InputManager {

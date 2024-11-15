@@ -122,6 +122,7 @@ namespace SDL_Framework
 			SDL_DestroyWindow(mWindow); // cleanup window before returning
 			return false;
 		}
+
 		if (TTF_Init() == -1) {
 			std::cerr << "Unable to initialize SDL_TTF, TTF Error: " << TTF_GetError()
 				<< std::endl;

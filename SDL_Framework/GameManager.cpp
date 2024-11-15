@@ -43,8 +43,8 @@ namespace SDL_Framework {
 		//std::cout << "Delta Time: " << mTimer->DeltaTime() << std::endl;
 
 		mInputManager->Update();
+
 		mTex->Update();
-		mRedShip->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_W) || mInputManager->KeyDown(SDL_SCANCODE_UP)) {
 			mTex->Translate(Vector2(0, -40.0f) * mTimer->DeltaTime(), GameEntity::World);
@@ -97,6 +97,7 @@ namespace SDL_Framework {
 		//SECOND SET OF MOVEMENT FOR SECOND TEXTURE (IJKL and KeyPad Numbers 8,6,2,4)
 		//SECOND SET OF ROTATION (U LEFT, O RIGHT)
 		//SECOND SET OF SCALING (M DOWN, . UP)
+		mRedShip->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_I) || mInputManager->KeyDown(SDL_SCANCODE_KP_8)) {
 			mRedShip->Translate(Vector2(0, -40.0f) * mTimer->DeltaTime(), GameEntity::World);
@@ -133,13 +134,6 @@ namespace SDL_Framework {
 
 		if (mInputManager->MouseButtonReleased(InputManager::Left)) {
 			std::cout << "Left mouse button released!" << std::endl;
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_Q)) {
-			mRedShip->Rotate(-260.0f * mTimer->DeltaTime());
-		}
-		else if (mInputManager->KeyDown(SDL_SCANCODE_E)) {
-			mRedShip->Rotate(260.0f * mTimer->DeltaTime());
 		}
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_M)) {
@@ -219,7 +213,7 @@ namespace SDL_Framework {
 			Graphics::SCREEN_HEIGHT * 0.5f));
 
 
-		mFontTex = new Texture("GALAGA", "ARCADE.TFF", 72, { 255, 0, 0 });
+		mFontTex = new Texture("GALAGA", "ARCADE.TTF", 72, { 255, 10, 10 });
 		mFontTex->Position(Vector2(400, 200));
 
 		//mParent = new GameEntity(100.0f, 400.0f);

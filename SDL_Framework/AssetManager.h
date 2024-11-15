@@ -26,7 +26,10 @@ namespace SDL_Framework {
 		static AssetManager* sInstance;
 
 		std::map<std::string, SDL_Texture*> mTextures;
+
 		std::map<std::string, TTF_Font*> mFonts;
-		std::map<SDL_Texture*, unsigned> mTextureRefCount;
+		//std::map<std::string, SDL_Texture*> mText;
+
+		std::map<SDL_Texture*, unsigned int> mTextureRefCount;
 	};
 }
