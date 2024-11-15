@@ -1,9 +1,11 @@
 #pragma once
 #include "Graphics.h"
-#include "GameEntity.h"
-#include "Timer.h"
-#include "Texture.h"
+#include "AnimatedTexture.h"
 #include "InputManager.h"
+#include "GameEntity.h"
+
+//#include "Timer.h"
+//#include "Texture.h"
 
 namespace SDL_Framework {
 	class GameManager {
@@ -40,8 +42,11 @@ namespace SDL_Framework {
 		AssetManager* mAssetManager;
 		InputManager* mInputManager;
 
-		Texture* mTex;
-		Texture* mRedShip;
+		//Texture* mTex;
+		AnimatedTexture* mTex;
+		AnimatedTexture* mRedShip;
+
+		Texture* mFontTex;
 
 		SDL_Event mEvents;
 	};

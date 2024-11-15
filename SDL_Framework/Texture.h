@@ -8,6 +8,8 @@ namespace SDL_Framework {
 		Texture(std::string filename, bool managed = false);
 		Texture(std::string filename, int x, int y, int width, 
 			int height, bool managed = false);
+		Texture(std::string text, std::string fontPath, int size, 
+			SDL_Color color, bool managed = false);	// Text obj
 		~Texture();
 
 		Vector2 ScaledDimensions();
@@ -15,8 +17,9 @@ namespace SDL_Framework {
 
 		void SetSourceRect(SDL_Rect* sourceRect);
 	
-	private:
+	protected:
 		SDL_Texture* mTex;
+		SDL_Texture* mRedShip;
 		Graphics* mGraphics;
 
 		int mWidth;

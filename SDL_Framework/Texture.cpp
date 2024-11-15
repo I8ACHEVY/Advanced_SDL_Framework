@@ -5,8 +5,10 @@ namespace SDL_Framework {
 		mGraphics = Graphics::Instance();
 
 		mTex = AssetManager::Instance()->GetTexture(filename, managed);
+		mRedShip = AssetManager::Instance()->GetTexture(filename, managed);
 
 		SDL_QueryTexture(mTex, nullptr, nullptr, &mWidth, &mHeight);
+		SDL_QueryTexture(mRedShip, nullptr, nullptr, &mWidth, &mHeight);
 
 		mClipped = false;
 		mDestinationRect.w = mWidth;
@@ -16,6 +18,7 @@ namespace SDL_Framework {
 	Texture::Texture(std::string filename, int x, int y, int width, int height, bool managed) {
 		mGraphics = Graphics::Instance();
 		mTex = AssetManager::Instance()->GetTexture(filename, managed);
+		mRedShip = AssetManager::Instance()->GetTexture(filename, managed);
 
 		mWidth = width;
 		mHeight = height;
@@ -31,9 +34,30 @@ namespace SDL_Framework {
 		mSourceRect.h = height;
 	}
 
+	Texture::Texture(std::string text, std::string fontPath, int size, 
+		SDL_Color color, bool managed){
+		mGraphics = Graphics::Instance();
+
+		mTex = AssetManager::Instance()->GetText(text, fontPath,
+			size, color, managed);
+		mRedShip = AssetManager::Instance()->GetText(text, fontPath,
+			size, color, managed);
+
+		mClipped = false;
+
+		SDL_QueryTexture(mTex, nullptr, nullptr, &mWidth, &mHeight);
+		SDL_QueryTexture(mRedShip, nullptr, nullptr, &mWidth, &mHeight);
+
+		mDestinationRect.w = mWidth;
+		mDestinationRect.h = mHeight;
+
+	}
+
 	Texture::~Texture() {
 		AssetManager::Instance()->DestroyTexture(mTex);
+		AssetManager::Instance()->DestroyTexture(mRedShip);
 		mTex = nullptr;
+		mRedShip = nullptr;
 		mGraphics = nullptr;
 	}
 
@@ -59,5 +83,7 @@ namespace SDL_Framework {
 		mDestinationRect.h = (int)(mHeight * scale.y);
 
 		mGraphics->DrawTexture(mTex, mClipped ?  &mSourceRect : nullptr, &mDestinationRect, Rotation(World));
+
+		mGraphics->DrawTexture(mRedShip, mClipped ? &mSourceRect : nullptr, &mDestinationRect, Rotation(World));
 	}
 }

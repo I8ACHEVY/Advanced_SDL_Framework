@@ -43,6 +43,8 @@ namespace SDL_Framework {
 		//std::cout << "Delta Time: " << mTimer->DeltaTime() << std::endl;
 
 		mInputManager->Update();
+		mTex->Update();
+		mRedShip->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_W) || mInputManager->KeyDown(SDL_SCANCODE_UP)) {
 			mTex->Translate(Vector2(0, -40.0f) * mTimer->DeltaTime(), GameEntity::World);
@@ -179,6 +181,8 @@ namespace SDL_Framework {
 		mRedShip->Render();
 		mTex->Render();
 
+		mFontTex->Render();
+
 		mGraphics->Render();
 	}
 
@@ -193,16 +197,30 @@ namespace SDL_Framework {
 		mAssetManager = AssetManager::Instance();
 		mInputManager = InputManager::Instance();
 
-		mTex = new Texture("SpriteSheet.png", 182, 54, 22, 22);
-		mTex->Scale(Vector2(1.5f, 1.5f));
+		//mTex = new Texture("SpriteSheet.png", 182, 54, 22, 22);
+		//mTex->Scale(Vector2(1.5f, 1.5f));
+		//mTex->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f,
+		//	Graphics::SCREEN_HEIGHT * 0.5f));
 
+		mTex = new AnimatedTexture("SpriteSheet.png", 204, 45, 40, 38, 4, 0.6f,
+			AnimatedTexture::Horizontal);
+		mTex->Scale(Vector2(1.5f, 1.5f));
 		mTex->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f,
 			Graphics::SCREEN_HEIGHT * 0.5f));
 
-		mRedShip = new Texture("SpriteSheet.png", 182, 78, 20, 20);
+		//mRedShip = new Texture("SpriteSheet.png", 182, 78, 20, 20);
+		//mRedShip->Scale(Vector2(1.5f, 1.5f));
+		//mRedShip->Position(Vector2(Graphics::SCREEN_WIDTH * 0.4f, Graphics::SCREEN_HEIGHT * 0.5f));
 
+		mRedShip = new AnimatedTexture("SpriteSheet.png", 204, 45, 40, 38, 4, 0.6f,
+			AnimatedTexture::Horizontal);
 		mRedShip->Scale(Vector2(1.5f, 1.5f));
-		mRedShip->Position(Vector2(Graphics::SCREEN_WIDTH * 0.4f, Graphics::SCREEN_HEIGHT * 0.5f));
+		mRedShip->Position(Vector2(Graphics::SCREEN_WIDTH * 0.4f,
+			Graphics::SCREEN_HEIGHT * 0.5f));
+
+
+		mFontTex = new Texture("GALAGA", "ARCADE.TFF", 72, { 255, 0, 0 });
+		mFontTex->Position(Vector2(400, 200));
 
 		//mParent = new GameEntity(100.0f, 400.0f);
 		//mChild = new GameEntity(100.0f, 500.0f);
@@ -225,6 +243,10 @@ namespace SDL_Framework {
 
 		delete mRedShip;
 		mRedShip = nullptr;
+
+
+		delete mFontTex;
+		mFontTex = nullptr;
 
 		//Release modules
 		Graphics::Release();
