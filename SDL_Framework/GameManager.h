@@ -3,6 +3,7 @@
 #include "AnimatedTexture.h"
 #include "InputManager.h"
 #include "GameEntity.h"
+#include "AudioManager.h"
 
 namespace SDL_Framework {
 	class GameManager {
@@ -38,6 +39,7 @@ namespace SDL_Framework {
 		Timer* mTimer;
 		AssetManager* mAssetManager;
 		InputManager* mInputManager;
+		AudioManager* mAudioManager;
 
 		AnimatedTexture* mTex;
 		AnimatedTexture* mRedShip;

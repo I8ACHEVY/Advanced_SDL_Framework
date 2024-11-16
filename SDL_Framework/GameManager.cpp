@@ -44,6 +44,33 @@ namespace SDL_Framework {
 
 		mInputManager->Update();
 
+		if (mInputManager->KeyDown(SDL_SCANCODE_MINUS)) {
+			int currentMusicVolume = Mix_VolumeMusic(-1);
+			int newMusicVolume = currentMusicVolume - 10;
+			if (newMusicVolume < 0) newMusicVolume = 0;
+
+			mAudioManager->MusicVolume(newMusicVolume);
+
+			int currentSFXVolume = Mix_Volume(-1, -1);
+			int newSFXVolume = currentMusicVolume - 10;
+			if (newSFXVolume < 0) newSFXVolume = 0;
+
+			mAudioManager->SFXVolume(newSFXVolume);
+		}
+		else if (mInputManager->KeyDown(SDL_SCANCODE_EQUALS)) {
+			int currentMusicVolume = Mix_VolumeMusic(-1); 
+			int newMusicVolume = currentMusicVolume + 10;  
+			if (newMusicVolume > MIX_MAX_VOLUME) newMusicVolume = MIX_MAX_VOLUME; 
+
+			mAudioManager->MusicVolume(newMusicVolume); 
+
+			int currentSFXVolume = Mix_Volume(-1, -1); 
+			int newSFXVolume = currentSFXVolume + 10;   
+			if (newSFXVolume > MIX_MAX_VOLUME) newSFXVolume = MIX_MAX_VOLUME;    
+
+			mAudioManager->SFXVolume(newSFXVolume);
+		}
+
 		mTex->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_W) || mInputManager->KeyDown(SDL_SCANCODE_UP)) {
@@ -130,6 +157,7 @@ namespace SDL_Framework {
 
 		if (mInputManager->MouseButtonPressed(InputManager::Left)) {
 			std::cout << "Left mouse button pressed!" << std::endl;
+			mAudioManager->PlaySFX("coin_credit.wav", 0, -1);			//audio test
 		}
 
 		if (mInputManager->MouseButtonReleased(InputManager::Left)) {
@@ -190,6 +218,7 @@ namespace SDL_Framework {
 		mTimer = Timer::Instance();
 		mAssetManager = AssetManager::Instance();
 		mInputManager = InputManager::Instance();
+		mAudioManager = AudioManager::Instance();
 
 		//mTex = new Texture("SpriteSheet.png", 182, 54, 22, 22);
 		//mTex->Scale(Vector2(1.5f, 1.5f));
@@ -254,6 +283,9 @@ namespace SDL_Framework {
 
 		InputManager::Release();
 		mInputManager = nullptr;
+
+		AudioManager::Release();
+		mAudioManager = nullptr;
 
 		// terminate SDL subsystems
 		SDL_Quit();
