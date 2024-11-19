@@ -7,6 +7,7 @@ namespace SDL_Framework {
 		enum Space { Local = 0, World};
 
 		GameEntity(float x = 0.0f, float y = 0.0f);
+		GameEntity(const Vector2& position);
 		~GameEntity();
 
 		void Position(float x, float y);

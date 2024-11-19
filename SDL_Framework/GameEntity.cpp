@@ -3,7 +3,10 @@
 namespace SDL_Framework {
 	GameEntity::GameEntity(float x, float y) : mPosition(x,y), mRotation(0.0f), 
 		mScale(Vec2_One), mActive(true), mParent(nullptr){
+	}
 
+	GameEntity::GameEntity(const Vector2& position) : mPosition(position), mRotation(0.0f),
+		mScale(Vec2_One), mActive(true), mParent(nullptr) {
 	}
 
 	GameEntity::~GameEntity() {

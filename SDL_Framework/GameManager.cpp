@@ -243,7 +243,7 @@ namespace SDL_Framework {
 
 
 		mFontTex = new Texture("GALAGA", "ARCADE.TTF", 72, { 255, 10, 10 });
-		mFontTex->Position(Vector2(400, 200));
+		mFontTex->Position(Vector2(300, 50));
 
 		//mParent = new GameEntity(100.0f, 400.0f);
 		//mChild = new GameEntity(100.0f, 500.0f);
