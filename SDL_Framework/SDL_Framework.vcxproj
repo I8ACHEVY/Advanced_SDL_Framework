@@ -164,6 +164,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="PhysicsEntity.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="SDL_Framework.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -181,6 +182,8 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="PhysicsEntity.h" />
+    <ClInclude Include="PhysicsHelper.h" />
+    <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
