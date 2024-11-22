@@ -24,6 +24,7 @@
     <ProjectGuid>{60c363ab-dc92-49b1-a3fc-0e36b68c0282}</ProjectGuid>
     <RootNamespace>SDLFramework</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Galaga_V1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -165,7 +166,8 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="PhysicsEntity.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
-    <ClCompile Include="SDL_Framework.cpp" />
+    <ClCompile Include="Galaga_V1.cpp" />
+    <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
@@ -184,6 +186,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClInclude Include="PhysicsEntity.h" />
     <ClInclude Include="PhysicsHelper.h" />
     <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="StartScreen.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

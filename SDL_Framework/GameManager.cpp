@@ -44,6 +44,9 @@ namespace SDL_Framework {
 		//std::cout << "Delta Time: " << mTimer->DeltaTime() << std::endl;
 
 		mInputManager->Update();
+		mStartScreen->Update();
+		mTex->Update();
+		mRedShip->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_MINUS)) {
 			int currentMusicVolume = Mix_VolumeMusic(-1);
@@ -71,8 +74,6 @@ namespace SDL_Framework {
 
 			mAudioManager->SFXVolume(newSFXVolume);
 		}
-
-		mTex->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_W) || mInputManager->KeyDown(SDL_SCANCODE_UP)) {
 			mTex->Translate(Vector2(0, -40.0f) * mTimer->DeltaTime(), GameEntity::World);
@@ -125,7 +126,6 @@ namespace SDL_Framework {
 		//SECOND SET OF MOVEMENT FOR SECOND TEXTURE (IJKL and KeyPad Numbers 8,6,2,4)
 		//SECOND SET OF ROTATION (U LEFT, O RIGHT)
 		//SECOND SET OF SCALING (M DOWN, . UP)
-		mRedShip->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_I) || mInputManager->KeyDown(SDL_SCANCODE_KP_8)) {
 			mRedShip->Translate(Vector2(0, -40.0f) * mTimer->DeltaTime(), GameEntity::World);
@@ -194,13 +194,14 @@ namespace SDL_Framework {
 	}
 
 	void GameManager::LateUpdate() {
-		mInputManager->UpdatePrevInput();
 		mPhysicsManager->Update();
+		mInputManager->UpdatePrevInput();
 
 	}
 
 	void GameManager::Render() {
 		mGraphics->ClearBackBuffer();
+		mStartScreen->Render();
 
 		mRedShip->Render();
 		mTex->Render();
@@ -288,6 +289,10 @@ namespace SDL_Framework {
 
 	GameManager::~GameManager() {
 		//Release pointers/ variables
+		delete mStartScreen;
+		mStartScreen = nullptr;
+
+
 		delete mTex;
 		mTex = nullptr;
 

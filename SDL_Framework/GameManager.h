@@ -5,6 +5,7 @@
 #include "GameEntity.h"
 #include "AudioManager.h"
 #include "PhysicsManager.h"
+#include "StartScreen.h"
 
 namespace SDL_Framework {
 	class GameManager {
@@ -42,6 +43,8 @@ namespace SDL_Framework {
 		InputManager* mInputManager;
 		AudioManager* mAudioManager;
 		PhysicsManager* mPhysicsManager;
+
+		StartScreen* mStartScreen;
 
 		AnimatedTexture* mTex;
 		AnimatedTexture* mRedShip;
