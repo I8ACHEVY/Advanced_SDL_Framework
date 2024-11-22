@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "BoxCollider.h" // remove after tests
 
 namespace SDL_Framework {
 	GameManager* GameManager::sInstance = nullptr;
@@ -194,6 +195,7 @@ namespace SDL_Framework {
 
 	void GameManager::LateUpdate() {
 		mInputManager->UpdatePrevInput();
+		mPhysicsManager->Update();
 
 	}
 
@@ -202,10 +204,14 @@ namespace SDL_Framework {
 
 		mRedShip->Render();
 		mTex->Render();
+		mPhys1->Render();
+		mPhys2->Render();
 
 		mFontTex->Render();
 
 		mGraphics->Render();
+
+
 	}
 
 	GameManager::GameManager() : mQuit(false) {
@@ -219,6 +225,19 @@ namespace SDL_Framework {
 		mAssetManager = AssetManager::Instance();
 		mInputManager = InputManager::Instance();
 		mAudioManager = AudioManager::Instance();
+		mPhysicsManager = PhysicsManager::Instance();
+
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Friendly,
+			PhysicsManager::CollisionFlags::Hostile |
+			PhysicsManager::CollisionFlags::HostileProjectile);
+
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Hostile,
+			PhysicsManager::CollisionFlags::Friendly |
+			PhysicsManager::CollisionFlags::FriendlyProjectile);
+
+		//challenge 2 todo -> finish setting up the collision layers (friendlyProjectiles, HostileProjectiles)
+		// bump
+
 
 		//mTex = new Texture("SpriteSheet.png", 182, 54, 22, 22);
 		//mTex->Scale(Vector2(1.5f, 1.5f));
@@ -245,18 +264,26 @@ namespace SDL_Framework {
 		mFontTex = new Texture("GALAGA", "ARCADE.TTF", 72, { 255, 10, 10 });
 		mFontTex->Position(Vector2(300, 50));
 
-		//mParent = new GameEntity(100.0f, 400.0f);
-		//mChild = new GameEntity(100.0f, 500.0f);
+		mPhys1 = new PhysEntity();
 
-		//printf("Child local pos: (%f,%f) \n",
-		//	mChild->Position(GameEntity::Local).x,
-		//	mChild->Position(GameEntity::Local).y);
+		mPhys1->Position(Vector2(Graphics::SCREEN_WIDTH * 0.3f, Graphics::SCREEN_HEIGHT * 0.5f));
+		mPhys1->AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)));
+		mPhys1->mId = mPhysicsManager->RegisterEntity(mPhys1, PhysicsManager::CollisionLayers::Friendly); // testing
 
-		//mChild->Parent(mParent);
+		mPhys2 = new PhysEntity();
+		mPhys2->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f, Graphics::SCREEN_HEIGHT * 0.5f));
+		mPhys2->AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)));
+		mPhys2->mId = mPhysicsManager->RegisterEntity(mPhys2, PhysicsManager::CollisionLayers::Hostile); // testing
 
-		//printf("Child local pos: (%f,%f) \n",
-		//	mChild->Position(GameEntity::Local).x,
-		//	mChild->Position(GameEntity::Local).y);
+		//mPhys3 = new PhysEntity();
+		//mPhys3->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f, Graphics::SCREEN_HEIGHT * 0.5f));
+		//mPhys3->AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)));
+		//mPhys3->mId = mPhysicsManager->RegisterEntity(mPhys2, PhysicsManager::CollisionLayers::Hostile); // testing
+
+		//mPhys4 = new PhysEntity();
+		//mPhys4->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f, Graphics::SCREEN_HEIGHT * 0.5f));
+		//mPhys4->AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)));
+		//mPhys4->mId = mPhysicsManager->RegisterEntity(mPhys2, PhysicsManager::CollisionLayers::Hostile); // testing	}
 	}
 
 	GameManager::~GameManager() {
@@ -267,9 +294,14 @@ namespace SDL_Framework {
 		delete mRedShip;
 		mRedShip = nullptr;
 
-
 		delete mFontTex;
 		mFontTex = nullptr;
+
+		delete mPhys1;
+		mPhys1 = nullptr;
+
+		delete mPhys2;
+		mPhys2 = nullptr;
 
 		//Release modules
 		Graphics::Release();
@@ -286,6 +318,9 @@ namespace SDL_Framework {
 
 		AudioManager::Release();
 		mAudioManager = nullptr;
+
+		PhysicsManager::Release();
+		mPhysicsManager = nullptr;
 
 		// terminate SDL subsystems
 		SDL_Quit();

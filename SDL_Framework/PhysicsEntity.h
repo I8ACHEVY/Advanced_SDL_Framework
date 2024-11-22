@@ -13,18 +13,21 @@ namespace SDL_Framework{
 
 		bool CheckCollision(PhysEntity* other);
 
-		virtual void Hit(PhysEntity* other);
+		virtual void Hit(PhysEntity* other) {
+			std::cout << "Collision Occured" << std::endl;
+		}
 
 		virtual void Render() override;
 
 	protected:
-		unsigned long mId;
-
 		std::vector<Collider*> mColliders;
 
 		Collider* mBroadPhaseCollider;
 
 		virtual bool IgnoreCollision();
+
+	public://remove public after tests
+		unsigned long mId;
 		
 		void AddCollider(Collider* collider, Vector2 localPos = vec2_Zero);
 	};
