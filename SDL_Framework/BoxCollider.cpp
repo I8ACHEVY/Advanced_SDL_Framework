@@ -21,10 +21,6 @@ namespace SDL_Framework {
 		}
 	}
 
-	Vector2 BoxCollider::GetVertexPos(int index) {
-		return mVerts[index]->Position();
-	}
-
 	Vector2 BoxCollider::GetFurthestPoint() {
 		Vector2 localPos = Position(GameEntity::Local);
 
@@ -42,6 +38,10 @@ namespace SDL_Framework {
 		}
 		return localPos + mVerts[furthestIndex]->Position(GameEntity::Local);
 
+	}
+
+	Vector2 BoxCollider::GetVertexPos(int index) {
+		return mVerts[index]->Position();
 	}
 
 	void BoxCollider::AddVert(int index, Vector2 pos) {

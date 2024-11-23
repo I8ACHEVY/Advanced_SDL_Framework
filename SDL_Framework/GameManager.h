@@ -32,9 +32,6 @@ namespace SDL_Framework {
 
 		float mScaleTimeM;
 		float mScaleTimePER;
-		
-		//GameEntity* mParent;
-		//GameEntity* mChild;
 
 		Graphics* mGraphics;
 		Timer* mTimer;
@@ -43,11 +40,16 @@ namespace SDL_Framework {
 		AudioManager* mAudioManager;
 		PhysicsManager* mPhysicsManager;
 
-		AnimatedTexture* mTex;
-		AnimatedTexture* mRedShip;
+		//AnimatedTexture* mTex;
+		//AnimatedTexture* mRedShip;
+
+		Texture* mTex;
+		Texture* mRedShip;
 
 		PhysEntity* mPhys1;
 		PhysEntity* mPhys2;
+		PhysEntity* mPhys3;
+		PhysEntity* mPhys4;
 
 		Texture* mFontTex;
 
