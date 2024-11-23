@@ -125,7 +125,7 @@ namespace SDL_Framework {
 		return retVal;
 	}
 
-	const Vector2 vec2_Zero = { 0.0f, 0.0f };
+	const Vector2 Vec2_Zero = { 0.0f, 0.0f };
 	const Vector2 Vec2_One = { 1.0f, 1.0f };
 	const Vector2 Vec2_Up = { 0.0f, 1.0f };
 	const Vector2 Vec2_Right = { 1.0f, 0.0f };

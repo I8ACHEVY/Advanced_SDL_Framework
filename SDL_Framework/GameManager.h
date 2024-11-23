@@ -6,6 +6,7 @@
 #include "AudioManager.h"
 #include "PhysicsManager.h"
 #include "StartScreen.h"
+#include "Random.h"
 
 namespace SDL_Framework {
 	class GameManager {
@@ -43,16 +44,17 @@ namespace SDL_Framework {
 		InputManager* mInputManager;
 		AudioManager* mAudioManager;
 		PhysicsManager* mPhysicsManager;
+		Random* mRandom;
 
 		StartScreen* mStartScreen;
 
-		AnimatedTexture* mTex;
-		AnimatedTexture* mRedShip;
+		//AnimatedTexture* mTex;
+		//AnimatedTexture* mRedShip;
 
-		PhysEntity* mPhys1;
-		PhysEntity* mPhys2;
+		//PhysEntity* mPhys1;
+		//PhysEntity* mPhys2;
 
-		Texture* mFontTex;
+		//Texture* mFontTex;
 
 		SDL_Event mEvents;
 	};

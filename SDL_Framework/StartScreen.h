@@ -9,12 +9,20 @@ public:
 	StartScreen();
 	~StartScreen();
 
+	void ChangeSelectedMode(int change);
+
 	void Update() override;
 	void Render() override;
 
 private:
 	Timer* mTimer;
 	InputManager* mInputManager;
+
+	Vector2 mAnimationStartPos;
+	Vector2 mAnimationEndPos;
+	float mAnimationTotalTime;
+	float mAnimationTimer;
+	bool mAnimationDone;
 
 	GameEntity* mTopBar;
 	Texture* mPlayer1;
@@ -29,6 +37,9 @@ private:
 	Texture* mOnePlayerMode;
 	Texture* mTwoPlayerMode;
 	Texture* mCursor;
+	Vector2 mCursorStartPos;
+	Vector2 mCursorOffsetPos;
+	int mSelectedMode;
 
 	GameEntity* mBottomBar;
 	Texture* mNamco;

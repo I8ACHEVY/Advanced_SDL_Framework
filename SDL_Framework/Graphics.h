@@ -3,14 +3,15 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <iostream>
-#include<string>
+#include <string>
 
 namespace SDL_Framework
 {
 	class Graphics{
 	public:
-		static const int SCREEN_WIDTH = 600;
-		static const int SCREEN_HEIGHT = 800;
+		static const int SCREEN_WIDTH = 1024;
+		static const int SCREEN_HEIGHT = 896;
+		const char* WINDOW_TITLE = "Galaga";
 
 		static Graphics* Instance();
 		static void Release();

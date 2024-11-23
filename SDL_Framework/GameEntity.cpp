@@ -99,6 +99,7 @@ namespace SDL_Framework {
 			mRotation -= parent->Rotation(World);
 			mScale = Vector2(mScale.x / parentScale.x, mScale.y / parentScale.y);
 		}
+		mParent = parent;
 	}
 
 	void GameEntity::Translate(Vector2 vec, Space space) {

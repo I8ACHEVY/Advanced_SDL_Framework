@@ -196,34 +196,6 @@ namespace SDL_Framework {
 		}
 	}
 
-	//void AssetManager::DestroyMusic(Mix_Music* music) {
-	//	for (auto elem : mMusic) {
-	//		if (elem.second == music) {
-	//			mMusicRefCount[elem.second] -= 1;
-
-	//			if (mMusicRefCount[elem.second] == 0) {
-	//				Mix_FreeMusic(elem.second);
-	//				mMusic.erase(elem.first);
-	//			}
-	//			return;
-	//		}
-	//	}
-	//}
-
-	//void AssetManager::DestroySFX(Mix_Chunk* sfx) {
-	//	for (auto elem : mSFX) {
-	//		if (elem.second == sfx) {
-	//			mSFXRefCount[elem.second] -= 1;
-
-	//			if (mSFXRefCount[elem.second] == 0) {
-	//				Mix_FreeChunk(elem.second);
-	//				mSFX.erase(elem.first);
-	//			}
-	//			return;
-	//		}
-	//	}
-	//}
-
 	void AssetManager::UnloadTexture(SDL_Texture* texture) {
 		bool found = false;
 		std::string key;

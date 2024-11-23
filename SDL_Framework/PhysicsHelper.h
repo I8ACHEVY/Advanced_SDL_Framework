@@ -65,6 +65,7 @@ namespace SDL_Framework {
 
 				if (j == 0) {
 					box1Min = box1Max = proj1;
+					box2Min = box2Max = proj1;
 				}
 				else {
 					if (proj1 < box1Min) {

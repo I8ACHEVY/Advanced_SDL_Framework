@@ -99,7 +99,7 @@ namespace SDL_Framework
 		std::cout << "STL Advanced Framework\n";
 
 		mWindow = SDL_CreateWindow(
-			"SDL Tutorial",
+			WINDOW_TITLE,
 			SDL_WINDOWPOS_UNDEFINED,
 			SDL_WINDOWPOS_UNDEFINED,
 			SCREEN_WIDTH,

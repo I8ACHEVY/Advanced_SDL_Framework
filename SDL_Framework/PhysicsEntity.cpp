@@ -24,7 +24,7 @@ namespace SDL_Framework {
 			delete mBroadPhaseCollider;
 			mBroadPhaseCollider = new CircleCollider(furthestDistance, true);
 			mBroadPhaseCollider->Parent(this);
-			mBroadPhaseCollider->Position(vec2_Zero);
+			mBroadPhaseCollider->Position(Vec2_Zero);
 		}
 	}
 

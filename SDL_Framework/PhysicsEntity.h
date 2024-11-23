@@ -29,7 +29,7 @@ namespace SDL_Framework{
 	public://remove public after tests
 		unsigned long mId;
 		
-		void AddCollider(Collider* collider, Vector2 localPos = vec2_Zero);
+		void AddCollider(Collider* collider, Vector2 localPos = Vec2_Zero);
 	};
 
 }
