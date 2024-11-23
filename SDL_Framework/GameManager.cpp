@@ -230,8 +230,6 @@ namespace SDL_Framework {
 		mFontTex->Render();
 
 		mGraphics->Render();
-
-
 	}
 
 	GameManager::GameManager() : mQuit(false) {
