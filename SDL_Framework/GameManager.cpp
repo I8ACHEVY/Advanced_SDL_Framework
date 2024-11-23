@@ -236,79 +236,25 @@ namespace SDL_Framework {
 			PhysicsManager::CollisionFlags::Friendly |
 			PhysicsManager::CollisionFlags::FriendlyProjectile);
 
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Hostile,
+			PhysicsManager::CollisionFlags::Friendly |
+			PhysicsManager::CollisionFlags::FriendlyProjectile);
+
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::HostileProjectile,
+			PhysicsManager::CollisionFlags::Friendly |
+			PhysicsManager::CollisionFlags::FriendlyProjectile);
+
 		mStartScreen = new StartScreen();
-
-		//challenge 2 todo -> finish setting up the collision layers (friendlyProjectiles, HostileProjectiles)
-		// bump
-
-
-		//mTex = new Texture("SpriteSheet.png", 182, 54, 22, 22);
-		//mTex->Scale(Vector2(1.5f, 1.5f));
-		//mTex->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f,
-		//	Graphics::SCREEN_HEIGHT * 0.5f));
-
-		//mTex = new AnimatedTexture("SpriteSheet.png", 204, 45, 40, 38, 4, 0.6f,
-			//AnimatedTexture::Horizontal);
-		//mTex->Scale(Vector2(1.5f, 1.5f));
-		//mTex->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f,
-			//Graphics::SCREEN_HEIGHT * 0.5f));
-
-		//mRedShip = new Texture("SpriteSheet.png", 182, 78, 20, 20);
-		//mRedShip->Scale(Vector2(1.5f, 1.5f));
-		//mRedShip->Position(Vector2(Graphics::SCREEN_WIDTH * 0.4f, Graphics::SCREEN_HEIGHT * 0.5f));
-
-		//mRedShip = new AnimatedTexture("SpriteSheet.png", 204, 45, 40, 38, 4, 0.6f,
-		//	AnimatedTexture::Horizontal);
-		//mRedShip->Scale(Vector2(1.5f, 1.5f));
-		//mRedShip->Position(Vector2(Graphics::SCREEN_WIDTH * 0.4f,
-		//	Graphics::SCREEN_HEIGHT * 0.5f));
-
 
 		//mFontTex = new Texture("GALAGA", "ARCADE.TTF", 72, { 255, 10, 10 });
 		//mFontTex->Position(Vector2(300, 50));
 
-/*		mPhys1 = new PhysEntity();
-
-		mPhys1->Position(Vector2(Graphics::SCREEN_WIDTH * 0.3f, Graphics::SCREEN_HEIGHT * 0.5f));
-		mPhys1->AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)));
-		mPhys1->mId = mPhysicsManager->RegisterEntity(mPhys1, PhysicsManager::CollisionLayers::Friendly);*/ // testing
-
-/*		mPhys2 = new PhysEntity();
-		mPhys2->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f, Graphics::SCREEN_HEIGHT * 0.5f));
-		mPhys2->AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)));
-		mPhys2->mId = mPhysicsManager->RegisterEntity(mPhys2, PhysicsManager::CollisionLayers::Hostile); */// testing
-
-		//mPhys3 = new PhysEntity();
-		//mPhys3->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f, Graphics::SCREEN_HEIGHT * 0.5f));
-		//mPhys3->AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)));
-		//mPhys3->mId = mPhysicsManager->RegisterEntity(mPhys2, PhysicsManager::CollisionLayers::Hostile); // testing
-
-		//mPhys4 = new PhysEntity();
-		//mPhys4->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f, Graphics::SCREEN_HEIGHT * 0.5f));
-		//mPhys4->AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)));
-		//mPhys4->mId = mPhysicsManager->RegisterEntity(mPhys2, PhysicsManager::CollisionLayers::Hostile); // testing	}
 	}
 
 	GameManager::~GameManager() {
 		//Release pointers/ variables
 		delete mStartScreen;
 		mStartScreen = nullptr;
-
-
-		//delete mTex;
-		//mTex = nullptr;
-
-		//delete mRedShip;
-		//mRedShip = nullptr;
-
-		//delete mFontTex;
-		//mFontTex = nullptr;
-
-		//delete mPhys1;
-		//mPhys1 = nullptr;
-
-		//delete mPhys2;
-		//mPhys2 = nullptr;
 
 		//Release modules
 		Graphics::Release();
