@@ -6,6 +6,7 @@ StartScreen::StartScreen() {
 
 	mAnimationStartPos = Vector2(0.0f, Graphics::SCREEN_HEIGHT);
 	mAnimationEndPos = Vec2_Zero;
+	mAnimationTotalTime = 5.0f;
 	mAnimationTimer = 0.0f;
 	mAnimationDone = false;
 
@@ -20,8 +21,8 @@ mPlayer2->Parent(mTopBar);
 mHiScore->Parent(mTopBar);
 
 mPlayer1->Position(-Graphics::SCREEN_WIDTH * 0.35f, 0.0f);
-mPlayer2->Position(Graphics::SCREEN_WIDTH * 0.2f, 0.0f);
-mHiScore->Position(-30, 0.0f);
+mPlayer2->Position(Graphics::SCREEN_WIDTH * 0.34f, 0.0f);
+mHiScore->Position(0, 0.0f);
 
 mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.32f);
 mLogo = new Texture("GalagaLogo.png", 0, 0, 360, 180);

@@ -40,12 +40,9 @@ namespace SDL_Framework {
 		}
 	}
 	void GameManager::Update() {
-		//std::cout << "Delta Time: " << mTimer->DeltaTime() << std::endl;
 
 		mInputManager->Update();
 		mStartScreen->Update();
-		//mTex->Update();
-		//mRedShip->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_MINUS)) {
 			int currentMusicVolume = Mix_VolumeMusic(-1);
@@ -202,16 +199,7 @@ namespace SDL_Framework {
 		mGraphics->ClearBackBuffer();
 		mStartScreen->Render();
 
-		//mRedShip->Render();
-		//mTex->Render();
-		//mPhys1->Render();
-		//mPhys2->Render();
-
-		//mFontTex->Render();
-
 		mGraphics->Render();
-
-
 	}
 
 	GameManager::GameManager() : mQuit(false) {
@@ -246,8 +234,21 @@ namespace SDL_Framework {
 
 		mStartScreen = new StartScreen();
 
-		//mFontTex = new Texture("GALAGA", "ARCADE.TTF", 72, { 255, 10, 10 });
-		//mFontTex->Position(Vector2(300, 50));
+		std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
+		std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
+		std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
+
+		std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
+		std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
+		std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
+
+		std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
+		std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
+		std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
+
+		std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
+		std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
+		std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
 
 	}
 

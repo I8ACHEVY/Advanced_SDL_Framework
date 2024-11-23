@@ -1,8 +1,5 @@
 #pragma once
 #include "Graphics.h"
-#include "AnimatedTexture.h"
-#include "InputManager.h"
-#include "GameEntity.h"
 #include "AudioManager.h"
 #include "PhysicsManager.h"
 #include "StartScreen.h"
@@ -34,9 +31,6 @@ namespace SDL_Framework {
 
 		float mScaleTimeM;
 		float mScaleTimePER;
-		
-		//GameEntity* mParent;
-		//GameEntity* mChild;
 
 		Graphics* mGraphics;
 		Timer* mTimer;
@@ -47,14 +41,6 @@ namespace SDL_Framework {
 		Random* mRandom;
 
 		StartScreen* mStartScreen;
-
-		//AnimatedTexture* mTex;
-		//AnimatedTexture* mRedShip;
-
-		//PhysEntity* mPhys1;
-		//PhysEntity* mPhys2;
-
-		//Texture* mFontTex;
 
 		SDL_Event mEvents;
 	};
