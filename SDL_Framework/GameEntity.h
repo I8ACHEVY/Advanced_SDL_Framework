@@ -39,6 +39,8 @@ namespace SDL_Framework {
 		Vector2 mScale;
 
 		bool mActive;
+
+	public:
 		GameEntity* mParent;
 
 	};

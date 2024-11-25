@@ -193,7 +193,7 @@ namespace SDL_Framework {
 		}
 
 
-		mPhys1->Position(mTex->Position() + Vector2(-7,-7));
+		mPhys1->Position(mTex->Position() + Vector2(-8,-8));
 		mPhys1->Scale(mTex->Scale());
 		mPhys1->Rotate(mTex->Rotation());
 
@@ -201,7 +201,7 @@ namespace SDL_Framework {
 		mPhys2->Scale(mTex->Scale());
 		mPhys2->Rotate(mTex->Rotation());
 
-		mPhys3->Position(mRedShip->Position() + Vector2(-6,-6));
+		mPhys3->Position(mRedShip->Position() + Vector2(-8,-7));
 		mPhys3->Scale(mRedShip->Scale());
 		mPhys3->Rotate(mRedShip->Rotation());
 
@@ -267,7 +267,7 @@ namespace SDL_Framework {
 		mTex->Position(Vector2(Graphics::SCREEN_WIDTH * 0.6f,Graphics::SCREEN_HEIGHT * 0.5f));
 
 		mPhys1 = new PhysEntity();
-		mPhys1->AddCollider(new BoxCollider(Vector2(23.0f, 23.0f)));
+		mPhys1->AddCollider(new BoxCollider(Vector2(18.0f, 18.0f)));
 		mPhys1->mId = mPhysicsManager->RegisterEntity(mPhys1, PhysicsManager::CollisionLayers::Friendly); // testing
 
 		mPhys2 = new PhysEntity();
@@ -286,7 +286,7 @@ namespace SDL_Framework {
 		mRedShip->Position(Vector2(Graphics::SCREEN_WIDTH * 0.4f, Graphics::SCREEN_HEIGHT * 0.5f));
 
 		mPhys3 = new PhysEntity();
-		mPhys3->AddCollider(new BoxCollider(Vector2(23.0f, 23.0f)));
+		mPhys3->AddCollider(new BoxCollider(Vector2(18.0f, 18.0f)));
 		mPhys3->mId = mPhysicsManager->RegisterEntity(mPhys3, PhysicsManager::CollisionLayers::Hostile); // testing
 
 		mPhys4 = new PhysEntity();

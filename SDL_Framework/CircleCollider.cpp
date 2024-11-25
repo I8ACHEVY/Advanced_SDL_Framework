@@ -1,4 +1,5 @@
 #include "CircleCollider.h"
+#include "GameEntity.h"
 
 namespace SDL_Framework {
 
@@ -16,14 +17,20 @@ namespace SDL_Framework {
 				SetDebugTexture(new Texture("CircleCollider.png"));
 			}
 
-			mDebugTexture->Scale(Vec2_One * (radius * 2 / 50.0f));
+			mDebugTexture->Scale(Vec2_One * (radius * 2 / 25.5f));
+		}
+
+		if (mParent) {
+			Vector2 entityPos = mParent->Position(GameEntity::World);
+			mDebugTexture->Position(entityPos);
 		}
 	}
+
 	CircleCollider::~CircleCollider(){}
 
 	Vector2 CircleCollider::GetFurthestPoint() {
-		Vector2 localPos = Position(GameEntity::Local);
-	    return Vec2_Right * (mRadius + Position(GameEntity::Local)).Magnitude(); //return localPos + Vec2_Right * mRadius; //
+		//Vector2 localPos = Position(GameEntity::Local);
+	    return Vec2_Right * (mRadius + Position(GameEntity::Local)).Magnitude();   //localPos + Vec2_Right * mRadius; //
 	}
 
 	float CircleCollider::GetRadius() {

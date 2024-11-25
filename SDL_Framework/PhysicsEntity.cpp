@@ -6,7 +6,7 @@ namespace SDL_Framework {
 
 	void PhysEntity::AddCollider(Collider* collider, Vector2 localPos) {
 		collider->Parent(this);
-		collider->Position(localPos);
+		collider->Position(this->Position()); //(localPos)
 		mColliders.push_back(collider);
 
 		if (mColliders.size() > 1 || mColliders[0]->GetType() != Collider::ColliderType::Circle) {
@@ -24,7 +24,7 @@ namespace SDL_Framework {
 			delete mBroadPhaseCollider;
 			mBroadPhaseCollider = new CircleCollider(furthestDistance, true);
 			mBroadPhaseCollider->Parent(this);
-			mBroadPhaseCollider->Position(vec2_Zero);
+			mBroadPhaseCollider->Position(this->Position()); //(Vec2_Zero)
 		}
 	}
 

@@ -12,6 +12,13 @@ namespace SDL_Framework {
 			mDebugTexture->Scale(size);
 		}
 
+		if (mParent) {
+			Vector2 entityPos = mParent->Position(GameEntity::Local);
+			for (int i = 0; i < MAX_VERTS; i++) {
+				mVerts[i]->Position(entityPos);
+			}
+		}
+
 	}
 
 	BoxCollider::~BoxCollider() {
@@ -19,6 +26,7 @@ namespace SDL_Framework {
 			delete vert;
 			vert = nullptr;
 		}
+	
 	}
 
 	Vector2 BoxCollider::GetFurthestPoint() {
