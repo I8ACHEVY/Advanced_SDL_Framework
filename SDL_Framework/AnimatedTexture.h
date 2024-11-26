@@ -10,7 +10,7 @@ namespace SDL_Framework {
 		enum AnimDir { Horizontal = 0, Vertical };
 
 		AnimatedTexture(std::string filename, int x, int y, int width, int height,
-			int frameCount, float animSpeed, AnimDir animationDir, bool manmaged = false);
+			int frameCount, float animSpeed, AnimDir animationDir, bool manmaged = true);
 
 		~AnimatedTexture();
 

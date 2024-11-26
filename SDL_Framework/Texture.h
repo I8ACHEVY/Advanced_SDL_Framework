@@ -5,11 +5,11 @@
 namespace SDL_Framework {
 	class Texture : public GameEntity {
 	public:
-		Texture(std::string filename, bool managed = false);
+		Texture(std::string filename, bool managed = true);
 		Texture(std::string filename, int x, int y, int width, 
-			int height, bool managed = false);
+			int height, bool managed = true);
 		Texture(std::string text, std::string fontPath, int size, 
-			SDL_Color color, bool managed = false);	// Text obj
+			SDL_Color color, bool managed = true);	// Text obj
 		~Texture();
 
 		Vector2 ScaledDimensions();

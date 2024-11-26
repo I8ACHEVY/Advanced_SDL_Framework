@@ -10,12 +10,12 @@ namespace SDL_Framework {
 		static AssetManager* Instance();
 		static void Release();
 
-		SDL_Texture* GetTexture(std::string filename, bool managed = false);
+		SDL_Texture* GetTexture(std::string filename, bool managed = true);
 		SDL_Texture* GetText(std::string text, std::string filename, int size,
-			SDL_Color color, bool managed = false);
+			SDL_Color color, bool managed = true);
 
-		Mix_Music* GetMusic(std::string filename, bool managed = false);	//Mix_LoadMUS
-		Mix_Chunk* GetSFX(std::string filename, bool managed = false);		//Mix_LoadWAV
+		Mix_Music* GetMusic(std::string filename, bool managed = true);	//Mix_LoadMUS
+		Mix_Chunk* GetSFX(std::string filename, bool managed = true);		//Mix_LoadWAV
 
 		void DestroyTexture(SDL_Texture* texture);
 		void DestroyMusic(Mix_Music* music);
