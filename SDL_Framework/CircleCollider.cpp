@@ -29,8 +29,7 @@ namespace SDL_Framework {
 	CircleCollider::~CircleCollider(){}
 
 	Vector2 CircleCollider::GetFurthestPoint() {
-		//Vector2 localPos = Position(GameEntity::Local);
-	    return Vec2_Right * (mRadius + Position(GameEntity::Local)).Magnitude();   //localPos + Vec2_Right * mRadius; //
+	    return Vec2_Right * (mRadius + Position(GameEntity::Local)).Magnitude();
 	}
 
 	float CircleCollider::GetRadius() {
