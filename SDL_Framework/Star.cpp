@@ -43,6 +43,8 @@ void Star::ScrollStar() {
 }
 
 void Star::Update() {
+	mFlickerTime += mTimer->DeltaTime();
+
 	if (mFlickerTime >= mFlickerSpeed) {
 		mVisible = !mVisible;
 		mFlickerTime = 0.0f;

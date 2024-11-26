@@ -14,15 +14,26 @@ mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 80.0f);
 mPlayer1 = new Texture("1UP", "emulogic.ttf", 32, { 200, 0, 0 });
 mPlayer2 = new Texture("2UP", "emulogic.ttf", 32, { 200, 0, 0 });
 mHiScore = new Texture("HI SCORE", "emulogic.ttf", 32, { 200, 0, 0 });
+mPlayer1Score = new Scoreboard({ 255, 255, 255 });
+mPlayer2Score = new Scoreboard({ 255, 255, 255 });
+mTopScore = new Scoreboard();
 
 mTopBar->Parent(this);
 mPlayer1->Parent(mTopBar);
 mPlayer2->Parent(mTopBar);
 mHiScore->Parent(mTopBar);
+mPlayer1Score->Parent(mTopBar);
+mPlayer2Score->Parent(mTopBar);
+mTopScore->Parent(mTopBar);
 
 mPlayer1->Position(-Graphics::SCREEN_WIDTH * 0.35f, 0.0f);
 mPlayer2->Position(Graphics::SCREEN_WIDTH * 0.34f, 0.0f);
 mHiScore->Position(0, 0.0f);
+mPlayer1Score->Position(Graphics::SCREEN_WIDTH * -0.34f, 40.0f);
+mPlayer2Score->Position(Graphics::SCREEN_WIDTH * 0.35f, 40.0f);
+mTopScore->Position(Graphics::SCREEN_WIDTH * 0.08f, 40.0f);
+
+mTopScore->Score(637982);
 
 mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.32f);
 mLogo = new Texture("GalagaLogo.png", 0, 0, 360, 180);
@@ -119,6 +130,9 @@ void StartScreen::Render() {
 	mPlayer1->Render();
 	mPlayer2->Render();
 	mHiScore->Render();
+	mPlayer1Score->Render();
+	mPlayer2Score->Render();
+	mTopScore->Render();
 
 	if (!mAnimationDone) {
 		mLogo->Render();
@@ -145,6 +159,12 @@ StartScreen::~StartScreen() {
 	mPlayer2 = nullptr;
 	delete mHiScore;
 	mHiScore = nullptr;
+	delete mPlayer1Score;
+	mPlayer1Score = nullptr;
+	delete mPlayer2Score;
+	mPlayer2Score = nullptr;
+	delete mTopScore;
+	mTopScore = nullptr;
 
 	delete mLogoHolder;
 	mLogoHolder = nullptr;

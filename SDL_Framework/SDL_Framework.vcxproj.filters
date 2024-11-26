@@ -78,6 +78,12 @@
     <ClCompile Include="StarLayer.cpp">
       <Filter>Source Files\Galaga CPP</Filter>
     </ClCompile>
+    <ClCompile Include="BackgroundStar.cpp">
+      <Filter>Source Files\Galaga CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Scoreboard.cpp">
+      <Filter>Source Files\Galaga CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -138,7 +144,13 @@
       <Filter>Header Files\Galaga H</Filter>
     </ClInclude>
     <ClInclude Include="StarLayer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Galaga H</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundStar.h">
+      <Filter>Header Files\Galaga H</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreBoard.h">
+      <Filter>Header Files\Galaga H</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

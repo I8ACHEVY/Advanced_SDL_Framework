@@ -1,6 +1,7 @@
 #pragma once
 #include "AnimatedTexture.h"
 #include "InputManager.h"
+#include "ScoreBoard.h"
 
 using namespace SDL_Framework;
 
@@ -28,6 +29,9 @@ private:
 	Texture* mPlayer1;
 	Texture* mPlayer2;
 	Texture* mHiScore;
+	Scoreboard* mPlayer1Score;
+	Scoreboard* mPlayer2Score;
+	Scoreboard* mTopScore;
 
 	GameEntity* mLogoHolder;
 	Texture* mLogo;

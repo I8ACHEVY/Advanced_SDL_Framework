@@ -42,6 +42,7 @@ namespace SDL_Framework {
 	void GameManager::Update() {
 
 		mInputManager->Update();
+		mBackgroundStars->Update();
 		mStartScreen->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_MINUS)) {
@@ -197,6 +198,7 @@ namespace SDL_Framework {
 
 	void GameManager::Render() {
 		mGraphics->ClearBackBuffer();
+		mBackgroundStars->Render();
 		mStartScreen->Render();
 
 		mGraphics->Render();
@@ -215,6 +217,7 @@ namespace SDL_Framework {
 		mAudioManager = AudioManager::Instance();
 		mPhysicsManager = PhysicsManager::Instance();
 		mRandom = Random::Instance();
+		mBackgroundStars = BackgroundStars::Instance();
 
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Friendly,
 			PhysicsManager::CollisionFlags::Hostile |
@@ -234,21 +237,22 @@ namespace SDL_Framework {
 
 		mStartScreen = new StartScreen();
 
-		std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
-		std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
-		std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
+		// random number test to ensure it is truly random
+		//std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
+		//std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
+		//std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
 
-		std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
-		std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
-		std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
+		//std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
+		//std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
+		//std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
 
-		std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
-		std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
-		std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
+		//std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
+		//std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
+		//std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
 
-		std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
-		std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
-		std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
+		//std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
+		//std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
+		//std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
 
 	}
 
@@ -278,6 +282,9 @@ namespace SDL_Framework {
 
 		Random::Release();
 		mRandom = nullptr;
+
+		BackgroundStars::Release();
+		mBackgroundStars = nullptr;
 
 		// terminate SDL subsystems
 		SDL_Quit();
