@@ -19,6 +19,7 @@ namespace SDL_Framework {
 			mDebugTexture->Scale(Vec2_One * (radius * 2 / 50.0f));
 		}
 	}
+
 	CircleCollider::~CircleCollider(){}
 
 	Vector2 CircleCollider::GetFurthestPoint() {

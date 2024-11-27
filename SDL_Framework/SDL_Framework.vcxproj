@@ -170,6 +170,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClCompile Include="Galaga_V1.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
+    <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="StarLayer.cpp" />
     <ClCompile Include="StartScreen.cpp" />
@@ -194,6 +195,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="ScoreBoard.h" />
+    <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="Star.h" />
     <ClInclude Include="StarLayer.h" />
     <ClInclude Include="StartScreen.h" />
