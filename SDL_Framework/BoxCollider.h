@@ -9,7 +9,6 @@ namespace SDL_Framework {
 		~BoxCollider();
 
 		Vector2 GetFurthestPoint() override;
-		Vector2 GetVertexPos(int index);
 
 	private:
 		static const int MAX_VERTS = 4;

@@ -11,14 +11,6 @@ namespace SDL_Framework {
 			SetDebugTexture(new Texture("BoxCollider.png"));
 			mDebugTexture->Scale(size);
 		}
-
-		if (mParent) {
-			Vector2 entityPos = mParent->Position(GameEntity::Local);
-			for (int i = 0; i < MAX_VERTS; i++) {
-				mVerts[i]->Position(entityPos);
-			}
-		}
-
 	}
 
 	BoxCollider::~BoxCollider() {
@@ -26,7 +18,6 @@ namespace SDL_Framework {
 			delete vert;
 			vert = nullptr;
 		}
-	
 	}
 
 	Vector2 BoxCollider::GetFurthestPoint() {
@@ -46,10 +37,6 @@ namespace SDL_Framework {
 		}
 		return localPos + mVerts[furthestIndex]->Position(GameEntity::Local);
 
-	}
-
-	Vector2 BoxCollider::GetVertexPos(int index) {
-		return mVerts[index]->Position();
 	}
 
 	void BoxCollider::AddVert(int index, Vector2 pos) {

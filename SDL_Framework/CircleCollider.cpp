@@ -1,5 +1,4 @@
 #include "CircleCollider.h"
-#include "GameEntity.h"
 
 namespace SDL_Framework {
 
@@ -17,7 +16,7 @@ namespace SDL_Framework {
 				SetDebugTexture(new Texture("CircleCollider.png"));
 			}
 
-			mDebugTexture->Scale(Vec2_One * (radius * 2 / 25.5f));
+			mDebugTexture->Scale(Vec2_One * (radius * 2 / 50.0f));
 		}
 
 		if (mParent) {
