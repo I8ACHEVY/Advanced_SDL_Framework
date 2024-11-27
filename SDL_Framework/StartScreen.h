@@ -12,6 +12,10 @@ public:
 
 	void ChangeSelectedMode(int change);
 
+	void ResetAnimation();
+
+	int SelectedMode();
+
 	void Update() override;
 	void Render() override;
 

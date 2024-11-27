@@ -2,9 +2,7 @@
 #include "Graphics.h"
 #include "AudioManager.h"
 #include "PhysicsManager.h"
-#include "StartScreen.h"
-#include "Random.h"
-#include "BackgroundStar.h"
+#include "ScreenManager.h"
 
 namespace SDL_Framework {
 	class GameManager {
@@ -40,9 +38,7 @@ namespace SDL_Framework {
 		AudioManager* mAudioManager;
 		PhysicsManager* mPhysicsManager;
 		Random* mRandom;
-		BackgroundStars* mBackgroundStars;
-
-		StartScreen* mStartScreen;
+		ScreenManager* mScreenManager;
 
 		SDL_Event mEvents;
 	};

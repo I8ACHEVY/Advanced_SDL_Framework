@@ -42,8 +42,7 @@ namespace SDL_Framework {
 	void GameManager::Update() {
 
 		mInputManager->Update();
-		mBackgroundStars->Update();
-		mStartScreen->Update();
+		mScreenManager->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_MINUS)) {
 			int currentMusicVolume = Mix_VolumeMusic(-1);
@@ -198,8 +197,7 @@ namespace SDL_Framework {
 
 	void GameManager::Render() {
 		mGraphics->ClearBackBuffer();
-		mBackgroundStars->Render();
-		mStartScreen->Render();
+		mScreenManager->Render();
 
 		mGraphics->Render();
 	}
@@ -217,7 +215,7 @@ namespace SDL_Framework {
 		mAudioManager = AudioManager::Instance();
 		mPhysicsManager = PhysicsManager::Instance();
 		mRandom = Random::Instance();
-		mBackgroundStars = BackgroundStars::Instance();
+		mScreenManager = ScreenManager::Instance();
 
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Friendly,
 			PhysicsManager::CollisionFlags::Hostile |
@@ -234,8 +232,6 @@ namespace SDL_Framework {
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::HostileProjectile,
 			PhysicsManager::CollisionFlags::Friendly |
 			PhysicsManager::CollisionFlags::FriendlyProjectile);
-
-		mStartScreen = new StartScreen();
 
 		// random number test to ensure it is truly random
 		//std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
@@ -258,8 +254,6 @@ namespace SDL_Framework {
 
 	GameManager::~GameManager() {
 		//Release pointers/ variables
-		delete mStartScreen;
-		mStartScreen = nullptr;
 
 		//Release modules
 		Graphics::Release();
@@ -283,8 +277,8 @@ namespace SDL_Framework {
 		Random::Release();
 		mRandom = nullptr;
 
-		BackgroundStars::Release();
-		mBackgroundStars = nullptr;
+		ScreenManager::Release();
+		mScreenManager = nullptr;
 
 		// terminate SDL subsystems
 		SDL_Quit();

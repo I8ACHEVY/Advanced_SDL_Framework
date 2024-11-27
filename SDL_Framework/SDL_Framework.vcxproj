@@ -168,6 +168,8 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClCompile Include="PhysicsEntity.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Galaga_V1.cpp" />
+    <ClCompile Include="PlayScreen.cpp" />
+    <ClCompile Include="PlaySideBar.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
@@ -193,6 +195,8 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClInclude Include="PhysicsEntity.h" />
     <ClInclude Include="PhysicsHelper.h" />
     <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="PlayScreen.h" />
+    <ClInclude Include="PlaySideBar.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="ScreenManager.h" />

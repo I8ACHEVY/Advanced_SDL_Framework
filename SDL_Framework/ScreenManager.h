@@ -1,10 +1,10 @@
 #pragma once
 #include "StartScreen.h"
 #include "BackgroundStar.h"
+#include "PlayScreen.h"
 
 
 class ScreenManager {
-
 
 public:
 	static ScreenManager* Instance();
@@ -26,4 +26,5 @@ private:
 	InputManager* mInput;
 
 	StartScreen* mStartScreen;
+	PlayScreen* mPlayScreen;
 };

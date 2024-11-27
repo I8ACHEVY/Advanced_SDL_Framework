@@ -123,6 +123,8 @@ namespace SDL_Framework
 			return false;
 		}
 
+		//SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);		//Change background to white for debug positioning
+
 		if (TTF_Init() == -1) {
 			std::cerr << "Unable to initialize SDL_TTF, TTF Error: " << TTF_GetError()
 				<< std::endl;

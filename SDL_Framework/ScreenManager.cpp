@@ -19,6 +19,7 @@ ScreenManager::ScreenManager() {
 	mInput = InputManager::Instance();
 
 	mStartScreen = new StartScreen();
+	mPlayScreen = new PlayScreen();
 
 	mCurrentScreen = Start;
 }
@@ -31,6 +32,9 @@ ScreenManager::~ScreenManager() {
 
 	delete mStartScreen;
 	mStartScreen = nullptr;
+
+	delete mPlayScreen;
+	mPlayScreen = nullptr;
 }
 
 void ScreenManager::Update() {
@@ -49,11 +53,33 @@ void ScreenManager::Update() {
 		break;
 
 	case ScreenManager::Play:
-		//update Playscreen
+		mPlayScreen->Update();
+
+		if (mInput->KeyPressed(SDL_SCANCODE_ESCAPE)) {
+			mCurrentScreen = Start;
+		}
 		break;
 
 	default:
-		std::cerr << "Unknown state found" << std::endl;
+		std::cerr << "Unknown state found for game screen" << std::endl;
+		break;
+	}
+}
+
+void ScreenManager::Render() {
+	mBackgroundStars->Render();
+
+	switch (mCurrentScreen) {
+		
+	case ScreenManager::Start:
+		mStartScreen->Render();
+		break;
+
+	case ScreenManager::Play:
+		mPlayScreen->Render();
+		break;
+
+	default:
 		break;
 	}
 }
