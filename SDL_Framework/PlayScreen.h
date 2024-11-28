@@ -10,6 +10,9 @@ public:
 	PlayScreen();
 	~PlayScreen();
 
+	void StartNewGame();
+	void StartNextLevel();
+
 	void Update() override;
 	void Render() override;
 

@@ -33,7 +33,7 @@ mPlayer1Score->Position(Graphics::SCREEN_WIDTH * -0.34f, 40.0f);
 mPlayer2Score->Position(Graphics::SCREEN_WIDTH * 0.35f, 40.0f);
 mTopScore->Position(Graphics::SCREEN_WIDTH * 0.08f, 40.0f);
 
-mTopScore->Score(637982);
+mTopScore->Score(645987);	//CREATE SAVE SYSTEM
 
 mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.32f);
 mLogo = new Texture("GalagaLogo.png", 0, 0, 360, 180);

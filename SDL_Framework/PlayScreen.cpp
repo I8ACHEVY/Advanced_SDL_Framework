@@ -21,6 +21,17 @@ PlayScreen::~PlayScreen() {
 	mSideBar = nullptr;
 }
 
+void PlayScreen::StartNewGame() {
+	mSideBar->SetHighScore(645987);	//CREATE SAVE SYSTEM
+	mSideBar->SetShips(2);
+
+	StartNextLevel();	//Test
+}
+
+void PlayScreen::StartNextLevel() {
+	mSideBar->SetLevel(116);
+}
+
 void PlayScreen::Update() {
 	mSideBar->Update();
 }

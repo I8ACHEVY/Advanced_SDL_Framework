@@ -170,5 +170,8 @@
     <ClInclude Include="PlaySideBar.h">
       <Filter>Header Files\Galaga H</Filter>
     </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\Galaga H</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

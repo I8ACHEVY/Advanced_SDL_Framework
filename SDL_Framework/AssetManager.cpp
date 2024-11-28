@@ -102,7 +102,7 @@ namespace SDL_Framework {
 
 	Mix_Chunk* AssetManager::GetSFX(std::string filename, bool managed) {
 		std::string fullPath = SDL_GetBasePath();
-		fullPath.append("Assets/Audio/" + filename);
+		fullPath.append("Assets/Audio/SFX/" + filename);
 
 		if (mSFX[fullPath] == nullptr) {
 			mSFX[fullPath] = Mix_LoadWAV(fullPath.c_str());
