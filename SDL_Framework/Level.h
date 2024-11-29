@@ -15,13 +15,14 @@ public:
 
 private:
 	Timer* mTimer;
-	PlaySideBar* mSidebar;
+	PlaySideBar* mSideBar;
 	BackgroundStars* mBackgroundStars;
 
 	int mStage; 
 	bool mStageStarted;
 
 	Texture* mReadyLabel;
+	Scoreboard* mStageNumber;
 	float mReadyLabelOnScreen;
 	float mReadyLabelOffScreen;
 
@@ -29,7 +30,7 @@ private:
 	float mStageLabelOnScreen;
 	float mStageLabelOffScreen;
 
-	float LabelTimer;
+	float mLabelTimer;
 
 	void StartStage();
 };

@@ -71,20 +71,6 @@ namespace SDL_Framework {
 			mAudioManager->SFXVolume(newSFXVolume);
 		}
 
-		if (mInputManager->KeyDown(SDL_SCANCODE_W) || mInputManager->KeyDown(SDL_SCANCODE_UP)) {
-			//mTex->Translate(Vector2(0, -40.0f) * mTimer->DeltaTime(), GameEntity::World);
-		}
-		else if (mInputManager->KeyDown(SDL_SCANCODE_S) || mInputManager->KeyDown(SDL_SCANCODE_DOWN)) {
-			//mTex->Translate(Vector2(0, 40.0f) * mTimer->DeltaTime(), GameEntity::World);
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_A) || mInputManager->KeyDown(SDL_SCANCODE_LEFT)) {
-			//mTex->Translate(Vector2(-40.0F, 0) * mTimer->DeltaTime(), GameEntity::World);
-		}
-		else if (mInputManager->KeyDown(SDL_SCANCODE_D) || mInputManager->KeyDown(SDL_SCANCODE_RIGHT)) {
-			//mTex->Translate(Vector2(40.0F, 0) * mTimer->DeltaTime(), GameEntity::World);
-		}
-
 		if (mInputManager->KeyDown(SDL_SCANCODE_Q)) {
 			//mTex->Rotate(-260.0f * mTimer->DeltaTime());
 		}
