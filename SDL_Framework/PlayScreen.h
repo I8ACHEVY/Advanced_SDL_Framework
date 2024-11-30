@@ -1,5 +1,6 @@
 #pragma once
 #include "Level.h"
+#include "Player.h"
 
 using namespace SDL_Framework;
 
@@ -12,6 +13,8 @@ public:
 	void StartNewGame();
 	void StartNextLevel();
 
+	bool GameOver();
+
 	void Update() override;
 	void Render() override;
 
@@ -21,6 +24,8 @@ private:
 
 	BackgroundStars* mStars;
 	PlaySideBar* mSideBar;
+
+	Player* mPlayer;
 
 	Texture* mStartLabel;
 

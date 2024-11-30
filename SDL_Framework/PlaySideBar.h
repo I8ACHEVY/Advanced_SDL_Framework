@@ -37,7 +37,7 @@ private:
 	bool mOneUpLabelVisible;
 
 	Scoreboard* mPlayer1Score;
-	Scoreboard* mPlayer2Score;
+	//Scoreboard* mPlayer2Score;
 
 	GameEntity* mShips;
 	Texture* mShipTextures[MAX_SHIP_TEXTURES];

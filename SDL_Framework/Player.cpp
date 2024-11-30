@@ -17,7 +17,7 @@ void Player::HandleMovement() {
 		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
 	}
 
-	Vector2 pos = Position(Local);
+	Vector2 pos = Position(Local);		//bug needs fix
 	if (pos.x < mMoveBounds.x) {
 		pos.x = mMoveBounds.x;
 	}
@@ -93,8 +93,11 @@ int Player::Lives() {
 	return mLives;
 }
 
-bool Player::WasHit() {
-	return mWasHit;
+void Player::WasHit() {
+	mLives -= 1;
+	mAnimating = true;
+	mDeathAnimation->ResetAnimation();
+	mAudio->PlaySFX("PlayerExplosion.wav",0, -1);
 }
 
 bool Player::IgnoreCollision() {

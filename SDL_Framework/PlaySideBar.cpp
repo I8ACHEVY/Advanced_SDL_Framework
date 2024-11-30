@@ -33,9 +33,9 @@ PlaySideBar::PlaySideBar() {
 	mPlayer1Score->Parent(this);
 	mPlayer1Score->Position(90.0f, 192.0f);
 
-	mPlayer2Score = new Scoreboard();
-	mPlayer2Score->Parent(this);
-	mPlayer2Score->Position(20.0f, 192.0f);
+	//mPlayer2Score = new Scoreboard();
+	//mPlayer2Score->Parent(this);
+	//mPlayer2Score->Position(20.0f, 192.0f);
 
 	mShips = new GameEntity();
 	mShips->Parent(this);
@@ -81,8 +81,8 @@ PlaySideBar::~PlaySideBar() {
 	delete mPlayer1Score;
 	mPlayer1Score = nullptr;
 
-	delete mPlayer2Score;
-	mPlayer2Score = nullptr;
+	//delete mPlayer2Score;
+	//mPlayer2Score = nullptr;
 
 	delete mShips;
 	mShips = nullptr;
@@ -193,7 +193,7 @@ void PlaySideBar::SetHighScore(int score) {
 }
 
 void PlaySideBar::SetPlayerScore(int score) {
-	mPlayer1Score = nullptr;
+	mPlayer1Score->Score(score);
 }
 
 void PlaySideBar::SetLevel(int level) {
@@ -233,7 +233,7 @@ void PlaySideBar::Render() {
 	}
 
 	mPlayer1Score->Render();
-	mPlayer2Score->Render();
+	//mPlayer2Score->Render();
 
 	for (int i = 0; i < MAX_SHIP_TEXTURES && i < mTotalShips; i ++) {
 		mShipTextures[i]->Render();
