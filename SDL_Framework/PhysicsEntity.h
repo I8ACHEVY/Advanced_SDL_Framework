@@ -26,7 +26,6 @@ namespace SDL_Framework{
 
 		virtual bool IgnoreCollision();
 
-	public://remove public after tests
 		unsigned long mId;
 		
 		void AddCollider(Collider* collider, Vector2 localPos = Vec2_Zero);

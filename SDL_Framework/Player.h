@@ -1,9 +1,9 @@
 #pragma once
-#include "PhysicsEntity.h"
 #include "AnimatedTexture.h"
 #include "InputManager.h"
 #include "AudioManager.h"
 #include "BoxCollider.h"
+#include "Bullet.h"
 
 using namespace SDL_Framework;
 
@@ -31,6 +31,9 @@ public:
 	void Hit(PhysEntity* other) override;
 
 private:
+	static const int MAX_BULLETS = 2;
+	Bullet* mBullets[MAX_BULLETS];
+
 	bool mWasHit;
 
 	Timer* mTimer;
@@ -50,4 +53,5 @@ private:
 	Vector2 mMoveBounds;
 
 	void HandleMovement();
+	void HandleFiring();
 };
