@@ -102,6 +102,12 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files\Galaga CPP</Filter>
     </ClCompile>
+    <ClCompile Include="BezierPath.cpp">
+      <Filter>Source Files\Galaga CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Galaga CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -186,6 +192,12 @@
       <Filter>Header Files\Galaga H</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Galaga H</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPath.h">
+      <Filter>Header Files\Galaga H</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Header Files\Galaga H</Filter>
     </ClInclude>
   </ItemGroup>

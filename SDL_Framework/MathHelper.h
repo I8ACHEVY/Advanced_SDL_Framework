@@ -5,6 +5,7 @@ namespace SDL_Framework {
 //macros
 #define PI 3.1415926535
 #define DEG_TO_RAD PI / 180.0f
+#define RAD_TO_DEG 180.0f / PI
 
 	struct Vector2 {
 		float x;
@@ -60,6 +61,28 @@ namespace SDL_Framework {
 	inline Vector2 operator* (float lhs, const Vector2& rhs) {
 		return Vector2(lhs * rhs.x, lhs * rhs.y);
 	}
+
+	struct BezierCurve {
+		Vector2 point0;
+		Vector2 point1;
+		Vector2 point2;
+		Vector2 point3;
+
+		Vector2 CalculatePointAlongCurve(float t) {
+			float tt = t * t;
+			float ttt = t * tt;
+			float u = 1.0f - t;
+			float uu = u * u;
+			float uuu = u * uu;
+
+			Vector2 point = (uuu * point0) + (3 * uu * t * point1) + 
+				(3 * u * tt * point2) + (tt * point3);
+
+			point.x = (float)round(point.x);
+			point.y = (float)round(point.y);
+			return point;
+		}
+	};
 
 	inline Vector2 Lerp(const Vector2& start, const Vector2& end, float time) {
 		if (time <= 0.0f) {

@@ -2,6 +2,7 @@
 #include "PlaySideBar.h"
 #include "BackgroundStar.h"
 #include "Player.h"
+#include "Enemy.h"
 
 using namespace SDL_Framework;
 
@@ -23,6 +24,7 @@ private:
 	PlaySideBar* mSideBar;
 	BackgroundStars* mBackgroundStars;
 	Player* mPlayer;
+	Enemy* mEnemy;
 
 	int mStage; 
 	bool mStageStarted;

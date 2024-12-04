@@ -24,6 +24,8 @@ namespace SDL_Framework
 
 		SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Color color);
 
+		void DrawLine(float startX, float startY, float endX, float endY);
+
 		void ClearBackBuffer();
 		void Render();
 
