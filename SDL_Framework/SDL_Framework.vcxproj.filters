@@ -108,6 +108,15 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Galaga CPP</Filter>
     </ClCompile>
+    <ClCompile Include="Formation.cpp">
+      <Filter>Source Files\Galaga CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Butterfly.cpp">
+      <Filter>Source Files\Galaga CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Wasp.cpp">
+      <Filter>Source Files\Galaga CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -198,6 +207,15 @@
       <Filter>Header Files\Galaga H</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Galaga H</Filter>
+    </ClInclude>
+    <ClInclude Include="Formation.h">
+      <Filter>Header Files\Galaga H</Filter>
+    </ClInclude>
+    <ClInclude Include="Butterfly.h">
+      <Filter>Header Files\Galaga H</Filter>
+    </ClInclude>
+    <ClInclude Include="Wasp.h">
       <Filter>Header Files\Galaga H</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,7 +2,7 @@
 #include "PlaySideBar.h"
 #include "BackgroundStar.h"
 #include "Player.h"
-#include "Enemy.h"
+#include "Butterfly.h"
 
 using namespace SDL_Framework;
 
@@ -24,7 +24,12 @@ private:
 	PlaySideBar* mSideBar;
 	BackgroundStars* mBackgroundStars;
 	Player* mPlayer;
-	Enemy* mEnemy;
+	Formation* mFormation;
+
+	const int MAX_BUTTERFLIES = 16;
+
+	int mButterflyCount;
+	std::vector<Enemy*> mEnemies;
 
 	int mStage; 
 	bool mStageStarted;
@@ -57,4 +62,8 @@ private:
 	void HandlePlayerDeath();
 	
 	void StartStage();
+
+	void HandleEnemySpawning();
+	void HandleEnemyFormation();
+	void HandleEnemyDiving();
 };

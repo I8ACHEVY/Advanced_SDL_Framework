@@ -49,7 +49,11 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 
 	mCurrentState = Running;
 
-	mEnemy = new Enemy(0);
+	mFormation = new Formation();
+	mFormation->Position(Graphics::SCREEN_WIDTH * 0.4f, 150.0f);
+	Enemy::SetFormation(mFormation);
+
+	mButterflyCount = 0;
 }
 
 Level::~Level() {
@@ -70,8 +74,14 @@ Level::~Level() {
 	delete mGameOverLabel;
 	mGameOverLabel = nullptr;
 
-	delete mEnemy;
-	mEnemy = nullptr;
+	delete mFormation;
+	mFormation = nullptr;
+
+	for (auto enemy : mEnemies) {
+		delete enemy;
+		enemy = nullptr;
+	}
+	mEnemies.clear();
 }
 
 Level::LevelStates Level::State() {
@@ -137,12 +147,50 @@ void Level::HandlePlayerDeath() {
 	}
 }
 
+void Level::HandleEnemySpawning() {
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_S) &&
+		mButterflyCount < MAX_BUTTERFLIES) {
+
+		mEnemies.push_back(new Butterfly(0, mButterflyCount, false));
+		mButterflyCount++;
+	}
+}
+
+void Level::HandleEnemyFormation() {
+	mFormation->Update();
+
+	if (mButterflyCount == MAX_BUTTERFLIES) {
+		bool flyIn = false;
+		for (auto enemy : mEnemies) {
+			if (enemy->CurrentState() == Enemy::FlyIn) {
+				flyIn = true;
+				break;
+			}
+		}
+
+		if (!flyIn) {
+			mFormation->Lock();
+		}
+	}
+}
+
+void Level::HandleEnemyDiving() {
+
+}
+
 void Level::Update() {
 	if (!mStageStarted) {
 		HandleStartLabels();
 	}
 	else {
-		mEnemy->Update();
+		HandleEnemySpawning();
+		HandleEnemyFormation();
+		HandleEnemyDiving();
+
+		for (auto enemy : mEnemies) {
+			enemy->Update();
+		}
+
 		HandleCollisions();
 
 		if (mPlayerHit) {
@@ -169,7 +217,9 @@ void Level::Render() {
 		}
 	}
 	else {
-		mEnemy->Render();
+		for (auto enemy : mEnemies) {
+			enemy->Render();
+		}
 
 		if (mPlayerHit) {
 			if (mRespawnTimer >= mRespawnLabelOnScreen) {
