@@ -5,8 +5,8 @@ Vector2 Butterfly::LocalFormationPosition() {
 
 	int dir = mIndex % 2 == 0 ? -1 : 1;
 
-	retVal.x = sFormation->GridSize().x * sFormation->GridSize().x * 
-		2 * (mIndex / 4) * (float)dir;
+	retVal.x = (sFormation->GridSize().x + sFormation->GridSize().x * 
+		2 * (mIndex / 4)) * (float)dir;
 
 	retVal.y = sFormation->GridSize().y * ((mIndex % 4) / 2);
 

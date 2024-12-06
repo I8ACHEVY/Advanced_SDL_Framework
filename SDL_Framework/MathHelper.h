@@ -76,7 +76,7 @@ namespace SDL_Framework {
 			float uuu = u * uu;
 
 			Vector2 point = (uuu * point0) + (3 * uu * t * point1) + 
-				(3 * u * tt * point2) + (tt * point3);
+				(3 * u * tt * point2) + (ttt * point3);
 
 			point.x = (float)round(point.x);
 			point.y = (float)round(point.y);
