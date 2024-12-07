@@ -3,6 +3,7 @@
 #include "BackgroundStar.h"
 #include "Player.h"
 #include "Butterfly.h"
+#include "Wasp.h"
 
 using namespace SDL_Framework;
 
@@ -27,8 +28,10 @@ private:
 	Formation* mFormation;
 
 	const int MAX_BUTTERFLIES = 16;
+	const int MAX_WASPS = 20;
 
 	int mButterflyCount;
+	int mWaspCount;
 	std::vector<Enemy*> mEnemies;
 
 	int mStage; 

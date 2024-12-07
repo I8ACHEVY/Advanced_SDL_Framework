@@ -136,37 +136,39 @@ void Wasp::RenderDiveState() {
 	mTexture->Render();
 
 	int currentPath = mIndex % 2;
-	for (int i = 0; i < sDivePaths[currentPath].size() - 1;) {
+	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
 			mDiveStartPosition.x + sDivePaths[currentPath][i].x,
 			mDiveStartPosition.y + sDivePaths[currentPath][i].y,
 			mDiveStartPosition.x + sDivePaths[currentPath][i + 1].x,
 			mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
-			);
+		);
 	}
+
+	Vector2 finalPos = WorldFormationPosition();
+	auto currentDivePath = sDivePaths[currentPath];
+	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];
+
+	Graphics::Instance()->DrawLine(
+		pathEndPos.x,
+		pathEndPos.y,
+		finalPos.x,
+		finalPos.y
+	);
 }
-
-Vector2 finalPos = WorldFormationPosition();
-auto currentDivePath = sDivePaths[currentPath];
-Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePaths].size() - 1];
-
-Graphics::Instance()->DrawLine(
-	pathEndPos.x,
-	pathEndPos.y,
-	finalPos.x,
-	finalPos.y
-);
 
 void Wasp::RenderDeadState() {
 
 }
 
-Wasp::Wasp(int path, int index, bool challenge, bool diver) {
+Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 	Enemy(path, index, challenge), mDiver(diver) {
 
 		mTexture = new Texture("AnimatedEnemies.png", 0, 40, 52, 40);
 		mTexture->Parent(this);
 		mTexture->Position(Vec2_Zero);
-	}
 }
 
+Wasp::~Wasp() {
+
+}
