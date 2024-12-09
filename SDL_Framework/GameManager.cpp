@@ -45,30 +45,12 @@ namespace SDL_Framework {
 		mScreenManager->Update();
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_MINUS)) {
-			int currentMusicVolume = Mix_VolumeMusic(-1);
-			int newMusicVolume = currentMusicVolume - 10;
-			if (newMusicVolume < 0) newMusicVolume = 0;
+			mAudioManager->DecreaseVolume();
 
-			mAudioManager->MusicVolume(newMusicVolume);
-
-			int currentSFXVolume = Mix_Volume(-1, -1);
-			int newSFXVolume = currentMusicVolume - 10;
-			if (newSFXVolume < 0) newSFXVolume = 0;
-
-			mAudioManager->SFXVolume(newSFXVolume);
 		}
 		else if (mInputManager->KeyDown(SDL_SCANCODE_EQUALS)) {
-			int currentMusicVolume = Mix_VolumeMusic(-1); 
-			int newMusicVolume = currentMusicVolume + 10;  
-			if (newMusicVolume > MIX_MAX_VOLUME) newMusicVolume = MIX_MAX_VOLUME; 
+			mAudioManager->IncreaseVolume(); 
 
-			mAudioManager->MusicVolume(newMusicVolume); 
-
-			int currentSFXVolume = Mix_Volume(-1, -1); 
-			int newSFXVolume = currentSFXVolume + 10;   
-			if (newSFXVolume > MIX_MAX_VOLUME) newSFXVolume = MIX_MAX_VOLUME;    
-
-			mAudioManager->SFXVolume(newSFXVolume);
 		}
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_Q)) {

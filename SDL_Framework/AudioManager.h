@@ -14,6 +14,8 @@ namespace SDL_Framework {
 		void ResumeMusic();
 		void MusicVolume(int volume);
 		void SFXVolume(int volume);
+		void IncreaseVolume();
+		void DecreaseVolume();
 		
 		void PlaySFX(std::string filename, int loops = 0, int channel = -1);
 		void PlaySFX(Mix_Chunk* sfx, int loops = 0, int channel = -1);

@@ -58,6 +58,29 @@ namespace SDL_Framework {
 		}
 	}
 
+	void AudioManager::IncreaseVolume() {
+		int currentMusicVolume = Mix_VolumeMusic(-1);
+		int newMusicVolume = currentMusicVolume + 10;
+		if (newMusicVolume > MIX_MAX_VOLUME) newMusicVolume = MIX_MAX_VOLUME;
+		MusicVolume(newMusicVolume);
+
+		int currentSFXVolume = Mix_Volume(-1, -1);
+		int newSFXVolume = currentSFXVolume + 10;
+		if (newSFXVolume > MIX_MAX_VOLUME) newSFXVolume = MIX_MAX_VOLUME;
+		SFXVolume(newSFXVolume);
+	}
+
+	void AudioManager::DecreaseVolume() {
+		int currentMusicVolume = Mix_VolumeMusic(-1);
+		int newMusicVolume = currentMusicVolume - 10;
+		if (newMusicVolume < 0) newMusicVolume = 0;
+		MusicVolume(newMusicVolume);
+
+		int currentSFXVolume = Mix_Volume(-1, -1);
+		int newSFXVolume = currentSFXVolume - 10;
+		if (newSFXVolume < 0) newSFXVolume = 0;
+		SFXVolume(newSFXVolume);
+	}
 
 	void AudioManager::PlaySFX(std::string filename, int loops, int channel) {
 		Mix_PlayChannel(channel, mAssetManager->GetSFX(filename), loops);
