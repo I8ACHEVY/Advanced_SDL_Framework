@@ -92,7 +92,7 @@ Vector2 Wasp::LocalFormationPosition() {
 	int dir = mIndex % 2 == 0 ? -1 : 1;
 
 	retVal.x = (sFormation->GridSize().x + sFormation->GridSize().x * 
-		2 * (mIndex / 4) * (float)dir);
+		2 * (mIndex / 4)) * (float)dir;
 
 	retVal.y = sFormation->GridSize().y * 2 + sFormation->GridSize().y * 
 		((mIndex % 4) / 2);
@@ -133,7 +133,7 @@ void Wasp::HandleDeadState() {
 }
 
 void Wasp::RenderDiveState() {
-	mTexture->Render();
+	mTexture[sFormation->GetTick() % 2]->Render();
 
 	int currentPath = mIndex % 2;
 	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
@@ -164,9 +164,15 @@ void Wasp::RenderDeadState() {
 Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 	Enemy(path, index, challenge), mDiver(diver) {
 
-		mTexture = new Texture("AnimatedEnemies.png", 0, 40, 52, 40);
-		mTexture->Parent(this);
-		mTexture->Position(Vec2_Zero);
+	mTexture[0] = new Texture("AnimatedEnemies.png", 0, 40, 52, 40);
+	mTexture[1] = new Texture("AnimatedEnemies.png", 52, 40, 52, 40);
+
+		for (int i = 0; i < 2; i++) {
+			mTexture[i]->Parent(this);
+			mTexture[i]->Position(Vec2_Zero);
+		}
+
+		mType = Enemy::Wasp;
 }
 
 Wasp::~Wasp() {

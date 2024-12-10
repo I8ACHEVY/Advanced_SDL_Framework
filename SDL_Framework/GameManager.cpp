@@ -112,14 +112,6 @@ namespace SDL_Framework {
 			//mRedShip->Rotate(260.0f * mTimer->DeltaTime());
 		}
 
-		if (mInputManager->KeyPressed(SDL_SCANCODE_SPACE)) {
-			std::cout << "Space pressed!" << std::endl;
-		}
-		if (mInputManager->KeyReleased(SDL_SCANCODE_SPACE)) {
-			std::cout << "Space released!" << std::endl;
-		}
-
-
 		if (mInputManager->MouseButtonPressed(InputManager::Left)) {
 			std::cout << "Left mouse button pressed!" << std::endl;
 			mAudioManager->PlaySFX("coin_credit.wav", 0, -1);			//audio test
@@ -188,35 +180,18 @@ namespace SDL_Framework {
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Friendly,
 			PhysicsManager::CollisionFlags::Hostile |
 			PhysicsManager::CollisionFlags::HostileProjectile);
-
+		
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Hostile,
 			PhysicsManager::CollisionFlags::Friendly |
 			PhysicsManager::CollisionFlags::FriendlyProjectile);
-
+		
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Hostile,
 			PhysicsManager::CollisionFlags::Friendly |
 			PhysicsManager::CollisionFlags::FriendlyProjectile);
-
+		
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::HostileProjectile,
 			PhysicsManager::CollisionFlags::Friendly |
 			PhysicsManager::CollisionFlags::FriendlyProjectile);
-
-		// random number test to ensure it is truly random
-		//std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
-		//std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
-		//std::cout << "Random Int Test: " << mRandom->RandomInt() << std::endl;
-
-		//std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
-		//std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
-		//std::cout << "Random Float Test: " << mRandom->RandomFloat() << std::endl;
-
-		//std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
-		//std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
-		//std::cout << "Random Range(int) Test: " << mRandom->RandomRange(0, 10) << std::endl;
-
-		//std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
-		//std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
-		//std::cout << "Random Range(float) Test: " << mRandom->RandomRange(0.0f, 10.0f) << std::endl;
 
 	}
 

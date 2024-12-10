@@ -35,7 +35,7 @@ protected:
 
 	Timer* mTimer;
 
-	Texture* mTexture;
+	Texture* mTexture[2];
 
 	States mCurrentState;
 

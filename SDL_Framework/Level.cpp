@@ -55,6 +55,7 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 
 	mButterflyCount = 0;
 	mWaspCount = 0;
+	mBossCount = 0;
 }
 
 Level::~Level() {
@@ -149,16 +150,23 @@ void Level::HandlePlayerDeath() {
 }
 
 void Level::HandleEnemySpawning() {
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_S) &&
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_S) &&		//Testing
 		mButterflyCount < MAX_BUTTERFLIES) {
 
 		mEnemies.push_back(new Butterfly(0, mButterflyCount, false));
 		mButterflyCount++;
 	}
 
-	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_W) &&
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_W) &&		//Testing
 		mWaspCount < MAX_WASPS) {
+
 		mEnemies.push_back(new Wasp(0, mWaspCount++, false, false));
+	}
+
+	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F) &&		//Testing
+		mBossCount < MAX_BOSSES) {
+
+		mEnemies.push_back(new Boss(0, mBossCount++, false));
 	}
 }
 
@@ -166,7 +174,9 @@ void Level::HandleEnemyFormation() {
 	mFormation->Update();
 
 	if (mButterflyCount == MAX_BUTTERFLIES &&
-		mWaspCount == MAX_WASPS) {
+		mWaspCount == MAX_WASPS &&
+		mBossCount == MAX_BOSSES) {
+
 		bool flyIn = false;
 		for (auto enemy : mEnemies) {
 			if (enemy->CurrentState() == Enemy::FlyIn) {
@@ -183,9 +193,29 @@ void Level::HandleEnemyFormation() {
 
 void Level::HandleEnemyDiving() {
 	if (mFormation->Locked()) {
-		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_V)) {
+		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_V)) {		//Testing
 			for (auto enemy : mEnemies) {
 				if (enemy->Type() == Enemy::Wasp &&
+					enemy->CurrentState() == Enemy::InFormation) {
+					enemy->Dive();
+					break;
+				}
+			}
+		}
+
+		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_B)) {		//Testing
+			for (auto enemy : mEnemies) {
+				if (enemy->Type() == Enemy::Butterfly &&
+					enemy->CurrentState() == Enemy::InFormation) {
+					enemy->Dive();
+					break;
+				}
+			}
+		}
+
+		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_G)) {		//Testing
+			for (auto enemy : mEnemies) {
+				if (enemy->Type() == Enemy::Boss &&
 					enemy->CurrentState() == Enemy::InFormation) {
 					enemy->Dive();
 					break;
@@ -214,7 +244,7 @@ void Level::Update() {
 			HandlePlayerDeath();
 		}
 		else {
-			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {
+			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {		//Testing
 				mCurrentState = Finished;
 			}
 		}

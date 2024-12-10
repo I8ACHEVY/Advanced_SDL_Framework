@@ -51,7 +51,8 @@ Enemy::Enemy(int path, int index, bool challenge) :
 	mCurrentWayPoint = 1;
 	Position(sPaths[mCurrentPath][0]);
 
-	mTexture = nullptr;		// enemy new Texture("AnimatedEnemies.png", 0, 0, 52, 40);
+	mTexture[0] = nullptr;		// enemy new Texture("AnimatedEnemies.png", 0, 0, 52, 40);
+	mTexture[1] = nullptr;
 	
 	mSpeed = 100.0f;
 }
@@ -59,8 +60,10 @@ Enemy::Enemy(int path, int index, bool challenge) :
 Enemy::~Enemy() {
 	mTimer = nullptr;
 
-	delete mTexture;
-	mTexture = nullptr;
+	for (int i = 0; i < 2; i++) {
+		delete mTexture[i];
+		mTexture[i] = nullptr;
+	}
 }
 
 Enemy::States Enemy::CurrentState() {
@@ -173,7 +176,7 @@ void Enemy::HandleStates() {
 }
 
 void Enemy::RenderFlyInState() {
-	mTexture->Render();
+	mTexture[sFormation->GetTick() % 2]->Render();
 
 	for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
@@ -186,7 +189,7 @@ void Enemy::RenderFlyInState() {
 }
 
 void Enemy::RenderInFormationState() {
-	mTexture->Render();
+	mTexture[sFormation->GetTick() % 2]->Render();
 }
 
 void Enemy::RenderStates() {
