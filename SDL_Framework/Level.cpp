@@ -161,12 +161,14 @@ void Level::HandleEnemySpawning() {
 		mWaspCount < MAX_WASPS) {
 
 		mEnemies.push_back(new Wasp(0, mWaspCount++, false, false));
+		//mWaspCount++;
 	}
 
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F) &&		//Testing
 		mBossCount < MAX_BOSSES) {
 
 		mEnemies.push_back(new Boss(0, mBossCount++, false));
+		//mBossCount++;
 	}
 }
 

@@ -4,7 +4,6 @@ std::vector<std::vector<Vector2>> Wasp::sDivePaths;
 
 void Wasp::CreateDivePaths() {
 	int currentPath = 0;
-
 	BezierPath* path = new BezierPath();
 
 	path->AddCurve({
@@ -104,8 +103,9 @@ void Wasp::HandleDiveState() {
 	int currentPath = mIndex % 2;
 
 	if (mCurrentWayPoint < sDivePaths[currentPath].size()) {
+
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
-			[mCurrentPath][mCurrentWayPoint];
+			[currentPath][mCurrentWayPoint];
 
 		Vector2 dist = waypointPos - Position();
 

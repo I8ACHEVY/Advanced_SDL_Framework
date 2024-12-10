@@ -1,4 +1,6 @@
 #include "Boss.h"
+#include "BoxCollider.h"
+#include "AudioManager.h"
 
 std::vector<std::vector<Vector2>> Boss::sDivePaths;
 
@@ -7,10 +9,10 @@ void Boss::CreateDivePaths() {
 	BezierPath* path = new BezierPath();
 
 	path->AddCurve({
-			Vector2(0.0f, 0.0f),
-			Vector2(0.0f, -60.0f),
-			Vector2(-90.0f, -60.0f),
-			Vector2(-90.0f, 0.0f) }, 15);
+		Vector2(0.0f, 0.0f),
+		Vector2(0.0f, -60.0f),
+		Vector2(-90.0f, -60.0f),
+		Vector2(-90.0f, 0.0f) }, 15);
 
 	path->AddCurve({
 		Vector2(-90.0f, 0.0f),
@@ -165,7 +167,7 @@ void Boss::HandleDiveState() {
 	
 	if (mCurrentWayPoint < sDivePaths[currentPath].size()) {
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
-			[mCurrentPath][mCurrentWayPoint];
+			[currentPath][mCurrentWayPoint];
 	
 		Vector2 dist = waypointPos - Position();
 	
@@ -220,6 +222,7 @@ void Boss::RenderDiveState() {
 		finalPos.x,
 		finalPos.y
 	);
+	
 }
 
 void Boss::RenderDeadState() {

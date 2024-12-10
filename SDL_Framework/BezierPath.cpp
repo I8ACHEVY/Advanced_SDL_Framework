@@ -14,7 +14,7 @@ void BezierPath::AddCurve(BezierCurve curve, int samples) {
 }
 
 void BezierPath::Sample(std::vector<Vector2>* samplePath) {
-	for (int i = 0; i < mCurves.size(); i++) {
+	for (unsigned int i = 0; i < mCurves.size(); i++) {
 		for (float t = 0.0f; t <= 1.0f; t += (1.0f / mSamples[i])) {
 			samplePath->push_back(mCurves[i].CalculatePointAlongCurve(t));
 		}

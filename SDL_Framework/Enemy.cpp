@@ -35,6 +35,99 @@ void Enemy::CreatePaths() {
 
 	sPaths.push_back(std::vector<Vector2>());
 	path->Sample(&sPaths[currentPath]);
+	delete path;
+
+	currentPath = 1;
+	path = new BezierPath();
+	int fullScreen = screenMidPoint * 2;
+
+	path->AddCurve({
+		Vector2(screenMidPoint - 50.0f, -10.0f),
+		Vector2(screenMidPoint - 50.0f, -20.0f),
+		Vector2(screenMidPoint - 50.0f, 30.0f),
+		Vector2(screenMidPoint - 50.0f, 20.0f) }, 1);
+
+	path->AddCurve({
+		Vector2(screenMidPoint - 50.0f, 20.0f),
+		Vector2(screenMidPoint - 50.0f, 100.0f),
+		Vector2(fullScreen - 75.0f, 325.0f),
+		Vector2(fullScreen - 75.0f, 425.0f) }, 25);
+
+	path->AddCurve({
+		Vector2(fullScreen - 75.0f, 425.0f),
+		Vector2(fullScreen - 75.0f, 650.0f),
+		Vector2(fullScreen - 350.0f, 650.0f),
+		Vector2(fullScreen - 350.0f, 425.0f) }, 25);
+
+	sPaths.push_back(std::vector<Vector2>());
+	path->Sample(&sPaths[currentPath]);
+	delete path;
+
+	currentPath = 2;
+	float temp = screenMidPoint - 100.0f;
+
+	path = new BezierPath();
+
+	path->AddCurve({
+		Vector2(-40.0f, 720.0f),
+		Vector2(-50.0f, 720.0f),
+		Vector2(10.0f, 720.0f),
+		Vector2(0.0f, 720.0f) }, 1);
+
+	path->AddCurve({
+		Vector2(0.0f, 720.0f),
+		Vector2(200.0f, 720.0f),
+		Vector2(temp, 500.0f),
+		Vector2(temp, 400.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(temp, 400.0f),
+		Vector2(temp, 200.0f),
+		Vector2(40.0f, 200.0f),
+		Vector2(40.0f, 400.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(40.0f, 400.0f),
+		Vector2(40.0f, 500.0f),
+		Vector2(temp - 120.0f, 600.0f),
+		Vector2(temp - 40.0f, 440.0f) }, 15);
+
+	sPaths.push_back(std::vector<Vector2>());
+	path->Sample(&sPaths[currentPath]);
+	delete path;
+
+	currentPath = 3;
+	temp = screenMidPoint + 60.0f;
+	float temp2 = fullScreen - 40.0f;
+
+	path = new BezierPath();
+	path->AddCurve({
+		Vector2(temp2 + 40.0f, 720.0f),
+		Vector2(temp2 + 50.0f, 720.0f),
+		Vector2(temp2 + 10.0f, 720.0f),
+		Vector2(temp2, 720.0f) }, 1);
+
+	path->AddCurve({
+		Vector2(temp2, 720.0f),
+		Vector2(temp2 - 200.0f, 720.0f),
+		Vector2(temp, 500.0f),
+		Vector2(temp, 400.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(temp, 400.0f),
+		Vector2(temp, 200.0f),
+		Vector2(temp2 - 40.0f, 200.0f),
+		Vector2(temp2 - 40.0f, 400.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(temp2 - 40.0f, 400.0f),
+		Vector2(temp2 - 40.0f, 500.0f),
+		Vector2(temp + 120.0f, 600.0f),
+		Vector2(temp + 40.0f, 440.0f) }, 15);
+
+	sPaths.push_back(std::vector<Vector2>());
+	path->Sample(&sPaths[currentPath]);
+	delete path;
 }
 
 void Enemy::SetFormation(Formation* formation) {
@@ -126,6 +219,7 @@ void Enemy::Render() {
 void Enemy::HandleFlyInState() {
 	if (mCurrentWayPoint < sPaths[mCurrentPath].size()) {
 		Vector2 dist = sPaths[mCurrentPath][mCurrentWayPoint] - Position();
+
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
 		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
 
@@ -141,6 +235,7 @@ void Enemy::HandleFlyInState() {
 	}
 	else {
 		Vector2 dist = WorldFormationPosition() - Position();
+
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
 		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
 

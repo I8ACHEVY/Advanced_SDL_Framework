@@ -116,7 +116,7 @@ void Butterfly::HandleDiveState(){
 
 	if (mCurrentWayPoint < sDivePaths[currentPath].size()) {
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
-			[mCurrentPath][mCurrentWayPoint];
+			[currentPath][mCurrentWayPoint];
 
 		Vector2 dist = waypointPos - Position();
 
@@ -133,7 +133,7 @@ void Butterfly::HandleDiveState(){
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
 		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
 
-		if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25) {
+		if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
 			JoinFormation();
 		}
 	}
@@ -170,6 +170,7 @@ void Butterfly::RenderDiveState(){
 		finalPos.x,
 		finalPos.y
 	);
+
 }
 
 void Butterfly::RenderDeadState(){}

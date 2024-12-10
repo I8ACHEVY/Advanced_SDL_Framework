@@ -16,6 +16,7 @@ namespace SDL_Framework {
 		static std::vector<std::vector<Vector2>> sDivePaths;
 
 		bool mCaptureDive;
+		int mCurrentPath;
 
 		Vector2 LocalFormationPosition() override;
 
