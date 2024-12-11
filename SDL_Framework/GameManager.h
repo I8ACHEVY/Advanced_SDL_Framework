@@ -39,6 +39,7 @@ namespace SDL_Framework {
 		PhysicsManager* mPhysicsManager;
 		Random* mRandom;
 		ScreenManager* mScreenManager;
+		SDL_Texture* mBorderTexture;
 
 		SDL_Event mEvents;
 	};

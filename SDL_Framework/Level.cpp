@@ -220,6 +220,34 @@ void Level::HandleEnemyDiving() {
 				if (enemy->Type() == Enemy::Boss &&
 					enemy->CurrentState() == Enemy::InFormation) {
 					enemy->Dive();
+
+					int index = enemy->Index();
+					int firstEscortIndex = (index % 2 == 0) ?
+						(index * 2) : (index * 2 - 1);
+					int secondEscortIndex = firstEscortIndex + 4;
+
+					for (auto butterfly : mEnemies) {
+						//verify the enemy is a butterfly in formation &
+						//the butterfly has either the first or second escort index
+						if (butterfly->Type() != Enemy::Butterfly) { continue; }
+						if (butterfly->CurrentState() != Enemy::InFormation) { continue;}
+
+						if (butterfly->Index() == firstEscortIndex ||
+							butterfly->Index() == secondEscortIndex){
+							butterfly->Dive(1);
+						}
+						// or do this
+						//if (butterfly->Type() == Enemy::Butterfly &&
+						//	butterfly->CurrentState() == Enemy::InFormation) {
+						// 
+						//	if (butterfly->Index() == firstEscortIndex || 
+						//	    butterfly->Index() == secondEscortIndex) {
+						//		
+						//		butterfly->Dive(1);
+						//	}
+						//}
+					}
+
 					break;
 				}
 			}

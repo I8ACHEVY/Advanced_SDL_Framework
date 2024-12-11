@@ -2,6 +2,7 @@
 
 namespace SDL_Framework {
 	GameManager* GameManager::sInstance = nullptr;
+	SDL_Texture* borderTexture = nullptr;
 
 	GameManager* GameManager::Instance() {
 		if (sInstance == nullptr) {
@@ -46,13 +47,20 @@ namespace SDL_Framework {
 
 		if (mInputManager->KeyDown(SDL_SCANCODE_MINUS)) {
 			mAudioManager->DecreaseVolume();
-
 		}
 		else if (mInputManager->KeyDown(SDL_SCANCODE_EQUALS)) {
-			mAudioManager->IncreaseVolume(); 
-
+			mAudioManager->IncreaseVolume();
 		}
 
+		if (mInputManager->KeyDown(SDL_SCANCODE_M)) {
+			if (mAudioManager->Muted()) {
+				mAudioManager->Unmute();
+			}
+			else {
+				mAudioManager->Mute();
+			}
+		}
+		/*
 		if (mInputManager->KeyDown(SDL_SCANCODE_Q)) {
 			//mTex->Rotate(-260.0f * mTimer->DeltaTime());
 		}
@@ -147,6 +155,7 @@ namespace SDL_Framework {
 		if (mInputManager->KeyReleased(SDL_SCANCODE_PERIOD)) {
 			mScaleTimePER = 0.0f;
 		}
+		*/
 	}
 
 	void GameManager::LateUpdate() {
@@ -156,6 +165,11 @@ namespace SDL_Framework {
 	}
 
 	void GameManager::Render() {
+		SDL_Rect destRect = { 0, 0, 1044, 926 };
+		if (borderTexture) {
+			SDL_RenderCopy(mGraphics->GetRenderer(), borderTexture, NULL, &destRect);
+		}
+
 		mGraphics->ClearBackBuffer();
 		mScreenManager->Render();
 
@@ -176,6 +190,12 @@ namespace SDL_Framework {
 		mPhysicsManager = PhysicsManager::Instance();
 		mRandom = Random::Instance();
 		mScreenManager = ScreenManager::Instance();
+
+		mBorderTexture = IMG_LoadTexture(mGraphics->GetRenderer(), "Boarder.png");
+
+		if (!mBorderTexture) {
+			std::cerr << "Failed to load border texture: " << IMG_GetError() << std::endl;
+		}
 
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Friendly,
 			PhysicsManager::CollisionFlags::Hostile |
@@ -222,6 +242,11 @@ namespace SDL_Framework {
 
 		ScreenManager::Release();
 		mScreenManager = nullptr;
+
+		if (mBorderTexture != nullptr) {
+			SDL_DestroyTexture(mBorderTexture);
+			mBorderTexture = nullptr;
+		}
 
 		// terminate SDL subsystems
 		SDL_Quit();

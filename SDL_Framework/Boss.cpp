@@ -201,7 +201,9 @@ void Boss::RenderDiveState() {
 		currentPath += 2;
 	}
 	
-	mTexture[sFormation->GetTick() % 2]->Render();
+	mTexture[0]->Render();
+	// or do this
+	//mTexture[sFormation->GetTick() % 2]->Render();
 	
 	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
@@ -235,10 +237,16 @@ Boss::Boss(int path, int index, bool challenge) :
 	mTexture[0] = new Texture("Bosses.png", 0, 0, 64, 64);
 	mTexture[1] = new Texture("Bosses.png", 64, 0, 64, 64);
 
-	for (int i = 0; i < 2; i++) {
-		mTexture[i]->Parent(this);
-		mTexture[i]->Position(Vec2_Zero);
+	for (auto texture : mTexture) {
+		texture->Parent(this);
+		texture->Position(Vec2_Zero);
 	}
+	// or do this
+	// 
+	//for (int i = 0; i < 2; i++) {
+	//	mTexture[i]->Parent(this);
+	//	mTexture[i]->Position(Vec2_Zero);
+	//}
 
 	mType = Enemy::Boss;
 

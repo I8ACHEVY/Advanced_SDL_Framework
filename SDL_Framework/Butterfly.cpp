@@ -7,11 +7,11 @@ void Butterfly::CreateDivePaths() {
 	BezierPath* path = new BezierPath();
 
 	path->AddCurve({
-	Vector2(0.0f, 0.0f),
-	Vector2(0.0f, -45.0f),
-	Vector2(-60.0f, -45.0f),
-	Vector2(-60.f, 0.0f) }, 15
-	);
+		Vector2(0.0f, 0.0f),
+		Vector2(0.0f, -45.0f),
+		Vector2(-60.0f, -45.0f),
+		Vector2(-60.f, 0.0f) }, 15
+		);
 
 	path->AddCurve({
 		Vector2(-60.0f, 0.0f),
@@ -45,7 +45,7 @@ void Butterfly::CreateDivePaths() {
 	path->Sample(&sDivePaths[currentPath]);
 	delete path;
 
-	currentPath++;
+	currentPath = 1;
 	path = new BezierPath();
 
 	path->AddCurve({
@@ -82,6 +82,92 @@ void Butterfly::CreateDivePaths() {
 		Vector2(-300.0f, 625.0f),
 		Vector2(-300.0f, 775.0f) }, 15
 		);
+
+	sDivePaths.push_back(std::vector<Vector2>());
+	path->Sample(&sDivePaths[currentPath]);
+	delete path;
+
+	currentPath = 2;
+	path = new BezierPath();
+
+	path->AddCurve({
+		Vector2(0.0f, 0.0f),
+		Vector2(0.0f, -60.0f),
+		Vector2(-90.0f, -60.0f),
+		Vector2(-90.0f, 0.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(-90.0f, 0.0f),
+		Vector2(-90.0f, 60.0f),
+		Vector2(-100.0f, 272.0f),
+		Vector2(-15.0f, 275.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(-15.0f, 275.0f),
+		Vector2(85.0f, 275.0f),
+		Vector2(85.0f, 125.0f),
+		Vector2(-15.0f, 125.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(-15.0f, 125.0f),
+		Vector2(-175.0f, 125.0f),
+		Vector2(0.0f, 450.0f),
+		Vector2(125.0f, 450.0f) }, 25);
+
+	path->AddCurve({
+		Vector2(120.0f, 450.0f),
+		Vector2(160.0f, 450.0f),
+		Vector2(200.0f, 500.0f),
+		Vector2(200.0f, 550.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(200.0f, 550.0f),
+		Vector2(200.0f, 540.0f),
+		Vector2(200.0f, 810.0f),
+		Vector2(200.0f, 800.0f) }, 15);
+
+	sDivePaths.push_back(std::vector<Vector2>());
+	path->Sample(&sDivePaths[currentPath]);
+	delete path;
+
+	currentPath = 3;
+	path = new BezierPath();
+
+	path->AddCurve({
+		Vector2(0.0f, 0.0f),
+		Vector2(0.0f, -60.0f),
+		Vector2(90.0f, -60.0f),
+		Vector2(90.0f, 0.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(90.0f, 0.0f),
+		Vector2(90.0f, 60.0f),
+		Vector2(100.0f, 272.0f),
+		Vector2(15.0f, 275.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(15.0f, 275.0f),
+		Vector2(-85.0f, 275.0f),
+		Vector2(-85.0f, 125.0f),
+		Vector2(15.0f, 125.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(15.0f, 125.0f),
+		Vector2(175.0f, 125.0f),
+		Vector2(0.0f, 450.0f),
+		Vector2(-125.0f, 450.0f) }, 25);
+
+	path->AddCurve({
+		Vector2(-120.0f, 450.0f),
+		Vector2(-160.0f, 450.0f),
+		Vector2(-200.0f, 500.0f),
+		Vector2(-200.0f, 550.0f) }, 15);
+
+	path->AddCurve({
+		Vector2(-200.0f, 550.0f),
+		Vector2(-200.0f, 540.0f),
+		Vector2(-200.0f, 810.0f),
+		Vector2(-200.0f, 800.0f) }, 15);
 
 	sDivePaths.push_back(std::vector<Vector2>());
 	path->Sample(&sDivePaths[currentPath]);
@@ -149,7 +235,9 @@ void Butterfly::RenderDiveState(){
 		currentPath += 2;
 	}
 
-	mTexture[sFormation->GetTick() % 2]->Render();
+	mTexture[0]->Render();
+	// or do this
+	//mTexture[sFormation->GetTick() % 2]->Render();
 
 	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
@@ -181,10 +269,16 @@ Enemy(path, index, challenge)
 	mTexture[0] = new Texture("AnimatedEnemies.png", 0, 0, 52, 40);
 	mTexture[1] = new Texture("AnimatedEnemies.png", 52, 0, 52, 40);
 
-	for (int i = 0; i < 2; i++) {
-		mTexture[i]->Parent(this);
-		mTexture[i]->Position(Vec2_Zero);
+	for (auto texture : mTexture) {
+		texture->Parent(this);
+		texture->Position(Vec2_Zero);
 	}
+	// or do this
+	// 
+	//for (int i = 0; i < 2; i++) {
+	//	mTexture[i]->Parent(this);
+	//	mTexture[i]->Position(Vec2_Zero);
+	//}
 	
 	mType = Enemy::Butterfly;
 }

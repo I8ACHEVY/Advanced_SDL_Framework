@@ -133,7 +133,9 @@ void Wasp::HandleDeadState() {
 }
 
 void Wasp::RenderDiveState() {
-	mTexture[sFormation->GetTick() % 2]->Render();
+	mTexture[0]->Render();
+	// or do this
+	//mTexture[sFormation->GetTick() % 2]->Render();
 
 	int currentPath = mIndex % 2;
 	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
@@ -167,10 +169,16 @@ Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 	mTexture[0] = new Texture("AnimatedEnemies.png", 0, 40, 52, 40);
 	mTexture[1] = new Texture("AnimatedEnemies.png", 52, 40, 52, 40);
 
-		for (int i = 0; i < 2; i++) {
-			mTexture[i]->Parent(this);
-			mTexture[i]->Position(Vec2_Zero);
-		}
+	for (auto texture : mTexture) {
+		texture->Parent(this);
+		texture->Position(Vec2_Zero);
+	}
+	// or do this
+	// 
+	//for (int i = 0; i < 2; i++) {
+	//	mTexture[i]->Parent(this);
+	//	mTexture[i]->Position(Vec2_Zero);
+	//}
 
 		mType = Enemy::Wasp;
 }

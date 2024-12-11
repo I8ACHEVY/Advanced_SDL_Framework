@@ -172,7 +172,7 @@ void PlaySideBar::AddFlag(std::string filename, float width, int value) {
 	//	break;
 	}
 
-	mFlagTextures.push_back(new Texture(filename, x, 0, width - 2, 64));
+	mFlagTextures.push_back(new Texture(filename, x, 0, (int)width - 2, 64));
 	mFlagTextures[index]->Parent(mFlags);
 	mFlagTextures[index]->Position(mFlagXOffset, mFlagYOffset);
 	mFlagXOffset += width * 0.5f;

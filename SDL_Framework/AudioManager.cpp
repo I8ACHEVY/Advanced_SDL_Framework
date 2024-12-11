@@ -1,6 +1,7 @@
 #include "AudioManager.h"
 
 namespace SDL_Framework {
+
 	AudioManager* AudioManager::sInstance = nullptr;
 
 	AudioManager* AudioManager::Instance() {
@@ -80,6 +81,28 @@ namespace SDL_Framework {
 		int newSFXVolume = currentSFXVolume - 10;
 		if (newSFXVolume < 0) newSFXVolume = 0;
 		SFXVolume(newSFXVolume);
+	}
+
+	bool AudioManager::Muted() {
+		return isMuted;
+	}
+
+	void AudioManager::Mute() {
+		if (!isMuted) {
+			previousMusicVolume = Mix_VolumeMusic(-1);
+			previousSFXVolume = Mix_Volume(-1, -1);
+			MusicVolume(0);
+			SFXVolume(0);
+			isMuted = true;
+		}
+	}
+
+	void AudioManager::Unmute() {
+		if (isMuted) {
+			MusicVolume(previousMusicVolume);
+			SFXVolume(previousSFXVolume);
+			isMuted = false;
+		}
 	}
 
 	void AudioManager::PlaySFX(std::string filename, int loops, int channel) {

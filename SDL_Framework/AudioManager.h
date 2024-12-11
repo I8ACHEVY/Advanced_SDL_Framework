@@ -8,6 +8,10 @@ namespace SDL_Framework {
 		static AudioManager* Instance();
 		static void Release();
 
+		void Mute();
+		void Unmute();
+		bool Muted();
+
 		void PlayMusic(std::string filename, int loops = -1);
 		void PlayMusic(Mix_Music* music, int loops = -1);
 		void PauseMusic();
@@ -21,6 +25,10 @@ namespace SDL_Framework {
 		void PlaySFX(Mix_Chunk* sfx, int loops = 0, int channel = -1);
 
 	private:
+		int previousMusicVolume;
+		int previousSFXVolume;
+		bool isMuted;
+
 		AudioManager();
 		~AudioManager();
 
