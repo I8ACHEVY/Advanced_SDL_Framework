@@ -17,7 +17,7 @@ void Player::HandleMovement() {
 		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
 	}
 
-	Vector2 pos = Position(Local);		//bug needs fix
+	Vector2 pos = Position(Local);
 	if (pos.x < mMoveBounds.x) {
 		pos.x = mMoveBounds.x;
 	}
@@ -53,7 +53,7 @@ Player::Player() {
 	mLives = 2;
 
 	mMoveSpeed = 100.0f;
-	mMoveBounds = Vector2(0.0f, 800.0f);
+	mMoveBounds = Vector2(323.0f, 1065.0f);
 
 	mShip = new Texture("PlayerShips.png", 0, 0, 60, 64);
 	mShip->Parent(this);

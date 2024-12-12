@@ -4,6 +4,7 @@
 #include <SDL_ttf.h>
 #include <iostream>
 #include <string>
+#include "Boundaries.h"
 
 namespace SDL_Framework
 {
@@ -34,11 +35,18 @@ namespace SDL_Framework
 
 		bool Init();
 
+		//Boundaries& GetPlayArea();
+
+		//int ClampX(int x) const;
+		//int ClampY(int y) const;
+
 	private:
 		static Graphics* sInstance;
 		static bool sInitialized;
 
 		SDL_Window* mWindow = nullptr;
 		SDL_Renderer* mRenderer = nullptr;
+
+		//Boundaries mScreenBounds;
 	};
 }

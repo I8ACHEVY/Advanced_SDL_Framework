@@ -1,4 +1,5 @@
 #include "Star.h"
+#include "PhysicsManager.h"
 
 bool Star::sScroll = false;
 
@@ -14,8 +15,12 @@ Star::Star(int layer) : Texture("Stars.png", 0,0,4,4) {
 
 	mSourceRect.x = starColor * 4;
 
-	Position(Vector2((float)(mRandom->RandomInt() % Graphics::Instance()->SCREEN_WIDTH), 
-		(float)(mRandom->RandomInt() % Graphics::Instance()->SCREEN_HEIGHT)));
+	mBounds = Vector2(323.0f, 1065.0f);
+
+	//Boundaries* mBounds = &Graphics::Instance()->GetPlayArea();
+
+	Position(Vector2((float)(mRandom->RandomInt() % Graphics::Instance()->SCREEN_WIDTH),	//mBounds->GetWidth()
+		(float)(mRandom->RandomInt() % Graphics::Instance()->SCREEN_HEIGHT)));				// mBounds->GetHeight()
 
 	mFlickerTime = 0.0f;
 	mFlickerSpeed = mRandom->RandomRange(0.15f, 1.0f);
