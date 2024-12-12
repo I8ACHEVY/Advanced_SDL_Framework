@@ -9,8 +9,8 @@ namespace SDL_Framework
 {
 	class Graphics{
 	public:
-		static const int SCREEN_WIDTH = 1080;	//1024
-		static const int SCREEN_HEIGHT = 1000;	//896
+		static const int SCREEN_WIDTH = 1400;	//1024
+		static const int SCREEN_HEIGHT = 1024;	//896
 		const char* WINDOW_TITLE = "Galaga";
 
 		static Graphics* Instance();
@@ -28,7 +28,6 @@ namespace SDL_Framework
 
 		void ClearBackBuffer();
 		void Render();
-		SDL_Renderer* GetRenderer();
 
 		Graphics();
 		~Graphics();

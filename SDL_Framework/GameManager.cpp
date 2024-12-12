@@ -165,18 +165,19 @@ namespace SDL_Framework {
 	}
 
 	void GameManager::Render() {
-		SDL_Rect destRect = { 0, 0, 1044, 926 };
-		if (borderTexture) {
-			SDL_RenderCopy(mGraphics->GetRenderer(), borderTexture, NULL, &destRect);
+		mGraphics->ClearBackBuffer();
+
+		if (mBorderTexture) {
+			SDL_Rect destRect = { 0, 0, 1400, 1024 };
+
+			mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
 		}
 
-		mGraphics->ClearBackBuffer();
 		mScreenManager->Render();
-
 		mGraphics->Render();
 	}
 
-	GameManager::GameManager() : mQuit(false) {
+	GameManager::GameManager() : mQuit(false), mBorderTexture (nullptr) {
 		mGraphics = Graphics::Instance();
 
 		if (!Graphics::Initialized()) {
@@ -191,7 +192,7 @@ namespace SDL_Framework {
 		mRandom = Random::Instance();
 		mScreenManager = ScreenManager::Instance();
 
-		mBorderTexture = IMG_LoadTexture(mGraphics->GetRenderer(), "Boarder.png");
+		mBorderTexture = mAssetManager->GetTexture("Border.png");
 
 		if (!mBorderTexture) {
 			std::cerr << "Failed to load border texture: " << IMG_GetError() << std::endl;

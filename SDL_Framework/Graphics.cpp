@@ -86,10 +86,6 @@ namespace SDL_Framework
 		SDL_RenderPresent(mRenderer);
 	}
 
-	SDL_Renderer* Graphics::GetRenderer() {
-		return mRenderer;
-	}
-
 	Graphics::Graphics() : mRenderer(nullptr), mWindow(nullptr){
 		sInitialized = Init();
 	}
