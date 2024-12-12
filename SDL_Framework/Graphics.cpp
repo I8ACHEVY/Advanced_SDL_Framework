@@ -131,10 +131,6 @@ namespace SDL_Framework
 			return false;
 		}
 
-		//mScreenBounds = Boundaries(0, 920, 0, 1140);
-		//SDL_Rect viewport = { 0, 0, 920, 1140 };
-		//SDL_RenderSetViewport(mRenderer, &viewport);
-
 		//SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);		//Change background to white for debug positioning
 
 		if (TTF_Init() == -1) {
@@ -145,16 +141,4 @@ namespace SDL_Framework
 
 		return true;
 	}
-
-	//Boundaries& Graphics::GetPlayArea() {
-	//	return mScreenBounds;
-	//}
-
-	//int Graphics::ClampX(int x) const {
-	//	return std::max(0, std::min(x, mScreenBounds.GetWidth()));
-	//}
-
-	//int Graphics::ClampY(int y) const {
-	//	return std::max(0, std::min(y, mScreenBounds.GetHeight()));
-	//}
 }

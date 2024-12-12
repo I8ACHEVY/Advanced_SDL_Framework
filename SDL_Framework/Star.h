@@ -20,7 +20,6 @@ private:
 	Timer* mTimer;
 	Random* mRandom;
 	Vector2 mBounds;
-	//Boundaries* mBounds;
 
 	static bool sScroll;
 	float mScrollSpeed;

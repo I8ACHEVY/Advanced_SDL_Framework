@@ -120,9 +120,6 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Source Files\Galaga CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Boundaries.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -226,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="Boss.h">
       <Filter>Header Files\Galaga H</Filter>
-    </ClInclude>
-    <ClInclude Include="Boundaries.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

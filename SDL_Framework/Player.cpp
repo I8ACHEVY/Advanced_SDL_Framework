@@ -29,7 +29,7 @@ void Player::HandleMovement() {
 }
 
 void Player::HandleFiring() {
-	if (mInput->KeyPressed(SDL_SCANCODE_SPACE)) {
+	if (mInput->KeyPressed(SDL_SCANCODE_SPACE) || mInput->MouseButtonPressed(InputManager::Left)) {
 		for (int i = 0; i < MAX_BULLETS; i++) {
 			if (!mBullets[i]->Active()) {
 				mBullets[i]->Fire(Position());

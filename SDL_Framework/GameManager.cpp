@@ -120,11 +120,6 @@ namespace SDL_Framework {
 			//mRedShip->Rotate(260.0f * mTimer->DeltaTime());
 		}
 
-		if (mInputManager->MouseButtonPressed(InputManager::Left)) {
-			std::cout << "Left mouse button pressed!" << std::endl;
-			mAudioManager->PlaySFX("coin_credit.wav", 0, -1);			//audio test
-		}
-
 		if (mInputManager->MouseButtonReleased(InputManager::Left)) {
 			std::cout << "Left mouse button released!" << std::endl;
 		}
