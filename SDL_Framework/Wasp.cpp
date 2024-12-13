@@ -23,15 +23,15 @@ void Wasp::CreateDivePaths() {
 	path->AddCurve({
 		Vector2(100.0f, 150.0f),
 		Vector2(250.0f, 150.0f),
-		Vector2(350.0f, 200.0f),
-		Vector2(350.0f, 350.0f) }, 15
+		Vector2(250.0f, 200.0f),
+		Vector2(250.0f, 250.0f) }, 15
 		);
 
 	path->AddCurve({
-		Vector2(350.0f, 350.0f),
-		Vector2(350.0f, 575.0f),
-		Vector2(100.0f, 575.0f),
-		Vector2(200.0f, 350.0f) }, 15
+		Vector2(250.0f, 250.0f),	//350,350
+		Vector2(250.0f, 450.0f),	//350,575
+		Vector2(50.0f, 500.0f),	//100,575
+		Vector2(50.0f, 350.0f) }, 15	//200, 350
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());
@@ -60,15 +60,15 @@ void Wasp::CreateDivePaths() {
 	path->AddCurve({
 		Vector2(-100.0f, 150.0f),
 		Vector2(-250.0f, 150.0f),
-		Vector2(-350.0f, 200.0f),
-		Vector2(-350.0f, 350.0f) }, 15
+		Vector2(-250.0f, 200.0f),
+		Vector2(-250.0f, 250.0f) }, 15
 		);
 
 	path->AddCurve({
-		Vector2(-350.0f, 350.0f),
-		Vector2(-350.0f, 575.0f),
-		Vector2(-100.0f, 575.0f),
-		Vector2(-100.0f, 350.0f) }, 15
+		Vector2(-250.0f, 250.0f),
+		Vector2(-250.0f, 450.0f),
+		Vector2(-50.0f, 500.0f),
+		Vector2(-50.0f, 350.0f) }, 15
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());

@@ -15,14 +15,14 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 
 	mLabelTimer = 0.0f;
 
-	mStageLabel = new Texture("STAGE", "emulogic.ttf", 32, { 75, 75, 200 });
+	mStageLabel = new Texture("STAGE", "emulogic.ttf", 20, { 75, 75, 200 });
 	mStageLabel->Parent(this);
 	mStageLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f);
 
 	mStageNumber = new Scoreboard({ 75, 75, 200 });
 	mStageNumber->Score(stage);
 	mStageNumber->Parent(this);
-	mStageNumber->Position(Graphics::SCREEN_WIDTH * 0.59f, Graphics::SCREEN_HEIGHT * 0.5f);
+	mStageNumber->Position(Graphics::SCREEN_WIDTH * 0.56f, Graphics::SCREEN_HEIGHT * 0.5f);
 
 	mStageLabelOnScreen = 0.0f;
 	mStageLabelOffScreen = 1.5f;
@@ -50,7 +50,7 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mCurrentState = Running;
 
 	mFormation = new Formation();
-	mFormation->Position(Graphics::SCREEN_WIDTH * 0.5f, 280.0f);	//150.0f
+	mFormation->Position(Graphics::SCREEN_WIDTH * 0.5f, 355.0f);	//150.0f
 	Enemy::SetFormation(mFormation);
 
 	mButterflyCount = 0;

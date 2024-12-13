@@ -36,9 +36,9 @@ void Butterfly::CreateDivePaths() {
 
 	path->AddCurve({
 		Vector2(375.0f, 525.0f),
-		Vector2(375.0f, 525.0f),
-		Vector2(300.0f, 625.0f),
-		Vector2(300.0f, 775.0f) }, 15
+		Vector2(375.0f, 575.0f),
+		Vector2(300.0f, 615.0f),
+		Vector2(300.0f, 560.0f) }, 15
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());
@@ -77,10 +77,10 @@ void Butterfly::CreateDivePaths() {
 		);
 
 	path->AddCurve({
-		Vector2(-375.0f, 525.0f),
-		Vector2(-375.0f, 525.0f),
-		Vector2(-300.0f, 625.0f),
-		Vector2(-300.0f, 775.0f) }, 15
+		Vector2(-375.0f, 525.0f),			//-375,525
+		Vector2(-375.0f, 575.0f),			//-375, 525
+		Vector2(-300.0f, 615.0f),			//-300, 625
+		Vector2(-300.0f, 560.0f) }, 15		//-300, 775
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());
@@ -124,7 +124,7 @@ void Butterfly::CreateDivePaths() {
 		Vector2(200.0f, 550.0f),
 		Vector2(200.0f, 540.0f),
 		Vector2(200.0f, 810.0f),
-		Vector2(200.0f, 800.0f) }, 15);
+		Vector2(200.0f, 510.0f) }, 15);	//800
 
 	sDivePaths.push_back(std::vector<Vector2>());
 	path->Sample(&sDivePaths[currentPath]);
@@ -167,7 +167,7 @@ void Butterfly::CreateDivePaths() {
 		Vector2(-200.0f, 550.0f),
 		Vector2(-200.0f, 540.0f),
 		Vector2(-200.0f, 810.0f),
-		Vector2(-200.0f, 800.0f) }, 15);
+		Vector2(-200.0f, 510.0f) }, 15);
 
 	sDivePaths.push_back(std::vector<Vector2>());
 	path->Sample(&sDivePaths[currentPath]);

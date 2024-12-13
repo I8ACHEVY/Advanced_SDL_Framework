@@ -42,7 +42,7 @@ void Boss::CreateDivePaths() {
 		Vector2(200.0f, 550.0f),
 		Vector2(200.0f, 540.0f),
 		Vector2(200.0f, 810.0f),
-		Vector2(200.0f, 800.0f) }, 15);
+		Vector2(200.0f, 510.0f) }, 15);			//800
 
 	sDivePaths.push_back(std::vector<Vector2>());
 	path->Sample(&sDivePaths[currentPath]);
@@ -79,13 +79,13 @@ void Boss::CreateDivePaths() {
 		Vector2(-120.0f, 450.0f),
 		Vector2(-160.0f, 450.0f),
 		Vector2(-200.0f, 500.0f),
-		Vector2(-200.0f, 550.0f) }, 15);
+		Vector2(-200.0f, 540.0f) }, 15);
 
 	path->AddCurve({
-		Vector2(-200.0f, 550.0f),
 		Vector2(-200.0f, 540.0f),
-		Vector2(-200.0f, 810.0f),
-		Vector2(-200.0f, 800.0f) }, 15);
+		Vector2(-200.0f, 540.0f),
+		Vector2(-200.0f, 510.0f),
+		Vector2(-200.0f, 510.0f) }, 15);		
 
 	sDivePaths.push_back(std::vector<Vector2>());
 	path->Sample(&sDivePaths[currentPath]);
