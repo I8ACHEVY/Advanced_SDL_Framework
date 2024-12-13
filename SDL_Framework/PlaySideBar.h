@@ -25,10 +25,12 @@ private:
 	Timer* mTimer;
 	AudioManager* mAudio;
 
-	Texture* mBackground;
+	Texture* mTopBackground;
+	Texture* mBottomBackground;
 
 	Texture* mHighLabel;
-	Texture* mScoreLabel;
+	Texture* mP1ScoreLabel;
+	Texture* mP2ScoreLabel;
 	Scoreboard* mHighScoreBoard;
 
 	Texture* mOneUpLabel;
@@ -37,7 +39,7 @@ private:
 	bool mOneUpLabelVisible;
 
 	Scoreboard* mPlayer1Score;
-	//Scoreboard* mPlayer2Score;
+	Scoreboard* mPlayer2Score;
 
 	GameEntity* mShips;
 	Texture* mShipTextures[MAX_SHIP_TEXTURES];

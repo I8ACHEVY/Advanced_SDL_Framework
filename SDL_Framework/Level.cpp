@@ -64,6 +64,28 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mChallengeStage = mSpawningPatterns.FirstChildElement("Level")
 		->FirstChildElement()
 		->BoolAttribute("value");
+
+	//if (!mChallengeStage) {
+	//	mFormation = new Formation();
+	//	mFormation->Position(Graphics::SCREEN_WIDTH * 0.4f, 150.0f);
+	//	Enemy::SetFormation(mFormation);
+
+	//	for (int i = 0; i < MAX_BUTTERFDLIES; i++) {
+	//		mFormationButterflies[i = nullptr; ]
+	//	}
+
+	//	for (int i = 0; i < MAX_Wasps; i++) {
+	//		mFormationWasps[i = nullptr;]
+	//	}
+
+	//	for (int i = 0; i < MAX_Bosses; i++) {
+	//		mFormationBosses[i = nullptr;]
+	//	}
+	//}
+
+	//mCurrentFlyInPriority = 0;
+	//mCurrentFlyInIndex = 0;
+	//m
 }
 
 Level::~Level() {
@@ -87,10 +109,26 @@ Level::~Level() {
 	delete mFormation;
 	mFormation = nullptr;
 
+	//for (int i = 0; i < MAX_BUTTERFLIES; i++) {
+	//	delete mFormationButterflies[i];
+	//	mFormationButterflies[i] = nullptr;
+	//}
+
+	//for (int i = 0; i < MAX_WASPS; i++) {
+	//	delete mFormationWasps[i];
+	//	mFormationWasps][i] = nullptr;
+	//}
+
+	//for (int i = 0; i < MAX_BUTTERFLIES; i++) {
+	//	delete mFormationButterflies[i];
+	//	mFormationButterflies][i] = nullptr;
+	//}
+
 	for (auto enemy : mEnemies) {
 		delete enemy;
 		enemy = nullptr;
 	}
+
 	mEnemies.clear();
 }
 
@@ -157,7 +195,7 @@ void Level::HandlePlayerDeath() {
 	}
 }
 
-void Level::HandleEnemySpawning() {
+void Level::HandleEnemySpawning() {//missed class edited
 	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_S) &&		//Testing
 		mButterflyCount < MAX_BUTTERFLIES) {
 
@@ -268,7 +306,7 @@ void Level::Update() {
 		HandleStartLabels();
 	}
 	else {
-		HandleEnemySpawning();
+		HandleEnemySpawning();	//missed
 		HandleEnemyFormation();
 		HandleEnemyDiving();
 

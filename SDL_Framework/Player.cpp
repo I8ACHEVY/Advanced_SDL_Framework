@@ -58,6 +58,8 @@ Player::Player() {
 	mShip = new Texture("PlayerShips.png", 0, 0, 60, 64);
 	mShip->Parent(this);
 	mShip->Position(Vec2_Zero);
+	mShip->Scale(Vector2(0.7f, 0.7f));
+
 
 	mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
 		AnimatedTexture::Horizontal);

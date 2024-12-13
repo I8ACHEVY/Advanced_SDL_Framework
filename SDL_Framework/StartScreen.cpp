@@ -31,7 +31,7 @@ mPlayer2->Position(Graphics::SCREEN_WIDTH * 0.2f, 0.0f);
 mHiScore->Position(0, 0.0f);
 mPlayer1Score->Position(Graphics::SCREEN_WIDTH * -0.19f, 40.0f);
 mPlayer2Score->Position(Graphics::SCREEN_WIDTH * 0.21f, 40.0f);
-mTopScore->Position(Graphics::SCREEN_WIDTH * 0.06f, 40.0f);
+mTopScore->Position(Graphics::SCREEN_WIDTH * 0.03f, 40.0f);
 
 mTopScore->Score(645987);	//CREATE SAVE SYSTEM
 

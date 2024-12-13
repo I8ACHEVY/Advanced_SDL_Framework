@@ -240,6 +240,7 @@ Boss::Boss(int path, int index, bool challenge) :
 	for (auto texture : mTexture) {
 		texture->Parent(this);
 		texture->Position(Vec2_Zero);
+		texture->Scale(Vector2(0.7f, 0.7f));
 	}
 	// or do this
 	// 

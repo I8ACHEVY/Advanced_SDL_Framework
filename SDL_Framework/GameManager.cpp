@@ -162,14 +162,21 @@ namespace SDL_Framework {
 	void GameManager::Render() {
 		mGraphics->ClearBackBuffer();
 
-		if (mBorderTexture) {
+		//if (mBorderTexture) {
+		//	SDL_Rect destRect = { 0, 0, 1400, 1024 };
+
+		//	mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
+
+		mScreenManager->Render();
+
+		if (mBorderTexture) {//border must be placed here after debugging
 			SDL_Rect destRect = { 0, 0, 1400, 1024 };
 
 			mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
-		}
 
-		mScreenManager->Render();
 		mGraphics->Render();
+
+		}
 	}
 
 	GameManager::GameManager() : mQuit(false), mBorderTexture (nullptr) {
