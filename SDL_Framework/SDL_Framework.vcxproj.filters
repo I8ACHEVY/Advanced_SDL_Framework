@@ -19,6 +19,12 @@
     <Filter Include="Header Files\Galaga H">
       <UniqueIdentifier>{082f297e-338a-492c-a124-cfc93b11c562}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{ece3e322-4cde-483c-9bc6-b98890adeb5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TinyXML">
+      <UniqueIdentifier>{724f8b86-bb76-4042-bc58-a2cfb17268a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Galaga_V1.cpp">
@@ -119,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>Source Files\Galaga CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Tinyxml2.cpp">
+      <Filter>TinyXML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -224,5 +233,13 @@
     <ClInclude Include="Boss.h">
       <Filter>Header Files\Galaga H</Filter>
     </ClInclude>
+    <ClInclude Include="Tinyxml2.h">
+      <Filter>TinyXML</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Level1.xml">
+      <Filter>Data</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
