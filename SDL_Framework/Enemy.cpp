@@ -5,7 +5,7 @@ Player* Enemy::sPlayer = nullptr;
 Formation* Enemy::sFormation = nullptr;
 
 void Enemy::CreatePaths() {
-	int screenMidPoint = (int)(Graphics::Instance()->SCREEN_WIDTH * 0.4f);
+	int screenMidPoint = (int)(Graphics::Instance()->SCREEN_WIDTH * 0.5f);
 
 	int currentPath = 0;
 	BezierPath* path = new BezierPath();

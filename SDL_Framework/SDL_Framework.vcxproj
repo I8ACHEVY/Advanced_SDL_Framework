@@ -125,6 +125,8 @@
       <Command>copy /y "$(ProjectDir)..\dep\devel\x64\*.dll" "$(OutDir)
  
 xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
+xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
+ 
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -150,6 +152,8 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
       <Command>copy /y "$(ProjectDir)..\dep\devel\x64\*.dll" "$(OutDir)
  
 xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
+xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
+ 
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -227,7 +231,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClInclude Include="Wasp.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Level1.xml" />
+    <Xml Include="Data\Level1.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

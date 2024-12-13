@@ -238,7 +238,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Level1.xml">
+    <Xml Include="Data\Level1.xml">
       <Filter>Data</Filter>
     </Xml>
   </ItemGroup>
