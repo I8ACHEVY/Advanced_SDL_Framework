@@ -172,7 +172,7 @@ namespace SDL_Framework {
 
 		if (mBorderTexture) {//border must be placed here after debugging
 			SDL_Rect destRect = { 0, 0, 1400, 1024 };
-
+		
 			mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
 		}
 

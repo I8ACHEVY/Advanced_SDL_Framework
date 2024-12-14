@@ -7,7 +7,7 @@ PlaySideBar::PlaySideBar() {
 	mTopBackground = new Texture("Black.png");
 	mTopBackground->Parent(this);
 	mTopBackground->Scale(Vector2(8.5f, 1.0f));
-	mTopBackground->Position(-520.0f, 150.0f);
+	mTopBackground->Position(0.0f, 0.0f); // (-520.0f, 150.0f);
 
 	mBottomBackground = new Texture("Black.png");
 	mBottomBackground->Parent(this);

@@ -39,8 +39,8 @@ private:
 	int mBossCount;
 
 	Butterfly* mFormationButterflies[MAX_BUTTERFLIES];
-	Wasp* mFormationWasp[MAX_WASPS];
-	Boss* mFormationBoss[MAX_BOSSES];
+	Wasp* mFormationWasps[MAX_WASPS];
+	Boss* mFormationBosses[MAX_BOSSES];
 
 	std::vector<Enemy*> mEnemies;	//debug testing
 
