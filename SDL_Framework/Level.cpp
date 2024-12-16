@@ -81,6 +81,19 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 		for (int i = 0; i < MAX_BOSSES; i++) {
 			mFormationBosses[i] = nullptr;
 		}
+
+
+		//for (Butterfly * butterfly : mFormationButterflies) {
+		//	butterfly = nullptr;
+		//}
+
+		//for (Wasp * wasp : mFormationWasps) {
+		//	wasp = nullptr;
+		//}
+
+		//for (Boss * boss : mFormationBosses) {
+		//	boss = nullptr;
+		//}
 	}
 	
 	mCurrentFlyInPriority = 0;
@@ -88,6 +101,8 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mSpawnDelay = 0.2f;
 	mSpawnTimer = 0.0f;
 	mSpawningFinished = false;
+
+	//Enemy::CurrentPlayer(mPlayer);
 }
 
 Level::~Level() {
@@ -200,7 +215,7 @@ void Level::HandlePlayerDeath() {
 void Level::HandleEnemySpawning() {
 	//if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_S) &&		//Testing
 	//	mButterflyCount < MAX_BUTTERFLIES) {
-
+	//
 	//	mEnemies.push_back(new Butterfly(0, mButterflyCount, false));
 	//	mButterflyCount++;
 	//}
@@ -249,10 +264,29 @@ void Level::HandleEnemySpawning() {
 						if (!mChallengeStage) {
 							//Add Butterfly to formation
 							mFormationButterflies[index] = new Butterfly(path, index, false);
+							mButterflyCount += 1;
 						}
 						else {
 							//TODO: Change the challenge boolean to true once Challenge logic is implemented
 							mEnemies.push_back(new Butterfly(path, index, false));
+						}
+					}
+					else if (type.compare("Wasp") == 0) {
+						if (!mChallengeStage) {
+							mFormationWasps[index] = new Wasp(path, index, false, false);
+							mWaspCount ++;
+						}
+						else {
+							mEnemies.push_back(new Wasp(path, index, false, false));
+						}
+					}
+					else if (type.compare("Boss") == 0) {
+						if (!mChallengeStage) {
+							mFormationBosses[index] = new Boss(path, index, false);
+							mBossCount ++;
+						}
+						else {
+							mEnemies.push_back(new Boss(path, index, false));
 						}
 					}
 
@@ -271,13 +305,13 @@ void Level::HandleEnemySpawning() {
 			if (!spawned) {
 				//We have Spawn elements waiting BUT we didn't spawn anything
 				if (!EnemyFlyingIn()) {
-					mCurrentFlyInPriority++;
+					mCurrentFlyInPriority += 1;
 					mCurrentFlyInIndex = 0;
 				}
 			}
 			else {
 				//We haven't finished spawning our element's enemies, next index
-				mCurrentFlyInIndex++;
+				mCurrentFlyInIndex += 1;
 			}
 		}
 
@@ -293,6 +327,20 @@ bool Level::EnemyFlyingIn() {
 		}
 	}
 
+	for (Wasp* wasp : mFormationWasps) {
+		if (wasp != nullptr &&
+			wasp->CurrentState() == Enemy::FlyIn) {
+			return true;
+		}
+	}
+
+	for (Boss* boss : mFormationBosses) {
+		if (boss != nullptr &&
+			boss->CurrentState() == Enemy::FlyIn) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -300,9 +348,16 @@ bool Level::EnemyFlyingIn() {
 void Level::HandleEnemyFormation() {
 	mFormation->Update();
 
+	bool levelCleared = mSpawningFinished;
+
 	for (Butterfly* butterfly : mFormationButterflies) {
 		if (butterfly != nullptr) {
 			butterfly->Update();
+
+			//if (butterfly->CurrentState() != Enemy::Dead ||
+			//	butterfly->InDeadAnimation()) {
+			//	levelCleared = false;
+			//}
 		}
 	}
 
@@ -464,36 +519,34 @@ void Level::Render() {
 		else if (mLabelTimer > mReadyLabelOnScreen && mLabelTimer < mReadyLabelOffScreen) {
 			mReadyLabel->Render();
 		}
+	}
 
 		else {
-			if (!mChallengeStage) {
-				for (Butterfly* butterfly : mFormationButterflies) {
-					if (butterfly != nullptr) {
-						butterfly->Render();
-					}
-				}
-
-				for (Wasp* wasp : mFormationWasps) {
-					if (wasp != nullptr) {
-						wasp->Render();
-					}
-				}
-
-				for (Boss* boss : mFormationBosses) {
-					if (boss != nullptr) {
-						boss->Render();
-					}
+		if (!mChallengeStage) {
+			for (Butterfly* butterfly : mFormationButterflies) {
+				if (butterfly != nullptr) {
+					butterfly->Render();
 				}
 			}
-			else {
-				for (auto enemy : mEnemies) {
-					enemy->Render();
+
+			for (Wasp* wasp : mFormationWasps) {
+				if (wasp != nullptr) {
+					wasp->Render();
+				}
+			}
+
+			for (Boss* boss : mFormationBosses) {
+				if (boss != nullptr) {
+					boss->Render();
 				}
 			}
 		}
 
-	}
-	else {
+		else {
+			for (auto enemy : mEnemies) {
+				enemy->Render();
+			}
+		}
 
 		if (mPlayerHit) {
 			if (mRespawnTimer >= mRespawnLabelOnScreen) {

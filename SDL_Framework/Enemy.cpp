@@ -148,7 +148,7 @@ Enemy::Enemy(int path, int index, bool challenge) :
 	mTexture[0] = nullptr;		// enemy new Texture("AnimatedEnemies.png", 0, 0, 52, 40);
 	mTexture[1] = nullptr;
 	
-	mSpeed = 100.0f;
+	mSpeed = 400.0f;
 }
 
 Enemy::~Enemy() {
