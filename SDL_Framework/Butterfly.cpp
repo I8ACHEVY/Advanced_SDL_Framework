@@ -1,4 +1,6 @@
 #include "Butterfly.h"
+#include "BoxCollider.h"
+#include "AudioManager.h"
 
 std::vector<std::vector<Vector2>> Butterfly::sDivePaths;
 
@@ -228,6 +230,12 @@ void Butterfly::HandleDiveState(){
 
 void Butterfly::HandleDeadState(){}
 
+void Butterfly::Hit(PhysEntity* other) {
+	AudioManager::Instance()->PlaySFX("SFX/ButterflyDestroyed.wav", 0, 3);
+	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 80 : 160);
+	Enemy::Hit(other);
+}
+
 void Butterfly::RenderDiveState(){
 	int currentPath = mIndex % 2;
 
@@ -247,11 +255,11 @@ void Butterfly::RenderDiveState(){
 			mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
 		);
 	}
-
+	
 	Vector2 finalPos = WorldFormationPosition();
 	auto currentDivePath = sDivePaths[currentPath];
 	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];
-
+	
 	Graphics::Instance()->DrawLine(
 		pathEndPos.x,
 		pathEndPos.y,
@@ -282,6 +290,8 @@ Enemy(path, index, challenge)
 	//}
 	
 	mType = Enemy::Butterfly;
+
+	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 }
 
 Butterfly::~Butterfly() {}

@@ -116,11 +116,9 @@ int Player::Lives() {
 	return mLives;
 }
 
-void Player::WasHit() {
-	mLives -= 1;
-	mAnimating = true;
-	mDeathAnimation->ResetAnimation();
-	mAudio->PlaySFX("PlayerExplosion.wav",0, -1);
+bool Player::WasHit() {
+	return mWasHit;
+
 }
 
 bool Player::IgnoreCollision() {
@@ -131,6 +129,7 @@ void Player::Hit(PhysEntity* other) {
 	mLives -= 1;
 	mAnimating = true;
 	mDeathAnimation->ResetAnimation();
+	mAudio->PlaySFX("PlayerExplosion.wav", 0, -1);
 	mWasHit = true;
 
 }

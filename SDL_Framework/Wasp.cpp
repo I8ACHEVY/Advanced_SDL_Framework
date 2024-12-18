@@ -1,4 +1,6 @@
 #include "Wasp.h"
+#include "BoxCollider.h"
+#include "AudioManager.h"
 
 std::vector<std::vector<Vector2>> Wasp::sDivePaths;
 
@@ -137,7 +139,7 @@ void Wasp::RenderDiveState() {
 	// or do this
 	//mTexture[sFormation->GetTick() % 2]->Render();
 
-	int currentPath = mIndex % 2;
+	int currentPath = mIndex % 2;	
 	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
 			mDiveStartPosition.x + sDivePaths[currentPath][i].x,
@@ -146,11 +148,11 @@ void Wasp::RenderDiveState() {
 			mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
 		);
 	}
-
+	
 	Vector2 finalPos = WorldFormationPosition();
 	auto currentDivePath = sDivePaths[currentPath];
 	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];
-
+	
 	Graphics::Instance()->DrawLine(
 		pathEndPos.x,
 		pathEndPos.y,
@@ -161,6 +163,12 @@ void Wasp::RenderDiveState() {
 
 void Wasp::RenderDeadState() {
 
+}
+
+void Wasp::Hit(PhysEntity* other) {
+	AudioManager::Instance()->PlaySFX("SFX/WaspDestroyed.wav", 0, 4);
+	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 50 : 100);
+	Enemy::Hit(other);
 }
 
 Wasp::Wasp(int path, int index, bool challenge, bool diver) :
@@ -183,6 +191,8 @@ Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 	//}
 
 		mType = Enemy::Wasp;
+
+		AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 }
 
 Wasp::~Wasp() {

@@ -42,6 +42,22 @@ private:
 	Wasp* mFormationWasps[MAX_WASPS];
 	Boss* mFormationBosses[MAX_BOSSES];
 
+	Butterfly* mDivingButterfly;
+	bool mSkipFirstButterfly;
+	float mButterflyDiveDelay;
+	float mButterflyDiveTimer;
+
+	Wasp* mDivingWasp;
+	Wasp* mDivingWasp2;
+	float mWaspDiveDelay;
+	float mWaspDiveTimer;
+
+	Boss* mDivingBoss;
+	bool mCaptureDive;
+	bool mSkipFirstBoss;
+	float mBossDiveDelay;
+	float mBossDiveTimer;
+
 	std::vector<Enemy*> mEnemies;	//debug testing
 
 	XMLDocument mSpawningPatterns;

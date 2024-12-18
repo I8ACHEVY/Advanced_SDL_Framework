@@ -1,5 +1,7 @@
 #pragma once
 #include "Enemy.h"
+#include "CaptureBeam.h"
+#include "Random.h"
 
 namespace SDL_Framework {
 
@@ -8,6 +10,7 @@ namespace SDL_Framework {
 		static void CreateDivePaths();
 
 		void Dive(int type = 0) override;
+		void Hit(PhysEntity* other) override;
 
 		Boss(int path, int index, bool challenge);
 		~Boss();
@@ -16,9 +19,15 @@ namespace SDL_Framework {
 		static std::vector<std::vector<Vector2>> sDivePaths;
 
 		bool mCaptureDive;
+		bool mCapturing;
 		int mCurrentPath;
 
+		bool mWasHit;
+
 		Vector2 LocalFormationPosition() override;
+
+		CaptureBeam* mCaptureBeam;
+		void HandleCaptureBeam();
 
 		void HandleDiveState() override;
 		void HandleDeadState() override;

@@ -81,19 +81,6 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 		for (int i = 0; i < MAX_BOSSES; i++) {
 			mFormationBosses[i] = nullptr;
 		}
-
-
-		//for (Butterfly * butterfly : mFormationButterflies) {
-		//	butterfly = nullptr;
-		//}
-
-		//for (Wasp * wasp : mFormationWasps) {
-		//	wasp = nullptr;
-		//}
-
-		//for (Boss * boss : mFormationBosses) {
-		//	boss = nullptr;
-		//}
 	}
 	
 	mCurrentFlyInPriority = 0;
@@ -102,7 +89,23 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mSpawnTimer = 0.0f;
 	mSpawningFinished = false;
 
-	//Enemy::CurrentPlayer(mPlayer);
+	mDivingButterfly = nullptr;
+	mSkipFirstButterfly = false;
+	mButterflyDiveDelay = 1.0f;
+	mButterflyDiveTimer = 0.0f;
+
+	mDivingWasp = nullptr;
+	mDivingWasp2 = nullptr;
+	mWaspDiveDelay = 3.0f;
+	mWaspDiveTimer = 0.0f;
+
+	mDivingBoss = nullptr;
+	mCaptureDive = true;
+	mSkipFirstBoss = true;
+	mBossDiveDelay = 5.0f;
+	mBossDiveTimer = 0.0f;
+
+	Enemy::CurrentPlayer(mPlayer);
 }
 
 Level::~Level() {
@@ -174,8 +177,7 @@ void Level::HandleStartLabels() {
 
 void Level::HandleCollisions() {
 	if (!mPlayerHit) {
-		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_X)) {	//Testing
-			mPlayer->WasHit();
+		if (mPlayer->WasHit()) {	//Testing call if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_X))
 			mSideBar->SetShips(mPlayer->Lives());
 
 			mPlayerHit = true;
@@ -354,22 +356,32 @@ void Level::HandleEnemyFormation() {
 		if (butterfly != nullptr) {
 			butterfly->Update();
 
-			//if (butterfly->CurrentState() != Enemy::Dead ||
-			//	butterfly->InDeadAnimation()) {
-			//	levelCleared = false;
-			//}
+			if (butterfly->CurrentState() != Enemy::Dead ||
+				butterfly->InDeathAnimation()) {
+				levelCleared = false;
+			}
 		}
 	}
 
 	for (Wasp* wasp : mFormationWasps) {
 		if (wasp != nullptr) {
 			wasp->Update();
+
+			if (wasp->CurrentState() != Enemy::Dead ||
+				wasp->InDeathAnimation()) {
+				levelCleared = false;
+			}
 		}
 	}
 
 	for (Boss* boss : mFormationBosses) {
 		if (boss != nullptr) {
 			boss->Update();
+
+			if (boss->CurrentState() != Enemy::Dead ||
+				boss->InDeathAnimation()) {
+				levelCleared = false;
+			}
 		}
 	}
 
@@ -384,6 +396,10 @@ void Level::HandleEnemyFormation() {
 	}
 	else {
 		HandleEnemyDiving();
+	}
+
+	if (levelCleared) {
+		mCurrentState = Finished;
 	}
 
 	//if (mButterflyCount == MAX_BUTTERFLIES &&
@@ -405,7 +421,7 @@ void Level::HandleEnemyFormation() {
 }
 
 void Level::HandleEnemyDiving() {
-	if (mFormation->Locked()) {
+	/*if (mFormation->Locked()) {
 		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_V)) {		//Testing
 			for (auto enemy : mEnemies) {
 				if (enemy->Type() == Enemy::Wasp &&
@@ -450,10 +466,10 @@ void Level::HandleEnemyDiving() {
 						// or do this
 						//if (butterfly->Type() == Enemy::Butterfly &&
 						//	butterfly->CurrentState() == Enemy::InFormation) {
-						// 
-						//	if (butterfly->Index() == firstEscortIndex || 
+						//
+						//	if (butterfly->Index() == firstEscortIndex ||
 						//	    butterfly->Index() == secondEscortIndex) {
-						//		
+						//
 						//		butterfly->Dive(1);
 						//	}
 						//}
@@ -462,6 +478,102 @@ void Level::HandleEnemyDiving() {
 					break;
 				}
 			}
+		}
+	}*/
+
+	if (mDivingButterfly == nullptr) {
+		mButterflyDiveTimer += mTimer->DeltaTime();
+
+		if (mButterflyDiveTimer >= mButterflyDiveDelay) {
+			bool skipped = false;
+
+			for (int i = MAX_BUTTERFLIES - 1; i >= 0; i--) {
+				if (mFormationButterflies[i] != nullptr
+					&& mFormationButterflies[i]->CurrentState() == Enemy::InFormation) {
+					if (!mSkipFirstButterfly || (mSkipFirstButterfly && skipped)) {
+						mDivingButterfly = mFormationButterflies[i];
+						mDivingButterfly->Dive();
+						mSkipFirstButterfly = !mSkipFirstButterfly;
+						break;
+					}
+				}
+				skipped = true;
+			}
+
+			mButterflyDiveTimer = 0.0f;
+		}
+	}
+	else {
+		if (mDivingButterfly->CurrentState() != Enemy::Diving) {
+			mDivingButterfly = nullptr;
+		}
+	}
+
+	mWaspDiveTimer += mTimer->DeltaTime();
+	if (mWaspDiveTimer >= mWaspDiveDelay) {
+		for (int i = MAX_WASPS - 1; i >= 0; i--) {
+			if (mFormationWasps[i]->CurrentState() == Enemy::InFormation) {
+				if (mDivingWasp == nullptr) {
+					mDivingWasp = mFormationWasps[i];
+					mDivingWasp->Dive();
+				}
+				else if (mDivingWasp2 == nullptr) {
+					mDivingWasp2 = mFormationWasps[i];
+					mDivingWasp2->Dive();
+				}
+				break;
+			}
+		}
+
+		mWaspDiveTimer = 0.0f;
+	}
+
+	if (mDivingWasp != nullptr && mDivingWasp->CurrentState() != Enemy::Diving) {
+		mDivingWasp = nullptr;
+	}
+	if (mDivingWasp2 != nullptr && mDivingWasp2->CurrentState() != Enemy::Diving) {
+		mDivingWasp2 = nullptr;
+	}
+
+	if (mDivingBoss == nullptr) {
+		mBossDiveTimer += mTimer->DeltaTime();
+
+		if (mBossDiveTimer >= mBossDiveDelay) {
+			bool skipped = false;
+			for (int i = MAX_BOSSES - 1; i >= 0; i--) {
+				if (mFormationBosses[i]->CurrentState() == Enemy::InFormation) {
+					if (!mSkipFirstBoss || (mSkipFirstBoss && skipped)) {
+						mDivingBoss = mFormationBosses[i];
+						if (mCaptureDive) {
+							mDivingBoss->Dive(1);
+						}
+						else {
+							mDivingBoss->Dive();
+							int index = mDivingBoss->Index();
+							int firstEscortIndex = (index % 2 == 0) ? (index * 2) : (index * 2 - 1);
+							int secondEscortIndex = firstEscortIndex + 4;
+
+							if (mFormationButterflies[firstEscortIndex]->CurrentState() == Enemy::InFormation) {
+								mFormationButterflies[firstEscortIndex]->Dive(1);
+							}
+							if (mFormationButterflies[secondEscortIndex]->CurrentState() == Enemy::InFormation) {
+								mFormationButterflies[secondEscortIndex]->Dive(1);
+							}
+						}
+						mSkipFirstBoss = !mSkipFirstBoss;
+						mCaptureDive = !mCaptureDive;
+						break;
+					}
+					skipped = true;
+				}
+			}
+
+			mBossDiveTimer = 0.0f;
+		}
+	}
+	else {
+		if (mDivingBoss->CurrentState() != Enemy::Diving) {
+			mDivingBoss = nullptr;
 		}
 	}
 }
@@ -499,11 +611,11 @@ void Level::Update() {
 		if (mPlayerHit) {
 			HandlePlayerDeath();
 		}
-		else {
-			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {		//Testing
-				mCurrentState = Finished;
-			}
-		}
+		//else {
+		//	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {		//Testing
+		//		mCurrentState = Finished;
+		//	}
+		//}
 	}
 }
 

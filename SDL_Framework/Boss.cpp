@@ -135,14 +135,32 @@ void Boss::Dive(int type) {
 
 	Enemy::Dive();
 
-	//if (mCaptureDive) {
-	//	mCapturing = false;
-	//	mCurrentPath = 2 + Random::Instance()->RandomRange(0, 1);
-	//	mCaptureBeam->ResetAnimation();
-	//}
-	//else {
-	//	mCurrentPath = mIndex % 2;
-	//}
+	if (mCaptureDive) {
+		mCapturing = false;
+		mCurrentPath = 2 + Random::Instance()->RandomRange(0, 1);
+		mCaptureBeam->ResetAnimation();
+	}
+	else {
+		mCurrentPath = mIndex % 2;
+	}
+}
+
+void Boss::Hit(PhysEntity* other) {
+	if (mWasHit) {
+		Enemy::Hit(other);
+		AudioManager::Instance()->PlaySFX("SFX/BossDestroyed.wav", 0, 2);
+		sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 150 :
+			mCaptureDive ? 400 : 800);
+	}
+	else {
+		mWasHit = true;
+		SDL_Rect temp = { 0, 64, 60, 64 };
+		mTexture[0]->SetSourceRect(&temp);
+		temp.x = 66;
+		temp.y = 68;
+		mTexture[1]->SetSourceRect(&temp);
+		AudioManager::Instance()->PlaySFX("SFX/BossInjured.wav", 0, 2);
+	}
 }
 
 Vector2 Boss::LocalFormationPosition() {
@@ -156,6 +174,17 @@ Vector2 Boss::LocalFormationPosition() {
 		-sFormation->GridSize().y;
 
 	return retVal;
+}
+
+void Boss::HandleCaptureBeam() {
+	mCaptureBeam->Update();
+	if (!mCaptureBeam->IsAnimating()) {
+		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
+		if (Position().y >= 910.0f) {
+			Position(WorldFormationPosition().x, -20.0f);
+			mCapturing = false;
+		}
+	}
 }
 
 void Boss::HandleDiveState() {
@@ -177,15 +206,30 @@ void Boss::HandleDiveState() {
 		if ((waypointPos - Position()).MagnitudeSqr() < EPSILON * mSpeed / 25) {
 			mCurrentWayPoint++;
 		}
+
+		if (mCurrentWayPoint == sDivePaths[mCurrentPath].size()) {
+			if (mCaptureDive) {
+				mCapturing = true;
+				Rotation(180.0f);
+			}
+			else {
+				Position(Vector2(WorldFormationPosition().x, 20.0f));
+			}
+		}
 	}
 	else {
-		Vector2 dist = WorldFormationPosition() - Position();
-	
-		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
-	
-		if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25) {
-			JoinFormation();
+		if (!mCaptureDive || !mCapturing) {
+			Vector2 dist = WorldFormationPosition() - Position();
+
+			Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
+			Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+
+			if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25) {
+				JoinFormation();
+			}
+		}
+		else {
+			HandleCaptureBeam();
 		}
 	}
 }
@@ -195,15 +239,20 @@ void Boss::HandleDeadState() {
 }
 
 void Boss::RenderDiveState() {
+	mTexture[0]->Render();
+
+	// or do this
+	//mTexture[sFormation->GetTick() % 2]->Render();
+
+	if (mCapturing && mCaptureBeam->IsAnimating()) {
+		mCaptureBeam->Render();
+	}
+
 	int currentPath = mIndex % 2;
 	
 	if (mCaptureDive) {
 		currentPath += 2;
 	}
-	
-	mTexture[0]->Render();
-	// or do this
-	//mTexture[sFormation->GetTick() % 2]->Render();
 	
 	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
 		Graphics::Instance()->DrawLine(
@@ -252,8 +301,23 @@ Boss::Boss(int path, int index, bool challenge) :
 	mType = Enemy::Boss;
 
 	mCurrentPath = 0;
+
+	mCaptureDive = false;
+	mCurrentPath = 0;
+	mCapturing = false;
+
+	mCaptureBeam = new CaptureBeam();
+	mCaptureBeam->Parent(this);
+	mCaptureBeam->Position(0.0f, -190.0f);
+	mCaptureBeam->Rotation(180.0f);
+
+	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
+
+	mWasHit = false;
 }
 
 Boss::~Boss() {
+	delete mCaptureBeam;
+	//mCaptureBeam = false;
 
 }

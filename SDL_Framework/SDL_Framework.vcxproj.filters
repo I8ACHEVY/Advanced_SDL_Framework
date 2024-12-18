@@ -129,6 +129,9 @@
     <ClCompile Include="Tinyxml2.cpp">
       <Filter>TinyXML</Filter>
     </ClCompile>
+    <ClCompile Include="CaptureBeam.cpp">
+      <Filter>Source Files\Galaga CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="Tinyxml2.h">
       <Filter>TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="CaptureBeam.h">
+      <Filter>Header Files\Galaga H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
