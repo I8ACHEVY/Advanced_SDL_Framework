@@ -45,7 +45,9 @@ void CaptureBeam::ResetAnimation() {
 
 void CaptureBeam::Render() {
 	Vector2 pos = Position(World);
-	Vector2 scale = Scale(World);
+	Vector2 worldScale = Scale(World);
+	Vector2 scale(worldScale.x * 0.7f, worldScale.y * 0.7f);
+
 	mDestinationRect.x = (int)(pos.x - mWidth * scale.x * 0.5f);
 	mDestinationRect.y = (int)(pos.y - mHeight * scale.y * 0.5f);
 	mDestinationRect.w = (int)(mWidth * scale.x);

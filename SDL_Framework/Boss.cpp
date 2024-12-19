@@ -103,8 +103,8 @@ void Boss::CreateDivePaths() {
 	path->AddCurve({
 		Vector2(-90.0f, 0.0f),
 		Vector2(-90.0f, 60.0f),
-		Vector2(100.0f, 340.0f),
-		Vector2(100.0f, 400.0f) }, 15);
+		Vector2(75.0f, 140.0f),
+		Vector2(75.0f, 250.0f) }, 15);
 
 	sDivePaths.push_back(std::vector<Vector2>());
 	path->Sample(&sDivePaths[currentPath]);
@@ -180,7 +180,7 @@ void Boss::HandleCaptureBeam() {
 	mCaptureBeam->Update();
 	if (!mCaptureBeam->IsAnimating()) {
 		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
-		if (Position().y >= 910.0f) {
+		if (Position().y >= 580.0f) {
 			Position(WorldFormationPosition().x, -20.0f);
 			mCapturing = false;
 		}
@@ -308,7 +308,7 @@ Boss::Boss(int path, int index, bool challenge) :
 
 	mCaptureBeam = new CaptureBeam();
 	mCaptureBeam->Parent(this);
-	mCaptureBeam->Position(0.0f, -190.0f);
+	mCaptureBeam->Position(0.0f, -140.0f);
 	mCaptureBeam->Rotation(180.0f);
 
 	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
