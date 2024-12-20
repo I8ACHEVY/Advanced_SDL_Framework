@@ -68,7 +68,7 @@ mCursorStartPos = mCursor->Position(Local);
 
 mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.8f);
 mNamco = new Texture("namco", "namco__.ttf", 24, { 200, 0, 0 });
-mDates = new Texture("1981 - 1985 NAMCO) LTD.", "emulogic.ttf", 20, { 230, 230, 230 });
+mDates = new Texture("1981 - 1985 NAMCO LTD.", "emulogic.ttf", 20, { 230, 230, 230 });
 mRights = new Texture("ALL RIGHTS RESERVED", "emulogic.ttf", 20, { 230, 230, 230 });
 
 mBottomBar->Parent(this);

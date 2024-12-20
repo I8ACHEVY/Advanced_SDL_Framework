@@ -21,6 +21,7 @@ void Player::HandleMovement() {
 	if (pos.x < mMoveBounds.x) {
 		pos.x = mMoveBounds.x;
 	}
+
 	else if (pos.x > mMoveBounds.y) {
 		pos.x = mMoveBounds.y;
 	}
