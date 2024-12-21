@@ -83,5 +83,5 @@ protected:
 
 	void RenderStates();
 
-	bool IgnoreCollisions(); //override
+	bool IgnoreCollisions(); // override;
 };

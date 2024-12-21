@@ -166,7 +166,7 @@ void Wasp::RenderDeadState() {
 }
 
 void Wasp::Hit(PhysEntity* other) {
-	AudioManager::Instance()->PlaySFX("SFX/WaspDestroyed.wav", 0, 4);
+	AudioManager::Instance()->PlaySFX("WaspDestroyed.wav", 0, -1);
 	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 50 : 100);
 	Enemy::Hit(other);
 }

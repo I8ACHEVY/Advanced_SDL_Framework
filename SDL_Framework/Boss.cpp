@@ -148,9 +148,10 @@ void Boss::Dive(int type) {
 void Boss::Hit(PhysEntity* other) {
 	if (mWasHit) {
 		Enemy::Hit(other);
-		AudioManager::Instance()->PlaySFX("SFX/BossDestroyed.wav", 0, 2);
+		AudioManager::Instance()->PlaySFX("BossDestroyed.wav", 0, 2);
 		sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 150 :
 			mCaptureDive ? 400 : 800);
+		Enemy::Hit(other);
 	}
 	else {
 		mWasHit = true;
@@ -159,7 +160,7 @@ void Boss::Hit(PhysEntity* other) {
 		temp.x = 66;
 		temp.y = 68;
 		mTexture[1]->SetSourceRect(&temp);
-		AudioManager::Instance()->PlaySFX("SFX/BossInjured.wav", 0, 2);
+		AudioManager::Instance()->PlaySFX("BossInjured.wav", 0, -1);
 	}
 }
 
