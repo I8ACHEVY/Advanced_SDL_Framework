@@ -58,8 +58,30 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mBossCount = 0;
 
 	std::string fullPath = SDL_GetBasePath();
-	fullPath.append("Data/Level1.xml");
-	mSpawningPatterns.LoadFile(fullPath.c_str());
+
+	//if (mStage == 1) {
+		fullPath.append("Data/Level1.xml");
+		mSpawningPatterns.LoadFile(fullPath.c_str());
+		std::cout << mStage << std::endl;
+	//}
+
+	//if (mStage == 2) {
+	//	fullPath.append("Data/Level2.xml");
+	//	mSpawningPatterns.LoadFile(fullPath.c_str());
+	//	std::cout << mStage << std::endl;
+	//}
+	//	
+	//if (mStage == 3) {
+	//	fullPath.append("Data/Level3.xml");
+	//	mSpawningPatterns.LoadFile(fullPath.c_str());
+	//	std::cout << mStage << std::endl;
+	//}
+
+	//if (mStage == 4) {
+	//	fullPath.append("Data/Challenge.xml");
+	//	mSpawningPatterns.LoadFile(fullPath.c_str());
+	//	std::cout << mStage << std::endl;
+	//}
 
 	mChallengeStage = mSpawningPatterns.FirstChildElement("Level")
 		->FirstChildElement()
@@ -611,11 +633,11 @@ void Level::Update() {
 		if (mPlayerHit) {
 			HandlePlayerDeath();
 		}
-		//else {
-		//	if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {		//Testing
-		//		mCurrentState = Finished;
-		//	}
-		//}
+		else {
+			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {		//Testing
+				mCurrentState = Finished;
+			}
+		}
 	}
 }
 
