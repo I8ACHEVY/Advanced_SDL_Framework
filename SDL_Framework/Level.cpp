@@ -59,29 +59,31 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 
 	std::string fullPath = SDL_GetBasePath();
 
-	//if (mStage == 1) {
+	if (mStage == 1) {
 		fullPath.append("Data/Level1.xml");
 		mSpawningPatterns.LoadFile(fullPath.c_str());
+		if (mSpawningFinished) {
+			mSpawningPatterns.Clear();
+		}
+	}
+
+	if (mStage == 2) {									// stage 2 error
+		fullPath.append("Data/Level2.xml");
+		mSpawningPatterns.LoadFile(fullPath.c_str());
 		std::cout << mStage << std::endl;
-	//}
+	}
+		
+	if (mStage == 3) {
+		fullPath.append("Data/Level3.xml");
+		mSpawningPatterns.LoadFile(fullPath.c_str());
+		std::cout << mStage << std::endl;
+	}
 
-	//if (mStage == 2) {
-	//	fullPath.append("Data/Level2.xml");
-	//	mSpawningPatterns.LoadFile(fullPath.c_str());
-	//	std::cout << mStage << std::endl;
-	//}
-	//	
-	//if (mStage == 3) {
-	//	fullPath.append("Data/Level3.xml");
-	//	mSpawningPatterns.LoadFile(fullPath.c_str());
-	//	std::cout << mStage << std::endl;
-	//}
-
-	//if (mStage == 4) {
-	//	fullPath.append("Data/Challenge.xml");
-	//	mSpawningPatterns.LoadFile(fullPath.c_str());
-	//	std::cout << mStage << std::endl;
-	//}
+	if (mStage == 4) {
+		fullPath.append("Data/Challenge.xml");
+		mSpawningPatterns.LoadFile(fullPath.c_str());
+		std::cout << mStage << std::endl;
+	}
 
 	mChallengeStage = mSpawningPatterns.FirstChildElement("Level")
 		->FirstChildElement()
