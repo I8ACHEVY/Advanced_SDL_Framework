@@ -354,7 +354,7 @@ void Enemy::RenderStates() {
 	PhysEntity::Render();
 }
 
-bool Enemy::IgnoreCollisions(){
+bool Enemy::IgnoreCollision(){
 	return mCurrentState == Dead;
 }
 
