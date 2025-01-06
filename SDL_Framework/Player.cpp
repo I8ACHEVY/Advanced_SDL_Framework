@@ -139,6 +139,10 @@ void Player::Update() {
 	if (mAnimating){
 		mDeathAnimation->Update();
 		mAnimating = mDeathAnimation->IsAnimating();
+
+		if (mWasHit) {
+			mWasHit = false;
+		}
 	}
 	else {
 		if (Active()) {
