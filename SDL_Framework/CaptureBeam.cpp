@@ -17,7 +17,7 @@ void CaptureBeam::RunAnimation() {
 			int temp = (int)(mCaptureTimer * 3.5f);
 			mSourceRect.h = (int)(temp / 7.0f * mHeight);
 		}
-		else if (mCaptureTimer > 4.0f) {
+		else if (mCaptureTimer > mTotalCaptureTime - 2.0f) {		// possible hard set > 4)
 			int temp = (int)((mTotalCaptureTime - mCaptureTimer) * 3.5f);
 			mSourceRect.h = (int)(temp / 7.0f * mHeight);
 		}

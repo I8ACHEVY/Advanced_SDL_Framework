@@ -140,7 +140,8 @@ void Wasp::RenderDiveState() {
 	//mTexture[sFormation->GetTick() % 2]->Render();
 
 	int currentPath = mIndex % 2;	
-	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
+	
+	/*for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {		//Dive Path Debugging
 		Graphics::Instance()->DrawLine(
 			mDiveStartPosition.x + sDivePaths[currentPath][i].x,
 			mDiveStartPosition.y + sDivePaths[currentPath][i].y,
@@ -148,17 +149,19 @@ void Wasp::RenderDiveState() {
 			mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
 		);
 	}
+	*/
 	
 	Vector2 finalPos = WorldFormationPosition();
 	auto currentDivePath = sDivePaths[currentPath];
 	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];
 	
-	Graphics::Instance()->DrawLine(
+	/*Graphics::Instance()->DrawLine(		//Return path Debugging
 		pathEndPos.x,
 		pathEndPos.y,
 		finalPos.x,
 		finalPos.y
 	);
+	*/
 }
 
 void Wasp::RenderDeadState() {

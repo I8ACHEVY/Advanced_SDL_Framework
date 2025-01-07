@@ -177,27 +177,16 @@ Vector2 Boss::LocalFormationPosition() {
 	return retVal;
 }
 
-void Boss::HandleCaptureBeam() {
-	mCaptureBeam->Update();
-	if (!mCaptureBeam->IsAnimating()) {
-		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
-		if (Position().y >= 580.0f) {
-			Position(WorldFormationPosition().x, -20.0f);
-			mCapturing = false;
-		}
-	}
-}
-
 void Boss::HandleDiveState() {
-	int currentPath = mIndex % 2;
+	//int currentPath = mIndex % 2;
+	//
+	//if (mCaptureDive) {
+	//	currentPath += 2;
+	//}
 	
-	if (mCaptureDive) {
-		currentPath += 2;
-	}
-	
-	if (mCurrentWayPoint < sDivePaths[currentPath].size()) {
+	if (mCurrentWayPoint < sDivePaths[mCurrentPath].size()) {
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
-			[currentPath][mCurrentWayPoint];
+			[mCurrentPath][mCurrentWayPoint];
 	
 		Vector2 dist = waypointPos - Position();
 	
@@ -235,6 +224,17 @@ void Boss::HandleDiveState() {
 	}
 }
 
+void Boss::HandleCaptureBeam() {
+	mCaptureBeam->Update();
+	if (!mCaptureBeam->IsAnimating()) {
+		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
+		if (Position().y >= 580.0f) {
+			Position(WorldFormationPosition().x, -20.0f);
+			mCapturing = false;
+		}
+	}
+}
+
 void Boss::HandleDeadState() {
 
 }
@@ -255,25 +255,25 @@ void Boss::RenderDiveState() {
 		currentPath += 2;
 	}
 	
-	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
-		Graphics::Instance()->DrawLine(
-			mDiveStartPosition.x + sDivePaths[currentPath][i].x,
-			mDiveStartPosition.y + sDivePaths[currentPath][i].y,
-			mDiveStartPosition.x + sDivePaths[currentPath][i + 1].x,
-			mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
-		);
-	}
+	//for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {		// Dive path debugging
+	//	Graphics::Instance()->DrawLine(
+	//		mDiveStartPosition.x + sDivePaths[currentPath][i].x,
+	//		mDiveStartPosition.y + sDivePaths[currentPath][i].y,
+	//		mDiveStartPosition.x + sDivePaths[currentPath][i + 1].x,
+	//		mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
+	//	);
+	//}
 	
 	Vector2 finalPos = WorldFormationPosition();
 	auto currentDivePath = sDivePaths[currentPath];
 	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];
 	
-	Graphics::Instance()->DrawLine(
-		pathEndPos.x,
-		pathEndPos.y,
-		finalPos.x,
-		finalPos.y
-	);
+	//Graphics::Instance()->DrawLine(		//return path debugging
+	//	pathEndPos.x,
+	//	pathEndPos.y,
+	//	finalPos.x,
+	//	finalPos.y
+	//);
 	
 }
 

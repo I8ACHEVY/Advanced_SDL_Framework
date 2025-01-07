@@ -286,7 +286,7 @@ void Level::HandleEnemySpawning() {
 					std::string type = child->Attribute("type");
 					int index = child->IntAttribute("index");
 
-					if (type.compare("Butterfly") == 0) {
+				     if (type.compare("Butterfly") == 0) {
 						if (!mChallengeStage) {
 							//Add Butterfly to formation
 							mFormationButterflies[index] = new Butterfly(path, index, false);

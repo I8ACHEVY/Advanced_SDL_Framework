@@ -174,6 +174,7 @@ Enemy::~Enemy() {
 	}
 
 	delete mDeathAnimation;
+	mDeathAnimation = nullptr;
 }
 
 Enemy::States Enemy::CurrentState() {
@@ -300,6 +301,7 @@ void Enemy::HandleStates() {
 		break;
 
 	case Dead:
+		//Render Death Texture in death state
 		HandleDeadState();
 		break;
 	}
