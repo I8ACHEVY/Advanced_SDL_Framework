@@ -21,7 +21,7 @@ public:
 private:
 	bool IgnoreCollision() override;
 
-	static const int OFFSCREEN_BUFFER = 10;
+	static const int OFFSCREEN_BUFFER = 180;	
 	Timer* mTimer;
 	Texture* mTexture;
 	float mSpeed;

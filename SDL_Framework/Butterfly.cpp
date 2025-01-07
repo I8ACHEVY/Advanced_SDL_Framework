@@ -1,4 +1,6 @@
 #include "Butterfly.h"
+#include "BoxCollider.h"
+#include "AudioManager.h"
 
 std::vector<std::vector<Vector2>> Butterfly::sDivePaths;
 
@@ -36,9 +38,9 @@ void Butterfly::CreateDivePaths() {
 
 	path->AddCurve({
 		Vector2(375.0f, 525.0f),
-		Vector2(375.0f, 525.0f),
-		Vector2(300.0f, 625.0f),
-		Vector2(300.0f, 775.0f) }, 15
+		Vector2(375.0f, 575.0f),
+		Vector2(300.0f, 615.0f),
+		Vector2(300.0f, 560.0f) }, 15
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());
@@ -77,10 +79,10 @@ void Butterfly::CreateDivePaths() {
 		);
 
 	path->AddCurve({
-		Vector2(-375.0f, 525.0f),
-		Vector2(-375.0f, 525.0f),
-		Vector2(-300.0f, 625.0f),
-		Vector2(-300.0f, 775.0f) }, 15
+		Vector2(-375.0f, 525.0f),			//-375,525
+		Vector2(-375.0f, 575.0f),			//-375, 525
+		Vector2(-300.0f, 615.0f),			//-300, 625
+		Vector2(-300.0f, 560.0f) }, 15		//-300, 775
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());
@@ -124,7 +126,7 @@ void Butterfly::CreateDivePaths() {
 		Vector2(200.0f, 550.0f),
 		Vector2(200.0f, 540.0f),
 		Vector2(200.0f, 810.0f),
-		Vector2(200.0f, 800.0f) }, 15);
+		Vector2(200.0f, 510.0f) }, 15);	
 
 	sDivePaths.push_back(std::vector<Vector2>());
 	path->Sample(&sDivePaths[currentPath]);
@@ -167,7 +169,7 @@ void Butterfly::CreateDivePaths() {
 		Vector2(-200.0f, 550.0f),
 		Vector2(-200.0f, 540.0f),
 		Vector2(-200.0f, 810.0f),
-		Vector2(-200.0f, 800.0f) }, 15);
+		Vector2(-200.0f, 510.0f) }, 15);
 
 	sDivePaths.push_back(std::vector<Vector2>());
 	path->Sample(&sDivePaths[currentPath]);
@@ -228,6 +230,12 @@ void Butterfly::HandleDiveState(){
 
 void Butterfly::HandleDeadState(){}
 
+void Butterfly::Hit(PhysEntity* other) {
+	AudioManager::Instance()->PlaySFX("ButterflyDestroyed.wav", 0, -1); 
+	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 80 : 160);
+	Enemy::Hit(other);
+}
+
 void Butterfly::RenderDiveState(){
 	int currentPath = mIndex % 2;
 
@@ -239,7 +247,7 @@ void Butterfly::RenderDiveState(){
 	// or do this
 	//mTexture[sFormation->GetTick() % 2]->Render();
 
-	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
+	/*for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {			//Dive path debugging
 		Graphics::Instance()->DrawLine(
 			mDiveStartPosition.x + sDivePaths[currentPath][i].x,
 			mDiveStartPosition.y + sDivePaths[currentPath][i].y,
@@ -247,18 +255,19 @@ void Butterfly::RenderDiveState(){
 			mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
 		);
 	}
-
+	*/
+	
 	Vector2 finalPos = WorldFormationPosition();
 	auto currentDivePath = sDivePaths[currentPath];
 	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];
-
-	Graphics::Instance()->DrawLine(
+	
+	/*Graphics::Instance()->DrawLine(		//Path return debugging
 		pathEndPos.x,
 		pathEndPos.y,
 		finalPos.x,
 		finalPos.y
 	);
-
+	*/
 }
 
 void Butterfly::RenderDeadState(){}
@@ -272,6 +281,7 @@ Enemy(path, index, challenge)
 	for (auto texture : mTexture) {
 		texture->Parent(this);
 		texture->Position(Vec2_Zero);
+		texture->Scale(Vector2(0.7f, 0.7f));
 	}
 	// or do this
 	// 
@@ -281,6 +291,8 @@ Enemy(path, index, challenge)
 	//}
 	
 	mType = Enemy::Butterfly;
+
+	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 }
 
 Butterfly::~Butterfly() {}

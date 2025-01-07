@@ -13,7 +13,7 @@ namespace SDL_Framework{
 
 		bool CheckCollision(PhysEntity* other);
 
-		virtual void Hit(PhysEntity* other) {
+		virtual void Hit(PhysEntity* other){
 			std::cout << "Collision Occured" << std::endl;
 		}
 

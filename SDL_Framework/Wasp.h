@@ -7,6 +7,8 @@ class Wasp : public Enemy {
 public:
 	static void CreateDivePaths();
 
+	void Hit(PhysEntity* other) override;
+
 	Wasp(int path, int index, bool challenge, bool diver);
 	~Wasp();
 
@@ -14,6 +16,7 @@ private:
 	static std::vector<std::vector<Vector2>> sDivePaths;
 
 	bool mDiver;
+	bool mWasHit;
 
 	void FlyInComplete() override;
 	Vector2 LocalFormationPosition() override;

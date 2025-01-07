@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Formation.h"
 
+
 using namespace SDL_Framework;
 
 class Enemy : public PhysEntity {
@@ -15,6 +16,7 @@ public:
 
 	static void CreatePaths();
 	static void SetFormation(Formation* formation);
+	static void CurrentPlayer(Player* player);
 
 	States CurrentState();
 	Types Type();
@@ -24,6 +26,9 @@ public:
 	virtual ~Enemy();
 
 	virtual void Dive(int type = 0);
+	virtual void Hit(PhysEntity* other) override;
+
+	bool InDeathAnimation();
 
 	void Update() override;
 	void Render() override;
@@ -36,6 +41,8 @@ protected:
 	Timer* mTimer;
 
 	Texture* mTexture[2];
+
+	AnimatedTexture* mDeathAnimation;
 
 	States mCurrentState;
 
@@ -75,4 +82,6 @@ protected:
 	virtual void RenderDeadState() = 0;
 
 	void RenderStates();
+
+	bool IgnoreCollision() override;
 };

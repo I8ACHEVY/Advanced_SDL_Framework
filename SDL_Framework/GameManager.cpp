@@ -120,11 +120,6 @@ namespace SDL_Framework {
 			//mRedShip->Rotate(260.0f * mTimer->DeltaTime());
 		}
 
-		if (mInputManager->MouseButtonPressed(InputManager::Left)) {
-			std::cout << "Left mouse button pressed!" << std::endl;
-			mAudioManager->PlaySFX("coin_credit.wav", 0, -1);			//audio test
-		}
-
 		if (mInputManager->MouseButtonReleased(InputManager::Left)) {
 			std::cout << "Left mouse button released!" << std::endl;
 		}
@@ -167,13 +162,20 @@ namespace SDL_Framework {
 	void GameManager::Render() {
 		mGraphics->ClearBackBuffer();
 
-		if (mBorderTexture) {
-			SDL_Rect destRect = { 0, 0, 1400, 1024 };
+		//if (mBorderTexture) {		//border debugging
+		//	SDL_Rect destRect = { 0, 0, 1400, 1024 };
+		//
+		//	mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
+		//}
 
+		mScreenManager->Render();
+
+		if (mBorderTexture) {//border must be placed here after debugging
+			SDL_Rect destRect = { 0, 0, 1400, 1024 };
+		
 			mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
 		}
 
-		mScreenManager->Render();
 		mGraphics->Render();
 	}
 
@@ -202,9 +204,9 @@ namespace SDL_Framework {
 			PhysicsManager::CollisionFlags::Hostile |
 			PhysicsManager::CollisionFlags::HostileProjectile);
 		
-		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Hostile,
-			PhysicsManager::CollisionFlags::Friendly |
-			PhysicsManager::CollisionFlags::FriendlyProjectile);
+		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::FriendlyProjectile,
+			PhysicsManager::CollisionFlags::Hostile |
+			PhysicsManager::CollisionFlags::HostileProjectile);
 		
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Hostile,
 			PhysicsManager::CollisionFlags::Friendly |

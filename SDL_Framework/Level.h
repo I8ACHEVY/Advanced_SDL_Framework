@@ -5,8 +5,10 @@
 #include "Butterfly.h"
 #include "Wasp.h"
 #include "Boss.h"
+#include "Tinyxml2.h"
 
 using namespace SDL_Framework;
+using namespace tinyxml2;
 
 class Level : public GameEntity {
 
@@ -28,16 +30,46 @@ private:
 	Player* mPlayer;
 	Formation* mFormation;
 
-	const int MAX_BUTTERFLIES = 16;
-	const int MAX_WASPS = 20;
-	const int MAX_BOSSES = 4;
+	static const int MAX_BUTTERFLIES = 16;
+	static const int MAX_WASPS = 20;
+	static const int MAX_BOSSES = 4;
 
 	int mButterflyCount;
 	int mWaspCount;
 	int mBossCount;
-	std::vector<Enemy*> mEnemies;
+
+	Butterfly* mFormationButterflies[MAX_BUTTERFLIES];
+	Wasp* mFormationWasps[MAX_WASPS];
+	Boss* mFormationBosses[MAX_BOSSES];
+
+	Butterfly* mDivingButterfly;
+	bool mSkipFirstButterfly;
+	float mButterflyDiveDelay;
+	float mButterflyDiveTimer;
+
+	Wasp* mDivingWasp;
+	Wasp* mDivingWasp2;
+	float mWaspDiveDelay;
+	float mWaspDiveTimer;
+
+	Boss* mDivingBoss;
+	bool mCaptureDive;
+	bool mSkipFirstBoss;
+	float mBossDiveDelay;
+	float mBossDiveTimer;
+
+	std::vector<Enemy*> mEnemies;	//debug testing
+
+	XMLDocument mSpawningPatterns;
+	int mCurrentFlyInPriority;
+	int mCurrentFlyInIndex;
+
+	float mSpawnDelay;
+	float mSpawnTimer;
+	bool mSpawningFinished;
 
 	int mStage; 
+	bool mChallengeStage;
 	bool mStageStarted;
 
 	Texture* mReadyLabel;
@@ -68,6 +100,8 @@ private:
 	void HandlePlayerDeath();
 	
 	void StartStage();
+
+	bool EnemyFlyingIn();
 
 	void HandleEnemySpawning();
 	void HandleEnemyFormation();

@@ -15,12 +15,8 @@ Star::Star(int layer) : Texture("Stars.png", 0,0,4,4) {
 
 	mSourceRect.x = starColor * 4;
 
-	mBounds = Vector2(323.0f, 1065.0f);
-
-	//Boundaries* mBounds = &Graphics::Instance()->GetPlayArea();
-
-	Position(Vector2((float)(mRandom->RandomInt() % Graphics::Instance()->SCREEN_WIDTH),	//mBounds->GetWidth()
-		(float)(mRandom->RandomInt() % Graphics::Instance()->SCREEN_HEIGHT)));				// mBounds->GetHeight()
+	Position(Vector2((float)(mRandom->RandomInt() % (int)(Graphics::Instance()->SCREEN_WIDTH * 0.58f) + 292.0f),
+		(float)(mRandom->RandomInt() % (int)(Graphics::Instance()->SCREEN_HEIGHT * 0.7f) + 220.0f)));
 
 	mFlickerTime = 0.0f;
 	mFlickerSpeed = mRandom->RandomRange(0.15f, 1.0f);
@@ -40,9 +36,9 @@ void Star::ScrollStar() {
 	Translate(Vec2_Up * mScrollSpeed);
 
 	Vector2 pos = Position(Local);
-	if (pos.y > Graphics::Instance()->SCREEN_HEIGHT) {
-		pos.y = 0.0f;
-		pos.x = (float)(mRandom->RandomInt() % Graphics::Instance()->SCREEN_WIDTH);
+	if (pos.y > Graphics::Instance()->SCREEN_HEIGHT * 0.95) {
+		pos.y = 190.0f;
+		pos.x = (float)(mRandom->RandomInt() % (int)(Graphics::Instance()->SCREEN_WIDTH * 0.58f) + 292.0f);
 		Position(pos);
 	}
 }

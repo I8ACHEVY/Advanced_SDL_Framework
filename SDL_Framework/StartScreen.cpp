@@ -4,16 +4,16 @@ StartScreen::StartScreen() {
 	mTimer = Timer::Instance();
 	mInputManager = InputManager::Instance();
 
-	mAnimationStartPos = Vector2(0.0f, Graphics::SCREEN_HEIGHT);
+	mAnimationStartPos = Vector2(0.0f, Graphics::SCREEN_HEIGHT * 0.5f);
 	mAnimationEndPos = Vec2_Zero;
 	mAnimationTotalTime = 5.0f;
 	mAnimationTimer = 0.0f;
 	mAnimationDone = false;
 
-mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 80.0f);
-mPlayer1 = new Texture("1UP", "emulogic.ttf", 32, { 200, 0, 0 });
-mPlayer2 = new Texture("2UP", "emulogic.ttf", 32, { 200, 0, 0 });
-mHiScore = new Texture("HI SCORE", "emulogic.ttf", 32, { 200, 0, 0 });
+mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 210.0f);
+mPlayer1 = new Texture("1UP", "emulogic.ttf", 20, { 200, 0, 0 });
+mPlayer2 = new Texture("2UP", "emulogic.ttf", 20, { 200, 0, 0 });
+mHiScore = new Texture("HI SCORE", "emulogic.ttf", 20, { 200, 0, 0 });
 mPlayer1Score = new Scoreboard({ 255, 255, 255 });
 mPlayer2Score = new Scoreboard({ 255, 255, 255 });
 mTopScore = new Scoreboard();
@@ -26,16 +26,16 @@ mPlayer1Score->Parent(mTopBar);
 mPlayer2Score->Parent(mTopBar);
 mTopScore->Parent(mTopBar);
 
-mPlayer1->Position(-Graphics::SCREEN_WIDTH * 0.35f, 0.0f);
-mPlayer2->Position(Graphics::SCREEN_WIDTH * 0.34f, 0.0f);
+mPlayer1->Position(-Graphics::SCREEN_WIDTH * 0.2f, 0.0f);
+mPlayer2->Position(Graphics::SCREEN_WIDTH * 0.2f, 0.0f);
 mHiScore->Position(0, 0.0f);
-mPlayer1Score->Position(Graphics::SCREEN_WIDTH * -0.34f, 40.0f);
-mPlayer2Score->Position(Graphics::SCREEN_WIDTH * 0.35f, 40.0f);
-mTopScore->Position(Graphics::SCREEN_WIDTH * 0.08f, 40.0f);
+mPlayer1Score->Position(Graphics::SCREEN_WIDTH * -0.19f, 40.0f);
+mPlayer2Score->Position(Graphics::SCREEN_WIDTH * 0.21f, 40.0f);
+mTopScore->Position(Graphics::SCREEN_WIDTH * 0.03f, 40.0f);
 
 mTopScore->Score(645987);	//CREATE SAVE SYSTEM
 
-mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.32f);
+mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.4f);
 mLogo = new Texture("GalagaLogo.png", 0, 0, 360, 180);
 mAnimatedLogo = new AnimatedTexture("GalagaLogo.png", 0, 0, 360, 180, 3, 0.5f,
 	AnimatedTexture::Vertical);
@@ -48,9 +48,9 @@ mLogo->Position(Vec2_Zero);
 mAnimatedLogo->Position(Vec2_Zero);
 
 
-mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.55f);
-mOnePlayerMode = new Texture("1 Player", "emulogic.ttf", 32, { 230, 230, 230 });
-mTwoPlayerMode = new Texture("2 Player", "emulogic.ttf", 32, { 230, 230, 230 });
+mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.6f);
+mOnePlayerMode = new Texture("1 Player", "emulogic.ttf", 20, { 230, 230, 230 });
+mTwoPlayerMode = new Texture("2 Player", "emulogic.ttf", 20, { 230, 230, 230 });
 mCursor = new Texture("Cursor.png");
 
 mPlayModes->Parent(this);
@@ -58,18 +58,18 @@ mOnePlayerMode->Parent(mPlayModes);
 mTwoPlayerMode->Parent(mPlayModes);
 mCursor->Parent(mPlayModes);
 
-mOnePlayerMode->Position(0.0f, -35.0f);
-mTwoPlayerMode->Position(0.0f, 35.0f);
-mCursor->Position(-175.0f, -35.0f);
+mOnePlayerMode->Position(0.0f, -28.0f);
+mTwoPlayerMode->Position(0.0f, 28.0f);
+mCursor->Position(-120.0f, -28.0f);
 
 mSelectedMode = 0;
-mCursorOffsetPos = Vector2(0.0f, 70.0f);
+mCursorOffsetPos = Vector2(0.0f, 55.0f);
 mCursorStartPos = mCursor->Position(Local);
 
-mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.7f);
-mNamco = new Texture("namco", "namco__.ttf", 36, { 200, 0, 0 });
-mDates = new Texture("1981 - 1985 NAMCO) LTD.", "emulogic.ttf", 32, { 230, 230, 230 });
-mRights = new Texture("ALL RIGHTS RESERVED", "emulogic.ttf", 32, { 230, 230, 230 });
+mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.8f);
+mNamco = new Texture("namco", "namco__.ttf", 24, { 200, 0, 0 });
+mDates = new Texture("1981 - 1985 NAMCO LTD.", "emulogic.ttf", 20, { 230, 230, 230 });
+mRights = new Texture("ALL RIGHTS RESERVED", "emulogic.ttf", 20, { 230, 230, 230 });
 
 mBottomBar->Parent(this);
 mNamco->Parent(mBottomBar);
@@ -77,8 +77,8 @@ mDates->Parent(mBottomBar);
 mRights->Parent(mBottomBar);
 
 mNamco->Position(Vec2_Zero);
-mDates->Position(0.0f, 90.0f);
-mRights->Position(0.0f, 170.0f);
+mDates->Position(0.0f, 50.0f);
+mRights->Position(0.0f, 90.0f);
 
 ResetAnimation();
 }

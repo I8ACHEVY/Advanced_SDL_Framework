@@ -21,6 +21,7 @@ void Player::HandleMovement() {
 	if (pos.x < mMoveBounds.x) {
 		pos.x = mMoveBounds.x;
 	}
+
 	else if (pos.x > mMoveBounds.y) {
 		pos.x = mMoveBounds.y;
 	}
@@ -29,7 +30,7 @@ void Player::HandleMovement() {
 }
 
 void Player::HandleFiring() {
-	if (mInput->KeyPressed(SDL_SCANCODE_SPACE)) {
+	if (mInput->KeyPressed(SDL_SCANCODE_SPACE) || mInput->MouseButtonPressed(InputManager::Left)) {
 		for (int i = 0; i < MAX_BULLETS; i++) {
 			if (!mBullets[i]->Active()) {
 				mBullets[i]->Fire(Position());
@@ -58,6 +59,8 @@ Player::Player() {
 	mShip = new Texture("PlayerShips.png", 0, 0, 60, 64);
 	mShip->Parent(this);
 	mShip->Position(Vec2_Zero);
+	mShip->Scale(Vector2(0.7f, 0.7f));
+
 
 	mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
 		AnimatedTexture::Horizontal);
@@ -65,9 +68,9 @@ Player::Player() {
 	mDeathAnimation->Position(Vec2_Zero);
 	mDeathAnimation->SetWrapMode(AnimatedTexture::Once);
 
-	AddCollider(new BoxCollider(Vector2(16.0f, 67.0f)));
-	AddCollider(new BoxCollider(Vector2(20.0f, 37.0f)), Vector2(20.0f, 10.0f));
-	AddCollider(new BoxCollider(Vector2(20.0f, 37.0f)), Vector2(-20.0f, 10.0f));
+	AddCollider(new BoxCollider(Vector2(10.0f, 45.0f)));
+	AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(12.0f, 5.0f));
+	AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(-12.0f, 5.0f));
 
 	mId = PhysicsManager::Instance()->RegisterEntity(this,
 		PhysicsManager::CollisionLayers::Friendly);
@@ -114,11 +117,9 @@ int Player::Lives() {
 	return mLives;
 }
 
-void Player::WasHit() {
-	mLives -= 1;
-	mAnimating = true;
-	mDeathAnimation->ResetAnimation();
-	mAudio->PlaySFX("PlayerExplosion.wav",0, -1);
+bool Player::WasHit() {
+	return mWasHit;
+
 }
 
 bool Player::IgnoreCollision() {
@@ -129,6 +130,7 @@ void Player::Hit(PhysEntity* other) {
 	mLives -= 1;
 	mAnimating = true;
 	mDeathAnimation->ResetAnimation();
+	mAudio->PlaySFX("PlayerExplosion.wav", 0, -1);
 	mWasHit = true;
 
 }
@@ -137,6 +139,10 @@ void Player::Update() {
 	if (mAnimating){
 		mDeathAnimation->Update();
 		mAnimating = mDeathAnimation->IsAnimating();
+
+		if (mWasHit) {
+			mWasHit = false;
+		}
 	}
 	else {
 		if (Active()) {

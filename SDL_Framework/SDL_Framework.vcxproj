@@ -125,6 +125,8 @@
       <Command>copy /y "$(ProjectDir)..\dep\devel\x64\*.dll" "$(OutDir)
  
 xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
+xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
+ 
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -150,6 +152,8 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
       <Command>copy /y "$(ProjectDir)..\dep\devel\x64\*.dll" "$(OutDir)
  
 xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
+xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
+ 
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -160,10 +164,10 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClCompile Include="BackgroundStar.cpp" />
     <ClCompile Include="BezierPath.cpp" />
     <ClCompile Include="Boss.cpp" />
-    <ClCompile Include="Boundaries.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Butterfly.cpp" />
+    <ClCompile Include="CaptureBeam.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -187,6 +191,7 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Tinyxml2.cpp" />
     <ClCompile Include="Wasp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,10 +201,10 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClInclude Include="BackgroundStar.h" />
     <ClInclude Include="BezierPath.h" />
     <ClInclude Include="Boss.h" />
-    <ClInclude Include="Boundaries.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Butterfly.h" />
+    <ClInclude Include="CaptureBeam.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Enemy.h" />
@@ -224,7 +229,14 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s
     <ClInclude Include="StartScreen.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Tinyxml2.h" />
     <ClInclude Include="Wasp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Challenge.xml" />
+    <Xml Include="Data\Level1.xml" />
+    <Xml Include="Level2.xml" />
+    <Xml Include="Level3.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

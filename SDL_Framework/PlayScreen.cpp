@@ -12,7 +12,7 @@ PlayScreen::PlayScreen() {
 
 	mStartLabel = new Texture("START", "emulogic.ttf", 32, { 150, 0, 0 });
 	mStartLabel->Parent(this);
-	mStartLabel->Position(Graphics::SCREEN_WIDTH * 0.4f, Graphics::SCREEN_HEIGHT * 0.5f);
+	mStartLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f);
 
 	mLevel = nullptr;
 	mLevelStartDelay = 1.0f;
@@ -49,7 +49,7 @@ void PlayScreen::StartNewGame() {
 	delete mPlayer;
 	mPlayer = new Player(); 
 	mPlayer->Parent(this);
-	mPlayer->Position(Graphics::SCREEN_WIDTH * 0.4f, Graphics::SCREEN_HEIGHT * 0.8f);
+	mPlayer->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.8f);
 	mPlayer->Active(false);
 
 	mSideBar->SetHighScore(645987);	//CREATE SAVE SYSTEM
@@ -101,6 +101,7 @@ void PlayScreen::Update() {
 		}
 
 		mPlayer->Update();
+		mSideBar->SetPlayerScore(mPlayer->Score());
 	}
 	else {
 		if (!Mix_PlayingMusic()) {

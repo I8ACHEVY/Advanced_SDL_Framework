@@ -1,4 +1,6 @@
 #include "Wasp.h"
+#include "BoxCollider.h"
+#include "AudioManager.h"
 
 std::vector<std::vector<Vector2>> Wasp::sDivePaths;
 
@@ -23,15 +25,15 @@ void Wasp::CreateDivePaths() {
 	path->AddCurve({
 		Vector2(100.0f, 150.0f),
 		Vector2(250.0f, 150.0f),
-		Vector2(350.0f, 200.0f),
-		Vector2(350.0f, 350.0f) }, 15
+		Vector2(250.0f, 200.0f),
+		Vector2(250.0f, 250.0f) }, 15
 		);
 
 	path->AddCurve({
-		Vector2(350.0f, 350.0f),
-		Vector2(350.0f, 575.0f),
-		Vector2(100.0f, 575.0f),
-		Vector2(200.0f, 350.0f) }, 15
+		Vector2(250.0f, 250.0f),	//350,350
+		Vector2(250.0f, 450.0f),	//350,575
+		Vector2(50.0f, 500.0f),	//100,575
+		Vector2(50.0f, 350.0f) }, 15	//200, 350
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());
@@ -60,15 +62,15 @@ void Wasp::CreateDivePaths() {
 	path->AddCurve({
 		Vector2(-100.0f, 150.0f),
 		Vector2(-250.0f, 150.0f),
-		Vector2(-350.0f, 200.0f),
-		Vector2(-350.0f, 350.0f) }, 15
+		Vector2(-250.0f, 200.0f),
+		Vector2(-250.0f, 250.0f) }, 15
 		);
 
 	path->AddCurve({
-		Vector2(-350.0f, 350.0f),
-		Vector2(-350.0f, 575.0f),
-		Vector2(-100.0f, 575.0f),
-		Vector2(-100.0f, 350.0f) }, 15
+		Vector2(-250.0f, 250.0f),
+		Vector2(-250.0f, 450.0f),
+		Vector2(-50.0f, 500.0f),
+		Vector2(-50.0f, 350.0f) }, 15
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());
@@ -137,8 +139,9 @@ void Wasp::RenderDiveState() {
 	// or do this
 	//mTexture[sFormation->GetTick() % 2]->Render();
 
-	int currentPath = mIndex % 2;
-	for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {
+	int currentPath = mIndex % 2;	
+	
+	/*for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {		//Dive Path Debugging
 		Graphics::Instance()->DrawLine(
 			mDiveStartPosition.x + sDivePaths[currentPath][i].x,
 			mDiveStartPosition.y + sDivePaths[currentPath][i].y,
@@ -146,21 +149,29 @@ void Wasp::RenderDiveState() {
 			mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
 		);
 	}
-
+	*/
+	
 	Vector2 finalPos = WorldFormationPosition();
 	auto currentDivePath = sDivePaths[currentPath];
 	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];
-
-	Graphics::Instance()->DrawLine(
+	
+	/*Graphics::Instance()->DrawLine(		//Return path Debugging
 		pathEndPos.x,
 		pathEndPos.y,
 		finalPos.x,
 		finalPos.y
 	);
+	*/
 }
 
 void Wasp::RenderDeadState() {
 
+}
+
+void Wasp::Hit(PhysEntity* other) {
+	AudioManager::Instance()->PlaySFX("WaspDestroyed.wav", 0, -1);
+	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 50 : 100);
+	Enemy::Hit(other);
 }
 
 Wasp::Wasp(int path, int index, bool challenge, bool diver) :
@@ -172,6 +183,8 @@ Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 	for (auto texture : mTexture) {
 		texture->Parent(this);
 		texture->Position(Vec2_Zero);
+		texture->Scale(Vector2(0.7f, 0.7f));
+
 	}
 	// or do this
 	// 
@@ -181,6 +194,8 @@ Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 	//}
 
 		mType = Enemy::Wasp;
+
+		AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 }
 
 Wasp::~Wasp() {

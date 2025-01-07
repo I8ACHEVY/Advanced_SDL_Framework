@@ -12,6 +12,8 @@ Bullet::Bullet(bool friendly) {
 	mTexture = new Texture("Bullet.png");
 	mTexture->Parent(this);
 	mTexture->Position(Vec2_Zero);
+	mTexture->Scale(Vector2(0.7f, 0.7f));
+
 
 	mSpeed = 500.0f;
 
@@ -52,7 +54,7 @@ void Bullet::Update() {
 		Translate(-Vec2_Up * mSpeed * mTimer->DeltaTime());
 
 		Vector2 pos = Position();
-		if (pos.y < -OFFSCREEN_BUFFER) {
+		if (pos.y < OFFSCREEN_BUFFER) {
 			Reload();
 		}
 	}

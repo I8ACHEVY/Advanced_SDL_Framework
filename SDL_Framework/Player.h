@@ -25,7 +25,7 @@ public:
 
 	void AddScore(int change);
 
-	void WasHit();
+	bool WasHit();
 
 	bool IgnoreCollision() override;
 	void Hit(PhysEntity* other) override;

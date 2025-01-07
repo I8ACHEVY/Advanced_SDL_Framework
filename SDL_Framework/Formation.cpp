@@ -16,7 +16,7 @@ Formation::Formation() {
 
 	mLocked = false;
 
-	mGridSize = Vector2(32.0f, 64.0f);
+	mGridSize = Vector2(23.0f, 40.0f); // formation spacing
 }
 
 
