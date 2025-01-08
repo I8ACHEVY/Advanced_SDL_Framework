@@ -5,7 +5,7 @@ namespace SDL_Framework
 	Graphics* Graphics::sInstance = nullptr;
 	bool Graphics::sInitialized = false;
 
-	Graphics* Graphics::Instance() { // make this class a singleton
+	Graphics* Graphics::Instance() { 
 		if (sInstance == nullptr) {
 			sInstance = new Graphics();
 		}
@@ -90,14 +90,14 @@ namespace SDL_Framework
 		sInitialized = Init();
 	}
 	Graphics::~Graphics() {
-		// Destroy renderer
+		
 		SDL_DestroyRenderer(mRenderer);
-		//Destroy the window
+		
 		SDL_DestroyWindow(mWindow);
 	}
 
 	bool Graphics::Init() {
-		// Initialize SDL subsystem
+		
 		if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0){
 			std::cerr << "SDL could not init, error: " << SDL_GetError() 
 				      << std::endl;
@@ -119,7 +119,7 @@ namespace SDL_Framework
 		{
 			std::cerr << "Unable to create a window. SDL_Error: "
 				      << SDL_GetError() << std::endl;
-			return false; //end if window creations fails
+			return false; 
 		}
 
 		mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
@@ -127,7 +127,7 @@ namespace SDL_Framework
 		{
 			std::cerr << "Unable to get renderer. SDL_Error: "
 				      << SDL_GetError() << std::endl;
-			SDL_DestroyWindow(mWindow); // cleanup window before returning
+			SDL_DestroyWindow(mWindow); 
 			return false;
 		}
 

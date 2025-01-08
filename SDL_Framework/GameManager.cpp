@@ -17,13 +17,13 @@ namespace SDL_Framework {
 	}
 
 	void GameManager::Run() {
-		//main game loop
+		
 		while (!mQuit)
 		{  
 			mTimer->Update();
-			//event polling loop, while there are events inside of out events variable
+			
 			while (SDL_PollEvent(&mEvents))
-			{   // Handle each and every event we want to look for
+			{   
 				switch (mEvents.type)
 				{
 				case SDL_QUIT:

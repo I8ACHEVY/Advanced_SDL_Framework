@@ -24,8 +24,6 @@ void Scoreboard::Score(int score) {
 			mScore.push_back(new Texture("0", "emulogic.ttf", 20, mColor));
 			mScore[i]->Parent(this);
 			mScore[i]->Position(Vector2(-20.0f * i, 0.0f));
-
-			//std::cout << "Created digit '0' at position: " << -32.0f * i << ", 0" << std::endl;
 		}
 	}
 	else {
@@ -36,8 +34,6 @@ void Scoreboard::Score(int score) {
 			mScore.push_back(new Texture(str.substr(i, 1), "emulogic.ttf", 20, mColor));
 			mScore[i]->Parent(this);
 			mScore[i]->Position(Vector2(-20.0f * (lastIndex - i), 0.0f));
-
-			//std::cout << "Created digit '" << str.substr(i, 1) << "' at position: " << -32.0f * (lastIndex - i) << ", 0" << std::endl;
 		}
 	}
 }

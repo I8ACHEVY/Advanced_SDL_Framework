@@ -7,7 +7,7 @@ PlaySideBar::PlaySideBar() {
 	mTopBackground = new Texture("Black.png");
 	mTopBackground->Parent(this);
 	mTopBackground->Scale(Vector2(8.5f, 1.0f));
-	mTopBackground->Position(0.0f, 0.0f); // (-520.0f, 150.0f);
+	mTopBackground->Position(0.0f, 0.0f); 
 
 	mBottomBackground = new Texture("Black.png");
 	mBottomBackground->Parent(this);
@@ -182,10 +182,6 @@ void PlaySideBar::AddFlag(std::string filename, float width, int value) {
 	case 5:
 		x = 28;
 		break;
-
-	//default:
-	//	std::cerr << "Unknown Flag/Medalion at given value" << value << std::endl;
-	//	break;
 	}
 
 	mFlagTextures.push_back(new Texture(filename, x, 0, (int)width - 2, 64));

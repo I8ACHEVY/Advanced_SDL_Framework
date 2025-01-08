@@ -49,10 +49,6 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 
 	mCurrentState = Running;
 
-	//mFormation = new Formation();									//Testing
-	//mFormation->Position(Graphics::SCREEN_WIDTH * 0.5f, 355.0f);	//150.0f
-	//Enemy::SetFormation(mFormation);
-
 	mButterflyCount = 0;
 	mWaspCount = 0;
 	mBossCount = 0;
@@ -91,7 +87,7 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 
 	if (!mChallengeStage) {
 		mFormation = new Formation();
-		mFormation->Position(Graphics::SCREEN_WIDTH * 0.5f, 355.0f);	//150.0f
+		mFormation->Position(Graphics::SCREEN_WIDTH * 0.5f, 355.0f);
 		Enemy::SetFormation(mFormation);
 	
 		for (int i = 0; i < MAX_BUTTERFLIES; i++) {
@@ -201,7 +197,7 @@ void Level::HandleStartLabels() {
 
 void Level::HandleCollisions() {
 	if (!mPlayerHit) {
-		if (mPlayer->WasHit()) {	//Testing call if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_X))
+		if (mPlayer->WasHit()) {
 			mSideBar->SetShips(mPlayer->Lives());
 
 			mPlayerHit = true;
@@ -239,26 +235,6 @@ void Level::HandlePlayerDeath() {
 }
 
 void Level::HandleEnemySpawning() {
-	//if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_S) &&		//Testing
-	//	mButterflyCount < MAX_BUTTERFLIES) {
-	//
-	//	mEnemies.push_back(new Butterfly(0, mButterflyCount, false));
-	//	mButterflyCount++;
-	//}
-
-	//if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_W) &&		//Testing
-	//	mWaspCount < MAX_WASPS) {
-
-	//	mEnemies.push_back(new Wasp(0, mWaspCount++, false, false));
-	//	//mWaspCount++;
-	//}
-
-	//if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_F) &&		//Testing
-	//	mBossCount < MAX_BOSSES) {
-
-	//	mEnemies.push_back(new Boss(0, mBossCount++, false));
-	//	//mBossCount++;
-	//}
 
 	mSpawnTimer += mTimer->DeltaTime();
 
@@ -276,8 +252,6 @@ void Level::HandleEnemySpawning() {
 				int path = element->IntAttribute("path");
 				XMLElement* child = element->FirstChildElement();
 
-				//This for loop is always going to give the next/last child
-				//Based on FlyInIndex
 				for (int i = 0; i < mCurrentFlyInIndex && child != nullptr; i++) {
 					child = child->NextSiblingElement();
 				}
@@ -288,7 +262,7 @@ void Level::HandleEnemySpawning() {
 
 				     if (type.compare("Butterfly") == 0) {
 						if (!mChallengeStage) {
-							//Add Butterfly to formation
+							
 							mFormationButterflies[index] = new Butterfly(path, index, false);
 							mButterflyCount += 1;
 						}
@@ -324,19 +298,18 @@ void Level::HandleEnemySpawning() {
 		}
 
 		if (!priorityFound) {
-			//no priorities found mean no more Spawn elements
+
 			mSpawningFinished = true;
 		}
 		else {
 			if (!spawned) {
-				//We have Spawn elements waiting BUT we didn't spawn anything
+
 				if (!EnemyFlyingIn()) {
 					mCurrentFlyInPriority += 1;
 					mCurrentFlyInIndex = 0;
 				}
 			}
 			else {
-				//We haven't finished spawning our element's enemies, next index
 				mCurrentFlyInIndex += 1;
 			}
 		}
@@ -425,85 +398,9 @@ void Level::HandleEnemyFormation() {
 	if (levelCleared) {
 		mCurrentState = Finished;
 	}
-
-	//if (mButterflyCount == MAX_BUTTERFLIES &&
-	//	mWaspCount == MAX_WASPS &&
-	//	mBossCount == MAX_BOSSES) {
-
-	//	bool flyIn = false;
-	//	for (auto enemy : mEnemies) {
-	//		if (enemy->CurrentState() == Enemy::FlyIn) {
-	//			flyIn = true;
-	//			break;
-	//		}
-	//	}
-
-	//	if (!flyIn) {
-	//		mFormation->Lock();
-	//	}
-	//}
 }
 
 void Level::HandleEnemyDiving() {
-	/*if (mFormation->Locked()) {
-		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_V)) {		//Testing
-			for (auto enemy : mEnemies) {
-				if (enemy->Type() == Enemy::Wasp &&
-					enemy->CurrentState() == Enemy::InFormation) {
-					enemy->Dive();
-					break;
-				}
-			}
-		}
-
-		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_B)) {		//Testing
-			for (auto enemy : mEnemies) {
-				if (enemy->Type() == Enemy::Butterfly &&
-					enemy->CurrentState() == Enemy::InFormation) {
-					enemy->Dive();
-					break;
-				}
-			}
-		}
-
-		if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_G)) {		//Testing
-			for (auto enemy : mEnemies) {
-				if (enemy->Type() == Enemy::Boss &&
-					enemy->CurrentState() == Enemy::InFormation) {
-					enemy->Dive();
-
-					int index = enemy->Index();
-					int firstEscortIndex = (index % 2 == 0) ?
-						(index * 2) : (index * 2 - 1);
-					int secondEscortIndex = firstEscortIndex + 4;
-
-					for (auto butterfly : mEnemies) {
-						//verify the enemy is a butterfly in formation &
-						//the butterfly has either the first or second escort index
-						if (butterfly->Type() != Enemy::Butterfly) { continue; }
-						if (butterfly->CurrentState() != Enemy::InFormation) { continue;}
-
-						if (butterfly->Index() == firstEscortIndex ||
-							butterfly->Index() == secondEscortIndex){
-							butterfly->Dive(1);
-						}
-						// or do this
-						//if (butterfly->Type() == Enemy::Butterfly &&
-						//	butterfly->CurrentState() == Enemy::InFormation) {
-						//
-						//	if (butterfly->Index() == firstEscortIndex ||
-						//	    butterfly->Index() == secondEscortIndex) {
-						//
-						//		butterfly->Dive(1);
-						//	}
-						//}
-					}
-
-					break;
-				}
-			}
-		}
-	}*/
 
 	if (mDivingButterfly == nullptr) {
 		mButterflyDiveTimer += mTimer->DeltaTime();
@@ -607,15 +504,6 @@ void Level::Update() {
 		HandleStartLabels();
 	}
 	else {
-		//HandleEnemySpawning();
-		//HandleEnemyFormation();
-		//HandleEnemyDiving();
-
-		//for (auto enemy : mEnemies) {
-		//	enemy->Update();
-		//}
-
-		//HandleCollisions();
 
 		if (!mSpawningFinished) {
 			HandleEnemySpawning();

@@ -178,11 +178,6 @@ Vector2 Boss::LocalFormationPosition() {
 }
 
 void Boss::HandleDiveState() {
-	//int currentPath = mIndex % 2;
-	//
-	//if (mCaptureDive) {
-	//	currentPath += 2;
-	//}
 	
 	if (mCurrentWayPoint < sDivePaths[mCurrentPath].size()) {
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
@@ -242,9 +237,6 @@ void Boss::HandleDeadState() {
 void Boss::RenderDiveState() {
 	mTexture[0]->Render();
 
-	// or do this
-	//mTexture[sFormation->GetTick() % 2]->Render();
-
 	if (mCapturing && mCaptureBeam->IsAnimating()) {
 		mCaptureBeam->Render();
 	}
@@ -292,12 +284,7 @@ Boss::Boss(int path, int index, bool challenge) :
 		texture->Position(Vec2_Zero);
 		texture->Scale(Vector2(0.7f, 0.7f));
 	}
-	// or do this
-	// 
-	//for (int i = 0; i < 2; i++) {
-	//	mTexture[i]->Parent(this);
-	//	mTexture[i]->Position(Vec2_Zero);
-	//}
+
 
 	mType = Enemy::Boss;
 
@@ -319,6 +306,6 @@ Boss::Boss(int path, int index, bool challenge) :
 
 Boss::~Boss() {
 	delete mCaptureBeam;
-	//mCaptureBeam = false;
+	mCaptureBeam = nullptr;
 
 }

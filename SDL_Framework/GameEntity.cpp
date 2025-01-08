@@ -78,17 +78,17 @@ namespace SDL_Framework {
 	}
 
 	void GameEntity::Parent(GameEntity* parent) {
-		if (parent == nullptr) {				//remove any parent object
+		if (parent == nullptr) {
 			mPosition = Position(World);
 			mRotation = Rotation(World);
 			mScale = Scale(World);
 		}
 		else {
-			if (mParent != nullptr) {			//already a child of something
+			if (mParent != nullptr) {
 				Parent(nullptr);
 			}
 
-			Vector2 parentScale = parent->Scale(World);		//want to attach to and have unattached form previous object
+			Vector2 parentScale = parent->Scale(World);	
 
 			mPosition = RotateVector(Position(World) - parent->Position(World), 
 				- parent->Rotation(World));

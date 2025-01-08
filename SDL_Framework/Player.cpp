@@ -3,13 +3,6 @@
 
 void Player::HandleMovement() {
 
-	//if (mInput->KeyDown(SDL_SCANCODE_W) || mInput->KeyDown(SDL_SCANCODE_UP)) {
-	//	Translate(Vec2_Up * mMoveSpeed * mTimer->DeltaTime(), World);
-	//}
-	//else if (mInput->KeyDown(SDL_SCANCODE_S) || mInput->KeyDown(SDL_SCANCODE_DOWN)) {
-	//	Translate(-Vec2_Up * mMoveSpeed * mTimer->DeltaTime(), World);
-	//}
-
 	if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
 		Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
 	}
@@ -123,7 +116,7 @@ bool Player::WasHit() {
 }
 
 bool Player::IgnoreCollision() {
-	return !mVisible || mAnimating;
+	return !mVisible || mAnimating || !Active();
 }
 
 void Player::Hit(PhysEntity* other) {

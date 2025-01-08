@@ -270,7 +270,9 @@ void Butterfly::RenderDiveState(){
 	*/
 }
 
-void Butterfly::RenderDeadState(){}
+void Butterfly::RenderDeadState(){
+
+}
 
 Butterfly::Butterfly(int path, int index, bool challenge) :
 Enemy(path, index, challenge) 
@@ -283,12 +285,6 @@ Enemy(path, index, challenge)
 		texture->Position(Vec2_Zero);
 		texture->Scale(Vector2(0.7f, 0.7f));
 	}
-	// or do this
-	// 
-	//for (int i = 0; i < 2; i++) {
-	//	mTexture[i]->Parent(this);
-	//	mTexture[i]->Position(Vec2_Zero);
-	//}
 	
 	mType = Enemy::Butterfly;
 

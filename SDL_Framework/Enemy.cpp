@@ -13,8 +13,6 @@ void Enemy::CreatePaths() {
 
 	int currentPath = 0;
 	BezierPath* path = new BezierPath();
-	//path->AddCurve({ Vector2(500.0f, 10.0f), Vector2(500.0f, 0.0f),	//strait line
-	//	Vector2(500.0f, 310.0f), Vector2(500.f, 300.0f) }, 1);
 
 	path->AddCurve({
 		Vector2(screenXPoint + 150.0f, screenYPoint + -10.0f),
@@ -282,6 +280,12 @@ void Enemy::HandleInFormationState() {
 void Enemy::HandleDeadState() {
 	if (mDeathAnimation->IsAnimating()) {
 		mDeathAnimation->Update();
+	}
+}
+
+void Enemy::RenderDeadState() {
+	if (mDeathAnimation->IsAnimating()) {
+		mDeathAnimation->Render();
 	}
 }
 

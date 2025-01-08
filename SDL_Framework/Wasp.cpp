@@ -186,12 +186,6 @@ Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 		texture->Scale(Vector2(0.7f, 0.7f));
 
 	}
-	// or do this
-	// 
-	//for (int i = 0; i < 2; i++) {
-	//	mTexture[i]->Parent(this);
-	//	mTexture[i]->Position(Vec2_Zero);
-	//}
 
 		mType = Enemy::Wasp;
 
