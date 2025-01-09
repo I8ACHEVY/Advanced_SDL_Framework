@@ -90,8 +90,12 @@ Player::~Player() {
 	}
 }
 
-void Player::Visible(bool visible) {
+void Player::SetVisible(bool visible) {
 	mVisible = visible;
+}
+
+bool Player::IsVisible() {
+	return mVisible;
 }
 
 void Player::AddScore(int change) {

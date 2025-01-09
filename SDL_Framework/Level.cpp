@@ -182,7 +182,7 @@ void Level::HandleStartLabels() {
 	if (mLabelTimer >= mStageLabelOffScreen) {
 		mBackgroundStars->Scroll(true);
 		mPlayer->Active(true);
-		mPlayer->Visible(true);
+		mPlayer->SetVisible(true);
 
 		if (mStage > 1) {
 			StartStage();
@@ -212,19 +212,19 @@ void Level::HandlePlayerDeath() {
 	if (!mPlayer->IsAnimating()) {
 		if (mPlayer->Lives() > 0) {
 			if (mRespawnTimer == 0.0f) {
-				mPlayer->Visible(false);
+				mPlayer->SetVisible(false);
 			}
 			mRespawnTimer += mTimer->DeltaTime();
 			if (mRespawnTimer >= mRespawnDelay) {
 				mPlayer->Active(true);
-				mPlayer->Visible(true);
+				mPlayer->SetVisible(true);
 				mPlayerHit = false;
 				mBackgroundStars->Scroll(true);
 			}
 		}
 		else {
 			if (mGameOverTimer == 0.0f) {
-				mPlayer->Visible(false);
+				mPlayer->SetVisible(false);
 			}
 			mGameOverTimer += mTimer->DeltaTime();
 			if (mGameOverTimer >= mGameOverDelay) {

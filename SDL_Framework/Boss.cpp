@@ -179,14 +179,20 @@ Vector2 Boss::LocalFormationPosition() {
 
 void Boss::HandleDiveState() {
 	
-	if (mCurrentWayPoint < sDivePaths[mCurrentPath].size()) {
+	if (mCurrentWayPoint < sDivePaths[mCurrentPath].size() &&
+		!sPlayer->IsAnimating() && sPlayer->IsVisible()) {
+
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
 			[mCurrentPath][mCurrentWayPoint];
 	
 		Vector2 dist = waypointPos - Position();
 	
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+
+		if (sPlayer->IsVisible()) {
+
+			Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+		}
 	
 		if ((waypointPos - Position()).MagnitudeSqr() < EPSILON * mSpeed / 25) {
 			mCurrentWayPoint++;

@@ -30,10 +30,10 @@ void Wasp::CreateDivePaths() {
 		);
 
 	path->AddCurve({
-		Vector2(250.0f, 250.0f),	//350,350
-		Vector2(250.0f, 450.0f),	//350,575
-		Vector2(50.0f, 500.0f),	//100,575
-		Vector2(50.0f, 350.0f) }, 15	//200, 350
+		Vector2(250.0f, 250.0f),
+		Vector2(250.0f, 450.0f),	
+		Vector2(50.0f, 500.0f),
+		Vector2(50.0f, 350.0f) }, 15
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());
@@ -104,7 +104,8 @@ Vector2 Wasp::LocalFormationPosition() {
 void Wasp::HandleDiveState() {
 	int currentPath = mIndex % 2;
 
-	if (mCurrentWayPoint < sDivePaths[currentPath].size()) {
+	if (mCurrentWayPoint < sDivePaths[currentPath].size() && 
+		!sPlayer->IsAnimating() && sPlayer->IsVisible()) {
 
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
 			[currentPath][mCurrentWayPoint];
@@ -112,7 +113,11 @@ void Wasp::HandleDiveState() {
 		Vector2 dist = waypointPos - Position();
 
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+
+		if (sPlayer->IsVisible()) {
+
+			Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+		}
 
 		if ((waypointPos - Position()).MagnitudeSqr() < EPSILON * mSpeed / 25) {
 			mCurrentWayPoint++;

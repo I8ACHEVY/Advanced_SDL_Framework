@@ -79,10 +79,10 @@ void Butterfly::CreateDivePaths() {
 		);
 
 	path->AddCurve({
-		Vector2(-375.0f, 525.0f),			//-375,525
-		Vector2(-375.0f, 575.0f),			//-375, 525
-		Vector2(-300.0f, 615.0f),			//-300, 625
-		Vector2(-300.0f, 560.0f) }, 15		//-300, 775
+		Vector2(-375.0f, 525.0f),		
+		Vector2(-375.0f, 575.0f),		
+		Vector2(-300.0f, 615.0f),		
+		Vector2(-300.0f, 560.0f) }, 15	
 		);
 
 	sDivePaths.push_back(std::vector<Vector2>());
@@ -202,8 +202,8 @@ void Butterfly::HandleDiveState(){
 		currentPath += 2;
 	}
 
-	if (mCurrentWayPoint < sDivePaths[currentPath].size()){
-		//&& !sPlayer->IsAnimating() && sPlayer->Visible()){
+	if (mCurrentWayPoint < sDivePaths[currentPath].size() && 
+		!sPlayer->IsAnimating() && sPlayer->IsVisible()){
 
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
 			[currentPath][mCurrentWayPoint];
@@ -212,10 +212,10 @@ void Butterfly::HandleDiveState(){
 
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
 		
-		//if (sPlayer->Visible()) {
+		if (sPlayer->IsVisible()) {
 
 			Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
-		//}
+		}
 
 		if ((waypointPos - Position()).MagnitudeSqr() < EPSILON * mSpeed / 25) {
 			mCurrentWayPoint++;

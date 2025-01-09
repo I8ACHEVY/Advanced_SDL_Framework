@@ -16,7 +16,8 @@ public:
 	void Update() override;
 	void Render() override;
 
-	void Visible(bool visible);
+	void SetVisible(bool visible);
+	bool IsVisible();
 
 	bool IsAnimating();
 
