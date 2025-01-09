@@ -247,13 +247,13 @@
     <Xml Include="Data\Level1.xml">
       <Filter>Data</Filter>
     </Xml>
-    <Xml Include="Level2.xml">
-      <Filter>Data</Filter>
-    </Xml>
-    <Xml Include="Level3.xml">
-      <Filter>Data</Filter>
-    </Xml>
     <Xml Include="Challenge.xml">
+      <Filter>Data</Filter>
+    </Xml>
+    <Xml Include="Data\Level2.xml">
+      <Filter>Data</Filter>
+    </Xml>
+    <Xml Include="Data\Level3.xml">
       <Filter>Data</Filter>
     </Xml>
   </ItemGroup>

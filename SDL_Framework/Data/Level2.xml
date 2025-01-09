@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<Level2>
+<Level>
 	<ChallengingStage value="false"/>
 
 	<Spawn path="0" priority="0">
@@ -73,4 +73,4 @@
 		<Enemy type="Wasp" index="19"/>
 	</Spawn>
 
-</Level2>
+</Level>

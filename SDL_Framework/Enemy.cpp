@@ -130,6 +130,7 @@ void Enemy::CreatePaths() {
 	delete path;
 
 	currentPath = 4;		// edit to be side by side left bottom
+	temp = screenXPoint - 100.0f;
 	path = new BezierPath();
 
 	path->AddCurve({
@@ -162,24 +163,27 @@ void Enemy::CreatePaths() {
 
 
 	currentPath = 5;			//edit to be side by side right bottom
+	temp = screenXPoint + 60.0f; 
+	temp2 = fullScreen - 40.0f;  
 	path = new BezierPath();
 
 	path->AddCurve({
-		Vector2(temp2 + 620.0f, screenYPoint + 640.0f),
-		Vector2(temp2 + 620.0f, screenYPoint + 640.0f),
-		Vector2(temp2 + 580.0f, screenYPoint + 640.0f),
-		Vector2(temp2 + 580.0f, screenYPoint + 640.0f) }, 1);
+		Vector2(temp2 + 650.0f, screenYPoint + 640.0f), //620, 640
+		Vector2(temp2 + 650.0f, screenYPoint + 640.0f),//620, 640
+		Vector2(temp2 + 580.0f, screenYPoint + 640.0f),//580, 640
+		Vector2(temp2 + 580.0f, screenYPoint + 640.0f) }, 1);//580, 640
 
 	path->AddCurve({
-		Vector2(temp2 + 580.0f, screenYPoint + 640.0f),
-		Vector2(temp2 + 510.0f, screenYPoint + 640.0f),
-		Vector2(temp + 130, screenYPoint + 500.0f),
-		Vector2(temp + 130, screenYPoint + 400.0f) }, 15);
+		Vector2(temp2 + 580.0f, screenYPoint + 640.0f),//580, 640
+		Vector2(temp2 + 510.0f, screenYPoint + 640.0f),//510, 640
+		Vector2(temp + 130, screenYPoint + 500.0f),//130, 500
+		Vector2(temp + 130, screenYPoint + 400.0f) }, 15);//130, 400
 
 	path->AddCurve({
-		Vector2(temp + 130, screenYPoint + 400.0f),
-		Vector2(temp + 130, screenYPoint + 200.0f),
-		Vector2(temp2 + 590.0f, screenYPoint + 140.0f),
+		Vector2(temp + 130, screenYPoint + 400.0f),//130, 400
+		Vector2(temp + 130, screenYPoint + 200.0f),//130, 200
+		Vector2(temp2 + 590.0f, screenYPoint + 140.0f),//590, 140
+
 		Vector2(temp2 + 590.0f, screenYPoint + 300.0f) }, 15);
 
 	path->AddCurve({
@@ -432,27 +436,27 @@ void Enemy::RenderFlyInState() {
 	mTexture[0]->Render();
 	//mTexture[sFormation->GetTick() % 2]->Render();
 
-	//for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug paths as they are called
-	//	Graphics::Instance()->DrawLine(
-	//		sPaths[mCurrentPath][i].x, 
-	//		sPaths[mCurrentPath][i].y,
-	//		sPaths[mCurrentPath][i + 1].x, 
-	//		sPaths[mCurrentPath][i + 1].y
-	//	);
-	//}
+	for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug paths as they are called
+		Graphics::Instance()->DrawLine(
+			sPaths[mCurrentPath][i].x, 
+			sPaths[mCurrentPath][i].y,
+			sPaths[mCurrentPath][i + 1].x, 
+			sPaths[mCurrentPath][i + 1].y
+		);
+	}
 }
 
 void Enemy::RenderInFormationState() {
 	mTexture[sFormation->GetTick() % 2]->Render();
 
-	//for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug bezier paths even after called
-	//	Graphics::Instance()->DrawLine(
-	//		sPaths[mCurrentPath][i].x,
-	//		sPaths[mCurrentPath][i].y,
-	//		sPaths[mCurrentPath][i + 1].x,
-	//		sPaths[mCurrentPath][i + 1].y
-	//	);
-	//}
+	for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug bezier paths even after called
+		Graphics::Instance()->DrawLine(
+			sPaths[mCurrentPath][i].x,
+			sPaths[mCurrentPath][i].y,
+			sPaths[mCurrentPath][i + 1].x,
+			sPaths[mCurrentPath][i + 1].y
+		);
+	}
 }
 
 void Enemy::RenderStates() {
