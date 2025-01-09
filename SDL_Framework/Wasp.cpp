@@ -130,8 +130,6 @@ void Wasp::HandleDiveState() {
 	}
 }
 
-//void Wasp::HandleDeadState() {}
-
 void Wasp::RenderDiveState() {
 	mTexture[0]->Render();
 	// or do this
@@ -161,8 +159,6 @@ void Wasp::RenderDiveState() {
 	);
 	*/
 }
-
-//void Wasp::RenderDeadState() {}
 
 void Wasp::Hit(PhysEntity* other) {
 	AudioManager::Instance()->PlaySFX("WaspDestroyed.wav", 0, -1);

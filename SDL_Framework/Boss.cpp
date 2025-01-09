@@ -232,8 +232,6 @@ void Boss::HandleCaptureBeam() {
 	}
 }
 
-//void Boss::HandleDeadState() {}
-
 void Boss::RenderDiveState() {
 	mTexture[0]->Render();
 
@@ -268,8 +266,6 @@ void Boss::RenderDiveState() {
 	//);
 	
 }
-
-//void Boss::RenderDeadState() {}
 
 Boss::Boss(int path, int index, bool challenge) :
 	Enemy(path, index, challenge) {

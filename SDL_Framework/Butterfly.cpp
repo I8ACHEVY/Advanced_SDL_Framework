@@ -234,8 +234,6 @@ void Butterfly::HandleDiveState(){
 
 }
 
-//void Butterfly::HandleDeadState(){}
-
 void Butterfly::Hit(PhysEntity* other) {
 	AudioManager::Instance()->PlaySFX("ButterflyDestroyed.wav", 0, -1); 
 	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 80 : 160);
@@ -275,8 +273,6 @@ void Butterfly::RenderDiveState(){
 	);
 	*/
 }
-
-//void Butterfly::RenderDeadState(){}
 
 Butterfly::Butterfly(int path, int index, bool challenge) :
 Enemy(path, index, challenge) 

@@ -152,7 +152,7 @@ void Enemy::CreatePaths() {
 	path->Sample(&sPaths[currentPath]);
 	delete path;
 
-/*	currentPath = 4;		// edit to be side by side left bottom
+	currentPath = 4;		// edit to be side by side left bottom
 	path = new BezierPath();
 
 	path->AddCurve({
@@ -182,7 +182,7 @@ void Enemy::CreatePaths() {
 	sPaths.push_back(std::vector<Vector2>());
 	path->Sample(&sPaths[currentPath]);
 	delete path;
-	*/
+	
 
 	currentPath = 3;
 	temp = screenXPoint + 60.0f;
