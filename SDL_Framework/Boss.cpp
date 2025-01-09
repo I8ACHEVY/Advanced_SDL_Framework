@@ -220,7 +220,9 @@ void Boss::HandleDiveState() {
 }
 
 void Boss::HandleCaptureBeam() {
-	mCaptureBeam->Update();
+	mCaptureBeam->PhysEntity::Update();
+	mCaptureBeam->AnimatedTexture::Update();
+
 	if (!mCaptureBeam->IsAnimating()) {
 		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
 		if (Position().y >= 580.0f) {
@@ -230,9 +232,7 @@ void Boss::HandleCaptureBeam() {
 	}
 }
 
-void Boss::HandleDeadState() {
-
-}
+//void Boss::HandleDeadState() {}
 
 void Boss::RenderDiveState() {
 	mTexture[0]->Render();
@@ -269,9 +269,7 @@ void Boss::RenderDiveState() {
 	
 }
 
-void Boss::RenderDeadState() {
-
-}
+//void Boss::RenderDeadState() {}
 
 Boss::Boss(int path, int index, bool challenge) :
 	Enemy(path, index, challenge) {
@@ -295,9 +293,9 @@ Boss::Boss(int path, int index, bool challenge) :
 	mCapturing = false;
 
 	mCaptureBeam = new CaptureBeam();
-	mCaptureBeam->Parent(this);
-	mCaptureBeam->Position(0.0f, -140.0f);
-	mCaptureBeam->Rotation(180.0f);
+	mCaptureBeam->PhysEntity::Parent(this);
+	mCaptureBeam->PhysEntity::Position(0.0f, -140.0f);
+	mCaptureBeam->PhysEntity::Rotation(180.0f);
 
 	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 

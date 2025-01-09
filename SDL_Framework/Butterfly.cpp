@@ -202,14 +202,20 @@ void Butterfly::HandleDiveState(){
 		currentPath += 2;
 	}
 
-	if (mCurrentWayPoint < sDivePaths[currentPath].size()) {
+	if (mCurrentWayPoint < sDivePaths[currentPath].size()){
+		//&& !sPlayer->IsAnimating() && sPlayer->Visible()){
+
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
 			[currentPath][mCurrentWayPoint];
 
 		Vector2 dist = waypointPos - Position();
 
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+		
+		//if (sPlayer->Visible()) {
+
+			Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+		//}
 
 		if ((waypointPos - Position()).MagnitudeSqr() < EPSILON * mSpeed / 25) {
 			mCurrentWayPoint++;
@@ -228,7 +234,7 @@ void Butterfly::HandleDiveState(){
 
 }
 
-void Butterfly::HandleDeadState(){}
+//void Butterfly::HandleDeadState(){}
 
 void Butterfly::Hit(PhysEntity* other) {
 	AudioManager::Instance()->PlaySFX("ButterflyDestroyed.wav", 0, -1); 
@@ -270,9 +276,7 @@ void Butterfly::RenderDiveState(){
 	*/
 }
 
-void Butterfly::RenderDeadState(){
-
-}
+//void Butterfly::RenderDeadState(){}
 
 Butterfly::Butterfly(int path, int index, bool challenge) :
 Enemy(path, index, challenge) 
