@@ -4,11 +4,17 @@
 
 void CaptureBeam::RunAnimation() {
 	mCaptureTimer += mTimer->DeltaTime();
+
 	if (mCaptureTimer >= mTotalCaptureTime) {
 		mAnimationDone = true;
+		
+		if (mCapturedPlayer) {
+			mCapturedPlayer->StartRotation();
+		}
 	}
 	else {
 		mAnimationTimer += mTimer->DeltaTime();
+
 		if (mAnimationTimer >= mAnimationSpeed) {
 			mAnimationTimer -= mAnimationSpeed;
 		}
@@ -30,7 +36,12 @@ void CaptureBeam::RunAnimation() {
 }
 
 void CaptureBeam::Hit(PhysEntity* other) {
-	std::cout << "Capture Beam Hit" << std::endl;
+	if (IgnoreCollision()) return;
+	std::cout << "Capture Beam Contact" << std::endl;
+}
+
+void CaptureBeam::SetCapturedShip(Player* player) {
+	mCapturedPlayer = player;
 }
 
 bool CaptureBeam::IgnoreCollisions() {

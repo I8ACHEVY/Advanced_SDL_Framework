@@ -5,14 +5,14 @@
 #include "PhysicsEntity.h"
 #include "Player.h"
 #include "Formation.h"
-
+#include "Bullet.h"
 
 using namespace SDL_Framework;
 
 class Enemy : public PhysEntity {
 public:
-	enum States {FlyIn, InFormation, Diving, Dead};
-	enum Types {Butterfly, Wasp, Boss};
+	enum States { FlyIn, InFormation, Diving, Dead };
+	enum Types { Butterfly, Wasp, Boss };
 
 	static void CreatePaths();
 	static void SetFormation(Formation* formation);
@@ -72,16 +72,22 @@ protected:
 	virtual void HandleFlyInState();
 	virtual void HandleInFormationState();
 	virtual void HandleDiveState() = 0;
-	virtual void HandleDeadState();// 
+	virtual void HandleDeadState();
 
 	void HandleStates();
 
 	virtual void RenderFlyInState();
 	virtual void RenderInFormationState();
 	virtual void RenderDiveState() = 0;
-	virtual void RenderDeadState();// 
+	virtual void RenderDeadState();
 
 	void RenderStates();
 
 	bool IgnoreCollision() override;
+
+	//void HandleFiring();
+	//void FireBullet(Vector2 position, Vector2 direction);
+	//static const int MAX_BULLETS = 2;
+	//Bullet* mBullets[MAX_BULLETS];
+	//AudioManager* mAudio;
 };

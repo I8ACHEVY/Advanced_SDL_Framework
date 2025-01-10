@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "PhysicsManager.h"
+#include "Bullet.h"
 
 std::vector<std::vector<Vector2>>Enemy::sPaths;
 Player* Enemy::sPlayer = nullptr;
@@ -260,6 +261,30 @@ void Enemy::CurrentPlayer(Player* player) {
 	sPlayer = player;
 }
 
+//void Enemy::HandleFiring() {
+//	if (sPlayer == nullptr) return;
+//
+//	Vector2 playerPosition = sPlayer->Position();
+//	Vector2 direction = (playerPosition - Position()).Normalized();
+//
+//	int numBullets = (rand() % 2) + 1;
+//
+//	for (int i = 0; i < MAX_BULLETS; i++) {
+//		float spreadAngle = (rand() % 20 - 10) * DEG_TO_RAD;
+//		Vector2 bulletDirection = (spreadAngle);
+//
+//		Bullet* bullet = new Bullet(false);
+//		bullet->Fire(Position());
+//		//PhysicsManager::Instance()->RegisterEntity(bullet, PhysicsManager::CollisionLayers::HostileProjectile);
+//
+//		if (!mBullets[i]->Active()) {
+//			mBullets[i]->Fire(Position());
+//			//mAudio->PlaySFX("Fire.wav");
+//			break;
+//		}
+//	}
+//}
+
 Enemy::Enemy(int path, int index, bool challenge) :
 	mCurrentPath(path), mIndex(index), mChallengeStage(challenge){
 
@@ -281,6 +306,10 @@ Enemy::Enemy(int path, int index, bool challenge) :
 	mDeathAnimation->Parent(this);
 	mDeathAnimation->Position(Vec2_Zero);
 	mDeathAnimation->SetWrapMode(AnimatedTexture::Once);
+
+	//for (int i = 0; i < MAX_BULLETS; i++) {
+	//	mBullets[i] = new Bullet(true);
+	//}
 }
 
 Enemy::~Enemy() {
@@ -292,7 +321,12 @@ Enemy::~Enemy() {
 	}
 
 	delete mDeathAnimation;
-	//mDeathAnimation = nullptr;
+	mDeathAnimation = nullptr;
+
+	//for (auto bullet : mBullets) {
+	//	delete bullet;
+	//	bullet = nullptr;
+	//}
 }
 
 Enemy::States Enemy::CurrentState() {
@@ -343,6 +377,18 @@ void Enemy::Dive(int type) {
 void Enemy::Update() {
 	if (Active()) {
 		HandleStates();
+
+		//if (mCurrentState == Diving) {
+		//	static float shootInterval = 0.5f;
+		//	static float FinalFireTime = 0.6f;
+
+		//	FinalFireTime += mTimer->DeltaTime();
+
+		//	if (FinalFireTime >= shootInterval) {
+		//		HandleFiring();
+		//		FinalFireTime = 0.0f;
+		//	}
+		//}
 	}
 }
 
@@ -350,6 +396,10 @@ void Enemy::Render() {
 	if (Active()) {
 		RenderStates();
 	}
+
+	//	for (int i = 0; i < MAX_BULLETS; i++) {
+	//	mBullets[i]->Render();
+	//}
 }
 
 void Enemy::HandleFlyInState() {
