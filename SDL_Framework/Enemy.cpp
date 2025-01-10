@@ -129,33 +129,33 @@ void Enemy::CreatePaths() {
 	path->Sample(&sPaths[currentPath]);
 	delete path;
 
-	currentPath = 4;		// edit to be side by side left bottom
+	currentPath = 4;		// side by side left bottom
 	temp = screenXPoint - 100.0f;
 	path = new BezierPath();
 
 	path->AddCurve({
-	Vector2(280.0f, screenYPoint + 640.0f),
-	Vector2(280.0f, screenYPoint + 640.0f),
-	Vector2(310.0f, screenYPoint + 640.0f),
-	Vector2(310.0f, screenYPoint + 640.0f) }, 1);
+	Vector2(280.0f, screenYPoint + 600.0f),
+	Vector2(280.0f, screenYPoint + 600.0f),
+	Vector2(270.0f, screenYPoint + 600.0f),
+	Vector2(270.0f, screenYPoint + 600.0f) }, 1);
 
 	path->AddCurve({
-	Vector2(310.0f, screenYPoint + 640.0f),
-	Vector2(400.0f, screenYPoint + 640.0f),
+	Vector2(270.0f, screenYPoint + 600.0f),
+	Vector2(360.0f, screenYPoint + 600.0f),
+	Vector2(temp - 40.0f, screenYPoint + 500.0f),
+	Vector2(temp - 40.0f, screenYPoint + 440.0f) }, 15);
+
+	path->AddCurve({
+	Vector2(temp - 40.0f, screenYPoint + 440.0f),
+	Vector2(temp - 40.0f, screenYPoint + 240.0f),
+	Vector2(360.0f, screenYPoint + 180.0f),
+	Vector2(360.0f, screenYPoint + 300.0f) }, 15);
+
+	path->AddCurve({
+	Vector2(360.0f, screenYPoint + 300.0f),
+	Vector2(360.0f, screenYPoint + 500.0f),
 	Vector2(temp, screenYPoint + 500.0f),
-	Vector2(temp, screenYPoint + 400.0f) }, 15);
-
-	path->AddCurve({
-	Vector2(temp, screenYPoint + 400.0f),
-	Vector2(temp, screenYPoint + 200.0f),
-	Vector2(320.0f, screenYPoint + 140.0f),
-	Vector2(320.0f, screenYPoint + 300.0f) }, 15);
-
-	path->AddCurve({
-	Vector2(320.0f, screenYPoint + 300.0f),
-	Vector2(320.0f, screenYPoint + 500.0f),
-	Vector2(temp + 40.0f, screenYPoint + 600.0f),
-	Vector2(temp + 40.0f, screenYPoint + 340.0f) }, 15);
+	Vector2(temp, screenYPoint + 340.0f) }, 15);
 
 	sPaths.push_back(std::vector<Vector2>());
 	path->Sample(&sPaths[currentPath]);
@@ -168,58 +168,56 @@ void Enemy::CreatePaths() {
 	path = new BezierPath();
 
 	path->AddCurve({
-		Vector2(temp2 + 650.0f, screenYPoint + 640.0f), //620, 640
-		Vector2(temp2 + 650.0f, screenYPoint + 640.0f),//620, 640
-		Vector2(temp2 + 580.0f, screenYPoint + 640.0f),//580, 640
-		Vector2(temp2 + 580.0f, screenYPoint + 640.0f) }, 1);//580, 640
+		Vector2(temp2 + 620.0f, screenYPoint + 600.0f),
+		Vector2(temp2 + 620.0f, screenYPoint + 600.0f),
+		Vector2(temp2 + 560.0f, screenYPoint + 600.0f),
+		Vector2(temp2 + 560.0f, screenYPoint + 600.0f) }, 1);
 
 	path->AddCurve({
-		Vector2(temp2 + 580.0f, screenYPoint + 640.0f),//580, 640
-		Vector2(temp2 + 510.0f, screenYPoint + 640.0f),//510, 640
-		Vector2(temp + 130, screenYPoint + 500.0f),//130, 500
-		Vector2(temp + 130, screenYPoint + 400.0f) }, 15);//130, 400
+		Vector2(temp2 + 560.0f, screenYPoint + 600.0f),
+		Vector2(temp2 + 560.0f, screenYPoint + 600.0f),
+		Vector2(temp + 160, screenYPoint + 500.0f),
+		Vector2(temp + 160, screenYPoint + 440.0f) }, 15);
 
 	path->AddCurve({
-		Vector2(temp + 130, screenYPoint + 400.0f),//130, 400
-		Vector2(temp + 130, screenYPoint + 200.0f),//130, 200
-		Vector2(temp2 + 590.0f, screenYPoint + 140.0f),//590, 140
-
-		Vector2(temp2 + 590.0f, screenYPoint + 300.0f) }, 15);
+		Vector2(temp + 160, screenYPoint + 440.0f),
+		Vector2(temp + 160, screenYPoint + 240.0f),
+		Vector2(temp2 + 560.0f, screenYPoint + 180.0f),
+		Vector2(temp2 + 560.0f, screenYPoint + 300.0f) }, 15);
 
 	path->AddCurve({
-		Vector2(temp2 + 590.0f, screenYPoint + 300.0f),
-		Vector2(temp2 + 590.0f, screenYPoint + 500.0f),
-		Vector2(temp + 120.0f, screenYPoint + 600.0f),
-		Vector2(temp + 120.0f, screenYPoint + 340.0f) }, 15);
+		Vector2(temp2 + 560.0f, screenYPoint + 300.0f),
+		Vector2(temp2 + 560.0f, screenYPoint + 500.0f),
+		Vector2(temp + 160.0f, screenYPoint + 500.0f),
+		Vector2(temp + 160.0f, screenYPoint + 340.0f) }, 15);
 
 	sPaths.push_back(std::vector<Vector2>());
 	path->Sample(&sPaths[currentPath]);
 	delete path;
 	
 
-	currentPath = 6;			//edit to be top left hook
+	currentPath = 6;			//side by side top left hook
 	path = new BezierPath();
-	//int fullScreen = screenXPoint * 0.8;
 
 	path->AddCurve({
-		Vector2(screenXPoint + 150.0f, screenYPoint + -10.0f),
-		Vector2(screenXPoint + 150.0f, screenYPoint + -20.0f),
-		Vector2(screenXPoint + 150.0f, screenYPoint + 30.0f),
-		Vector2(screenXPoint + 150.0f, screenYPoint + 20.0f) }, 1
+		Vector2(screenXPoint + 190.0f, screenYPoint + -10.0f),
+		Vector2(screenXPoint + 190.0f, screenYPoint + -20.0f),
+		Vector2(screenXPoint + 190.0f, screenYPoint + 30.0f),
+		Vector2(screenXPoint + 190.0f, screenYPoint + 20.0f) }, 1
 		);
 
 	path->AddCurve({
-		Vector2(screenXPoint + 150.0f, screenYPoint + 20.0f),
-		Vector2(screenXPoint + 150.0f, screenYPoint + 100.0f),
-		Vector2(320.0f, screenYPoint + 140.0f),
-		Vector2(320.0f, screenYPoint + 300.0f) }, 25
+		Vector2(screenXPoint + 190.0f, screenYPoint + 20.0f),
+		Vector2(screenXPoint + 190.0f, screenYPoint + 100.0f),
+		Vector2(360.0f, screenYPoint + 140.0f),
+		Vector2(360.0f, screenYPoint + 300.0f) }, 25
 		);
 
 	path->AddCurve({
-		Vector2(320.0f, screenYPoint + 300.0f),
-		Vector2(320.0f, screenYPoint + 500.0f),
-		Vector2(580.0f, screenYPoint + 600.0f),
-		Vector2(580.0f, screenYPoint + 340.0f) }, 25
+		Vector2(360.0f, screenYPoint + 300.0f),
+		Vector2(360.0f, screenYPoint + 500.0f),
+		Vector2(540.0f, screenYPoint + 500.0f),
+		Vector2(540.0f, screenYPoint + 340.0f) }, 25
 		);
 
 	sPaths.push_back(std::vector<Vector2>());
@@ -227,26 +225,26 @@ void Enemy::CreatePaths() {
 	delete path;
 	
 
-	currentPath = 7;			//edit to be top right hook
+	currentPath = 7;			//side by side top right hook
 	path = new BezierPath();
 
 	path->AddCurve({
-		Vector2(screenXPoint - 50.0f, screenYPoint + -10.0f),
-		Vector2(screenXPoint - 50.0f, screenYPoint + -20.0f),
-		Vector2(screenXPoint - 50.0f, screenYPoint + 30.0f),
-		Vector2(screenXPoint - 50.0f, screenYPoint + 20.0f) }, 1);
+		Vector2(screenXPoint - 90.0f, screenYPoint + -10.0f),
+		Vector2(screenXPoint - 90.0f, screenYPoint + -20.0f),
+		Vector2(screenXPoint - 90.0f, screenYPoint + 30.0f),
+		Vector2(screenXPoint - 90.0f, screenYPoint + 20.0f) }, 1);
 
 	path->AddCurve({
-		Vector2(screenXPoint - 50.0f, screenYPoint + 20.0f),
-		Vector2(screenXPoint - 50.0f, screenYPoint + 80.0f),
-		Vector2(1070.0f, screenYPoint + 140.0f),
-		Vector2(1070.0f, screenYPoint + 300.0f) }, 25);
+		Vector2(screenXPoint - 90.0f, screenYPoint + 20.0f),
+		Vector2(screenXPoint - 90.0f, screenYPoint + 80.0f),
+		Vector2(1030.0f, screenYPoint + 140.0f),
+		Vector2(1030.0f, screenYPoint + 300.0f) }, 25);
 
 	path->AddCurve({
-		Vector2(1070.0f, screenYPoint + 300.0f),
-		Vector2(1070.0f, screenYPoint + 500.0f),
-		Vector2(830.0f, screenYPoint + 600.0f),
-		Vector2(830.0f, screenYPoint + 340.0f) }, 25);
+		Vector2(1030.0f, screenYPoint + 300.0f),
+		Vector2(1030.0f, screenYPoint + 500.0f),
+		Vector2(870.0f, screenYPoint + 500.0f),
+		Vector2(870.0f, screenYPoint + 340.0f) }, 25);
 
 	sPaths.push_back(std::vector<Vector2>());
 	path->Sample(&sPaths[currentPath]);
@@ -275,7 +273,7 @@ Enemy::Enemy(int path, int index, bool challenge) :
 	mTexture[0] = nullptr;		// enemy new Texture("AnimatedEnemies.png", 0, 0, 52, 40);
 	mTexture[1] = nullptr;
 	
-	mSpeed = 450.0f;
+	mSpeed = 580.0f;
 
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Hostile);
 
@@ -436,27 +434,27 @@ void Enemy::RenderFlyInState() {
 	mTexture[0]->Render();
 	//mTexture[sFormation->GetTick() % 2]->Render();
 
-	for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug paths as they are called
-		Graphics::Instance()->DrawLine(
-			sPaths[mCurrentPath][i].x, 
-			sPaths[mCurrentPath][i].y,
-			sPaths[mCurrentPath][i + 1].x, 
-			sPaths[mCurrentPath][i + 1].y
-		);
-	}
+	//for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug paths as they are called
+	//	Graphics::Instance()->DrawLine(
+	//		sPaths[mCurrentPath][i].x, 
+	//		sPaths[mCurrentPath][i].y,
+	//		sPaths[mCurrentPath][i + 1].x, 
+	//		sPaths[mCurrentPath][i + 1].y
+	//	);
+	//}
 }
 
 void Enemy::RenderInFormationState() {
 	mTexture[sFormation->GetTick() % 2]->Render();
 
-	for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug bezier paths even after called
-		Graphics::Instance()->DrawLine(
-			sPaths[mCurrentPath][i].x,
-			sPaths[mCurrentPath][i].y,
-			sPaths[mCurrentPath][i + 1].x,
-			sPaths[mCurrentPath][i + 1].y
-		);
-	}
+	//for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug bezier paths even after called
+	//	Graphics::Instance()->DrawLine(
+	//		sPaths[mCurrentPath][i].x,
+	//		sPaths[mCurrentPath][i].y,
+	//		sPaths[mCurrentPath][i + 1].x,
+	//		sPaths[mCurrentPath][i + 1].y
+	//	);
+	//}
 }
 
 void Enemy::RenderStates() {

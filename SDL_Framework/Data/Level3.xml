@@ -8,7 +8,6 @@
 		<Enemy type="Wasp" index="1"/>
 		<Enemy type="Wasp" index="2"/>
 		<Enemy type="Wasp" index="3"/>
-		<Enemy type="Wasp" index="4"/>
 	</Spawn>
 
 	<Spawn path="1" priority="0">
@@ -16,7 +15,6 @@
 		<Enemy type="Butterfly" index="1"/>
 		<Enemy type="Butterfly" index="2"/>
 		<Enemy type="Butterfly" index="3"/>
-		<Enemy type="Butterfly" index="4"/>
 	</Spawn>
 
 	<Spawn path="2" priority="1">
@@ -35,40 +33,41 @@
 
 	<Spawn path="2" priority="2">
 		<Enemy type="Butterfly" index="8"/>
+		<Enemy type="Butterfly" index="9"/>
 		<Enemy type="Butterfly" index="10"/>
-		<Enemy type="Butterfly" index="12"/>
-		<Enemy type="Butterfly" index="14"/>
+		<Enemy type="Butterfly" index="11"/>
 	</Spawn>
 
 	<Spawn path="3" priority="2">
-		<Enemy type="Butterfly" index="9"/>
-		<Enemy type="Butterfly" index="11"/>
+		<Enemy type="Butterfly" index="12"/>
 		<Enemy type="Butterfly" index="13"/>
+		<Enemy type="Butterfly" index="14"/>
 		<Enemy type="Butterfly" index="15"/>
 	</Spawn>
 
-	<Spawn path="0" priority="3">
+	<Spawn path="6" priority="3">
+		<Enemy type="Wasp" index="4"/>
 		<Enemy type="Wasp" index="5"/>
 		<Enemy type="Wasp" index="6"/>
 		<Enemy type="Wasp" index="7"/>
-		<Enemy type="Wasp" index="8"/>
 	</Spawn>
 
 	<Spawn path="2" priority="3">
+		<Enemy type="Wasp" index="8"/>
 		<Enemy type="Wasp" index="9"/>
 		<Enemy type="Wasp" index="10"/>
 		<Enemy type="Wasp" index="11"/>
-		<Enemy type="Wasp" index="12"/>
 	</Spawn>
 
-	<Spawn path="0" priority="4">
-		<Enemy type="Wasp" index="16"/>
+	<Spawn path="7" priority="4">
+		<Enemy type="Wasp" index="12"/>
 		<Enemy type="Wasp" index="13"/>
 		<Enemy type="Wasp" index="14"/>
 		<Enemy type="Wasp" index="15"/>
 	</Spawn>
 
-	<Spawn path="2" priority="4">
+	<Spawn path="3" priority="4">
+		<Enemy type="Wasp" index="16"/>
 		<Enemy type="Wasp" index="17"/>
 		<Enemy type="Wasp" index="18"/>
 		<Enemy type="Wasp" index="19"/>

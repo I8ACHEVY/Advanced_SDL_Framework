@@ -46,7 +46,7 @@ Player::Player() {
 	mScore = 0;
 	mLives = 2;
 
-	mMoveSpeed = 100.0f;
+	mMoveSpeed = 250.0f;
 	mMoveBounds = Vector2(323.0f, 1065.0f);
 
 	mShip = new Texture("PlayerShips.png", 0, 0, 60, 64);

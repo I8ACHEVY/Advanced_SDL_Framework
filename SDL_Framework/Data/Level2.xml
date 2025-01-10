@@ -17,14 +17,14 @@
 		<Enemy type="Butterfly" index="3"/>
 	</Spawn>
 
-	<Spawn path="2" priority="1">
+	<Spawn path="4" priority="1">
 		<Enemy type="Boss" index="2"/>
 		<Enemy type="Boss" index="0"/>
 		<Enemy type="Boss" index="1"/>
 		<Enemy type="Boss" index="3"/>
 	</Spawn>
 
-	<Spawn path="4" priority="1">
+	<Spawn path="2" priority="1">
 		<Enemy type="Butterfly" index="4"/>
 		<Enemy type="Butterfly" index="5"/>
 		<Enemy type="Butterfly" index="6"/>
