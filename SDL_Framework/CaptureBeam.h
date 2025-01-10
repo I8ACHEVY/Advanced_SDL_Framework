@@ -2,7 +2,8 @@
 #include "AnimatedTexture.h"
 #include "PhysicsEntity.h"
 #include "BoxCollider.h"
-//#include "Player.h"
+#include "Player.h"
+#include "Boss.h"
 
 using namespace SDL_Framework;
 
@@ -27,7 +28,7 @@ private:
 	//bool mIsCaptured;
 	//bool mCapturedPlayer;
 
-	BoxCollider* mCollider;
+	PhysEntity* mCollider;
 
 	void RunAnimation() override;
 

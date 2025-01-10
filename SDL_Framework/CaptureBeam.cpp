@@ -8,7 +8,7 @@ void CaptureBeam::RunAnimation() {
 	if (mCaptureTimer >= 2.1f && mCaptureTimer <= mTotalCaptureTime - 2.0f) {
 		if (!mColliderAdded) {
 
-		mCollider = AddCollider(new BoxCollider(Vector2(160.0f, 60.0f)), Vector2(0.0f, -140.0f));
+		AddCollider(new BoxCollider(Vector2(140.0f, 190.0f)), Vector2(0.0f, -30.0f));
 		mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::HostileProjectile);
 
 		mColliderAdded = true;
@@ -60,6 +60,24 @@ void CaptureBeam::Hit(PhysEntity* other) {
 		return;
 	}
 	std::cout << "Capture Beam Contact" << std::endl;
+
+	 Player* player = dynamic_cast<Player*>(other);
+	 if (player) {
+
+		 Vector2 beamPosition = AnimatedTexture::Position(World);
+		 float beamWidth = mWidth * AnimatedTexture::Scale(World).x * 0.7f;
+		 float beamHeight = mHeight * AnimatedTexture::Scale(World).y * 0.7f;
+		 Vector2 beamTopCenter = Vector2(beamPosition.x, beamPosition.y - beamHeight * 0.5f);
+
+		 Vector2 direction = beamTopCenter - Player->GetPosition();
+		 Vector2 dir;
+
+		 float pullSpeed = 100.0f;
+		 Player->SetPosition(Player->GetPosition() + direction * pullSpeed * mTimer->DeltaTime());
+
+		 Player->Rotate(260.0f * mTimer->DeltaTime());
+	 }
+
 }
 
 //void CaptureBeam::SetCapturedShip(Player* player) {
