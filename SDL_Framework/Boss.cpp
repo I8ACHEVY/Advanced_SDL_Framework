@@ -229,6 +229,12 @@ void Boss::HandleCaptureBeam() {
 	mCaptureBeam->PhysEntity::Update();
 	mCaptureBeam->AnimatedTexture::Update();
 
+	//if (mCaptureBeam->IsAnimating()) {
+	//	if (mCaptureBeam->mCapturedPlayer != nullptr) {
+	//		mCaptureBeam->mCapturedPlayer->StartRotation();
+	//	}
+	//}
+
 	if (!mCaptureBeam->IsAnimating()) {
 		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
 		if (Position().y >= 580.0f) {
@@ -298,6 +304,10 @@ Boss::Boss(int path, int index, bool challenge) :
 	mCaptureBeam->PhysEntity::Parent(this);
 	mCaptureBeam->PhysEntity::Position(0.0f, -140.0f);
 	mCaptureBeam->PhysEntity::Rotation(180.0f);
+
+	mCaptureBeam->AnimatedTexture::Parent(this);
+	mCaptureBeam->AnimatedTexture::Position(0.0f, -140.0f);
+	mCaptureBeam->AnimatedTexture::Rotation(180.0f);
 
 	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 

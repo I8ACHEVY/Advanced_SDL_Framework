@@ -20,6 +20,7 @@ namespace SDL_Framework {
 
 		bool mCaptureDive;
 		bool mCapturing;
+		bool mCapturedPlayer;
 		int mCurrentPath;
 
 		bool mWasHit;

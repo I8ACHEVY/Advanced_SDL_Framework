@@ -1,16 +1,36 @@
 #include "CaptureBeam.h"
-#include "BoxCollider.h"
 #include "PhysicsManager.h"
 
 void CaptureBeam::RunAnimation() {
 	mCaptureTimer += mTimer->DeltaTime();
+	//mCapturedPlayer = false;
+
+	if (mCaptureTimer >= 2.1f && mCaptureTimer <= mTotalCaptureTime - 2.0f) {
+		if (!mColliderAdded) {
+
+		mCollider = AddCollider(new BoxCollider(Vector2(160.0f, 60.0f)), Vector2(0.0f, -140.0f));
+		mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::HostileProjectile);
+
+		mColliderAdded = true;
+		}
+	}
+	else if (mColliderAdded) {
+		
+		if (mCaptureTimer >= mTotalCaptureTime) {
+			mColliderAdded = false;
+			if (mCollider) {
+				delete mCollider;
+				mCollider = nullptr;
+			}
+		}
+	}
 
 	if (mCaptureTimer >= mTotalCaptureTime) {
 		mAnimationDone = true;
 		
-		if (mCapturedPlayer) {
-			mCapturedPlayer->StartRotation();
-		}
+		//if (mCapturedPlayer) {
+		//	Player->StartRotation();
+		//}
 	}
 	else {
 		mAnimationTimer += mTimer->DeltaTime();
@@ -36,30 +56,35 @@ void CaptureBeam::RunAnimation() {
 }
 
 void CaptureBeam::Hit(PhysEntity* other) {
-	if (IgnoreCollision()) return;
+	if (IgnoreCollision()) {
+		return;
+	}
 	std::cout << "Capture Beam Contact" << std::endl;
 }
 
-void CaptureBeam::SetCapturedShip(Player* player) {
-	mCapturedPlayer = player;
-}
+//void CaptureBeam::SetCapturedShip(Player* player) {
+//	mCapturedPlayer = player;
+//}
 
 bool CaptureBeam::IgnoreCollisions() {
 	return mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0;
 }
 
 CaptureBeam::CaptureBeam()
-	: AnimatedTexture("CaptureBeam.png", 0, 0, 184, 320, 3, 0.5f, Horizontal) {
+	: AnimatedTexture("CaptureBeam.png", 0, 0, 184, 320, 3, 0.5f, Horizontal), mCollider(nullptr) {
 	mTotalCaptureTime = 6.0f;
 	ResetAnimation();
 
-	AddCollider(new BoxCollider(Vector2(160.0f, 60.0f)), Vector2(0.0f, -140.0f));
-
-	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::HostileProjectile);
+	//AddCollider(new BoxCollider(Vector2(160.0f, 60.0f)), Vector2(0.0f, -140.0f));
+	//mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::HostileProjectile);
 }
 
 
 CaptureBeam::~CaptureBeam() {
+	if (mCollider) {
+		delete mCollider;
+		mCollider = nullptr;
+	}
 }
 
 void CaptureBeam::ResetAnimation() {

@@ -1,6 +1,8 @@
 #pragma once
 #include "AnimatedTexture.h"
 #include "PhysicsEntity.h"
+#include "BoxCollider.h"
+//#include "Player.h"
 
 using namespace SDL_Framework;
 
@@ -21,7 +23,13 @@ public:
 private:
 	float mTotalCaptureTime;
 	float mCaptureTimer;
-	bool mIsCaptured;
+	bool mColliderAdded;
+	//bool mIsCaptured;
+	//bool mCapturedPlayer;
+
+	BoxCollider* mCollider;
 
 	void RunAnimation() override;
+
+	
 };

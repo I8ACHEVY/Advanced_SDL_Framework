@@ -125,7 +125,7 @@ bool Player::IgnoreCollision() {
 
 void Player::StartRotation() {
 	mIsCaptured = true;
-	mRotationTimer = 0.0f;
+	//mRotationTimer = 0.0f;
 	mShip->Rotate(260.0f * mTimer->DeltaTime());
 }
 
@@ -149,8 +149,13 @@ void Player::Update() {
 	}
 	else {
 		if (Active()) {
-			HandleMovement();
-			HandleFiring();
+			if (mIsCaptured) {
+				HandleFiring();
+			}
+			else {
+				HandleMovement();
+				HandleFiring();
+			}
 		}
 	}
 
