@@ -277,6 +277,8 @@ void Butterfly::RenderDiveState(){
 Butterfly::Butterfly(int path, int index, bool challenge) :
 Enemy(path, index, challenge) 
 {
+	mTag = "Butterfly";
+
 	mTexture[0] = new Texture("AnimatedEnemies.png", 0, 0, 52, 40);
 	mTexture[1] = new Texture("AnimatedEnemies.png", 52, 0, 52, 40);
 

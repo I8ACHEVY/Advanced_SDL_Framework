@@ -25,6 +25,8 @@ private:
 	float mCaptureTimer;
 	bool mColliderAdded;
 	bool mIsCaptured;
+	
+	static std::string mTag;
 
 	PhysEntity* mCollider;
 

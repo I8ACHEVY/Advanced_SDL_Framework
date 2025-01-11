@@ -16,6 +16,7 @@ public:
 
 private:
 	static std::vector<std::vector<Vector2>> sDivePaths;
+	static std::string mTag;
 
 	bool mEscort;
 

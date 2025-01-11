@@ -282,6 +282,8 @@ void Boss::RenderDiveState() {
 Boss::Boss(int path, int index, bool challenge) :
 	Enemy(path, index, challenge) {
 
+	mTag = "Boss";
+
 	mTexture[0] = new Texture("Bosses.png", 0, 0, 64, 64);
 	mTexture[1] = new Texture("Bosses.png", 64, 0, 64, 64);
 

@@ -130,11 +130,19 @@ bool Player::IgnoreCollision() {
 //}
 
 void Player::Hit(PhysEntity* other) {
-	mLives -= 1;
-	mAnimating = true;
-	mDeathAnimation->ResetAnimation();
-	mAudio->PlaySFX("PlayerExplosion.wav", 0, -1);
-	mWasHit = true;
+	if (other->Tag() == "Capture Beam") {
+		mIsCaptured = true;
+		beamOrigin = other->Position(World);
+	}
+	else {
+		if (other->Tag() == "Butterfly" || "Wasp" || "Boss") {
+			mLives -= 1;
+			mAnimating = true;
+			mDeathAnimation->ResetAnimation();
+			mAudio->PlaySFX("PlayerExplosion.wav", 0, -1);
+			mWasHit = true;
+		}
+	}
 
 }
 

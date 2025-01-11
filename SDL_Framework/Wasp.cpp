@@ -174,6 +174,8 @@ void Wasp::Hit(PhysEntity* other) {
 Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 	Enemy(path, index, challenge), mDiver(diver) {
 
+	mTag = "Wasp";
+
 	mTexture[0] = new Texture("AnimatedEnemies.png", 0, 40, 52, 40);
 	mTexture[1] = new Texture("AnimatedEnemies.png", 52, 40, 52, 40);
 

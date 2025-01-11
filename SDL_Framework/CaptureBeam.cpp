@@ -67,9 +67,9 @@ void CaptureBeam::Hit(PhysEntity* other) {
 		 Vector2 beamPosition = AnimatedTexture::Position(World);
 		 float beamWidth = mWidth * AnimatedTexture::Scale(World).x * 0.7f;
 		 float beamHeight = mHeight * AnimatedTexture::Scale(World).y * 0.7f;
-		 Vector2 beamTopCenter = Vector2(beamPosition.x, beamPosition.y - beamHeight * 0.5f);
+		 Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - beamHeight * 0.5f);
 
-		 Vector2 dir = beamTopCenter - player->Position(World);
+		 Vector2 dir = beamOrigin - player->Position(World);
 
 		 float pullSpeed = 100.0f;
 		 player->Position(player->Position(World) + dir * pullSpeed * mTimer->DeltaTime());
@@ -92,6 +92,7 @@ CaptureBeam::CaptureBeam()
 	: AnimatedTexture("CaptureBeam.png", 0, 0, 184, 320, 3, 0.5f, Horizontal), mCollider(nullptr) {
 	mTotalCaptureTime = 6.0f;
 	ResetAnimation();
+	mTag = "CaptureBeam";
 
 	//AddCollider(new BoxCollider(Vector2(160.0f, 60.0f)), Vector2(0.0f, -140.0f));
 	//mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::HostileProjectile);
