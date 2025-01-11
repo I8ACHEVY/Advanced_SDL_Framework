@@ -130,12 +130,12 @@ bool Player::IgnoreCollision() {
 //}
 
 void Player::Hit(PhysEntity* other) {
-	if (Tag() == "Capture Beam") {
+	if (GetTag() == "Capture Beam") {
 		mIsCaptured = true;
-		beamOrigin = other->Position(World);
+		//beamOrigin = other->Position(World);
 	}
 	else {
-		if (Tag() == "Butterfly" || "Wasp" || "Boss") {
+		if (GetTag() == "Butterfly" || "Wasp" || "Boss") {
 			mLives -= 1;
 			mAnimating = true;
 			mDeathAnimation->ResetAnimation();

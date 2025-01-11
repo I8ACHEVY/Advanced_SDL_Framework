@@ -76,10 +76,10 @@ void CaptureBeam::Hit(PhysEntity* other) {
 
 		 player->Rotate(260.0f * mTimer->DeltaTime());
 
-		 if (dir < beamWidth * 0.2f) {
-			 player->Rotate(0.0f * mTimer->DeltaTime());
-			 mIsCaptured = true;
-		 }
+		 //if (dir < beamWidth * 0.2f) {
+			// player->Rotate(0.0f * mTimer->DeltaTime());
+			// mIsCaptured = true;
+		 //}
 	 }
 
 }

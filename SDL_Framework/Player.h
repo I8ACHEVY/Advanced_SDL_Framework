@@ -45,7 +45,7 @@ private:
 
 	bool mVisible;
 	bool mAnimating;
-	//bool mIsCaptured;
+	bool mIsCaptured;
 
 	Texture* mShip;
 	AnimatedTexture* mDeathAnimation;
