@@ -4,7 +4,7 @@
 #include "AudioManager.h"
 #include "BoxCollider.h"
 #include "Bullet.h"
-#include "CaptureBeam.h"
+//#include "CaptureBeam.h"
 
 using namespace SDL_Framework;
 
@@ -31,7 +31,7 @@ public:
 
 	bool IgnoreCollision() override;
 	void Hit(PhysEntity* other) override;
-	void StartRotation();
+	//void StartRotation();
 
 private:
 	static const int MAX_BULLETS = 2;
@@ -45,7 +45,7 @@ private:
 
 	bool mVisible;
 	bool mAnimating;
-	bool mIsCaptured;
+	//bool mIsCaptured;
 
 	Texture* mShip;
 	AnimatedTexture* mDeathAnimation;

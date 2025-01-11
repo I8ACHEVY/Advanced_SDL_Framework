@@ -123,11 +123,11 @@ bool Player::IgnoreCollision() {
 	return !mVisible || mAnimating || !Active();
 }
 
-void Player::StartRotation() {
-	mIsCaptured = true;
-	//mRotationTimer = 0.0f;
-	mShip->Rotate(260.0f * mTimer->DeltaTime());
-}
+//void Player::StartRotation() {
+//	mIsCaptured = true;
+//	//mRotationTimer = 0.0f;
+//	mShip->Rotate(260.0f * mTimer->DeltaTime());
+//}
 
 void Player::Hit(PhysEntity* other) {
 	mLives -= 1;

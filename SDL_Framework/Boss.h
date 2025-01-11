@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "CaptureBeam.h"
 #include "Random.h"
+#include "Texture.h"
 
 namespace SDL_Framework {
 
@@ -28,11 +29,12 @@ namespace SDL_Framework {
 		Vector2 LocalFormationPosition() override;
 
 		CaptureBeam* mCaptureBeam;
+		Texture* mRedShip;
+
 		void HandleCaptureBeam();
 
 		void HandleDiveState() override;
 
 		void RenderDiveState() override;
 	};
-
-}
+};

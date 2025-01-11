@@ -291,7 +291,6 @@ Boss::Boss(int path, int index, bool challenge) :
 		texture->Scale(Vector2(0.7f, 0.7f));
 	}
 
-
 	mType = Enemy::Boss;
 
 	mCurrentPath = 0;
@@ -312,10 +311,18 @@ Boss::Boss(int path, int index, bool challenge) :
 	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 
 	mWasHit = false;
+
+	mRedShip = new Texture("PlayerShips.png", 60, 64, 60, 64);
+	mRedShip->Parent(this);
+	mRedShip->Position(0.0f, 40.0f);
+	mRedShip->Scale(Vector2(0.7f, 0.7f));
 }
 
 Boss::~Boss() {
 	delete mCaptureBeam;
 	mCaptureBeam = nullptr;
+
+	delete mRedShip;
+	mRedShip = nullptr;
 
 }

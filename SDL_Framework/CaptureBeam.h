@@ -3,7 +3,6 @@
 #include "PhysicsEntity.h"
 #include "BoxCollider.h"
 #include "Player.h"
-#include "Boss.h"
 
 using namespace SDL_Framework;
 
@@ -19,18 +18,15 @@ public:
 	void Render() override;
 
 	void Hit(PhysEntity* other) override;
-	bool IgnoreCollisions();
+	bool IgnoreCollision();
 
 private:
 	float mTotalCaptureTime;
 	float mCaptureTimer;
 	bool mColliderAdded;
-	//bool mIsCaptured;
-	//bool mCapturedPlayer;
+	bool mIsCaptured;
 
 	PhysEntity* mCollider;
 
 	void RunAnimation() override;
-
-	
 };

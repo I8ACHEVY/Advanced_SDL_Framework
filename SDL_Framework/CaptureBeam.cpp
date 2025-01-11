@@ -18,10 +18,10 @@ void CaptureBeam::RunAnimation() {
 		
 		if (mCaptureTimer >= mTotalCaptureTime) {
 			mColliderAdded = false;
-			if (mCollider) {
-				delete mCollider;
-				mCollider = nullptr;
-			}
+			//if (mCollider) {
+			//	delete mCollider;
+			//	mCollider = nullptr;
+			//}
 		}
 	}
 
@@ -69,22 +69,22 @@ void CaptureBeam::Hit(PhysEntity* other) {
 		 float beamHeight = mHeight * AnimatedTexture::Scale(World).y * 0.7f;
 		 Vector2 beamTopCenter = Vector2(beamPosition.x, beamPosition.y - beamHeight * 0.5f);
 
-		 Vector2 direction = beamTopCenter - Player->GetPosition();
-		 Vector2 dir;
+		 Vector2 dir = beamTopCenter - player->Position(World);
 
 		 float pullSpeed = 100.0f;
-		 Player->SetPosition(Player->GetPosition() + direction * pullSpeed * mTimer->DeltaTime());
+		 player->Position(player->Position(World) + dir * pullSpeed * mTimer->DeltaTime());
 
-		 Player->Rotate(260.0f * mTimer->DeltaTime());
+		 player->Rotate(260.0f * mTimer->DeltaTime());
+
+		 if (dir < beamWidth * 0.2f) {
+			 player->Rotate(0.0f * mTimer->DeltaTime());
+			 mIsCaptured = true;
+		 }
 	 }
 
 }
 
-//void CaptureBeam::SetCapturedShip(Player* player) {
-//	mCapturedPlayer = player;
-//}
-
-bool CaptureBeam::IgnoreCollisions() {
+bool CaptureBeam::IgnoreCollision() {
 	return mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0;
 }
 
