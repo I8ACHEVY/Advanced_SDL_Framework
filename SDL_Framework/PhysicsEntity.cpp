@@ -57,6 +57,14 @@ namespace SDL_Framework {
 		return false;
 	}
 
+	void PhysEntity::Tag(const std::string& tag) {
+		mTag = tag;
+	}
+
+	std::string PhysEntity::GetTag() const {
+		return mTag;
+	}
+
 	void PhysEntity::Render() {
 		for (auto colliders : mColliders) {
 			colliders->Render();

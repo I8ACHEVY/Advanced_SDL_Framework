@@ -37,7 +37,6 @@ protected:
 	static Formation* sFormation;
 	static std::vector<std::vector<Vector2>> sPaths;
 	static Player* sPlayer;
-	static 	std::string mTag;
 
 	Timer* mTimer;
 

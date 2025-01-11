@@ -19,8 +19,12 @@ namespace SDL_Framework{
 
 		virtual void Render() override;
 
+		void Tag(const std::string& tag);
+		std::string GetTag() const;
+
 	protected:
 		std::vector<Collider*> mColliders;
+		static 	std::string mTag;
 
 		Collider* mBroadPhaseCollider;
 

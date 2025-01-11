@@ -280,7 +280,7 @@ void Boss::RenderDiveState() {
 }
 
 Boss::Boss(int path, int index, bool challenge) :
-	Enemy(path, index, challenge) {
+	Enemy(path, index, challenge){
 
 	mTag = "Boss";
 
