@@ -24,7 +24,7 @@ namespace SDL_Framework{
 
 	protected:
 		std::vector<Collider*> mColliders;
-		static 	std::string mTag;
+		std::string mTag;
 
 		Collider* mBroadPhaseCollider;
 
