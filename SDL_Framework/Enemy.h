@@ -27,7 +27,6 @@ public:
 
 	virtual void Dive(int type = 0);
 	virtual void Hit(PhysEntity* other) override;
-
 	bool InDeathAnimation();
 
 	void Update() override;

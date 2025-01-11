@@ -238,6 +238,7 @@ void Boss::HandleCaptureBeam() {
 	}
 
 	if (mIsCaptured) {
+
 		mRedShip->Render();
 	}
 }

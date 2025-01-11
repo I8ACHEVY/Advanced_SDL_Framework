@@ -47,7 +47,7 @@ void CaptureBeam::RunAnimation() {
 }
 
 void CaptureBeam::Hit(PhysEntity* other) {
-	if (IgnoreCollision()) {
+	if (IgnoreCollision(other)) {
 		return;
 	}
 	std::cout << "Capture Beam Contact" << std::endl;
@@ -55,47 +55,69 @@ void CaptureBeam::Hit(PhysEntity* other) {
 	 Player* player = dynamic_cast<Player*>(other);
 	 if (player) {
 
-		 Vector2 beamPosition = AnimatedTexture::Position(World);
-		 float beamWidth = mWidth * AnimatedTexture::Scale(World).x * 0.7f;
-		 float beamHeight = mHeight * AnimatedTexture::Scale(World).y * 0.7f;
-
-		 Vector2 beamOrigin = other->Position(World);
-		 //Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - beamHeight * 0.5f);
-
-		 Vector2 dir = beamOrigin - player->Position(World);
-
-		 float distSquared = dir.x * dir.x + dir.y * dir.y;
-		 float minDistSquared = std::numeric_limits<float>::max();
-
-		 float pullSpeed = 100.0f;
-		 player->Position(player->Position(World) + dir * pullSpeed * mTimer->DeltaTime());
-
-		 player->Rotate(260.0f * mTimer->DeltaTime());
-
-		 if (distSquared < minDistSquared) {
-			 minDistSquared = distSquared;
-			 player->Rotate(0.0f * mTimer->DeltaTime());
+		 if (!mIsCaptured) {
+			 std::cout << "original rot and pos stored" << std::endl;
+			 mOriginalPosition = player->Position(World);
+			 mOriginalRotation = player->Rotation(World);
 			 mIsCaptured = true;
 		 }
-	 }
 
+		 if (mIsCaptured) {
+			 Vector2 beamPosition = AnimatedTexture::Position(World);
+			 float beamWidth = mWidth * AnimatedTexture::Scale(World).x * 0.7f;
+			 float beamHeight = mHeight * AnimatedTexture::Scale(World).y * 0.7f;
+
+			 Vector2 beamOrigin = other->Position(World);
+			 Vector2 dir = beamOrigin - player->Position(World);
+
+			 float distSquared = dir.x * dir.x + dir.y * dir.y;
+			 float minDistSquared = std::numeric_limits<float>::max();
+
+			 float pullSpeed = 100.0f;
+			 player->Position(player->Position(World) + dir * pullSpeed * mTimer->DeltaTime());
+
+			 player->Rotate(260.0f * mTimer->DeltaTime());
+
+			 std::cout << "Current Player Rotation: " << player->Rotation(World) << std::endl;
+
+			 if (distSquared < minDistSquared) {
+				 minDistSquared = distSquared;
+				 std::cout << "Player Escaping: Resetting Rotation" << std::endl;
+				 player->Rotate(mOriginalRotation);
+				 mIsCaptured = true;
+			 }
+		 }
+		 else {
+			 player->Rotation(mOriginalRotation);
+			 player->Position(mOriginalPosition);
+		 }
+
+	 }
 }
 
-bool CaptureBeam::IgnoreCollision() {
+bool CaptureBeam::IsCaptured() const {
+	return mIsCaptured;
+}
 
-	if (mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0) {	//add if and else from just a return 4
-		return false;
+bool CaptureBeam::IgnoreCollision(PhysEntity* entity) {
+	if (auto* player = dynamic_cast<Player*>(entity)) {
+
+		if (mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0) {	//add if and else from just a return 4
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
-	else {
-		return true;
-	}
+	return true;
 }
 
 CaptureBeam::CaptureBeam()
 	: AnimatedTexture("CaptureBeam.png", 0, 0, 184, 320, 3, 0.5f, Horizontal), mCollider(nullptr) {
 	mTotalCaptureTime = 6.0f;
 	ResetAnimation();
-	mTag = "CaptureBeam";
+	mTag = "Capture";
+	std::cout << "CaptureBeam Tag set to" << mTag << std::endl;
 
 	//AddCollider(new BoxCollider(Vector2(160.0f, 60.0f)), Vector2(0.0f, -140.0f));
 	//mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::HostileProjectile);

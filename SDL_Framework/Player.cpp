@@ -22,6 +22,18 @@ void Player::HandleMovement() {
 	Position(pos);
 }
 
+//void Player::HandleCaptureMovement() {
+//	Vector2 beamPosition;
+//	Vector2 dir = beamPosition - Position();
+//	float distance = dir.Magnitude();
+//	float pullSpeed = 100.0f;
+//	Vector2 pullVector = dir.Normalized() * pullSpeed * mTimer->DeltaTime();
+//	Position(Position() + pullVector);
+//
+//	//mAnimating = false;
+//	//mWasHit = false;
+//}
+
 void Player::HandleFiring() {
 	if (mInput->KeyPressed(SDL_SCANCODE_SPACE) || mInput->MouseButtonPressed(InputManager::Left)) {
 		for (int i = 0; i < MAX_BULLETS; i++) {
@@ -42,9 +54,10 @@ Player::Player() {
 	mVisible = false;
 	mAnimating = false;
 	mWasHit = false;
+	mIsCaptured = false;
 
 	mScore = 0;
-	mLives = 2;
+	mLives = 20;
 
 	mMoveSpeed = 250.0f;
 	mMoveBounds = Vector2(323.0f, 1065.0f);
@@ -116,7 +129,10 @@ int Player::Lives() {
 
 bool Player::WasHit() {
 	return mWasHit;
+}
 
+bool Player::IsCaptured() const{
+	return mIsCaptured;
 }
 
 bool Player::IgnoreCollision() {
@@ -124,12 +140,20 @@ bool Player::IgnoreCollision() {
 }
 
 void Player::Hit(PhysEntity* other) {
-	if (other->GetTag() == "Capture Beam") {
-		//mIsCaptured = true;
-		//beamOrigin = other->Position(World);
+
+	std::cout << "Player Hit by Tag" << other->GetTag() << std::endl;
+	if (other->GetTag() == "Capture") {
+		mAnimating = false;
+		mWasHit = false;
+		
+		//if (!mIsCaptured) {
+		//	mOriginalPosition = Position(World);
+		//	mOriginalRotation = Rotation();
+		//}
+		mIsCaptured = true;
 	}
-	else {
-		if (other->GetTag() == "Butterfly" || "Wasp" || "Boss") {
+	else if (other->GetTag() == "Butterfly" || other->GetTag() == "Wasp" || other->GetTag() == "Boss") {
+		if (!mIsCaptured) {
 			mLives -= 1;
 			mAnimating = true;
 			mDeathAnimation->ResetAnimation();
@@ -141,7 +165,7 @@ void Player::Hit(PhysEntity* other) {
 }
 
 void Player::Update() {
-	if (mAnimating){
+	if (mAnimating && !mIsCaptured){
 		mDeathAnimation->Update();
 		mAnimating = mDeathAnimation->IsAnimating();
 
@@ -151,13 +175,26 @@ void Player::Update() {
 	}
 	else {
 		if (Active()) {
-			//if (mIsCaptured) {
-			//	HandleFiring();
-			//}
-			//else {
+			if (mIsCaptured) {
+
+				//Vector2 beamOrigin = Vector2(0.0f, 0.0f);
+				//Vector2 dir = beamOrigin - Position(World);
+				//float pullSpeed = 100.0f;
+				//Position(Position(World) + dir.Normalized() * pullSpeed * mTimer->DeltaTime());
+				//float angleToBeam = atan2(beamOrigin.y - Position(World).y, beamOrigin.x - Position(World).x);
+				//Rotate(angleToBeam);
+
+				//float distSquared = dir.x * dir.x + dir.y * dir.y;
+				//if (distSquared < 100.0f * 100.0f) {
+				//	mIsCaptured = false;
+				//}
+
+				HandleFiring();
+			}
+			else {
 				HandleMovement();
 				HandleFiring();
-			//}
+			}
 		}
 	}
 
