@@ -4,7 +4,7 @@
 #include "AudioManager.h"
 #include "BoxCollider.h"
 #include "Bullet.h"
-//#include "CaptureBeam.h"
+#include "CaptureBeam.h"
 
 using namespace SDL_Framework;
 
