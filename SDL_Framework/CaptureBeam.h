@@ -20,13 +20,14 @@ public:
 	void Hit(PhysEntity* other) override;
 	bool IgnoreCollision();
 
+	bool mIsCaptured;
+
 private:
 	float mTotalCaptureTime;
 	float mCaptureTimer;
 	bool mColliderAdded;
-	bool mIsCaptured;
 	
-	static std::string mTag;
+	std::string mTag;
 
 	PhysEntity* mCollider;
 

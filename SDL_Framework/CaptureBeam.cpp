@@ -58,25 +58,37 @@ void CaptureBeam::Hit(PhysEntity* other) {
 		 Vector2 beamPosition = AnimatedTexture::Position(World);
 		 float beamWidth = mWidth * AnimatedTexture::Scale(World).x * 0.7f;
 		 float beamHeight = mHeight * AnimatedTexture::Scale(World).y * 0.7f;
-		 Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - beamHeight * 0.5f);
+
+		 Vector2 beamOrigin = other->Position(World);
+		 //Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - beamHeight * 0.5f);
 
 		 Vector2 dir = beamOrigin - player->Position(World);
+
+		 float distSquared = dir.x * dir.x + dir.y * dir.y;
+		 float minDistSquared = std::numeric_limits<float>::max();
 
 		 float pullSpeed = 100.0f;
 		 player->Position(player->Position(World) + dir * pullSpeed * mTimer->DeltaTime());
 
 		 player->Rotate(260.0f * mTimer->DeltaTime());
 
-		 //if (player->Position(World) < beamOrigin) {
-			// player->Rotate(0.0f * mTimer->DeltaTime());
-			// mIsCaptured = true;
-		 //}
+		 if (distSquared < minDistSquared) {
+			 minDistSquared = distSquared;
+			 player->Rotate(0.0f * mTimer->DeltaTime());
+			 mIsCaptured = true;
+		 }
 	 }
 
 }
 
 bool CaptureBeam::IgnoreCollision() {
-	return mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0;
+
+	if (mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0) {	//add if and else from just a return 4
+		return false;
+	}
+	else {
+		return true;
+	}
 }
 
 CaptureBeam::CaptureBeam()

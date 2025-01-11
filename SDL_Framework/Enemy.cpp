@@ -482,29 +482,10 @@ void Enemy::HandleStates() {
 
 void Enemy::RenderFlyInState() {
 	mTexture[0]->Render();
-	//mTexture[sFormation->GetTick() % 2]->Render();
-
-	//for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug paths as they are called
-	//	Graphics::Instance()->DrawLine(
-	//		sPaths[mCurrentPath][i].x, 
-	//		sPaths[mCurrentPath][i].y,
-	//		sPaths[mCurrentPath][i + 1].x, 
-	//		sPaths[mCurrentPath][i + 1].y
-	//	);
-	//}
 }
 
 void Enemy::RenderInFormationState() {
 	mTexture[sFormation->GetTick() % 2]->Render();
-
-	//for (int i = 0; i < sPaths[mCurrentPath].size() - 1; i++) {		// debug bezier paths even after called
-	//	Graphics::Instance()->DrawLine(
-	//		sPaths[mCurrentPath][i].x,
-	//		sPaths[mCurrentPath][i].y,
-	//		sPaths[mCurrentPath][i + 1].x,
-	//		sPaths[mCurrentPath][i + 1].y
-	//	);
-	//}
 }
 
 void Enemy::RenderStates() {
