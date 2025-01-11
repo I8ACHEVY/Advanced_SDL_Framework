@@ -31,6 +31,7 @@ public:
 
 	bool IgnoreCollision() override;
 	void Hit(PhysEntity* other) override;
+	void Tag();
 	//void StartRotation();
 
 private:
