@@ -3,7 +3,6 @@
 
 void CaptureBeam::RunAnimation() {
 	mCaptureTimer += mTimer->DeltaTime();
-	//mCapturedPlayer = false;
 
 	if (mCaptureTimer >= 2.1f && mCaptureTimer <= mTotalCaptureTime - 2.0f) {
 		if (!mColliderAdded) {
@@ -18,19 +17,11 @@ void CaptureBeam::RunAnimation() {
 		
 		if (mCaptureTimer >= mTotalCaptureTime) {
 			mColliderAdded = false;
-			//if (mCollider) {
-			//	delete mCollider;
-			//	mCollider = nullptr;
-			//}
 		}
 	}
 
 	if (mCaptureTimer >= mTotalCaptureTime) {
 		mAnimationDone = true;
-		
-		//if (mCapturedPlayer) {
-		//	Player->StartRotation();
-		//}
 	}
 	else {
 		mAnimationTimer += mTimer->DeltaTime();
@@ -45,7 +36,7 @@ void CaptureBeam::RunAnimation() {
 			int temp = (int)(mCaptureTimer * 3.5f);
 			mSourceRect.h = (int)(temp / 7.0f * mHeight);
 		}
-		else if (mCaptureTimer > mTotalCaptureTime - 2.0f) {		// possible hard set > 4)
+		else if (mCaptureTimer > mTotalCaptureTime - 2.0f) {
 			int temp = (int)((mTotalCaptureTime - mCaptureTimer) * 3.5f);
 			mSourceRect.h = (int)(temp / 7.0f * mHeight);
 		}
@@ -76,7 +67,7 @@ void CaptureBeam::Hit(PhysEntity* other) {
 
 		 player->Rotate(260.0f * mTimer->DeltaTime());
 
-		 //if (dir < beamWidth * 0.2f) {
+		 //if (player->Position(World) < beamOrigin) {
 			// player->Rotate(0.0f * mTimer->DeltaTime());
 			// mIsCaptured = true;
 		 //}

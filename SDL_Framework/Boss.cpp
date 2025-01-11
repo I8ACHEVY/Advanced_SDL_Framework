@@ -229,18 +229,16 @@ void Boss::HandleCaptureBeam() {
 	mCaptureBeam->PhysEntity::Update();
 	mCaptureBeam->AnimatedTexture::Update();
 
-	//if (mCaptureBeam->IsAnimating()) {
-	//	if (mCaptureBeam->mCapturedPlayer != nullptr) {
-	//		mCaptureBeam->mCapturedPlayer->StartRotation();
-	//	}
-	//}
-
 	if (!mCaptureBeam->IsAnimating()) {
 		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
 		if (Position().y >= 580.0f) {
 			Position(WorldFormationPosition().x, -20.0f);
 			mCapturing = false;
 		}
+	}
+
+	if (mIsCaptured) {
+		mRedShip->Render();
 	}
 }
 

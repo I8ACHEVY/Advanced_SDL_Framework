@@ -88,7 +88,7 @@ namespace SDL_Framework {
 				other->mBroadPhaseCollider);
 		}
 
-		if (narrowPhaseCheck) { //==true
+		if (narrowPhaseCheck) { 
 			for (int i = 0; i < mColliders.size(); i++) {
 				for (int j = 0; j < other->mColliders.size(); j++) {
 					if (ColliderVsColliderCheck(mColliders[i], other->mColliders[j])) {

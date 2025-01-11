@@ -63,7 +63,7 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 		}
 	}
 
-	if (mStage == 2) {									// stage 2 error
+	if (mStage == 2) {	
 		fullPath.append("Data/Level2.xml");
 		mSpawningPatterns.LoadFile(fullPath.c_str());
 		std::cout << mStage << std::endl;

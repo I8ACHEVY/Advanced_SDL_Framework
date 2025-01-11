@@ -31,7 +31,7 @@ public:
 	bool InDeathAnimation();
 
 	void Update() override;
-	void Render() override;
+	virtual void Render() override;
 
 protected:
 	static Formation* sFormation;

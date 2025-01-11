@@ -123,19 +123,13 @@ bool Player::IgnoreCollision() {
 	return !mVisible || mAnimating || !Active();
 }
 
-//void Player::StartRotation() {
-//	mIsCaptured = true;
-//	//mRotationTimer = 0.0f;
-//	mShip->Rotate(260.0f * mTimer->DeltaTime());
-//}
-
 void Player::Hit(PhysEntity* other) {
-	if (GetTag() == "Capture Beam") {
-		mIsCaptured = true;
+	if (other->GetTag() == "Capture Beam") {
+		//mIsCaptured = true;
 		//beamOrigin = other->Position(World);
 	}
 	else {
-		if (GetTag() == "Butterfly" || "Wasp" || "Boss") {
+		if (other->GetTag() == "Butterfly" || "Wasp" || "Boss") {
 			mLives -= 1;
 			mAnimating = true;
 			mDeathAnimation->ResetAnimation();
@@ -157,13 +151,13 @@ void Player::Update() {
 	}
 	else {
 		if (Active()) {
-			if (mIsCaptured) {
-				HandleFiring();
-			}
-			else {
+			//if (mIsCaptured) {
+			//	HandleFiring();
+			//}
+			//else {
 				HandleMovement();
 				HandleFiring();
-			}
+			//}
 		}
 	}
 
