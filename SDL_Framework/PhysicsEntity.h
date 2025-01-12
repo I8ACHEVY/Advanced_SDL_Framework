@@ -22,6 +22,8 @@ namespace SDL_Framework{
 		void Tag(const std::string& tag);
 		std::string GetTag() const;
 
+		Collider* GetBroadPhaseCollider() const;
+
 	protected:
 		std::vector<Collider*> mColliders;
 		std::string mTag;

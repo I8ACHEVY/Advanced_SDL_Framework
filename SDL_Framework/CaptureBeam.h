@@ -3,7 +3,6 @@
 #include "PhysicsEntity.h"
 #include "BoxCollider.h"
 #include "Player.h"
-//#include "Enemy.h"
 
 using namespace SDL_Framework;
 
@@ -27,12 +26,15 @@ public:
 	bool IgnoreCollision(PhysEntity* Entity);
 	bool IsCaptured() const;
 
+
 private:
 	float mTotalCaptureTime;
 	float mCaptureTimer;
 	float mOriginalRotation;
+
 	Vector2 mOriginalPosition;
 	Vector2 mBeamOrigin;
+
 	bool mColliderAdded;
 	bool mIsCaptured;
 	

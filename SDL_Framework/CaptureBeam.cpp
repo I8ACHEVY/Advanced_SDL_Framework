@@ -4,10 +4,10 @@
 void CaptureBeam::RunAnimation() {
 	mCaptureTimer += mTimer->DeltaTime();
 
-	if (mCaptureTimer >= 2.1f && mCaptureTimer <= mTotalCaptureTime - 2.0f) {
+	if (mCaptureTimer >= 0.5f && mCaptureTimer <= mTotalCaptureTime - 1.0f) {
 		if (!mColliderAdded) {
 
-		AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)), Vector2(0.0f, 170.0f));
+		AddCollider(new BoxCollider(Vector2(90.0f, 300.0f)), Vector2(0.0f, -40.0f));
 		mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::HostileProjectile);
 
 		mColliderAdded = true;
@@ -55,57 +55,59 @@ void CaptureBeam::Hit(PhysEntity* other) {
 	Player* player = dynamic_cast<Player*>(other);
 	if (player) {
 
-		 if (!mIsCaptured) {
-			 //Vector2 newPosition = Vector2(player->Position(World).x, Graphics::SCREEN_HEIGHT * 0.8f);
-			 std::cout << "original rot and pos stored" << std::endl;
-			 mIsCaptured = true;
-		 }
+		Collider* broadPhaseCollider = other->GetBroadPhaseCollider();
+		if (broadPhaseCollider && broadPhaseCollider->GetType() == Collider::ColliderType::Circle) {
+			std::cout << "Player is in circle" << std::endl;
 
-		 if (mIsCaptured) {
-			 Vector2 beamPosition = AnimatedTexture::Position(World);
-			 Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - 160.0f);
-			 Vector2 dir = beamOrigin - player->Position(World);
+			for (auto* collider : other->mCollider()) {
+				if (collider->GetType() == Collider::ColliderType::Box) {
+					boxCollider = collider;
+					break;
+				}
+			}
 
-			 //float beamWidth = mWidth * AnimatedTexture::Scale(World).x * 0.7f;
-			 //float beamHeight = mHeight * AnimatedTexture::Scale(World).y * 0.7f;
+			if (boxCollider) {
+				std::cout << "Player is in both" << std::endl;
 
-			 //float minDistSquared = std::numeric_limits<float>::max();
+				if (mIsCaptured) {
+					Vector2 beamPosition = AnimatedTexture::Position(World);
+					Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - 80.0f);//-160
+					Vector2 dir = beamOrigin - player->Position(World);
 
-			 float pullSpeed = 150.0f;
-			 player->Translate(dir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
+					//float minDistSquared = std::numeric_limits<float>::max();
 
-			 player->Rotate(260.0f * mTimer->DeltaTime());
+					float pullSpeed = 100.0f;
+					player->Translate(dir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
 
-			 std::cout << "Current Player Rotation: " << player->Rotation(World) << std::endl;
+					player->Rotate(260.0f * mTimer->DeltaTime());
 
-			 float escapeDistance = 160.0f; //beamWidth;
-			 float distSquared = dir.MagnitudeSqr();
+					std::cout << "Current Player Rotation: " << player->Rotation(World) << std::endl;
 
-			 if (distSquared > escapeDistance * escapeDistance) {
-				 //minDistSquared = distSquared;
-				 std::cout << "Player Escaping: Resetting Rotation" << std::endl;
-				 mIsCaptured = false;
+					float escapeDistance = 100.0f;
+					float distSquared = dir.MagnitudeSqr();
 
-				 //Vector2 currentPosition = player->Position(World);
+					if (distSquared > escapeDistance * escapeDistance) {
+						//minDistSquared = distSquared;
+						std::cout << "Player Escaping: Resetting Rotation" << std::endl;
+						mIsCaptured = false;
 
-				 //float homePositionX = currentPosition.x;
-				 //float homePositionY = Graphics::SCREEN_HEIGHT * 0.8f;
-				 // 
-				 //if (currentPosition.y > homePositionY) {
-					Vector2 returnDir = Vector2(player->Position(World).y - Graphics::SCREEN_HEIGHT * 0.8f);
-					player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
-					player->Rotate(90.0f);
-				 //}
-				 //else {
-					// //player->SetPosition(Vector2(homePositionX, homePositionY), World);
-				 //}
-			 }
-		 }
-		 //else {
-			// player->Rotation(mOriginalRotation);
-			// player->Position(mOriginalPosition);
-		 //}
+						//Vector2 currentPosition = player->Position(World);
 
+						//float homePositionX = currentPosition.x;
+						//float homePositionY = Graphics::SCREEN_HEIGHT * 0.8f;
+						// 
+						//if (currentPosition.y > homePositionY) {
+						Vector2 returnDir = Vector2(player->Position(World).y - Graphics::SCREEN_HEIGHT * 0.8f);
+						player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
+						player->Rotate(90.0f);
+						//}
+						//else {
+						   // //player->SetPosition(Vector2(homePositionX, homePositionY), World);
+						//}
+					}
+				}
+			}
+		}
 	}
 }
 
