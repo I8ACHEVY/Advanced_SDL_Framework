@@ -7,7 +7,7 @@ void CaptureBeam::RunAnimation() {
 	if (mCaptureTimer >= 2.1f && mCaptureTimer <= mTotalCaptureTime - 2.0f) {
 		if (!mColliderAdded) {
 
-		AddCollider(new BoxCollider(Vector2(140.0f, 190.0f)), Vector2(0.0f, -30.0f));
+		AddCollider(new BoxCollider(Vector2(20.0f, 20.0f)), Vector2(0.0f, 170.0f));
 		mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::HostileProjectile);
 
 		mColliderAdded = true;
@@ -52,47 +52,61 @@ void CaptureBeam::Hit(PhysEntity* other) {
 	}
 	std::cout << "Capture Beam Contact" << std::endl;
 
-	 Player* player = dynamic_cast<Player*>(other);
-	 if (player) {
+	Player* player = dynamic_cast<Player*>(other);
+	if (player) {
 
 		 if (!mIsCaptured) {
+			 //Vector2 newPosition = Vector2(player->Position(World).x, Graphics::SCREEN_HEIGHT * 0.8f);
 			 std::cout << "original rot and pos stored" << std::endl;
-			 mOriginalPosition = player->Position(World);
-			 mOriginalRotation = player->Rotation(World);
 			 mIsCaptured = true;
 		 }
 
 		 if (mIsCaptured) {
 			 Vector2 beamPosition = AnimatedTexture::Position(World);
-			 float beamWidth = mWidth * AnimatedTexture::Scale(World).x * 0.7f;
-			 float beamHeight = mHeight * AnimatedTexture::Scale(World).y * 0.7f;
-
-			 Vector2 beamOrigin = other->Position(World);
+			 Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - 160.0f);
 			 Vector2 dir = beamOrigin - player->Position(World);
 
-			 float distSquared = dir.x * dir.x + dir.y * dir.y;
-			 float minDistSquared = std::numeric_limits<float>::max();
+			 //float beamWidth = mWidth * AnimatedTexture::Scale(World).x * 0.7f;
+			 //float beamHeight = mHeight * AnimatedTexture::Scale(World).y * 0.7f;
 
-			 float pullSpeed = 100.0f;
-			 player->Position(player->Position(World) + dir * pullSpeed * mTimer->DeltaTime());
+			 //float minDistSquared = std::numeric_limits<float>::max();
+
+			 float pullSpeed = 150.0f;
+			 player->Translate(dir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
 
 			 player->Rotate(260.0f * mTimer->DeltaTime());
 
 			 std::cout << "Current Player Rotation: " << player->Rotation(World) << std::endl;
 
-			 if (distSquared < minDistSquared) {
-				 minDistSquared = distSquared;
+			 float escapeDistance = 160.0f; //beamWidth;
+			 float distSquared = dir.MagnitudeSqr();
+
+			 if (distSquared > escapeDistance * escapeDistance) {
+				 //minDistSquared = distSquared;
 				 std::cout << "Player Escaping: Resetting Rotation" << std::endl;
-				 player->Rotate(mOriginalRotation);
-				 mIsCaptured = true;
+				 mIsCaptured = false;
+
+				 //Vector2 currentPosition = player->Position(World);
+
+				 //float homePositionX = currentPosition.x;
+				 //float homePositionY = Graphics::SCREEN_HEIGHT * 0.8f;
+				 // 
+				 //if (currentPosition.y > homePositionY) {
+					Vector2 returnDir = Vector2(player->Position(World).y - Graphics::SCREEN_HEIGHT * 0.8f);
+					player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
+					player->Rotate(90.0f);
+				 //}
+				 //else {
+					// //player->SetPosition(Vector2(homePositionX, homePositionY), World);
+				 //}
 			 }
 		 }
-		 else {
-			 player->Rotation(mOriginalRotation);
-			 player->Position(mOriginalPosition);
-		 }
+		 //else {
+			// player->Rotation(mOriginalRotation);
+			// player->Position(mOriginalPosition);
+		 //}
 
-	 }
+	}
 }
 
 bool CaptureBeam::IsCaptured() const {

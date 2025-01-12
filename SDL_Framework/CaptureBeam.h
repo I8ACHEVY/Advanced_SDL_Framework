@@ -32,6 +32,7 @@ private:
 	float mCaptureTimer;
 	float mOriginalRotation;
 	Vector2 mOriginalPosition;
+	Vector2 mBeamOrigin;
 	bool mColliderAdded;
 	bool mIsCaptured;
 	

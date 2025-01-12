@@ -38,8 +38,6 @@ private:
 	Bullet* mBullets[MAX_BULLETS];
 
 	bool mWasHit;
-	//Vector2 mOriginalPosition;
-	//float mOriginalRotation;
 	bool mIsCaptured;
 
 	Timer* mTimer;

@@ -149,6 +149,7 @@ void Wasp::RenderDiveState() {
 void Wasp::Hit(PhysEntity* other) {
 	AudioManager::Instance()->PlaySFX("WaspDestroyed.wav", 0, -1);
 	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 50 : 100);
+
 	Enemy::Hit(other);
 }
 
@@ -169,7 +170,7 @@ Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 
 		mType = Enemy::Wasp;
 
-		AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
+		//AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 }
 
 Wasp::~Wasp() {
