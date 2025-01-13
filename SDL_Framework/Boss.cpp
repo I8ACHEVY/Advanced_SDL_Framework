@@ -226,7 +226,7 @@ void Boss::HandleDiveState() {
 
 void Boss::HandleCaptureBeam() {
 	mCaptureBeam->PhysEntity::Update();
-	mCaptureBeam->AnimatedTexture::Update();
+	//mCaptureBeam->AnimatedTexture::Update();
 
 	if (!mCaptureBeam->IsAnimating()) {
 		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);

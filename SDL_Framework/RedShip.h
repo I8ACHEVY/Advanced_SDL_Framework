@@ -15,8 +15,10 @@ namespace SDL_Framework {
 		//void Render() override;
 
 		//void SetVisible(bool visible);
-		bool IsVisible();
-		//bool IsAnimating();
+		void CapturedPlayer();
+		void UpdateTexture(int index);
+		//void SetBossIndex(int index) { mBossIndex = index; }
+		//int GetBossIndex() const { return mBossIndex; }
 
 		static void CreateDivePaths();
 
@@ -44,6 +46,7 @@ namespace SDL_Framework {
 		bool mVisible;
 		//bool mAnimating;
 		bool mEscort;
+		int mBossIndex;
 
 		//void FlyInComplete() override;
 

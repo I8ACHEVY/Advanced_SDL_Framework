@@ -255,7 +255,7 @@ void RedShip::RenderDiveState() {
 }
 
 RedShip::RedShip(int path, int index, bool challenge) :
-	Enemy(path, index, challenge), mCaptureBeam(new CaptureBeam()) {
+	Enemy(path, index, challenge) {
 
 	mTag = "RedShip";
 
@@ -298,10 +298,10 @@ RedShip::RedShip(int path, int index, bool challenge) :
 }
 
 RedShip::~RedShip() {
-	//if (mCollider) {
-	//	delete mCollider;
-	//	mCollider = nullptr;
-	//}
+	if (mCollider) {
+		delete mCollider;
+		mCollider = nullptr;
+	}
 
 	//if (mDeathAnimation) {
 	//	delete mDeathAnimation;
@@ -314,19 +314,25 @@ RedShip::~RedShip() {
 	}
 }
 
-//void RedShip::SetVisible(bool visible) {
-//	return mZombie;
-//	//mVisible = visible;
-//}
-
-bool RedShip::IsVisible() {
+void RedShip::CapturedPlayer() {
 	if (mCaptureBeam->Zombie())
-	return mVisible;
+	UpdateTexture(mIndex);
 }
 
-//bool RedShip::IsAnimating() {
-//	return mZombie;
-//}
+void RedShip::UpdateTexture(int index) {
+	if (index == mBossIndex + 1) {
+		if (mCaptureBeam->Zombie()) {
+			mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
+			mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
+		}
+
+		for (auto texture : mTexture) {
+			texture->Parent(this);
+			texture->Position(Vec2_Zero);
+			texture->Scale(Vector2(0.7f, 0.7f));
+		}
+	}
+}
 
 bool RedShip::IgnoreCollision(PhysEntity* Entity) {
 	return !mCaptureBeam->Zombie() || !Active();
