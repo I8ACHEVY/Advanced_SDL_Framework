@@ -132,7 +132,7 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 
 	mDivingRedShip = nullptr;
 	mSkipFirstRedShip = false;
-	mRedShipDiveDelay = 1.0f;
+	mRedShipDiveDelay = 6.0f;
 	mRedShipDiveTimer = 0.0f;
 
 	Enemy::CurrentPlayer(mPlayer);
@@ -403,17 +403,6 @@ void Level::HandleEnemyFormation() {
 		}
 	}
 
-	for (Boss* boss : mFormationBosses) {
-		if (boss != nullptr) {
-			boss->Update();
-
-			if (boss->CurrentState() != Enemy::Dead ||
-				boss->InDeathAnimation()) {
-				levelCleared = false;
-			}
-		}
-	}
-
 	for (RedShip* redShip : mFormationRedShip) {
 		if (redShip != nullptr) {
 			redShip->Update();
@@ -425,10 +414,22 @@ void Level::HandleEnemyFormation() {
 		}
 	}
 
+	for (Boss* boss : mFormationBosses) {
+		if (boss != nullptr) {
+			boss->Update();
+
+			if (boss->CurrentState() != Enemy::Dead ||
+				boss->InDeathAnimation()) {
+				levelCleared = false;
+			}
+		}
+	}
+
 	if (!mFormation->Locked()) {
 		if (mButterflyCount == MAX_BUTTERFLIES &&
 			mWaspCount == MAX_WASPS &&
-			mBossCount == MAX_BOSSES) {
+			mBossCount == MAX_BOSSES &&
+			mRedShipCount == MAX_REDSHIPS) {
 			if (!EnemyFlyingIn()) {
 				mFormation->Lock();
 			}
@@ -499,6 +500,34 @@ void Level::HandleEnemyDiving() {
 		mDivingWasp2 = nullptr;
 	}
 
+	if (mDivingRedShip == nullptr) {
+		mRedShipDiveTimer += mTimer->DeltaTime();
+
+		if (mRedShipDiveTimer >= mRedShipDiveDelay) {
+			bool skipped = false;
+
+			for (int i = MAX_REDSHIPS - 1; i >= 0; i--) {
+				if (mFormationRedShip[i] != nullptr
+					&& mFormationRedShip[i]->CurrentState() == Enemy::InFormation) {
+					if (!mSkipFirstRedShip || (mSkipFirstRedShip && skipped)) {
+						mDivingRedShip = mFormationRedShip[i];
+						mDivingRedShip->Dive();
+						mSkipFirstRedShip = !mSkipFirstRedShip;
+						break;
+					}
+				}
+				skipped = true;
+			}
+
+			mRedShipDiveTimer = 0.0f;
+		}
+	}
+	else {
+		if (mDivingRedShip->CurrentState() != Enemy::Diving) {
+			mDivingRedShip = nullptr;
+		}
+	}
+
 	if (mDivingBoss == nullptr) {
 		mBossDiveTimer += mTimer->DeltaTime();
 
@@ -547,35 +576,6 @@ void Level::HandleEnemyDiving() {
 	else {
 		if (mDivingBoss->CurrentState() != Enemy::Diving) {
 			mDivingBoss = nullptr;
-		}
-	}
-
-
-	if (mDivingRedShip == nullptr) {
-		mRedShipDiveTimer += mTimer->DeltaTime();
-
-		if (mRedShipDiveTimer >= mRedShipDiveDelay) {
-			bool skipped = false;
-
-			for (int i = MAX_REDSHIPS - 1; i >= 0; i--) {
-				if (mFormationRedShip[i] != nullptr
-					&& mFormationRedShip[i]->CurrentState() == Enemy::InFormation) {
-					if (!mSkipFirstRedShip || (mSkipFirstRedShip && skipped)) {
-						mDivingRedShip = mFormationRedShip[i];
-						mDivingRedShip->Dive();
-						mSkipFirstRedShip = !mSkipFirstRedShip;
-						break;
-					}
-				}
-				skipped = true;
-			}
-
-			mRedShipDiveTimer = 0.0f;
-		}
-	}
-	else {
-		if (mDivingRedShip->CurrentState() != Enemy::Diving) {
-			mDivingRedShip = nullptr;
 		}
 	}
 }
@@ -641,17 +641,18 @@ void Level::Render() {
 				}
 			}
 
+			for (RedShip* redShip : mFormationRedShip) {
+				if (redShip != nullptr) {
+					redShip->Render();
+				}
+			}
+
 			for (Boss* boss : mFormationBosses) {
 				if (boss != nullptr) {
 					boss->Render();
 				}
 			}
 
-			for (RedShip* redShip : mFormationRedShip) {
-				if (redShip != nullptr) {
-					redShip->Render();
-				}
-			}
 		}
 
 		else {

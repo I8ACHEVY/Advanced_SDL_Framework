@@ -1,5 +1,5 @@
 #pragma once
-#include "AnimatedTexture.h"
+//#include "AnimatedTexture.h"
 #include "PhysicsManager.h"
 #include "Enemy.h"
 
@@ -13,16 +13,16 @@ namespace SDL_Framework {
 		//void Update() override;
 		//void Render() override;
 
-		void SetVisible(bool visible);
-		bool IsVisible();
-		bool IsAnimating();
+		//void SetVisible(bool visible);
+		//bool IsVisible();
+		//bool IsAnimating();
 
 		static void CreateDivePaths();
 
 		void Dive(int type = 0) override;
 
 		void Hit(PhysEntity* other) override;
-		bool IgnoreCollision(PhysEntity* Entity);
+		//bool IgnoreCollision(PhysEntity* Entity);
 
 		RedShip(int path, int index, bool challenge);
 		~RedShip();
@@ -37,11 +37,13 @@ namespace SDL_Framework {
 
 		Texture* mRedShip;
 		PhysEntity* mCollider;
-		AnimatedTexture* mDeathAnimation;
+		//AnimatedTexture* mDeathAnimation;
 
-		bool mVisible;
-		bool mAnimating;
+	/*	bool mVisible;
+		bool mAnimating;*/
 		bool mEscort;
+
+		//void FlyInComplete() override;
 
 		Vector2 LocalFormationPosition() override;
 

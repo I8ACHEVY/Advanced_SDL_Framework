@@ -89,44 +89,44 @@ void RedShip::CreateDivePaths() {
 	path->Sample(&sDivePaths[currentPath]);
 	delete path;
 
-	currentPath = 2;
+	currentPath = 2;		//escort path
 	path = new BezierPath();
 
 	path->AddCurve({
 		Vector2(0.0f, 0.0f),
 		Vector2(0.0f, -60.0f),
-		Vector2(-90.0f, -60.0f),
-		Vector2(-90.0f, 0.0f) }, 15);
+		Vector2(90.0f, -60.0f),
+		Vector2(90.0f, 0.0f) }, 15);
 
 	path->AddCurve({
-		Vector2(-90.0f, 0.0f),
-		Vector2(-90.0f, 60.0f),
-		Vector2(-100.0f, 272.0f),
-		Vector2(-15.0f, 275.0f) }, 15);
+		Vector2(90.0f, 0.0f),
+		Vector2(90.0f, 60.0f),
+		Vector2(100.0f, 272.0f),
+		Vector2(15.0f, 275.0f) }, 15);
 
 	path->AddCurve({
-		Vector2(-15.0f, 275.0f),
-		Vector2(85.0f, 275.0f),
-		Vector2(85.0f, 125.0f),
-		Vector2(-15.0f, 125.0f) }, 15);
+		Vector2(15.0f, 275.0f),
+		Vector2(-85.0f, 275.0f),
+		Vector2(-85.0f, 125.0f),
+		Vector2(15.0f, 125.0f) }, 15);
 
 	path->AddCurve({
-		Vector2(-15.0f, 125.0f),
-		Vector2(-175.0f, 125.0f),
+		Vector2(15.0f, 125.0f),
+		Vector2(175.0f, 125.0f),
 		Vector2(0.0f, 450.0f),
-		Vector2(125.0f, 450.0f) }, 25);
+		Vector2(-125.0f, 450.0f) }, 25);
 
 	path->AddCurve({
-		Vector2(120.0f, 450.0f),
-		Vector2(160.0f, 450.0f),
-		Vector2(200.0f, 500.0f),
-		Vector2(200.0f, 550.0f) }, 15);
+		Vector2(-120.0f, 450.0f),
+		Vector2(-160.0f, 450.0f),
+		Vector2(-200.0f, 500.0f),
+		Vector2(-200.0f, 540.0f) }, 15);
 
 	path->AddCurve({
-		Vector2(200.0f, 550.0f),
-		Vector2(200.0f, 540.0f),
-		Vector2(200.0f, 810.0f),
-		Vector2(200.0f, 510.0f) }, 15);
+		Vector2(-200.0f, 540.0f),
+		Vector2(-200.0f, 540.0f),
+		Vector2(-200.0f, 710.0f),
+		Vector2(-200.0f, 510.0f) }, 15);
 
 	sDivePaths.push_back(std::vector<Vector2>());
 	path->Sample(&sDivePaths[currentPath]);
@@ -255,11 +255,11 @@ void RedShip::RenderDiveState() {
 }
 
 RedShip::RedShip(int path, int index, bool challenge) :
-	Enemy(path, index, challenge)
-{
+	Enemy(path, index, challenge) { 
+
 	mTag = "RedShip";
 
-	mVisible = false;
+	//mVisible = false;
 
 	mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
 	mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
@@ -276,15 +276,15 @@ RedShip::RedShip(int path, int index, bool challenge) :
 	AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(12.0f, 5.0f));
 	AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(-12.0f, 5.0f));
 
-	mId = PhysicsManager::Instance()->RegisterEntity(this,
-		PhysicsManager::CollisionLayers::Hostile);
+	//mId = PhysicsManager::Instance()->RegisterEntity(this,
+	//	PhysicsManager::CollisionLayers::Hostile);
 
-	mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
-		AnimatedTexture::Horizontal);
-
-	mDeathAnimation->Parent();
-	mDeathAnimation->Position(Vec2_Zero);
-	mDeathAnimation->SetWrapMode(AnimatedTexture::Once);
+	//mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
+	//	AnimatedTexture::Horizontal);
+	//
+	//mDeathAnimation->Parent();
+	//mDeathAnimation->Position(Vec2_Zero);
+	//mDeathAnimation->SetWrapMode(AnimatedTexture::Once);
 
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		mBullets[i] = new Bullet(true);
@@ -292,15 +292,15 @@ RedShip::RedShip(int path, int index, bool challenge) :
 }
 
 RedShip::~RedShip() {
-	if (mCollider) {
-		delete mCollider;
-		mCollider = nullptr;
-	}
+	//if (mCollider) {
+	//	delete mCollider;
+	//	mCollider = nullptr;
+	//}
 
-	if (mDeathAnimation) {
-		delete mDeathAnimation;
-		mDeathAnimation = nullptr;
-	}
+	//if (mDeathAnimation) {
+	//	delete mDeathAnimation;
+	//	mDeathAnimation = nullptr;
+	//}
 
 	for (auto bullet : mBullets) {
 		delete bullet;
@@ -308,52 +308,29 @@ RedShip::~RedShip() {
 	}
 }
 
-void RedShip::SetVisible(bool visible) {
-	mVisible = visible;
-}
+//void RedShip::SetVisible(bool visible) {
+//	mVisible = visible;
+//}
+//
+//bool RedShip::IsVisible() {
+//	return mVisible;
+//}
+//
+//bool RedShip::IsAnimating() {
+//	return mAnimating;
+//}
 
-bool RedShip::IsVisible() {
-	return mVisible;
-}
-
-bool RedShip::IsAnimating() {
-	return mAnimating;
-}
-
-bool RedShip::IgnoreCollision(PhysEntity* Entity) {
-	return !mVisible || mAnimating || !Active();
-
-	//if (auto* player = dynamic_cast<Player*>(entity)) {
-
-	//	if (mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0) {
-	//		return false;
-	//	}
-	//	else {
-	//		return true;
-	//	}
-	//}
-	//return true;
-}
-
-//void RedShip::Render() {
+//bool RedShip::IgnoreCollision(PhysEntity* Entity) {
+//	return !mVisible || mAnimating || !Active();
 //
-//	Vector2 pos = Position(World);
-//	//Vector2 worldScale = Scale(World);
-//	//Vector2 scale(worldScale.x * 0.7f, worldScale.y * 0.7f);
+//	//if (auto* player = dynamic_cast<Player*>(entity)) {
 //
-//	//mDestinationRect.x = (int)(pos.x - mWidth * scale.x * 0.5f);
-//	//mDestinationRect.y = (int)(pos.y - mHeight * scale.y * 0.5f);
-//	//mDestinationRect.w = (int)(mWidth * scale.x);
-//	//mDestinationRect.h = mSourceRect.h;
-//
-//	//mGraphics->DrawTexture(mTex, mClipped ? &mSourceRect : nullptr, &mDestinationRect, Texture::Rotation(World));
-//
-//	PhysEntity::Render();
-//
-//	//Vector2 pos = Position(World);
-//	Vector2 scale = Scale(World);
-//
-//	mRedShip->Render();
-//
-//	//PhysEntity::Render();
+//	//	if (mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0) {
+//	//		return false;
+//	//	}
+//	//	else {
+//	//		return true;
+//	//	}
+//	//}
+//	//return true;
 //}
