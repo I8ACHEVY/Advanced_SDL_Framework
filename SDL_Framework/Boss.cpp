@@ -226,7 +226,7 @@ void Boss::HandleDiveState() {
 
 void Boss::HandleCaptureBeam() {
 	mCaptureBeam->PhysEntity::Update();
-	//mCaptureBeam->AnimatedTexture::Update();
+	mCaptureBeam->AnimatedTexture::Update();
 
 	if (!mCaptureBeam->IsAnimating()) {
 		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
@@ -241,7 +241,7 @@ void Boss::RenderDiveState() {
 	mTexture[0]->Render();
 
 	if (mCapturing && mCaptureBeam->IsAnimating()) {
-		//mCaptureBeam->Render();
+		mCaptureBeam->Render();
 	}
 
 	int currentPath = mIndex % 2;

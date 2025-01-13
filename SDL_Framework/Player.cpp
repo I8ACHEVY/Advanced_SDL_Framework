@@ -52,7 +52,7 @@ Player::Player() {
 	mIsCaptured = false;
 
 	mScore = 0;
-	mLives = 20;
+	mLives = 2;
 
 	mMoveSpeed = 250.0f;
 	mMoveBounds = Vector2(323.0f, 1065.0f);
