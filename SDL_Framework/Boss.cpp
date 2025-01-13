@@ -227,8 +227,8 @@ void Boss::HandleDiveState() {
 void Boss::HandleCaptureBeam() {
 	mCaptureBeam->PhysEntity::Update();
 	mCaptureBeam->AnimatedTexture::Update();
-	mRedShip->PhysEntity::Update();
-	mRedShip->Update();
+	//mRedShip->PhysEntity::Update();
+	//mRedShip->Update();
 
 	if (!mCaptureBeam->IsAnimating()) {
 		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
@@ -240,29 +240,26 @@ void Boss::HandleCaptureBeam() {
 }
 
 void Boss::HandleRedShip() {
-	//if (mCaptureBeam->Zombie()) {
+	mRedShip->PhysEntity::Update();
+	mRedShip->Update();
+
+	//if (mCaptureBeam->Zombie())
 		if (mRedShip == nullptr) {
 			mRedShip = new RedShip();
 		}
-	//}
+
 	else {
 		if (mRedShip != nullptr) {
 			delete mRedShip;
 			mRedShip = nullptr;
 		}
 	}
-
-	//for (int i = 0; i < 3; ++i) {
-	//	RedShip* redShip = new RedShip(0, i, false);
-	//	redShip->Parent(this);
-	//	redShips.push_back(redShip);
-	//}
 }
 
 void Boss::UpdateRedShips() {
-	//if (mRedShip != nullptr) {
-
-	//}
+	if (mRedShip != nullptr) {
+		mRedShip->Update();
+	}
 }
 
 void Boss::RenderRedShip() {
@@ -357,11 +354,11 @@ Boss::Boss(int path, int index, bool challenge) :
 
 	mRedShip = new RedShip();
 	mRedShip->PhysEntity::Parent(this);
-	mRedShip->PhysEntity::Position(0.0f, 0.0f);
+	mRedShip->PhysEntity::Position(0.0f,-0.0f);
 	mRedShip->PhysEntity::Rotation(180.0f);
 
 	mRedShip->Parent(this);
-	mRedShip->Position(0.0f, -140.0f);
+	mRedShip->Position(0.0f, 20.0f);
 	mRedShip->Rotation(180.0f);
 }
 

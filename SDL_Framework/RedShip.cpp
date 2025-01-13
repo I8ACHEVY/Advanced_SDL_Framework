@@ -8,12 +8,21 @@ void RedShip::Hit(PhysEntity* other) {
 	}
 }
 
-bool RedShip::IgnoreCollision(PhysEntity* Entity) {
-
-}
+//bool RedShip::IgnoreCollision(PhysEntity* Entity) {
+//	if (auto* player = dynamic_cast<Player*>(entity)) {
+//
+//		if (mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0) {
+//			return false;
+//		}
+//		else {
+//			return true;
+//		}
+//	}
+//	return true;
+//}
 
 RedShip::RedShip() {
-	//Texture("PlayerShips.png", 60, 0, 60, 64), mCollider(nullptr) {
+	//'Texture("PlayerShips.png", 60, 0, 60, 64), mCollider(nullptr) {
 
 	mTag = "RedShip";
 

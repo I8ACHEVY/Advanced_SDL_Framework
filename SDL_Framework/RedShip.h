@@ -14,7 +14,7 @@ namespace SDL_Framework {
 	public:
 
 		void Hit(PhysEntity* other) override;
-		bool IgnoreCollision(PhysEntity* Entity);
+		//bool IgnoreCollision(PhysEntity* Entity);
 
 		RedShip();
 		~RedShip();
