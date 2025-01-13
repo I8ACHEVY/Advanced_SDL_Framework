@@ -138,7 +138,10 @@ bool CaptureBeam::IgnoreCollision(PhysEntity* entity) {
 }
 
 CaptureBeam::CaptureBeam()
-	: AnimatedTexture("CaptureBeam.png", 0, 0, 184, 320, 3, 0.5f, Horizontal), mCollider(nullptr) {
+	: AnimatedTexture("CaptureBeam.png", 0, 0, 184, 320, 3, 0.5f, Horizontal), 
+	mCollider(nullptr),
+	mZombie(false){
+
 	mTotalCaptureTime = 6.0f;
 	ResetAnimation();
 	mTag = "Capture";

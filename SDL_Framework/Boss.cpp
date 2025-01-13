@@ -240,17 +240,8 @@ void Boss::HandleCaptureBeam() {
 void Boss::RenderDiveState() {
 	mTexture[0]->Render();
 
-	//if (mCaptureBeam->Zombie()) {
-	//	HandleRedShip();
-	//	RenderRedShip();
-	//}
-
 	if (mCapturing && mCaptureBeam->IsAnimating()) {
-		mCaptureBeam->Render();
-
-		//if (mCaptureBeam->Zombie()) {
-		//	RenderRedShip();
-		//}
+		//mCaptureBeam->Render();
 	}
 
 	int currentPath = mIndex % 2;

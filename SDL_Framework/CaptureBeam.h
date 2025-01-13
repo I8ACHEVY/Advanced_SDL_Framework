@@ -8,8 +8,8 @@ using namespace SDL_Framework;
 
 class CaptureBeam :
 	public AnimatedTexture,
-	public PhysEntity
-{
+	public PhysEntity {
+
 public:
 	enum class Type {
 		Enemy,
@@ -39,7 +39,7 @@ private:
 	bool mColliderAdded;
 	bool mIsCaptured;
 	bool mZombie;
-	
+
 	std::string mTag;
 
 	PhysEntity* mCollider;

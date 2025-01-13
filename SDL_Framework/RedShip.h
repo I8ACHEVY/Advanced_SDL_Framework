@@ -2,6 +2,7 @@
 //#include "AnimatedTexture.h"
 #include "PhysicsManager.h"
 #include "Enemy.h"
+#include "CaptureBeam.h"
 
 namespace SDL_Framework {
 
@@ -14,7 +15,7 @@ namespace SDL_Framework {
 		//void Render() override;
 
 		//void SetVisible(bool visible);
-		//bool IsVisible();
+		bool IsVisible();
 		//bool IsAnimating();
 
 		static void CreateDivePaths();
@@ -22,7 +23,7 @@ namespace SDL_Framework {
 		void Dive(int type = 0) override;
 
 		void Hit(PhysEntity* other) override;
-		//bool IgnoreCollision(PhysEntity* Entity);
+		bool IgnoreCollision(PhysEntity* Entity);
 
 		RedShip(int path, int index, bool challenge);
 		~RedShip();
@@ -37,10 +38,11 @@ namespace SDL_Framework {
 
 		Texture* mRedShip;
 		PhysEntity* mCollider;
+		CaptureBeam* mCaptureBeam;
 		//AnimatedTexture* mDeathAnimation;
 
-	/*	bool mVisible;
-		bool mAnimating;*/
+		bool mVisible;
+		//bool mAnimating;
 		bool mEscort;
 
 		//void FlyInComplete() override;

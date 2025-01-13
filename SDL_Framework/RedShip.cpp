@@ -255,14 +255,18 @@ void RedShip::RenderDiveState() {
 }
 
 RedShip::RedShip(int path, int index, bool challenge) :
-	Enemy(path, index, challenge) { 
+	Enemy(path, index, challenge), mCaptureBeam(new CaptureBeam()) {
 
 	mTag = "RedShip";
 
-	//mVisible = false;
-
-	mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-	mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
+	if (mCaptureBeam && mCaptureBeam->Zombie()) {
+		mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
+		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
+	}
+	else {
+		mTexture[0] = new Texture("PlayerShips.png", 60, 64, 60, 64);
+		mTexture[1] = new Texture("PlayerShips.png", 60, 64, 60, 64);
+	}
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);
@@ -272,9 +276,11 @@ RedShip::RedShip(int path, int index, bool challenge) :
 
 	mType = Enemy::RedShip;
 
-	AddCollider(new BoxCollider(Vector2(10.0f, 45.0f)));
-	AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(12.0f, 5.0f));
-	AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(-12.0f, 5.0f));
+	if (mCaptureBeam && mCaptureBeam->Zombie()) {
+		AddCollider(new BoxCollider(Vector2(10.0f, 45.0f)));
+		AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(12.0f, 5.0f));
+		AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(-12.0f, 5.0f));
+	}
 
 	//mId = PhysicsManager::Instance()->RegisterEntity(this,
 	//	PhysicsManager::CollisionLayers::Hostile);
@@ -309,28 +315,19 @@ RedShip::~RedShip() {
 }
 
 //void RedShip::SetVisible(bool visible) {
-//	mVisible = visible;
-//}
-//
-//bool RedShip::IsVisible() {
-//	return mVisible;
-//}
-//
-//bool RedShip::IsAnimating() {
-//	return mAnimating;
+//	return mZombie;
+//	//mVisible = visible;
 //}
 
-//bool RedShip::IgnoreCollision(PhysEntity* Entity) {
-//	return !mVisible || mAnimating || !Active();
-//
-//	//if (auto* player = dynamic_cast<Player*>(entity)) {
-//
-//	//	if (mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0) {
-//	//		return false;
-//	//	}
-//	//	else {
-//	//		return true;
-//	//	}
-//	//}
-//	//return true;
+bool RedShip::IsVisible() {
+	if (mCaptureBeam->Zombie())
+	return mVisible;
+}
+
+//bool RedShip::IsAnimating() {
+//	return mZombie;
 //}
+
+bool RedShip::IgnoreCollision(PhysEntity* Entity) {
+	return !mCaptureBeam->Zombie() || !Active();
+}
