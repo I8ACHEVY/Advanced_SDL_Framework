@@ -5,6 +5,7 @@
 #include "Butterfly.h"
 #include "Wasp.h"
 #include "Boss.h"
+#include "RedShip.h"
 #include "Tinyxml2.h"
 
 using namespace SDL_Framework;
@@ -43,7 +44,7 @@ private:
 	Butterfly* mFormationButterflies[MAX_BUTTERFLIES];
 	Wasp* mFormationWasps[MAX_WASPS];
 	Boss* mFormationBosses[MAX_BOSSES];
-	//RedShip* mFormationRedShip[MAX_REDSHIPS];
+	RedShip* mFormationRedShip[MAX_REDSHIPS];
 
 	Butterfly* mDivingButterfly;
 	bool mSkipFirstButterfly;
@@ -61,11 +62,11 @@ private:
 	float mBossDiveDelay;
 	float mBossDiveTimer;
 
-	//RedShip* mDivingRedShip;
-	//bool mSkipFirstRedShip;
-	//float mRedShipDiveDelay;
-	//float mRedShipDiveTimer;
-	//bool mRedShipSpawn;
+	RedShip* mDivingRedShip;
+	bool mSkipFirstRedShip;
+	float mRedShipDiveDelay;
+	float mRedShipDiveTimer;
+	bool mRedShipSpawn;
 
 	std::vector<Enemy*> mEnemies;	//debug testing
 
