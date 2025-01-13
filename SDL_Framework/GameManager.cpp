@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "Level.h"
 
 namespace SDL_Framework {
 	GameManager* GameManager::sInstance = nullptr;
@@ -60,6 +61,7 @@ namespace SDL_Framework {
 				mAudioManager->Mute();
 			}
 		}
+
 		/*
 		if (mInputManager->KeyDown(SDL_SCANCODE_Q)) {
 			//mTex->Rotate(-260.0f * mTimer->DeltaTime());

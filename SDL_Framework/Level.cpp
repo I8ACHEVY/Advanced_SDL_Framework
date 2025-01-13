@@ -52,6 +52,7 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mButterflyCount = 0;
 	mWaspCount = 0;
 	mBossCount = 0;
+	//mRedShipCount = 0;
 
 	std::string fullPath = SDL_GetBasePath();
 
@@ -101,6 +102,10 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 		for (int i = 0; i < MAX_BOSSES; i++) {
 			mFormationBosses[i] = nullptr;
 		}
+
+		//for (int i = 0; i < MAX_REDSHIPS; i++) {
+		//	mFormationRedShip[i] = nullptr;
+		//}
 	}
 	
 	mCurrentFlyInPriority = 0;
@@ -124,6 +129,11 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
 	mSkipFirstBoss = true;
 	mBossDiveDelay = 5.0f;
 	mBossDiveTimer = 0.0f;
+
+	//mDivingRedShip = nullptr;
+	//mSkipFirstRedShip = false;
+	//mRedShipDiveDelay = 1.0f;
+	//mRedShipDiveTimer = 0.0f;
 
 	Enemy::CurrentPlayer(mPlayer);
 }
@@ -163,6 +173,11 @@ Level::~Level() {
 		delete mFormationBosses[i];
 		mFormationBosses[i] = nullptr;
 	}
+
+	//for (int i = 0; i < MAX_REDSHIPS; i++) {
+	//	delete mFormationRedShip[i];
+	//	mFormationRedShip[i] = nullptr;
+	//}
 
 	for (auto enemy : mEnemies) {
 		delete enemy;
@@ -340,6 +355,13 @@ bool Level::EnemyFlyingIn() {
 		}
 	}
 
+	//for (RedShip* redShip : mFormationRedShip) {
+	//	if (redShip != nullptr &&
+	//		redShip->CurrentState() == Enemy::FlyIn) {
+	//		return true;
+	//	}
+	//}
+
 	return false;
 }
 
@@ -381,6 +403,17 @@ void Level::HandleEnemyFormation() {
 			}
 		}
 	}
+
+	//for (RedShip* redShip : mFormationRedShip) {
+	//	if (redShip != nullptr) {
+	//		redShip->Update();
+
+	//		if (redShip->CurrentState() != Enemy::Dead ||
+	//			redShip->InDeathAnimation()) {
+	//			levelCleared = false;
+	//		}
+	//	}
+	//}
 
 	if (!mFormation->Locked()) {
 		if (mButterflyCount == MAX_BUTTERFLIES &&
@@ -474,12 +507,21 @@ void Level::HandleEnemyDiving() {
 							int firstEscortIndex = (index % 2 == 0) ? (index * 2) : (index * 2 - 1);
 							int secondEscortIndex = firstEscortIndex + 4;
 
+							int thirdEscortIndex = -1;			//RedShip Escort 
+							
+							//if (mFormationRedShip[i] != nullptr) {
+							//	thirdEscortIndex = mDivingBoss->Index();	// have RedShip associated with captureboss by index
+							//}
+
 							if (mFormationButterflies[firstEscortIndex]->CurrentState() == Enemy::InFormation) {
 								mFormationButterflies[firstEscortIndex]->Dive(1);
 							}
 							if (mFormationButterflies[secondEscortIndex]->CurrentState() == Enemy::InFormation) {
 								mFormationButterflies[secondEscortIndex]->Dive(1);
 							}
+							//if (thirdEscortIndex != -1 && mFormationRedShip[thirdEscortIndex]->CurrentState() == PhysEntity::InFormation) {
+							//	mFormationRedShip[thirdEscortIndex]->Dive(1);
+							//}
 						}
 						mSkipFirstBoss = !mSkipFirstBoss;
 						mCaptureDive = !mCaptureDive;
@@ -497,6 +539,35 @@ void Level::HandleEnemyDiving() {
 			mDivingBoss = nullptr;
 		}
 	}
+
+
+	//if (mDivingRedShip == nullptr) {
+	//	mRedShipDiveTimer += mTimer->DeltaTime();
+
+	//	if (mRedShipDiveTimer >= mRedShipDiveDelay) {
+	//		bool skipped = false;
+
+	//		for (int i = MAX_REDSHIPS - 1; i >= 0; i--) {
+	//			if (mFormationRedShip[i] != nullptr
+	//				&& mFormationRedShip[i]->CurrentState() == Enemy::InFormation) {
+	//				if (!mSkipFirstRedShip || (mSkipFirstRedShip && skipped)) {
+	//					mDivingRedShip = mFormationRedShip[i];
+	//					mDivingRedShip->Dive();
+	//					mSkipFirstRedShip = !mSkipFirstRedShip;
+	//					break;
+	//				}
+	//			}
+	//			skipped = true;
+	//		}
+
+	//		mRedShipDiveTimer = 0.0f;
+	//	}
+	//}
+	//else {
+	//	if (mDivingRedShip->CurrentState() != Enemy::Diving) {
+	//		mDivingRedShip = nullptr;
+	//	}
+	//}
 }
 
 void Level::Update() {
@@ -532,6 +603,7 @@ void Level::Update() {
 }
 
 void Level::Render() {
+
 	if (!mStageStarted) {
 		if (mLabelTimer > mStageLabelOnScreen &&
 			mLabelTimer < mStageLabelOffScreen) {
@@ -545,7 +617,7 @@ void Level::Render() {
 		}
 	}
 
-		else {
+	else {
 		if (!mChallengeStage) {
 			for (Butterfly* butterfly : mFormationButterflies) {
 				if (butterfly != nullptr) {
@@ -564,6 +636,13 @@ void Level::Render() {
 					boss->Render();
 				}
 			}
+
+
+			//for (RedShip* redShip : mFormationRedShip) {
+			//	if (redShip != nullptr) {
+			//		redShip->Render();
+			//	}
+			//}
 		}
 
 		else {
@@ -576,8 +655,8 @@ void Level::Render() {
 			if (mRespawnTimer >= mRespawnLabelOnScreen) {
 				mReadyLabel->Render();
 			}
-			
-			if (mGameOverTimer >= mGameOverLabelOnScreen){
+
+			if (mGameOverTimer >= mGameOverLabelOnScreen) {
 				mGameOverLabel->Render();
 			}
 		}

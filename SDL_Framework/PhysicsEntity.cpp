@@ -104,5 +104,9 @@ namespace SDL_Framework {
 	Collider* PhysEntity::GetBroadPhaseCollider() const {
 		return mBroadPhaseCollider;
 	}
+
+	Collider* PhysEntity::GetNarrowPhaseCollider() const {
+		return mNarrowPhaseCollider;
+	}
 }
 

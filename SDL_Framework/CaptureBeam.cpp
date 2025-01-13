@@ -56,56 +56,61 @@ void CaptureBeam::Hit(PhysEntity* other) {
 	if (player) {
 
 		Collider* broadPhaseCollider = other->GetBroadPhaseCollider();
+		Collider* narrowPhaseCollider = other->GetBroadPhaseCollider();
+
+		if (narrowPhaseCollider) {
+			std::cout << "Player is in both" << std::endl;
+			mIsCaptured = true;
+
+			if (mIsCaptured) {
+				Vector2 beamPosition = AnimatedTexture::Position(World);
+				Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - 80.0f);//-160
+				Vector2 dir = beamOrigin - player->Position(World);
+
+				float pullSpeed = 100.0f;
+				player->Translate(dir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
+
+				player->Rotate(260.0f * mTimer->DeltaTime());
+
+				std::cout << "Current Player Rotation: " << player->Rotation(World) << std::endl;
+
+				float escapeDistance = 100.0f;
+				float distSquared = dir.MagnitudeSqr();
+
+				if (distSquared < escapeDistance * escapeDistance) {
+					mIsCaptured = false;
+					mZombie = true;
+					std::cout << "Zombie Ship" << std::endl;
+				}
+			}
+		}
+
 		if (broadPhaseCollider && broadPhaseCollider->GetType() == Collider::ColliderType::Circle) {
 			std::cout << "Player is in circle" << std::endl;
 
-			for (auto* collider : other->mCollider()) {
-				if (collider->GetType() == Collider::ColliderType::Box) {
-					boxCollider = collider;
-					break;
-				}
-			}
+			mOriginalRotation = player->Rotation(World);
+			mOriginalPositionY = player->Position(World).y;
+			std::cout << "Original rotation and position stored" << std::endl;
 
-			if (boxCollider) {
-				std::cout << "Player is in both" << std::endl;
+			mIsCaptured = false;
+		}
 
-				if (mIsCaptured) {
-					Vector2 beamPosition = AnimatedTexture::Position(World);
-					Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - 80.0f);//-160
-					Vector2 dir = beamOrigin - player->Position(World);
+		if (!broadPhaseCollider || (broadPhaseCollider->GetType() !=
+			Collider::ColliderType::Box && broadPhaseCollider->GetType() !=
+			Collider::ColliderType::Circle)) {
 
-					//float minDistSquared = std::numeric_limits<float>::max();
+			std::cout << "Player is in circle" << std::endl;
 
-					float pullSpeed = 100.0f;
-					player->Translate(dir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
+			if (mIsCaptured) {
+				std::cout << "Player Escaping: Resetting Rotation" << std::endl;
+				float pullSpeed = 150.0f;
 
-					player->Rotate(260.0f * mTimer->DeltaTime());
+				player->Rotate(mOriginalRotation);
 
-					std::cout << "Current Player Rotation: " << player->Rotation(World) << std::endl;
+				Vector2 currentPos = player->Position(World);
 
-					float escapeDistance = 100.0f;
-					float distSquared = dir.MagnitudeSqr();
-
-					if (distSquared > escapeDistance * escapeDistance) {
-						//minDistSquared = distSquared;
-						std::cout << "Player Escaping: Resetting Rotation" << std::endl;
-						mIsCaptured = false;
-
-						//Vector2 currentPosition = player->Position(World);
-
-						//float homePositionX = currentPosition.x;
-						//float homePositionY = Graphics::SCREEN_HEIGHT * 0.8f;
-						// 
-						//if (currentPosition.y > homePositionY) {
-						Vector2 returnDir = Vector2(player->Position(World).y - Graphics::SCREEN_HEIGHT * 0.8f);
-						player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
-						player->Rotate(90.0f);
-						//}
-						//else {
-						   // //player->SetPosition(Vector2(homePositionX, homePositionY), World);
-						//}
-					}
-				}
+				Vector2 returnDir = Vector2(currentPos.x - mOriginalPositionY);//Graphics::SCREEN_HEIGHT * 0.8f)
+				player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
 			}
 		}
 	}
@@ -115,10 +120,14 @@ bool CaptureBeam::IsCaptured() const {
 	return mIsCaptured;
 }
 
+bool CaptureBeam::Zombie() const {
+	return mZombie;
+}
+
 bool CaptureBeam::IgnoreCollision(PhysEntity* entity) {
 	if (auto* player = dynamic_cast<Player*>(entity)) {
 
-		if (mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0) {	//add if and else from just a return 4
+		if (mCaptureTimer <= 2.1f || mCaptureTimer >= mTotalCaptureTime - 2.0) {
 			return false;
 		}
 		else {

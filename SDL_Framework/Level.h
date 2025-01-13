@@ -33,14 +33,17 @@ private:
 	static const int MAX_BUTTERFLIES = 16;
 	static const int MAX_WASPS = 20;
 	static const int MAX_BOSSES = 4;
+	static const int MAX_REDSHIPS = 4;
 
 	int mButterflyCount;
 	int mWaspCount;
 	int mBossCount;
+	int mRedShipCount;
 
 	Butterfly* mFormationButterflies[MAX_BUTTERFLIES];
 	Wasp* mFormationWasps[MAX_WASPS];
 	Boss* mFormationBosses[MAX_BOSSES];
+	//RedShip* mFormationRedShip[MAX_REDSHIPS];
 
 	Butterfly* mDivingButterfly;
 	bool mSkipFirstButterfly;
@@ -57,6 +60,12 @@ private:
 	bool mSkipFirstBoss;
 	float mBossDiveDelay;
 	float mBossDiveTimer;
+
+	//RedShip* mDivingRedShip;
+	//bool mSkipFirstRedShip;
+	//float mRedShipDiveDelay;
+	//float mRedShipDiveTimer;
+	//bool mRedShipSpawn;
 
 	std::vector<Enemy*> mEnemies;	//debug testing
 

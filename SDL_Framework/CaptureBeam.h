@@ -25,6 +25,7 @@ public:
 	void Hit(PhysEntity* other) override;
 	bool IgnoreCollision(PhysEntity* Entity);
 	bool IsCaptured() const;
+	bool Zombie() const;
 
 
 private:
@@ -32,11 +33,12 @@ private:
 	float mCaptureTimer;
 	float mOriginalRotation;
 
-	Vector2 mOriginalPosition;
+	Vector2 mOriginalPositionY;
 	Vector2 mBeamOrigin;
 
 	bool mColliderAdded;
 	bool mIsCaptured;
+	bool mZombie;
 	
 	std::string mTag;
 

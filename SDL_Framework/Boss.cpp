@@ -171,8 +171,7 @@ Vector2 Boss::LocalFormationPosition() {
 	retVal.x =
 		(sFormation->GridSize().x + sFormation->GridSize().x *
 			2 * (mIndex / 2)) * (float)dir;
-	retVal.y =
-		-sFormation->GridSize().y;
+	retVal.y = -sFormation->GridSize().y;
 
 	return retVal;
 }
@@ -228,6 +227,8 @@ void Boss::HandleDiveState() {
 void Boss::HandleCaptureBeam() {
 	mCaptureBeam->PhysEntity::Update();
 	mCaptureBeam->AnimatedTexture::Update();
+	mRedShip->PhysEntity::Update();
+	mRedShip->Update();
 
 	if (!mCaptureBeam->IsAnimating()) {
 		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
@@ -236,18 +237,59 @@ void Boss::HandleCaptureBeam() {
 			mCapturing = false;
 		}
 	}
+}
 
-	if (mIsCaptured) {
-
-		mRedShip->Render();
+void Boss::HandleRedShip() {
+	//if (mCaptureBeam->Zombie()) {
+		if (mRedShip == nullptr) {
+			mRedShip = new RedShip();
+		}
+	//}
+	else {
+		if (mRedShip != nullptr) {
+			delete mRedShip;
+			mRedShip = nullptr;
+		}
 	}
+
+	//for (int i = 0; i < 3; ++i) {
+	//	RedShip* redShip = new RedShip(0, i, false);
+	//	redShip->Parent(this);
+	//	redShips.push_back(redShip);
+	//}
+}
+
+void Boss::UpdateRedShips() {
+	//if (mRedShip != nullptr) {
+
+	//}
+}
+
+void Boss::RenderRedShip() {
+	//if (mCaptureBeam->Zombie()) {
+
+		if (mRedShip != nullptr) {
+			mRedShip->Render();
+		}
+	//}
 }
 
 void Boss::RenderDiveState() {
 	mTexture[0]->Render();
 
+	if (mCaptureBeam->Zombie()) {
+		HandleRedShip();
+		RenderRedShip();
+		//mRedShip->Render();
+	}
+
 	if (mCapturing && mCaptureBeam->IsAnimating()) {
 		mCaptureBeam->Render();
+
+		if (mCaptureBeam->Zombie()) {
+			RenderRedShip();
+			//mRedShip->Render();
+		}
 	}
 
 	int currentPath = mIndex % 2;
@@ -313,10 +355,14 @@ Boss::Boss(int path, int index, bool challenge) :
 
 	mWasHit = false;
 
-	mRedShip = new Texture("PlayerShips.png", 60, 64, 60, 64);
+	mRedShip = new RedShip();
+	mRedShip->PhysEntity::Parent(this);
+	mRedShip->PhysEntity::Position(0.0f, 0.0f);
+	mRedShip->PhysEntity::Rotation(180.0f);
+
 	mRedShip->Parent(this);
-	mRedShip->Position(0.0f, 40.0f);
-	mRedShip->Scale(Vector2(0.7f, 0.7f));
+	mRedShip->Position(0.0f, -140.0f);
+	mRedShip->Rotation(180.0f);
 }
 
 Boss::~Boss() {
@@ -325,5 +371,4 @@ Boss::~Boss() {
 
 	delete mRedShip;
 	mRedShip = nullptr;
-
 }

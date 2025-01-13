@@ -3,37 +3,31 @@
 
 
 void Player::HandleMovement() {
+	if (!mIsCaptured) {
 
-	if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
-		Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+		if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
+			Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+		}
+		else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
+			Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+		}
+
+		Vector2 pos = Position(Local);
+		if (pos.x < mMoveBounds.x) {
+			pos.x = mMoveBounds.x;
+		}
+
+		else if (pos.x > mMoveBounds.y) {
+			pos.x = mMoveBounds.y;
+		}
+
+		Position(pos);
 	}
-	else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
-		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+	else {
+		return;
 	}
 
-	Vector2 pos = Position(Local);
-	if (pos.x < mMoveBounds.x) {
-		pos.x = mMoveBounds.x;
-	}
-
-	else if (pos.x > mMoveBounds.y) {
-		pos.x = mMoveBounds.y;
-	}
-
-	Position(pos);
 }
-
-//void Player::HandleCaptureMovement() {
-//	Vector2 beamPosition;
-//	Vector2 dir = beamPosition - Position();
-//	float distance = dir.Magnitude();
-//	float pullSpeed = 100.0f;
-//	Vector2 pullVector = dir.Normalized() * pullSpeed * mTimer->DeltaTime();
-//	Position(Position() + pullVector);
-//
-//	//mAnimating = false;
-//	//mWasHit = false;
-//}
 
 void Player::HandleFiring() {
 	if (mInput->KeyPressed(SDL_SCANCODE_SPACE) || mInput->MouseButtonPressed(InputManager::Left)) {
@@ -147,13 +141,13 @@ void Player::Hit(PhysEntity* other) {
 		mAnimating = false;
 		mWasHit = false;
 		
-		//if (!mIsCaptured) {
-		//	mOriginalPosition = Position(World);
-		//	mOriginalRotation = Rotation();
-		//}
 		mIsCaptured = true;
 	}
-	else if (other->GetTag() == "Butterfly" || other->GetTag() == "Wasp" || other->GetTag() == "Boss") {
+	else if (other->GetTag() == "Butterfly" || 
+		other->GetTag() == "Wasp" || 
+		other->GetTag() == "Boss" ||
+		other->GetTag() == "RedShip") {
+
 		if (!mIsCaptured) {
 			mLives -= 1;
 			mAnimating = true;
@@ -177,18 +171,6 @@ void Player::Update() {
 	else {
 		if (Active()) {
 			if (mIsCaptured) {
-
-				//Vector2 beamOrigin = Vector2(0.0f, 0.0f);
-				//Vector2 dir = beamOrigin - Position(World);
-				//float pullSpeed = 100.0f;
-				//Position(Position(World) + dir.Normalized() * pullSpeed * mTimer->DeltaTime());
-				//float angleToBeam = atan2(beamOrigin.y - Position(World).y, beamOrigin.x - Position(World).x);
-				//Rotate(angleToBeam);
-
-				//float distSquared = dir.x * dir.x + dir.y * dir.y;
-				//if (distSquared < 100.0f * 100.0f) {
-				//	mIsCaptured = false;
-				//}
 
 				HandleFiring();
 			}

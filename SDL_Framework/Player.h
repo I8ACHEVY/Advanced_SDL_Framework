@@ -31,7 +31,6 @@ public:
 
 	bool IgnoreCollision() override;
 	void Hit(PhysEntity* other) override;
-	//void HandleCaptureMovement();
 
 private:
 	static const int MAX_BULLETS = 2;

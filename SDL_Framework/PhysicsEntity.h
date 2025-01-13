@@ -23,12 +23,14 @@ namespace SDL_Framework{
 		std::string GetTag() const;
 
 		Collider* GetBroadPhaseCollider() const;
+		Collider* GetNarrowPhaseCollider() const;
 
 	protected:
 		std::vector<Collider*> mColliders;
 		std::string mTag;
 
 		Collider* mBroadPhaseCollider;
+		Collider* mNarrowPhaseCollider;
 
 		virtual bool IgnoreCollision();
 
