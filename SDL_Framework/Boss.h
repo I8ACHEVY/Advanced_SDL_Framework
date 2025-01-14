@@ -17,7 +17,6 @@ namespace SDL_Framework {
 		Boss(int path, int index, bool challenge);
 		~Boss();
 
-		void HandleRedShip();
 		void UpdateRedShips();
 		void RenderRedShip();
 
@@ -36,6 +35,9 @@ namespace SDL_Framework {
 		bool mIsCaptured;
 		CaptureBeam* mCaptureBeam;
 		RedShip* mRedShip;
+
+		void HandleZombieShip();
+		void RenderZombieShip();
 
 		void HandleCaptureBeam();
 

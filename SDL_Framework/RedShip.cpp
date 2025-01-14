@@ -259,14 +259,14 @@ RedShip::RedShip(int path, int index, bool challenge) :
 
 	mTag = "RedShip";
 
-	if (mCaptureBeam && mCaptureBeam->Zombie()) {
+	//if (mCaptureBeam && mCaptureBeam->Zombie()) {
 		mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
 		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-	}
-	else {
-		mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-	}
+	//}
+	//else {
+	//	mTexture[0] = new Texture("PlayerShips.png", 60, 64, 60, 64);
+	//	mTexture[1] = new Texture("PlayerShips.png", 60, 64, 60, 64);
+	//}
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);
@@ -338,3 +338,23 @@ void RedShip::UpdateTexture(int index) {
 bool RedShip::IgnoreCollision(PhysEntity* Entity) {
 	return !mCaptureBeam->Zombie() || !Active();
 }
+
+/* XML RedShip flyIn spawning
+
+<Spawn path="0" priority="5">
+	<Enemy type="RedShip" index="0"/>
+</Spawn>
+
+<Spawn path="1" priority="5">
+	<Enemy type="RedShip" index="1"/>
+</Spawn>
+
+<Spawn path="2" priority="5">
+	<Enemy type="RedShip" index="2"/>
+</Spawn>
+
+<Spawn path="3" priority="5">
+	<Enemy type="RedShip" index="3"/>
+</Spawn>
+
+*/

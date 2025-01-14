@@ -428,8 +428,7 @@ void Level::HandleEnemyFormation() {
 	if (!mFormation->Locked()) {
 		if (mButterflyCount == MAX_BUTTERFLIES &&
 			mWaspCount == MAX_WASPS &&
-			mBossCount == MAX_BOSSES &&
-			mRedShipCount == MAX_REDSHIPS) {
+			mBossCount == MAX_BOSSES ) { //&& mRedShipCount == MAX_REDSHIPS
 			if (!EnemyFlyingIn()) {
 				mFormation->Lock();
 			}
