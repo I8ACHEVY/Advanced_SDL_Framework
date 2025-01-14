@@ -283,6 +283,7 @@ RedShip::RedShip(int path, int index, bool challenge) :
 	}
 
 	//mId = PhysicsManager::Instance()->RegisterEntity(this,
+	//
 	//	PhysicsManager::CollisionLayers::Hostile);
 
 	//mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
