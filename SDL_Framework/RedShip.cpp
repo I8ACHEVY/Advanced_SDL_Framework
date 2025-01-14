@@ -264,8 +264,8 @@ RedShip::RedShip(int path, int index, bool challenge) :
 		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
 	}
 	else {
-		mTexture[0] = new Texture("PlayerShips.png", 60, 64, 60, 64);
-		mTexture[1] = new Texture("PlayerShips.png", 60, 64, 60, 64);
+		mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
+		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
 	}
 
 	for (auto texture : mTexture) {
@@ -274,13 +274,13 @@ RedShip::RedShip(int path, int index, bool challenge) :
 		texture->Scale(Vector2(0.7f, 0.7f));
 	}
 
-	mType = Enemy::RedShip;
+	mType = Enemy::RedShips;
 
-	if (mCaptureBeam && mCaptureBeam->Zombie()) {
+	//if (mCaptureBeam && mCaptureBeam->Zombie()) {
 		AddCollider(new BoxCollider(Vector2(10.0f, 45.0f)));
 		AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(12.0f, 5.0f));
 		AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(-12.0f, 5.0f));
-	}
+	//}
 
 	//mId = PhysicsManager::Instance()->RegisterEntity(this,
 	//

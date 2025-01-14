@@ -306,6 +306,11 @@ Boss::Boss(int path, int index, bool challenge) :
 	//AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 
 	mWasHit = false;
+
+	if (mCaptureBeam->Zombie()) {
+		mRedShip = new RedShip(0, 0, false);
+		mRedShip->PhysEntity::Parent(this);
+	}
 }
 
 Boss::~Boss() {
