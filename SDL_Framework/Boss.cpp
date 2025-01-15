@@ -202,18 +202,9 @@ void Boss::HandleDiveState() {
 				mCapturing = true;
 				Rotation(180.0f);
 
-				if (mCaptureBeam && mCaptureBeam->Zombie()) {
-					mRedShip->Position(Position());
-				}
 			}
 			else {
 				Position(Vector2(WorldFormationPosition().x, 20.0f));
-
-				if (mCaptureBeam && mCaptureBeam->Zombie()) {
-					mRedShip->Parent(nullptr);
-					mRedShip->CurrentState() == Enemy::InFormation;
-					//RedShip* InFormation();
-				}
 			}
 		}
 	}
@@ -244,19 +235,6 @@ void Boss::HandleCaptureBeam() {
 			Position(WorldFormationPosition().x, -20.0f);
 			mCapturing = false;
 		}
-	}
-}
-
-void Boss::HandleZombieShip() {
-	mRedShip->Enemy::Update();
-}
-
-void Boss::RenderZombieShip() {
-	if (mCaptureBeam && mCaptureBeam->Zombie()) {
-
-		RedShip* newZombieShip = new RedShip(0, mIndex, false);
-		newZombieShip->Parent(this);
-		//mRedShipCount++;
 	}
 }
 
@@ -326,13 +304,9 @@ Boss::Boss(int path, int index, bool challenge) :
 	mCaptureBeam->AnimatedTexture::Position(0.0f, -140.0f);
 	mCaptureBeam->AnimatedTexture::Rotation(180.0f);
 
-	//AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
+	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 
 	mWasHit = false;
-
-	mRedShip = new RedShip(path, index, false);
-	mRedShip->Enemy::Parent(this);
-	//mRedShip->AnimatedTexture::Parent(this);
 }
 
 Boss::~Boss() {

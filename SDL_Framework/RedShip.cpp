@@ -89,7 +89,7 @@ void RedShip::CreateDivePaths() {
 	path->Sample(&sDivePaths[currentPath]);
 	delete path;
 
-	currentPath = 2;		//escort path
+	currentPath = 2;
 	path = new BezierPath();
 
 	path->AddCurve({
@@ -264,7 +264,7 @@ RedShip::RedShip(int path, int index, bool challenge) :
 		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
 	//}
 	//else {
-	//	mTexture[0] = new Texture("PlayerShips.png", 60, 64, 60, 64);
+	//	mTexture[0] = new Texture("PlayerShips.png", 60, 64, 60, 64);		//invisable texture
 	//	mTexture[1] = new Texture("PlayerShips.png", 60, 64, 60, 64);
 	//}
 
@@ -336,7 +336,7 @@ void RedShip::UpdateTexture(int index) {
 }
 
 bool RedShip::IgnoreCollision(PhysEntity* Entity) {
-	return !mCaptureBeam->Zombie() || !Active();
+	//return !mCaptureBeam->Zombie() || !Active();
 }
 
 /* XML RedShip flyIn spawning

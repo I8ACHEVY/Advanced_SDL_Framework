@@ -3,7 +3,7 @@
 #include "CaptureBeam.h"
 #include "Random.h"
 #include "Texture.h"
-#include "RedShip.h"
+//#include "RedShip.h"
 
 namespace SDL_Framework {
 
@@ -16,9 +16,6 @@ namespace SDL_Framework {
 
 		Boss(int path, int index, bool challenge);
 		~Boss();
-
-		void UpdateRedShips();
-		void RenderRedShip();
 
 	private:
 		static std::vector<std::vector<Vector2>> sDivePaths;
@@ -34,10 +31,7 @@ namespace SDL_Framework {
 
 		bool mIsCaptured;
 		CaptureBeam* mCaptureBeam;
-		RedShip* mRedShip;
-
-		void HandleZombieShip();
-		void RenderZombieShip();
+		//RedShip* mRedShip;
 
 		void HandleCaptureBeam();
 
