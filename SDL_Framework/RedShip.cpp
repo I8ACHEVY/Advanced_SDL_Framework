@@ -321,18 +321,18 @@ void RedShip::CapturedPlayer() {
 }
 
 void RedShip::UpdateTexture(int index) {
-	if (index == mBossIndex + 1) {
-		if (mCaptureBeam->Zombie()) {
-			mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-			mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-		}
+	//if (index == mBossIndex + 1) {
+	//	if (mCaptureBeam->Zombie()) {
+	//		mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
+	//		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
+	//	}
 
-		for (auto texture : mTexture) {
-			texture->Parent(this);
-			texture->Position(Vec2_Zero);
-			texture->Scale(Vector2(0.7f, 0.7f));
-		}
-	}
+	//	for (auto texture : mTexture) {
+	//		texture->Parent(this);
+	//		texture->Position(Vec2_Zero);
+	//		texture->Scale(Vector2(0.7f, 0.7f));
+	//	}
+	//}
 }
 
 bool RedShip::IgnoreCollision(PhysEntity* Entity) {
