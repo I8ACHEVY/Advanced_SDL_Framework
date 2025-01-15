@@ -3,28 +3,52 @@
 
 
 void Player::HandleMovement() {
-	if (!mIsCaptured) {
+	//if (CaptureRange()) {
+	//	if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
+	//		Translate(-Vec2_Right * (mMoveSpeed * 0.2f) * mTimer->DeltaTime(), World);
+	//	}
+	//	else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
+	//		Translate(Vec2_Right * (mMoveSpeed * 0.2f) * mTimer->DeltaTime(), World);
+	//	}
 
-		if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
-			Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
-		}
-		else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
-			Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+	//	Vector2 pos = Position(Local);
+	//	if (pos.x < mMoveBounds.x) {
+	//		pos.x = mMoveBounds.x;
+	//	}
+
+	//	else if (pos.x > mMoveBounds.y) {
+	//		pos.x = mMoveBounds.y;
+	//	}
+
+	//	Position(pos);
+	//
+	//}
+
+	if (!CaptureRange()) {
+
+		if (IsCapturing()) {
+			return;
 		}
 
-		Vector2 pos = Position(Local);
-		if (pos.x < mMoveBounds.x) {
-			pos.x = mMoveBounds.x;
-		}
+		else {
+			if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
+				Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+			}
+			else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
+				Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+			}
 
-		else if (pos.x > mMoveBounds.y) {
-			pos.x = mMoveBounds.y;
-		}
+			Vector2 pos = Position(Local);
+			if (pos.x < mMoveBounds.x) {
+				pos.x = mMoveBounds.x;
+			}
 
-		Position(pos);
-	}
-	else {
-		return;
+			else if (pos.x > mMoveBounds.y) {
+				pos.x = mMoveBounds.y;
+			}
+
+			Position(pos);
+		}
 	}
 
 }
@@ -46,10 +70,11 @@ Player::Player() {
 	mInput = InputManager::Instance();
 	mAudio = AudioManager::Instance();
 
+	mTag = "Player";
 	mVisible = false;
 	mAnimating = false;
 	mWasHit = false;
-	mIsCaptured = false;
+	//mIsCapturing = false;
 
 	mScore = 0;
 	mLives = 2;
@@ -126,8 +151,27 @@ bool Player::WasHit() {
 	return mWasHit;
 }
 
-bool Player::IsCaptured() const{
-	return mIsCaptured;
+void Player::SetCaptureRange(bool value) {
+	mCaptureRange = value;
+}
+bool Player::CaptureRange() const {
+	return mCaptureRange;
+}
+
+void Player::SetIsCapturing(bool value) { 
+	mIsCapturing = value;
+}
+
+bool Player::IsCapturing() const {
+	return mIsCapturing;
+}
+
+void Player::SetZombie(bool value) {
+	mZombie = value;
+}
+
+bool Player::Zombie() const {
+	return mZombie;
 }
 
 bool Player::IgnoreCollision() {
@@ -137,18 +181,19 @@ bool Player::IgnoreCollision() {
 void Player::Hit(PhysEntity* other) {
 
 	std::cout << "Player Hit by Tag" << other->GetTag() << std::endl;
+
 	if (other->GetTag() == "Capture") {
 		mAnimating = false;
 		mWasHit = false;
-		
-		mIsCaptured = true;
+		mCaptureRange = true;
+	
 	}
 	else if (other->GetTag() == "Butterfly" || 
 		other->GetTag() == "Wasp" || 
 		other->GetTag() == "Boss" ||
 		other->GetTag() == "RedShip") {
 
-		if (!mIsCaptured) {
+		 if (!IsCapturing()){
 			mLives -= 1;
 			mAnimating = true;
 			mDeathAnimation->ResetAnimation();
@@ -160,9 +205,12 @@ void Player::Hit(PhysEntity* other) {
 }
 
 void Player::Update() {
-	if (mAnimating && !mIsCaptured){
+	if (mAnimating && !IsCapturing()){
 		mDeathAnimation->Update();
 		mAnimating = mDeathAnimation->IsAnimating();
+		SetCaptureRange(false);
+		SetIsCapturing(false);
+		SetZombie(false);
 
 		if (mWasHit) {
 			mWasHit = false;
@@ -170,12 +218,12 @@ void Player::Update() {
 	}
 	else {
 		if (Active()) {
-			if (mIsCaptured) {
+			if (IsCapturing()) {
 
 				HandleFiring();
 			}
 			else {
-				if (!mIsCaptured) {
+				if (!IsCapturing()) {
 					HandleMovement();
 					HandleFiring();
 				}

@@ -4,7 +4,9 @@ void Level::StartStage() {
 	mStageStarted = true;
 }
 
-Level::Level(int stage, PlaySideBar* sideBar, Player* player) {
+Level::Level(int stage, PlaySideBar* sideBar, Player* player) : 
+	zPlayer(player){
+
 	mTimer = Timer::Instance();
 	mSideBar = sideBar;
 	mSideBar->SetLevel(stage);
@@ -307,11 +309,11 @@ void Level::HandleEnemySpawning() {
 
 					else if (type.compare("RedShip") == 0) {
 						 if (!mChallengeStage) {
-							 mFormationRedShip[index] = new RedShip(path, index, false);
+							 mFormationRedShip[index] = new RedShip(path, index, false, zPlayer);
 							 mRedShipCount++;
 						 }
 						 else {
-							 mEnemies.push_back(new RedShip(path, index, false));
+							 mEnemies.push_back(new RedShip(path, index, false, zPlayer));
 						 }
 					 }
 

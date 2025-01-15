@@ -254,8 +254,8 @@ void RedShip::RenderDiveState() {
 
 }
 
-RedShip::RedShip(int path, int index, bool challenge) :
-	Enemy(path, index, challenge) {
+RedShip::RedShip(int path, int index, bool challenge, Player* player) :
+	Enemy(path, index, challenge), zPlayer(player) {
 
 	mTag = "RedShip";
 
@@ -316,7 +316,7 @@ RedShip::~RedShip() {
 }
 
 void RedShip::CapturedPlayer() {
-	if (mCaptureBeam->Zombie())
+	if (zPlayer->Zombie())
 	UpdateTexture(mIndex);
 }
 
@@ -336,7 +336,7 @@ void RedShip::UpdateTexture(int index) {
 }
 
 bool RedShip::IgnoreCollision(PhysEntity* Entity) {
-	//return !mCaptureBeam->Zombie() || !Active();
+	return !zPlayer->Zombie() || !Active();
 }
 
 /* XML RedShip flyIn spawning

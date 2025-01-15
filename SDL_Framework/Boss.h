@@ -29,7 +29,7 @@ namespace SDL_Framework {
 
 		Vector2 LocalFormationPosition() override;
 
-		bool mIsCaptured;
+		bool mIsCapturing;
 		CaptureBeam* mCaptureBeam;
 		//RedShip* mRedShip;
 

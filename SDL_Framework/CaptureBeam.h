@@ -24,25 +24,26 @@ public:
 
 	void Hit(PhysEntity* other) override;
 	bool IgnoreCollision(PhysEntity* Entity);
-	bool IsCaptured() const;
-	bool Zombie() const;
-
 
 private:
 	float mTotalCaptureTime;
 	float mCaptureTimer;
 	float mOriginalRotation;
+	float mCapturedCoolDownTimer;
 
 	Vector2 mOriginalPositionY;
 	Vector2 mBeamOrigin;
 
 	bool mColliderAdded;
-	bool mIsCaptured;
-	bool mZombie;
+	bool mIsCapturedCoolDown;
 
 	std::string mTag;
 
 	PhysEntity* mCollider;
+	Player* mIsCapturing;
+	Player* mZombie;
+	Player* mCaptureRange;
 
 	void RunAnimation() override;
+	bool IsCapturedCoolDown(bool value);
 };

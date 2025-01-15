@@ -47,22 +47,28 @@ void CaptureBeam::RunAnimation() {
 }
 
 void CaptureBeam::Hit(PhysEntity* other) {
+	Player* player = dynamic_cast<Player*>(other);
+
 	if (IgnoreCollision(other)) {
 		return;
 	}
-	std::cout << "Capture Beam Contact" << std::endl;
 
-	Player* player = dynamic_cast<Player*>(other);
-	if (player) {
+	std::cout << "Capture Beam Contact " << other->GetTag() << std::endl;
+	if (other->GetTag() == "Player") {
+
+		if (!player->CaptureRange()) {
+			player->SetCaptureRange(true);
+		}
 
 		Collider* broadPhaseCollider = other->GetBroadPhaseCollider();
 		Collider* narrowPhaseCollider = other->GetBroadPhaseCollider();
 
 		if (narrowPhaseCollider) {
 			std::cout << "Player is in both" << std::endl;
-			mIsCaptured = true;
+			player->SetIsCapturing(true);
+			player->SetCaptureRange(false);
 
-			if (mIsCaptured) {
+			if (player->IsCapturing()) {
 				Vector2 beamPosition = AnimatedTexture::Position(World);
 				Vector2 beamOrigin = Vector2(beamPosition.x, beamPosition.y - 80.0f);//-160
 				Vector2 dir = beamOrigin - player->Position(World);
@@ -74,13 +80,22 @@ void CaptureBeam::Hit(PhysEntity* other) {
 
 				std::cout << "Current Player Rotation: " << player->Rotation(World) << std::endl;
 
-				float escapeDistance = 100.0f;
+				float escapeDistance = 5.0f;
 				float distSquared = dir.MagnitudeSqr();
 
 				if (distSquared < escapeDistance * escapeDistance) {
-					mIsCaptured = false;
-					mZombie = true;
+					player->SetZombie(true);
+					IsCapturedCoolDown(true);
 					std::cout << "Zombie Ship" << std::endl;
+
+					mCapturedCoolDownTimer = 0.0f;
+
+					mCapturedCoolDownTimer += mTimer->DeltaTime();
+
+					if (mCapturedCoolDownTimer >= 2.0f) {
+						player->SetIsCapturing(false);
+						IsCapturedCoolDown(false);
+					}
 				}
 			}
 		}
@@ -88,40 +103,50 @@ void CaptureBeam::Hit(PhysEntity* other) {
 		if (broadPhaseCollider && broadPhaseCollider->GetType() == Collider::ColliderType::Circle) {
 			std::cout << "Player is in circle" << std::endl;
 
-			mOriginalRotation = player->Rotation(World);
-			mOriginalPositionY = player->Position(World).y;
-			std::cout << "Original rotation and position stored" << std::endl;
+			//mOriginalRotation = player->Rotation(World);
+			//mOriginalPositionY = player->Position(World).y;
+			//std::cout << "Original rotation and position stored" << std::endl;
 
-			mIsCaptured = false;
+			player->SetIsCapturing(false);
+			player->SetCaptureRange(false);
+
+			//float pullSpeed = 150.0f;
+
+			//player->Rotate(mOriginalRotation);
+
+			//Vector2 currentPos = player->Position(World);
+
+			//Vector2 returnDir = Vector2(currentPos.x - mOriginalPositionY);//Graphics::SCREEN_HEIGHT * 0.8f)
+			//player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
+
 		}
 
-		if (!broadPhaseCollider || (broadPhaseCollider->GetType() !=
-			Collider::ColliderType::Box && broadPhaseCollider->GetType() !=
-			Collider::ColliderType::Circle)) {
+		
 
-			std::cout << "Player is in circle" << std::endl;
+			//if (player->IsCapturing()) {
+			//	std::cout << "Player Escaping: Resetting Rotation" << std::endl;
+			//	player->SetIsCapturing(false);
+			//	player->SetCaptureRange(false);
 
-			if (mIsCaptured) {
-				std::cout << "Player Escaping: Resetting Rotation" << std::endl;
-				float pullSpeed = 150.0f;
+			//	float pullSpeed = 150.0f;
 
-				player->Rotate(mOriginalRotation);
+			//	player->Rotate(mOriginalRotation);
 
-				Vector2 currentPos = player->Position(World);
+			//	Vector2 currentPos = player->Position(World);
 
-				Vector2 returnDir = Vector2(currentPos.x - mOriginalPositionY);//Graphics::SCREEN_HEIGHT * 0.8f)
-				player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
-			}
-		}
+			//	Vector2 returnDir = Vector2(currentPos.x - mOriginalPositionY);//Graphics::SCREEN_HEIGHT * 0.8f)
+			//	player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
+			//}
 	}
-}
 
-bool CaptureBeam::IsCaptured() const {
-	return mIsCaptured;
-}
+	else if (other->GetTag() == "Butterfly" ||
+		other->GetTag() == "Wasp" ||
+		other->GetTag() == "Boss" ||
+		other->GetTag() == "RedShip") {
+		return;
+	}
 
-bool CaptureBeam::Zombie() const {
-	return mZombie;
+	
 }
 
 bool CaptureBeam::IgnoreCollision(PhysEntity* entity) {
@@ -139,8 +164,8 @@ bool CaptureBeam::IgnoreCollision(PhysEntity* entity) {
 
 CaptureBeam::CaptureBeam()
 	: AnimatedTexture("CaptureBeam.png", 0, 0, 184, 320, 3, 0.5f, Horizontal), 
-	mCollider(nullptr),
-	mZombie(false){
+	mCollider(nullptr){
+	//zPlayer->SetZombie(false){
 
 	mTotalCaptureTime = 6.0f;
 	ResetAnimation();
@@ -157,6 +182,10 @@ CaptureBeam::~CaptureBeam() {
 		delete mCollider;
 		mCollider = nullptr;
 	}
+}
+
+bool CaptureBeam::IsCapturedCoolDown(bool value) {
+	return mIsCapturedCoolDown;
 }
 
 void CaptureBeam::ResetAnimation() {

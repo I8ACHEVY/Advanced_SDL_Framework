@@ -29,6 +29,7 @@ private:
 	PlaySideBar* mSideBar;
 	BackgroundStars* mBackgroundStars;
 	Player* mPlayer;
+	Player* zPlayer;
 	Formation* mFormation;
 
 	static const int MAX_BUTTERFLIES = 16;

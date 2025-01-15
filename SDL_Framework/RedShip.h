@@ -3,6 +3,7 @@
 #include "PhysicsManager.h"
 #include "Enemy.h"
 #include "CaptureBeam.h"
+#include "Player.h"
 
 namespace SDL_Framework {
 
@@ -27,7 +28,7 @@ namespace SDL_Framework {
 		void Hit(PhysEntity* other) override;
 		bool IgnoreCollision(PhysEntity* Entity);
 
-		RedShip(int path, int index, bool challenge);
+		RedShip(int path, int index, bool challenge, Player* player);
 		~RedShip();
 
 		//virtual void Render() override;
@@ -41,6 +42,7 @@ namespace SDL_Framework {
 		Texture* mRedShip;
 		PhysEntity* mCollider;
 		CaptureBeam* mCaptureBeam;
+		Player* zPlayer;
 		//AnimatedTexture* mDeathAnimation;
 
 		bool mVisible;
