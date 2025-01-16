@@ -284,7 +284,7 @@ void Level::HandleEnemySpawning() {
 							mButterflyCount += 1;
 						}
 						else {
-							//TODO: Change the challenge boolean to true once Challenge logic is implemented
+						
 							mEnemies.push_back(new Butterfly(path, index, false));
 						}
 					}
@@ -430,7 +430,9 @@ void Level::HandleEnemyFormation() {
 	if (!mFormation->Locked()) {
 		if (mButterflyCount == MAX_BUTTERFLIES &&
 			mWaspCount == MAX_WASPS &&
-			mBossCount == MAX_BOSSES ) { //&& mRedShipCount == MAX_REDSHIPS
+			mBossCount == MAX_BOSSES && 
+			mRedShipCount == MAX_REDSHIPS) {
+
 			if (!EnemyFlyingIn()) {
 				mFormation->Lock();
 			}
@@ -547,10 +549,10 @@ void Level::HandleEnemyDiving() {
 							int firstEscortIndex = (index % 2 == 0) ? (index * 2) : (index * 2 - 1);
 							int secondEscortIndex = firstEscortIndex + 4;
 
-							int thirdEscortIndex = -1;			//RedShip Escort 
+							int thirdEscortIndex = -1;	
 							
 							if (mFormationRedShip[i] != nullptr) {
-								thirdEscortIndex = mDivingBoss->Index();	// have RedShip associated with captureboss by index
+								thirdEscortIndex = mDivingBoss->Index();	
 							}
 
 							if (mFormationButterflies[firstEscortIndex]->CurrentState() == Enemy::InFormation) {
@@ -604,11 +606,6 @@ void Level::Update() {
 
 		if (mPlayerHit) {
 			HandlePlayerDeath();
-		}
-		else {
-			if (InputManager::Instance()->KeyPressed(SDL_SCANCODE_N)) {		//Testing
-				mCurrentState = Finished;
-			}
 		}
 	}
 }
