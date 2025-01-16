@@ -104,6 +104,7 @@ void CaptureBeam::Hit(PhysEntity* other) {
 			std::cout << "Player is in circle" << std::endl;
 
 			//mOriginalRotation = player->Rotation(World);
+			// 
 			//mOriginalPositionY = player->Position(World).y;
 			//std::cout << "Original rotation and position stored" << std::endl;
 
