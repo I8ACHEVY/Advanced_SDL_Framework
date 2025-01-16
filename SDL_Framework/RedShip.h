@@ -1,5 +1,4 @@
 #pragma once
-//#include "AnimatedTexture.h"
 #include "PhysicsManager.h"
 #include "Enemy.h"
 #include "CaptureBeam.h"
@@ -12,15 +11,6 @@ namespace SDL_Framework {
 
 	public:
 
-		//void Update() override;
-		//void Render() override;
-
-		//void SetVisible(bool visible);
-		void CapturedPlayer();
-		void UpdateTexture(int index);
-		//void SetBossIndex(int index) { mBossIndex = index; }
-		//int GetBossIndex() const { return mBossIndex; }
-
 		static void CreateDivePaths();
 
 		void Dive(int type = 0) override;
@@ -30,8 +20,6 @@ namespace SDL_Framework {
 
 		RedShip(int path, int index, bool challenge, Player* player);
 		~RedShip();
-
-		//virtual void Render() override;
 
 	private:
 		static std::vector<std::vector<Vector2>> sDivePaths;
@@ -43,18 +31,12 @@ namespace SDL_Framework {
 		PhysEntity* mCollider;
 		CaptureBeam* mCaptureBeam;
 		Player* zPlayer;
-		//AnimatedTexture* mDeathAnimation;
 
 		bool mVisible;
-		//bool mAnimating;
 		bool mEscort;
 		int mBossIndex;
 
-		//void FlyInComplete() override;
-
 		Vector2 LocalFormationPosition() override;
-
-		//void HandleFiring();
 
 		void HandleDiveState() override;
 

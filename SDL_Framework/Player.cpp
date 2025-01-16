@@ -3,26 +3,26 @@
 
 
 void Player::HandleMovement() {
-	//if (CaptureRange()) {
-	//	if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
-	//		Translate(-Vec2_Right * (mMoveSpeed * 0.2f) * mTimer->DeltaTime(), World);
-	//	}
-	//	else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
-	//		Translate(Vec2_Right * (mMoveSpeed * 0.2f) * mTimer->DeltaTime(), World);
-	//	}
-
-	//	Vector2 pos = Position(Local);
-	//	if (pos.x < mMoveBounds.x) {
-	//		pos.x = mMoveBounds.x;
-	//	}
-
-	//	else if (pos.x > mMoveBounds.y) {
-	//		pos.x = mMoveBounds.y;
-	//	}
-
-	//	Position(pos);
-	//
-	//}
+	if (CaptureRange()) {
+		if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
+			Translate(-Vec2_Right * (mMoveSpeed * 0.2f) * mTimer->DeltaTime(), World);
+		}
+		else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
+			Translate(Vec2_Right * (mMoveSpeed * 0.2f) * mTimer->DeltaTime(), World);
+		}
+	
+		Vector2 pos = Position(Local);
+		if (pos.x < mMoveBounds.x) {
+			pos.x = mMoveBounds.x;
+		}
+	
+		else if (pos.x > mMoveBounds.y) {
+			pos.x = mMoveBounds.y;
+		}
+	
+		Position(pos);
+	
+	}
 
 	if (!CaptureRange()) {
 
@@ -74,7 +74,6 @@ Player::Player() {
 	mVisible = false;
 	mAnimating = false;
 	mWasHit = false;
-	//mIsCapturing = false;
 
 	mScore = 0;
 	mLives = 2;

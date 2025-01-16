@@ -271,7 +271,7 @@ Enemy(path, index, challenge)
 	
 	mType = Enemy::Butterfly;
 
-	//AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
+	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 }
 
 Butterfly::~Butterfly() {}

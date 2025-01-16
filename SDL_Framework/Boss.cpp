@@ -251,25 +251,9 @@ void Boss::RenderDiveState() {
 		currentPath += 2;
 	}
 	
-	//for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {		// Dive path debugging
-	//	Graphics::Instance()->DrawLine(
-	//		mDiveStartPosition.x + sDivePaths[currentPath][i].x,
-	//		mDiveStartPosition.y + sDivePaths[currentPath][i].y,
-	//		mDiveStartPosition.x + sDivePaths[currentPath][i + 1].x,
-	//		mDiveStartPosition.y + sDivePaths[currentPath][i + 1].y
-	//	);
-	//}
-	
 	Vector2 finalPos = WorldFormationPosition();
 	auto currentDivePath = sDivePaths[currentPath];
 	Vector2 pathEndPos = mDiveStartPosition + currentDivePath[currentDivePath.size() - 1];
-	
-	//Graphics::Instance()->DrawLine(		//return path debugging
-	//	pathEndPos.x,
-	//	pathEndPos.y,
-	//	finalPos.x,
-	//	finalPos.y
-	//);
 	
 }
 

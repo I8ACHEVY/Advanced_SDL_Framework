@@ -259,14 +259,9 @@ RedShip::RedShip(int path, int index, bool challenge, Player* player) :
 
 	mTag = "RedShip";
 
-	//if (mCaptureBeam && mCaptureBeam->Zombie()) {
+
 		mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
 		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-	//}
-	//else {
-	//	mTexture[0] = new Texture("PlayerShips.png", 60, 64, 60, 64);		//invisable texture
-	//	mTexture[1] = new Texture("PlayerShips.png", 60, 64, 60, 64);
-	//}
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);
@@ -276,22 +271,9 @@ RedShip::RedShip(int path, int index, bool challenge, Player* player) :
 
 	mType = Enemy::RedShips;
 
-	//if (mCaptureBeam && mCaptureBeam->Zombie()) {
 		AddCollider(new BoxCollider(Vector2(10.0f, 45.0f)));
 		AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(12.0f, 5.0f));
 		AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(-12.0f, 5.0f));
-	//}
-
-	//mId = PhysicsManager::Instance()->RegisterEntity(this,
-	//
-	//	PhysicsManager::CollisionLayers::Hostile);
-
-	//mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
-	//	AnimatedTexture::Horizontal);
-	//
-	//mDeathAnimation->Parent();
-	//mDeathAnimation->Position(Vec2_Zero);
-	//mDeathAnimation->SetWrapMode(AnimatedTexture::Once);
 
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		mBullets[i] = new Bullet(true);
@@ -315,46 +297,6 @@ RedShip::~RedShip() {
 	}
 }
 
-void RedShip::CapturedPlayer() {
-	if (zPlayer->Zombie())
-	UpdateTexture(mIndex);
-}
-
-void RedShip::UpdateTexture(int index) {
-	//if (index == mBossIndex + 1) {
-	//	if (mCaptureBeam->Zombie()) {
-	//		mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-	//		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-	//	}
-
-	//	for (auto texture : mTexture) {
-	//		texture->Parent(this);
-	//		texture->Position(Vec2_Zero);
-	//		texture->Scale(Vector2(0.7f, 0.7f));
-	//	}
-	//}
-}
-
 bool RedShip::IgnoreCollision(PhysEntity* Entity) {
 	return !zPlayer->Zombie() || !Active();
 }
-
-/* XML RedShip flyIn spawning
-
-<Spawn path="0" priority="5">
-	<Enemy type="RedShip" index="0"/>
-</Spawn>
-
-<Spawn path="1" priority="5">
-	<Enemy type="RedShip" index="1"/>
-</Spawn>
-
-<Spawn path="2" priority="5">
-	<Enemy type="RedShip" index="2"/>
-</Spawn>
-
-<Spawn path="3" priority="5">
-	<Enemy type="RedShip" index="3"/>
-</Spawn>
-
-*/

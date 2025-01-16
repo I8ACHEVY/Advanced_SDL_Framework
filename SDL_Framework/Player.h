@@ -28,14 +28,14 @@ public:
 
 	bool WasHit();
 
-	void SetIsCapturing(bool value);// { mIsCapturing = value; }
-	bool IsCapturing() const;// { return mIsCapturing; }
+	void SetIsCapturing(bool value);
+	bool IsCapturing() const;
 	
 	void SetCaptureRange(bool value);
 	bool CaptureRange() const;
 
-	void SetZombie(bool value);// { mZombie = value; }
-	bool Zombie() const;// { return mZombie; }
+	void SetZombie(bool value);
+	bool Zombie() const;
 
 	bool IgnoreCollision() override;
 	void Hit(PhysEntity* other) override;

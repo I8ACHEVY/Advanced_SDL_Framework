@@ -3,7 +3,6 @@
 #include "CaptureBeam.h"
 #include "Random.h"
 #include "Texture.h"
-//#include "RedShip.h"
 
 namespace SDL_Framework {
 
@@ -31,7 +30,6 @@ namespace SDL_Framework {
 
 		bool mIsCapturing;
 		CaptureBeam* mCaptureBeam;
-		//RedShip* mRedShip;
 
 		void HandleCaptureBeam();
 

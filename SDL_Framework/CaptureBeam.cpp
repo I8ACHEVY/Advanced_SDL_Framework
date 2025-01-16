@@ -103,41 +103,19 @@ void CaptureBeam::Hit(PhysEntity* other) {
 		if (broadPhaseCollider && broadPhaseCollider->GetType() == Collider::ColliderType::Circle) {
 			std::cout << "Player is in circle" << std::endl;
 
-			//mOriginalRotation = player->Rotation(World);
-			// 
-			//mOriginalPositionY = player->Position(World).y;
-			//std::cout << "Original rotation and position stored" << std::endl;
-
 			player->SetIsCapturing(false);
 			player->SetCaptureRange(false);
 
-			//float pullSpeed = 150.0f;
+			float pullSpeed = 150.0f;
 
-			//player->Rotate(mOriginalRotation);
+			player->Rotate(mOriginalRotation);
 
-			//Vector2 currentPos = player->Position(World);
+			Vector2 currentPos = player->Position(World);
 
-			//Vector2 returnDir = Vector2(currentPos.x - mOriginalPositionY);//Graphics::SCREEN_HEIGHT * 0.8f)
-			//player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
+			Vector2 returnDir = Vector2(currentPos.x - mOriginalPositionY);//Graphics::SCREEN_HEIGHT * 0.8f)
+			player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
 
 		}
-
-		
-
-			//if (player->IsCapturing()) {
-			//	std::cout << "Player Escaping: Resetting Rotation" << std::endl;
-			//	player->SetIsCapturing(false);
-			//	player->SetCaptureRange(false);
-
-			//	float pullSpeed = 150.0f;
-
-			//	player->Rotate(mOriginalRotation);
-
-			//	Vector2 currentPos = player->Position(World);
-
-			//	Vector2 returnDir = Vector2(currentPos.x - mOriginalPositionY);//Graphics::SCREEN_HEIGHT * 0.8f)
-			//	player->Translate(returnDir.Normalized() * pullSpeed * mTimer->DeltaTime(), World);
-			//}
 	}
 
 	else if (other->GetTag() == "Butterfly" ||
@@ -166,15 +144,11 @@ bool CaptureBeam::IgnoreCollision(PhysEntity* entity) {
 CaptureBeam::CaptureBeam()
 	: AnimatedTexture("CaptureBeam.png", 0, 0, 184, 320, 3, 0.5f, Horizontal), 
 	mCollider(nullptr){
-	//zPlayer->SetZombie(false){
 
 	mTotalCaptureTime = 6.0f;
 	ResetAnimation();
 	mTag = "Capture";
 	std::cout << "CaptureBeam Tag set to" << mTag << std::endl;
-
-	//AddCollider(new BoxCollider(Vector2(160.0f, 60.0f)), Vector2(0.0f, -140.0f));
-	//mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::HostileProjectile);
 }
 
 

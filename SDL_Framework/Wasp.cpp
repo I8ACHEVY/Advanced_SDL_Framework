@@ -170,7 +170,7 @@ Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 
 		mType = Enemy::Wasp;
 
-		//AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
+		AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 }
 
 Wasp::~Wasp() {
