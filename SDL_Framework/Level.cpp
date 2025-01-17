@@ -51,10 +51,10 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) :
 
 	mCurrentState = Running;
 
-	mButterflyCount = 0;
-	mWaspCount = 0;
-	mBossCount = 0;
-	mRedShipCount = 0;
+	mCrabCount = 0;
+	mOctopusCount = 0;
+	mSquidCount = 0;
+	mShipCount = 0;
 
 	std::string fullPath = SDL_GetBasePath();
 
@@ -93,20 +93,20 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) :
 		mFormation->Position(Graphics::SCREEN_WIDTH * 0.5f, 355.0f);
 		Enemy::SetFormation(mFormation);
 	
-		for (int i = 0; i < MAX_BUTTERFLIES; i++) {
-			mFormationButterflies[i] = nullptr;
+		for (int i = 0; i < MAX_CRABS; i++) {
+			mFormationCrabs[i] = nullptr;
 		}
 	
-		for (int i = 0; i < MAX_WASPS; i++) {
-			mFormationWasps[i] = nullptr;
+		for (int i = 0; i < MAX_OCTOPI; i++) {
+			mFormationOctopi[i] = nullptr;
 		}
 	
-		for (int i = 0; i < MAX_BOSSES; i++) {
-			mFormationBosses[i] = nullptr;
+		for (int i = 0; i < MAX_SQUIDS; i++) {
+			mFormationSquids[i] = nullptr;
 		}
 
 		for (int i = 0; i < MAX_REDSHIPS; i++) {
-			mFormationRedShip[i] = nullptr;
+			mFormationShip[i] = nullptr;
 		}
 	}
 	
@@ -116,26 +116,26 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) :
 	mSpawnTimer = 0.0f;
 	mSpawningFinished = false;
 
-	mDivingButterfly = nullptr;
-	mSkipFirstButterfly = false;
-	mButterflyDiveDelay = 1.0f;
-	mButterflyDiveTimer = 0.0f;
+	mDivingCrab = nullptr;
+	mSkipFirstCrab = false;
+	mCrabDiveDelay = 1.0f;
+	mCrabDiveTimer = 0.0f;
 
-	mDivingWasp = nullptr;
-	mDivingWasp2 = nullptr;
-	mWaspDiveDelay = 3.0f;
-	mWaspDiveTimer = 0.0f;
+	mDivingOctopus = nullptr;
+	mDivingOctopus2 = nullptr;
+	mOctopusDiveDelay = 3.0f;
+	mOctopusDiveTimer = 0.0f;
 
-	mDivingBoss = nullptr;
+	mDivingSquid = nullptr;
 	mCaptureDive = true;
-	mSkipFirstBoss = true;
-	mBossDiveDelay = 5.0f;
-	mBossDiveTimer = 0.0f;
+	mSkipFirstSquid = true;
+	mSquidDiveDelay = 5.0f;
+	mSquidDiveTimer = 0.0f;
 
-	mDivingRedShip = nullptr;
-	mSkipFirstRedShip = false;
-	mRedShipDiveDelay = 6.0f;
-	mRedShipDiveTimer = 0.0f;
+	mDivingShip = nullptr;
+	mSkipFirstShip = false;
+	mShipDiveDelay = 6.0f;
+	mShipDiveTimer = 0.0f;
 
 	Enemy::CurrentPlayer(mPlayer);
 }
@@ -161,24 +161,24 @@ Level::~Level() {
 	delete mFormation;
 	mFormation = nullptr;
 
-	for (int i = 0; i < MAX_BUTTERFLIES; i++) {
-		delete mFormationButterflies[i];
-		mFormationButterflies[i] = nullptr;
+	for (int i = 0; i < MAX_CRABS; i++) {
+		delete mFormationCrabs[i];
+		mFormationCrabs[i] = nullptr;
 	}
 	
-	for (int i = 0; i < MAX_WASPS; i++) {
-		delete mFormationWasps[i];
-		mFormationWasps[i] = nullptr;
+	for (int i = 0; i < MAX_OCTOPI; i++) {
+		delete mFormationOctopi[i];
+		mFormationOctopi[i] = nullptr;
 	}
 	
-	for (int i = 0; i < MAX_BOSSES; i++) {
-		delete mFormationBosses[i];
-		mFormationBosses[i] = nullptr;
+	for (int i = 0; i < MAX_SQUIDS; i++) {
+		delete mFormationSquids[i];
+		mFormationSquids[i] = nullptr;
 	}
 
 	for (int i = 0; i < MAX_REDSHIPS; i++) {
-		delete mFormationRedShip[i];
-		mFormationRedShip[i] = nullptr;
+		delete mFormationShip[i];
+		mFormationShip[i] = nullptr;
 	}
 
 	for (auto enemy : mEnemies) {
@@ -280,27 +280,27 @@ void Level::HandleEnemySpawning() {
 				     if (type.compare("Butterfly") == 0) {
 						if (!mChallengeStage) {
 							
-							mFormationButterflies[index] = new Butterfly(path, index, false);
-							mButterflyCount += 1;
+							mFormationCrabs[index] = new Butterfly(path, index, false);
+							mCrabCount += 1;
 						}
 						else {
 							//TODO: Change the challenge boolean to true once Challenge logic is implemented
 							mEnemies.push_back(new Butterfly(path, index, false));
 						}
 					}
-					else if (type.compare("Wasp") == 0) {
+					else if (type.compare("Octopus") == 0) {
 						if (!mChallengeStage) {
-							mFormationWasps[index] = new Wasp(path, index, false, false);
-							mWaspCount ++;
+							mFormationOctopi[index] = new Octopus(path, index, false, false);
+							mOctopusCount ++;
 						}
 						else {
-							mEnemies.push_back(new Wasp(path, index, false, false));
+							mEnemies.push_back(new Octopus(path, index, false, false));
 						}
 					}
 					else if (type.compare("Boss") == 0) {
 						if (!mChallengeStage) {
-							mFormationBosses[index] = new Boss(path, index, false);
-							mBossCount ++;
+							mFormationSquids[index] = new Boss(path, index, false);
+							mSquidCount ++;
 						}
 						else {
 							mEnemies.push_back(new Boss(path, index, false));
@@ -309,8 +309,8 @@ void Level::HandleEnemySpawning() {
 
 					else if (type.compare("RedShip") == 0) {
 						 if (!mChallengeStage) {
-							 mFormationRedShip[index] = new RedShip(path, index, false, zPlayer);
-							 mRedShipCount++;
+							 mFormationShip[index] = new RedShip(path, index, false, zPlayer);
+							 mShipCount++;
 						 }
 						 else {
 							 mEnemies.push_back(new RedShip(path, index, false, zPlayer));
@@ -346,28 +346,28 @@ void Level::HandleEnemySpawning() {
 }
 
 bool Level::EnemyFlyingIn() {
-	for (Butterfly* butterfly : mFormationButterflies) {
+	for (Butterfly* butterfly : mFormationCrabs) {
 		if (butterfly != nullptr &&
 			butterfly->CurrentState() == Enemy::FlyIn) {
 			return true;
 		}
 	}
 
-	for (Wasp* wasp : mFormationWasps) {
+	for (Octopus* wasp : mFormationOctopi) {
 		if (wasp != nullptr &&
 			wasp->CurrentState() == Enemy::FlyIn) {
 			return true;
 		}
 	}
 
-	for (Boss* boss : mFormationBosses) {
+	for (Boss* boss : mFormationSquids) {
 		if (boss != nullptr &&
 			boss->CurrentState() == Enemy::FlyIn) {
 			return true;
 		}
 	}
 
-	for (RedShip* redShip : mFormationRedShip) {
+	for (RedShip* redShip : mFormationShip) {
 		if (redShip != nullptr &&
 			redShip->CurrentState() == Enemy::FlyIn) {
 			return true;
@@ -383,7 +383,7 @@ void Level::HandleEnemyFormation() {
 
 	bool levelCleared = mSpawningFinished;
 
-	for (Butterfly* butterfly : mFormationButterflies) {
+	for (Butterfly* butterfly : mFormationCrabs) {
 		if (butterfly != nullptr) {
 			butterfly->Update();
 
@@ -394,7 +394,7 @@ void Level::HandleEnemyFormation() {
 		}
 	}
 
-	for (Wasp* wasp : mFormationWasps) {
+	for (Octopus* wasp : mFormationOctopi) {
 		if (wasp != nullptr) {
 			wasp->Update();
 
@@ -405,7 +405,7 @@ void Level::HandleEnemyFormation() {
 		}
 	}
 
-	for (RedShip* redShip : mFormationRedShip) {
+	for (RedShip* redShip : mFormationShip) {
 		if (redShip != nullptr) {
 			redShip->Update();
 
@@ -416,7 +416,7 @@ void Level::HandleEnemyFormation() {
 		}
 	}
 
-	for (Boss* boss : mFormationBosses) {
+	for (Boss* boss : mFormationSquids) {
 		if (boss != nullptr) {
 			boss->Update();
 
@@ -428,9 +428,9 @@ void Level::HandleEnemyFormation() {
 	}
 
 	if (!mFormation->Locked()) {
-		if (mButterflyCount == MAX_BUTTERFLIES &&
-			mWaspCount == MAX_WASPS &&
-			mBossCount == MAX_BOSSES ) { //&& mRedShipCount == MAX_REDSHIPS
+		if (mCrabCount == MAX_CRABS &&
+			mOctopusCount == MAX_OCTOPI &&
+			mSquidCount == MAX_SQUIDS ) { //&& mRedShipCount == MAX_REDSHIPS
 			if (!EnemyFlyingIn()) {
 				mFormation->Lock();
 			}
@@ -447,123 +447,123 @@ void Level::HandleEnemyFormation() {
 
 void Level::HandleEnemyDiving() {
 
-	if (mDivingButterfly == nullptr) {
-		mButterflyDiveTimer += mTimer->DeltaTime();
+	if (mDivingCrab == nullptr) {
+		mCrabDiveTimer += mTimer->DeltaTime();
 
-		if (mButterflyDiveTimer >= mButterflyDiveDelay) {
+		if (mCrabDiveTimer >= mCrabDiveDelay) {
 			bool skipped = false;
 
-			for (int i = MAX_BUTTERFLIES - 1; i >= 0; i--) {
-				if (mFormationButterflies[i] != nullptr
-					&& mFormationButterflies[i]->CurrentState() == Enemy::InFormation) {
-					if (!mSkipFirstButterfly || (mSkipFirstButterfly && skipped)) {
-						mDivingButterfly = mFormationButterflies[i];
-						mDivingButterfly->Dive();
-						mSkipFirstButterfly = !mSkipFirstButterfly;
+			for (int i = MAX_CRABS - 1; i >= 0; i--) {
+				if (mFormationCrabs[i] != nullptr
+					&& mFormationCrabs[i]->CurrentState() == Enemy::InFormation) {
+					if (!mSkipFirstCrab || (mSkipFirstCrab && skipped)) {
+						mDivingCrab = mFormationCrabs[i];
+						mDivingCrab->Dive();
+						mSkipFirstCrab = !mSkipFirstCrab;
 						break;
 					}
 				}
 				skipped = true;
 			}
 
-			mButterflyDiveTimer = 0.0f;
+			mCrabDiveTimer = 0.0f;
 		}
 	}
 	else {
-		if (mDivingButterfly->CurrentState() != Enemy::Diving) {
-			mDivingButterfly = nullptr;
+		if (mDivingCrab->CurrentState() != Enemy::Diving) {
+			mDivingCrab = nullptr;
 		}
 	}
 
-	mWaspDiveTimer += mTimer->DeltaTime();
-	if (mWaspDiveTimer >= mWaspDiveDelay) {
-		for (int i = MAX_WASPS - 1; i >= 0; i--) {
-			if (mFormationWasps[i]->CurrentState() == Enemy::InFormation) {
-				if (mDivingWasp == nullptr) {
-					mDivingWasp = mFormationWasps[i];
-					mDivingWasp->Dive();
+	mOctopusDiveTimer += mTimer->DeltaTime();
+	if (mOctopusDiveTimer >= mOctopusDiveDelay) {
+		for (int i = MAX_OCTOPI - 1; i >= 0; i--) {
+			if (mFormationOctopi[i]->CurrentState() == Enemy::InFormation) {
+				if (mDivingOctopus == nullptr) {
+					mDivingOctopus = mFormationOctopi[i];
+					mDivingOctopus->Dive();
 				}
-				else if (mDivingWasp2 == nullptr) {
-					mDivingWasp2 = mFormationWasps[i];
-					mDivingWasp2->Dive();
+				else if (mDivingOctopus2 == nullptr) {
+					mDivingOctopus2 = mFormationOctopi[i];
+					mDivingOctopus2->Dive();
 				}
 				break;
 			}
 		}
 
-		mWaspDiveTimer = 0.0f;
+		mOctopusDiveTimer = 0.0f;
 	}
 
-	if (mDivingWasp != nullptr && mDivingWasp->CurrentState() != Enemy::Diving) {
-		mDivingWasp = nullptr;
+	if (mDivingOctopus != nullptr && mDivingOctopus->CurrentState() != Enemy::Diving) {
+		mDivingOctopus = nullptr;
 	}
-	if (mDivingWasp2 != nullptr && mDivingWasp2->CurrentState() != Enemy::Diving) {
-		mDivingWasp2 = nullptr;
+	if (mDivingOctopus2 != nullptr && mDivingOctopus2->CurrentState() != Enemy::Diving) {
+		mDivingOctopus2 = nullptr;
 	}
 
-	if (mDivingRedShip == nullptr) {
-		mRedShipDiveTimer += mTimer->DeltaTime();
+	if (mDivingShip == nullptr) {
+		mShipDiveTimer += mTimer->DeltaTime();
 
-		if (mRedShipDiveTimer >= mRedShipDiveDelay) {
+		if (mShipDiveTimer >= mShipDiveDelay) {
 			bool skipped = false;
 
 			for (int i = MAX_REDSHIPS - 1; i >= 0; i--) {
-				if (mFormationRedShip[i] != nullptr
-					&& mFormationRedShip[i]->CurrentState() == Enemy::InFormation) {
-					if (!mSkipFirstRedShip || (mSkipFirstRedShip && skipped)) {
-						mDivingRedShip = mFormationRedShip[i];
-						mDivingRedShip->Dive();
-						mSkipFirstRedShip = !mSkipFirstRedShip;
+				if (mFormationShip[i] != nullptr
+					&& mFormationShip[i]->CurrentState() == Enemy::InFormation) {
+					if (!mSkipFirstShip || (mSkipFirstShip && skipped)) {
+						mDivingShip = mFormationShip[i];
+						mDivingShip->Dive();
+						mSkipFirstShip = !mSkipFirstShip;
 						break;
 					}
 				}
 				skipped = true;
 			}
 
-			mRedShipDiveTimer = 0.0f;
+			mShipDiveTimer = 0.0f;
 		}
 	}
 	else {
-		if (mDivingRedShip->CurrentState() != Enemy::Diving) {
-			mDivingRedShip = nullptr;
+		if (mDivingShip->CurrentState() != Enemy::Diving) {
+			mDivingShip = nullptr;
 		}
 	}
 
-	if (mDivingBoss == nullptr) {
-		mBossDiveTimer += mTimer->DeltaTime();
+	if (mDivingSquid == nullptr) {
+		mSquidDiveTimer += mTimer->DeltaTime();
 
-		if (mBossDiveTimer >= mBossDiveDelay) {
+		if (mSquidDiveTimer >= mSquidDiveDelay) {
 			bool skipped = false;
-			for (int i = MAX_BOSSES - 1; i >= 0; i--) {
-				if (mFormationBosses[i]->CurrentState() == Enemy::InFormation) {
-					if (!mSkipFirstBoss || (mSkipFirstBoss && skipped)) {
-						mDivingBoss = mFormationBosses[i];
+			for (int i = MAX_SQUIDS - 1; i >= 0; i--) {
+				if (mFormationSquids[i]->CurrentState() == Enemy::InFormation) {
+					if (!mSkipFirstSquid || (mSkipFirstSquid && skipped)) {
+						mDivingSquid = mFormationSquids[i];
 						if (mCaptureDive) {
-							mDivingBoss->Dive(1);
+							mDivingSquid->Dive(1);
 						}
 						else {
-							mDivingBoss->Dive();
-							int index = mDivingBoss->Index();
+							mDivingSquid->Dive();
+							int index = mDivingSquid->Index();
 							int firstEscortIndex = (index % 2 == 0) ? (index * 2) : (index * 2 - 1);
 							int secondEscortIndex = firstEscortIndex + 4;
 
 							int thirdEscortIndex = -1;			//RedShip Escort 
 							
-							if (mFormationRedShip[i] != nullptr) {
-								thirdEscortIndex = mDivingBoss->Index();	// have RedShip associated with captureboss by index
+							if (mFormationShip[i] != nullptr) {
+								thirdEscortIndex = mDivingSquid->Index();	// have RedShip associated with captureboss by index
 							}
 
-							if (mFormationButterflies[firstEscortIndex]->CurrentState() == Enemy::InFormation) {
-								mFormationButterflies[firstEscortIndex]->Dive(1);
+							if (mFormationCrabs[firstEscortIndex]->CurrentState() == Enemy::InFormation) {
+								mFormationCrabs[firstEscortIndex]->Dive(1);
 							}
-							if (mFormationButterflies[secondEscortIndex]->CurrentState() == Enemy::InFormation) {
-								mFormationButterflies[secondEscortIndex]->Dive(1);
+							if (mFormationCrabs[secondEscortIndex]->CurrentState() == Enemy::InFormation) {
+								mFormationCrabs[secondEscortIndex]->Dive(1);
 							}
-							if (thirdEscortIndex != -1 && mFormationRedShip[thirdEscortIndex]->CurrentState() == Enemy::InFormation) {
-								mFormationRedShip[thirdEscortIndex]->Dive(1);
+							if (thirdEscortIndex != -1 && mFormationShip[thirdEscortIndex]->CurrentState() == Enemy::InFormation) {
+								mFormationShip[thirdEscortIndex]->Dive(1);
 							}
 						}
-						mSkipFirstBoss = !mSkipFirstBoss;
+						mSkipFirstSquid = !mSkipFirstSquid;
 						mCaptureDive = !mCaptureDive;
 						break;
 					}
@@ -571,12 +571,12 @@ void Level::HandleEnemyDiving() {
 				}
 			}
 
-			mBossDiveTimer = 0.0f;
+			mSquidDiveTimer = 0.0f;
 		}
 	}
 	else {
-		if (mDivingBoss->CurrentState() != Enemy::Diving) {
-			mDivingBoss = nullptr;
+		if (mDivingSquid->CurrentState() != Enemy::Diving) {
+			mDivingSquid = nullptr;
 		}
 	}
 }
@@ -630,25 +630,25 @@ void Level::Render() {
 
 	else {
 		if (!mChallengeStage) {
-			for (Butterfly* butterfly : mFormationButterflies) {
+			for (Butterfly* butterfly : mFormationCrabs) {
 				if (butterfly != nullptr) {
 					butterfly->Render();
 				}
 			}
 
-			for (Wasp* wasp : mFormationWasps) {
+			for (Octopus* wasp : mFormationOctopi) {
 				if (wasp != nullptr) {
 					wasp->Render();
 				}
 			}
 
-			for (RedShip* redShip : mFormationRedShip) {
+			for (RedShip* redShip : mFormationShip) {
 				if (redShip != nullptr) {
 					redShip->Render();
 				}
 			}
 
-			for (Boss* boss : mFormationBosses) {
+			for (Boss* boss : mFormationSquids) {
 				if (boss != nullptr) {
 					boss->Render();
 				}

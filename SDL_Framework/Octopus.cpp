@@ -1,10 +1,10 @@
-#include "Wasp.h"
+#include "Octopus.h"
 #include "BoxCollider.h"
 #include "AudioManager.h"
 
-std::vector<std::vector<Vector2>> Wasp::sDivePaths;
+std::vector<std::vector<Vector2>> Octopus::sDivePaths;
 
-void Wasp::CreateDivePaths() {
+void Octopus::CreateDivePaths() {
 	int currentPath = 0;
 	BezierPath* path = new BezierPath();
 
@@ -78,7 +78,7 @@ void Wasp::CreateDivePaths() {
 	delete path;
 }
 
-void Wasp::FlyInComplete() {
+void Octopus::FlyInComplete() {
 	if (mDiver) {
 		mCurrentState = Dead;
 	}
@@ -87,7 +87,7 @@ void Wasp::FlyInComplete() {
 	}
 }
 
-Vector2 Wasp::LocalFormationPosition() {
+Vector2 Octopus::LocalFormationPosition() {
 	Vector2 retVal;
 
 	int dir = mIndex % 2 == 0 ? -1 : 1;
@@ -101,7 +101,7 @@ Vector2 Wasp::LocalFormationPosition() {
 	return retVal;
 }
 
-void Wasp::HandleDiveState() {
+void Octopus::HandleDiveState() {
 	int currentPath = mIndex % 2;
 
 	if (mCurrentWayPoint < sDivePaths[currentPath].size() && 
@@ -135,7 +135,7 @@ void Wasp::HandleDiveState() {
 	}
 }
 
-void Wasp::RenderDiveState() {
+void Octopus::RenderDiveState() {
 	mTexture[0]->Render();
 
 	int currentPath = mIndex % 2;	
@@ -146,17 +146,17 @@ void Wasp::RenderDiveState() {
 
 }
 
-void Wasp::Hit(PhysEntity* other) {
+void Octopus::Hit(PhysEntity* other) {
 	AudioManager::Instance()->PlaySFX("WaspDestroyed.wav", 0, -1);
 	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 50 : 100);
 
 	Enemy::Hit(other);
 }
 
-Wasp::Wasp(int path, int index, bool challenge, bool diver) :
+Octopus::Octopus(int path, int index, bool challenge, bool diver) :
 	Enemy(path, index, challenge), mDiver(diver) {
 
-	mTag = "Wasp";
+	mTag = "Octopus";
 
 	mTexture[0] = new Texture("AnimatedEnemies.png", 0, 40, 52, 40);
 	mTexture[1] = new Texture("AnimatedEnemies.png", 52, 40, 52, 40);
@@ -168,11 +168,11 @@ Wasp::Wasp(int path, int index, bool challenge, bool diver) :
 
 	}
 
-		mType = Enemy::Wasp;
+		mType = Enemy::Octopus;
 
 		//AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 }
 
-Wasp::~Wasp() {
+Octopus::~Octopus() {
 
 }

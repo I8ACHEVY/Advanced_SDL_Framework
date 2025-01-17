@@ -11,7 +11,7 @@ namespace SDL_Framework
 	public:
 		static const int SCREEN_WIDTH = 1400;	//1024
 		static const int SCREEN_HEIGHT = 1024;	//896
-		const char* WINDOW_TITLE = "Galaga";
+		const char* WINDOW_TITLE = "Space Invaders";
 
 		static Graphics* Instance();
 		static void Release();

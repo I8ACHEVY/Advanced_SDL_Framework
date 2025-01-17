@@ -188,8 +188,8 @@ void Player::Hit(PhysEntity* other) {
 		mCaptureRange = true;
 	
 	}
-	else if (other->GetTag() == "Butterfly" || 
-		other->GetTag() == "Wasp" || 
+	else if (other->GetTag() == "Crab" || 
+		other->GetTag() == "Octopus" || 
 		other->GetTag() == "Boss" ||
 		other->GetTag() == "RedShip") {
 

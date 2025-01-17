@@ -141,7 +141,7 @@ void CaptureBeam::Hit(PhysEntity* other) {
 	}
 
 	else if (other->GetTag() == "Butterfly" ||
-		other->GetTag() == "Wasp" ||
+		other->GetTag() == "Octopus" ||
 		other->GetTag() == "Boss" ||
 		other->GetTag() == "RedShip") {
 		return;

@@ -3,7 +3,7 @@
 #include "BackgroundStar.h"
 #include "Player.h"
 #include "Butterfly.h"
-#include "Wasp.h"
+#include "Octopus.h"
 #include "Boss.h"
 #include "RedShip.h"
 #include "Tinyxml2.h"
@@ -32,42 +32,42 @@ private:
 	Player* zPlayer;
 	Formation* mFormation;
 
-	static const int MAX_BUTTERFLIES = 16;
-	static const int MAX_WASPS = 20;
-	static const int MAX_BOSSES = 4;
-	static const int MAX_REDSHIPS = 4;
+	static const int MAX_CRABS = 22;
+	static const int MAX_OCTOPI = 22;
+	static const int MAX_SQUIDS = 11;
+	static const int MAX_SHIPS = 4;
 
-	int mButterflyCount;
-	int mWaspCount;
-	int mBossCount;
-	int mRedShipCount;
+	int mCrabCount;
+	int mOctopusCount;
+	int mSquidCount;
+	int mShipCount;
 
-	Butterfly* mFormationButterflies[MAX_BUTTERFLIES];
-	Wasp* mFormationWasps[MAX_WASPS];
-	Boss* mFormationBosses[MAX_BOSSES];
-	RedShip* mFormationRedShip[MAX_REDSHIPS];
+	Butterfly* mFormationCrabs[MAX_CRABS];
+	Octopus* mFormationOctopi[MAX_OCTOPI];
+	Boss* mFormationSquids[MAX_SQUIDS];
+	RedShip* mFormationShip[MAX_SHIPS];
 
-	Butterfly* mDivingButterfly;
-	bool mSkipFirstButterfly;
-	float mButterflyDiveDelay;
-	float mButterflyDiveTimer;
+	Butterfly* mDivingCrab;
+	bool mSkipFirstCrab;
+	float mCrabDiveDelay;
+	float mCrabDiveTimer;
 
-	Wasp* mDivingWasp;
-	Wasp* mDivingWasp2;
-	float mWaspDiveDelay;
-	float mWaspDiveTimer;
+	Octopus* mDivingOctopus;
+	Octopus* mDivingOctopus2;
+	float mOctopusDiveDelay;
+	float mOctopusDiveTimer;
 
-	Boss* mDivingBoss;
+	Boss* mDivingSquid;
 	bool mCaptureDive;
-	bool mSkipFirstBoss;
-	float mBossDiveDelay;
-	float mBossDiveTimer;
+	bool mSkipFirstSquid;
+	float mSquidDiveDelay;
+	float mSquidDiveTimer;
 
-	RedShip* mDivingRedShip;
-	bool mSkipFirstRedShip;
-	float mRedShipDiveDelay;
-	float mRedShipDiveTimer;
-	bool mRedShipSpawn;
+	RedShip* mDivingShip;
+	bool mSkipFirstShip;
+	float mShipDiveDelay;
+	float mShipDiveTimer;
+	bool mShipSpawn;
 
 	std::vector<Enemy*> mEnemies;	//debug testing
 

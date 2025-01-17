@@ -4,17 +4,17 @@
 	<ChallengingStage value="false"/>
 
 	<Spawn path="0" priority="0">
-		<Enemy type="Wasp" index="0"/>
-		<Enemy type="Wasp" index="1"/>
-		<Enemy type="Wasp" index="2"/>
-		<Enemy type="Wasp" index="3"/>
+		<Enemy type="Octopus" index="0"/>
+		<Enemy type="Octopus" index="1"/>
+		<Enemy type="Octopus" index="2"/>
+		<Enemy type="Octopus" index="3"/>
 	</Spawn>
 
 	<Spawn path="1" priority="0">
-		<Enemy type="Butterfly" index="0"/>
-		<Enemy type="Butterfly" index="1"/>
-		<Enemy type="Butterfly" index="2"/>
-		<Enemy type="Butterfly" index="3"/>
+		<Enemy type="Octopus" index="0"/>
+		<Enemy type="Octopus" index="1"/>
+		<Enemy type="Octopus" index="2"/>
+		<Enemy type="Octopus" index="3"/>
 	</Spawn>
 
 	<Spawn path="4" priority="1">
@@ -46,31 +46,31 @@
 	</Spawn>
 
 	<Spawn path="0" priority="3">
-		<Enemy type="Wasp" index="4"/>
-		<Enemy type="Wasp" index="6"/>
-		<Enemy type="Wasp" index="8"/>
-		<Enemy type="Wasp" index="10"/>
+		<Enemy type="Octopus" index="4"/>
+		<Enemy type="Octopus" index="6"/>
+		<Enemy type="Octopus" index="8"/>
+		<Enemy type="Octopus" index="10"/>
 	</Spawn>
 
 	<Spawn path="6" priority="3">
-		<Enemy type="Wasp" index="5"/>
-		<Enemy type="Wasp" index="7"/>
-		<Enemy type="Wasp" index="9"/>
-		<Enemy type="Wasp" index="11"/>
+		<Enemy type="Octopus" index="5"/>
+		<Enemy type="Octopus" index="7"/>
+		<Enemy type="Octopus" index="9"/>
+		<Enemy type="Octopus" index="11"/>
 	</Spawn>
 
 	<Spawn path="1" priority="4">
-		<Enemy type="Wasp" index="12"/>
-		<Enemy type="Wasp" index="14"/>
-		<Enemy type="Wasp" index="16"/>
-		<Enemy type="Wasp" index="18"/>
+		<Enemy type="Octopus" index="12"/>
+		<Enemy type="Octopus" index="14"/>
+		<Enemy type="Octopus" index="16"/>
+		<Enemy type="Octopus" index="18"/>
 	</Spawn>
 
 	<Spawn path="7" priority="4">
-		<Enemy type="Wasp" index="13"/>
-		<Enemy type="Wasp" index="15"/>
-		<Enemy type="Wasp" index="17"/>
-		<Enemy type="Wasp" index="19"/>
+		<Enemy type="Octopus" index="13"/>
+		<Enemy type="Octopus" index="15"/>
+		<Enemy type="Octopus" index="17"/>
+		<Enemy type="Octopus" index="19"/>
 	</Spawn>
 
 </Level>

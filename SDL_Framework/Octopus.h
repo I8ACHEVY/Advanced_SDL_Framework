@@ -2,15 +2,15 @@
 
 #include "Enemy.h"
 
-class Wasp : public Enemy {
+class Octopus : public Enemy {
 
 public:
 	static void CreateDivePaths();
 
 	void Hit(PhysEntity* other) override;
 
-	Wasp(int path, int index, bool challenge, bool diver);
-	~Wasp();
+	Octopus(int path, int index, bool challenge, bool diver);
+	~Octopus();
 
 private:
 	static std::vector<std::vector<Vector2>> sDivePaths;

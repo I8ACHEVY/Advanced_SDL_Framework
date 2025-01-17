@@ -21,7 +21,7 @@ PlayScreen::PlayScreen() {
 	mPlayer = nullptr;
 
 	Enemy::CreatePaths();
-	Wasp::CreateDivePaths();
+	Octopus::CreateDivePaths();
 	Butterfly::CreateDivePaths();
 	RedShip::CreateDivePaths();
 	Boss::CreateDivePaths();

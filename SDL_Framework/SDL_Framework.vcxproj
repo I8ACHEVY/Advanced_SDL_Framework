@@ -179,7 +179,7 @@ xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="PhysicsEntity.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
-    <ClCompile Include="Galaga_V1.cpp" />
+    <ClCompile Include="Space_Invaders_V1.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScreen.cpp" />
     <ClCompile Include="PlaySideBar.cpp" />
@@ -193,7 +193,7 @@ xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Tinyxml2.cpp" />
-    <ClCompile Include="Wasp.cpp" />
+    <ClCompile Include="Octopus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedTexture.h" />
@@ -232,7 +232,7 @@ xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Tinyxml2.h" />
-    <ClInclude Include="Wasp.h" />
+    <ClInclude Include="Octopus.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Challenge.xml" />

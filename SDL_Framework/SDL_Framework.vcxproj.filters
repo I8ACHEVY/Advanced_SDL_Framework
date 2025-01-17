@@ -13,21 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Galaga CPP">
-      <UniqueIdentifier>{bcaf453c-9c6e-4a1b-83de-5bfea2339ab3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Galaga H">
-      <UniqueIdentifier>{082f297e-338a-492c-a124-cfc93b11c562}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Data">
       <UniqueIdentifier>{ece3e322-4cde-483c-9bc6-b98890adeb5c}</UniqueIdentifier>
     </Filter>
     <Filter Include="TinyXML">
       <UniqueIdentifier>{724f8b86-bb76-4042-bc58-a2cfb17268a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Space_Invaders CPP">
+      <UniqueIdentifier>{bcaf453c-9c6e-4a1b-83de-5bfea2339ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Space_Invaders H">
+      <UniqueIdentifier>{082f297e-338a-492c-a124-cfc93b11c562}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Galaga_V1.cpp">
+    <ClCompile Include="Space_Invaders_V1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
@@ -73,67 +73,67 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StartScreen.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Star.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="StarLayer.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="BackgroundStar.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Scoreboard.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="ScreenManager.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="PlayScreen.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="PlaySideBar.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="BezierPath.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Formation.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Butterfly.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Wasp.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+    <ClCompile Include="Octopus.cpp">
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Boss.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Tinyxml2.cpp">
       <Filter>TinyXML</Filter>
     </ClCompile>
     <ClCompile Include="CaptureBeam.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="RedShip.cpp">
-      <Filter>Source Files\Galaga CPP</Filter>
+      <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,67 +186,67 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StartScreen.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Star.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="StarLayer.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="BackgroundStar.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="ScoreBoard.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="ScreenManager.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="PlayScreen.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="PlaySideBar.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="BezierPath.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Formation.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Butterfly.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
-    <ClInclude Include="Wasp.h">
-      <Filter>Header Files\Galaga H</Filter>
+    <ClInclude Include="Octopus.h">
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Boss.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Tinyxml2.h">
       <Filter>TinyXML</Filter>
     </ClInclude>
     <ClInclude Include="CaptureBeam.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="RedShip.h">
-      <Filter>Header Files\Galaga H</Filter>
+      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
