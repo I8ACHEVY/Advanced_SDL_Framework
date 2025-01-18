@@ -61,4 +61,20 @@
 		<Enemy type="Octopus" index="19"/>
 	</Spawn>
 
+	<Spawn path="0" priority="5">
+		<Enemy type="RedShip" index="0"/>
+	</Spawn>
+
+	<Spawn path="1" priority="5">
+		<Enemy type="RedShip" index="1"/>
+	</Spawn>
+
+	<Spawn path="2" priority="5">
+		<Enemy type="RedShip" index="2"/>
+	</Spawn>
+
+	<Spawn path="3" priority="5">
+		<Enemy type="RedShip" index="3"/>
+	</Spawn>
+
 </Level>

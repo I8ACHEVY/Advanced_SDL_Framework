@@ -22,9 +22,9 @@ PlayScreen::PlayScreen() {
 
 	Enemy::CreatePaths();
 	Octopus::CreateDivePaths();
-	Butterfly::CreateDivePaths();
+	Crab::CreateDivePaths();
 	RedShip::CreateDivePaths();
-	Boss::CreateDivePaths();
+	Squid::CreateDivePaths();
 }
 
 PlayScreen::~PlayScreen() {

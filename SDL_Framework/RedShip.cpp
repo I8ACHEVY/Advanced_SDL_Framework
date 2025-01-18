@@ -261,6 +261,7 @@ RedShip::RedShip(int path, int index, bool challenge, Player* player) :
 
 	//if (mCaptureBeam && mCaptureBeam->Zombie()) {
 		mTexture[0] = new Texture("InvaderSprites.png", 215, 223, 50, 24);
+
 		mTexture[1] = new Texture("InvaderSprites.png", 215, 223, 50, 24);
 	//}
 	//else {

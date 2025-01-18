@@ -1,10 +1,10 @@
-#include "Butterfly.h"
+#include "Crab.h"
 #include "BoxCollider.h"
 #include "AudioManager.h"
 
-std::vector<std::vector<Vector2>> Butterfly::sDivePaths; 
+std::vector<std::vector<Vector2>> Crab::sDivePaths; 
 
-void Butterfly::CreateDivePaths() {
+void Crab::CreateDivePaths() {
 	int currentPath = 0;
 	BezierPath* path = new BezierPath();
 
@@ -176,13 +176,13 @@ void Butterfly::CreateDivePaths() {
 	delete path;
 }
 
-void Butterfly::Dive(int type) {
+void Crab::Dive(int type) {
 	mEscort = type != 0;
 
 	Enemy::Dive();
 }
 
-Vector2 Butterfly::LocalFormationPosition() {
+Vector2 Crab::LocalFormationPosition() {
 	Vector2 retVal;
 
 	int dir = mIndex % 2 == 0 ? -1 : 1;
@@ -195,7 +195,7 @@ Vector2 Butterfly::LocalFormationPosition() {
 	return retVal;
 }
 
-void Butterfly::HandleDiveState(){
+void Crab::HandleDiveState(){
 	int currentPath = mIndex % 2;
 
 	if (mEscort) {
@@ -234,13 +234,13 @@ void Butterfly::HandleDiveState(){
 
 }
 
-void Butterfly::Hit(PhysEntity* other) {
+void Crab::Hit(PhysEntity* other) {
 	AudioManager::Instance()->PlaySFX("ButterflyDestroyed.wav", 0, -1); 
 	sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 80 : 160);
 	Enemy::Hit(other);
 }
 
-void Butterfly::RenderDiveState(){
+void Crab::RenderDiveState(){
 	int currentPath = mIndex % 2;
 
 	if (mEscort) {
@@ -255,10 +255,10 @@ void Butterfly::RenderDiveState(){
 	
 }
 
-Butterfly::Butterfly(int path, int index, bool challenge) ://crab
+Crab::Crab(int path, int index, bool challenge) :
 Enemy(path, index, challenge) 
 {
-	mTag = "Butterfly";
+	mTag = "Crab";
 
 	mTexture[0] = new Texture("InvaderSprites.png", 74, 225, 24, 24);
 	mTexture[1] = new Texture("InvaderSprites.png", 107, 225, 24, 24);
@@ -269,9 +269,9 @@ Enemy(path, index, challenge)
 		texture->Scale(Vector2(1.7f, 1.7f));
 	}
 	
-	mType = Enemy::Butterfly;
+	mType = Enemy::Crab;
 
 	//AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 }
 
-Butterfly::~Butterfly() {}
+Crab::~Crab() {}

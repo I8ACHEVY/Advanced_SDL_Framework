@@ -7,15 +7,15 @@
 
 namespace SDL_Framework {
 
-	class Boss : public Enemy {
+	class Squid : public Enemy {
 	public:
 		static void CreateDivePaths();
 
 		void Dive(int type = 0) override;
 		void Hit(PhysEntity* other) override;
 
-		Boss(int path, int index, bool challenge);
-		~Boss();
+		Squid(int path, int index, bool challenge);
+		~Squid();
 
 	private:
 		static std::vector<std::vector<Vector2>> sDivePaths;

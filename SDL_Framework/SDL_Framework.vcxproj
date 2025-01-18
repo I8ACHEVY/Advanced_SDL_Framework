@@ -24,7 +24,7 @@
     <ProjectGuid>{60c363ab-dc92-49b1-a3fc-0e36b68c0282}</ProjectGuid>
     <RootNamespace>SDLFramework</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Galaga_V1</ProjectName>
+    <ProjectName>Space_Invaders_V1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -163,10 +163,10 @@ xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BackgroundStar.cpp" />
     <ClCompile Include="BezierPath.cpp" />
-    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Squid.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Butterfly.cpp" />
+    <ClCompile Include="Crab.cpp" />
     <ClCompile Include="CaptureBeam.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -201,10 +201,10 @@ xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BackgroundStar.h" />
     <ClInclude Include="BezierPath.h" />
-    <ClInclude Include="Boss.h" />
+    <ClInclude Include="Squid.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Butterfly.h" />
+    <ClInclude Include="Crab.h" />
     <ClInclude Include="CaptureBeam.h" />
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />

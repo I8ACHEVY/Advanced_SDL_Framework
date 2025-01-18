@@ -2,7 +2,7 @@
 #include "Enemy.h"
 
 
-class Butterfly : public Enemy {
+class Crab : public Enemy {
 
 public:
 	static void CreateDivePaths();
@@ -11,8 +11,8 @@ public:
 
 	void Hit(PhysEntity* other) override;
 
-	Butterfly(int path, int index, bool challenge);
-	~Butterfly();
+	Crab(int path, int index, bool challenge);
+	~Crab();
 
 private:
 	static std::vector<std::vector<Vector2>> sDivePaths;

@@ -2,9 +2,9 @@
 #include "PlaySideBar.h"
 #include "BackgroundStar.h"
 #include "Player.h"
-#include "Butterfly.h"
+#include "Crab.h"
 #include "Octopus.h"
-#include "Boss.h"
+#include "Squid.h"
 #include "RedShip.h"
 #include "Tinyxml2.h"
 
@@ -42,12 +42,12 @@ private:
 	int mSquidCount;
 	int mShipCount;
 
-	Butterfly* mFormationCrabs[MAX_CRABS];
+	Crab* mFormationCrabs[MAX_CRABS];
 	Octopus* mFormationOctopi[MAX_OCTOPI];
-	Boss* mFormationSquids[MAX_SQUIDS];
+	Squid* mFormationSquids[MAX_SQUIDS];
 	RedShip* mFormationShip[MAX_SHIPS];
 
-	Butterfly* mDivingCrab;
+	Crab* mDivingCrab;
 	bool mSkipFirstCrab;
 	float mCrabDiveDelay;
 	float mCrabDiveTimer;
@@ -57,7 +57,7 @@ private:
 	float mOctopusDiveDelay;
 	float mOctopusDiveTimer;
 
-	Boss* mDivingSquid;
+	Squid* mDivingSquid;
 	bool mCaptureDive;
 	bool mSkipFirstSquid;
 	float mSquidDiveDelay;

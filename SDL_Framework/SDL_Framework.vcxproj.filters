@@ -117,13 +117,13 @@
     <ClCompile Include="Formation.cpp">
       <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Butterfly.cpp">
+    <ClCompile Include="Crab.cpp">
       <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Octopus.cpp">
       <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
+    <ClCompile Include="Squid.cpp">
       <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
     <ClCompile Include="Tinyxml2.cpp">
@@ -230,13 +230,13 @@
     <ClInclude Include="Formation.h">
       <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
-    <ClInclude Include="Butterfly.h">
+    <ClInclude Include="Crab.h">
       <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Octopus.h">
       <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
+    <ClInclude Include="Squid.h">
       <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="Tinyxml2.h">

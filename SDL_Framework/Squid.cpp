@@ -1,10 +1,10 @@
-#include "Boss.h"
+#include "Squid.h"
 #include "BoxCollider.h"
 #include "AudioManager.h"
 
-std::vector<std::vector<Vector2>> Boss::sDivePaths;
+std::vector<std::vector<Vector2>> Squid::sDivePaths;
 
-void Boss::CreateDivePaths() {
+void Squid::CreateDivePaths() {
 	int currentPath = 0;
 	BezierPath* path = new BezierPath();
 
@@ -130,7 +130,7 @@ void Boss::CreateDivePaths() {
 	delete path;
 }
 
-void Boss::Dive(int type) {
+void Squid::Dive(int type) {
 	mCaptureDive = type != 0;
 
 	Enemy::Dive();
@@ -145,7 +145,7 @@ void Boss::Dive(int type) {
 	}
 }
 
-void Boss::Hit(PhysEntity* other) {
+void Squid::Hit(PhysEntity* other) {
 	if (mWasHit) {
 		Enemy::Hit(other);
 		AudioManager::Instance()->PlaySFX("BossDestroyed.wav", 0, 2);
@@ -164,7 +164,7 @@ void Boss::Hit(PhysEntity* other) {
 	}
 }
 
-Vector2 Boss::LocalFormationPosition() {
+Vector2 Squid::LocalFormationPosition() {
 	Vector2 retVal;
 	int dir = mIndex % 2 == 0 ? -1 : 1;
 
@@ -176,7 +176,7 @@ Vector2 Boss::LocalFormationPosition() {
 	return retVal;
 }
 
-void Boss::HandleDiveState() {
+void Squid::HandleDiveState() {
 	
 	if (mCurrentWayPoint < sDivePaths[mCurrentPath].size() &&
 		!sPlayer->IsAnimating() && sPlayer->IsVisible()) {
@@ -225,7 +225,7 @@ void Boss::HandleDiveState() {
 	}
 }
 
-void Boss::HandleCaptureBeam() {
+void Squid::HandleCaptureBeam() {
 	mCaptureBeam->PhysEntity::Update();
 	mCaptureBeam->AnimatedTexture::Update();
 
@@ -238,7 +238,7 @@ void Boss::HandleCaptureBeam() {
 	}
 }
 
-void Boss::RenderDiveState() {
+void Squid::RenderDiveState() {
 	mTexture[0]->Render();
 
 	if (mCapturing && mCaptureBeam->IsAnimating()) {
@@ -273,10 +273,10 @@ void Boss::RenderDiveState() {
 	
 }
 
-Boss::Boss(int path, int index, bool challenge) ://squid
+Squid::Squid(int path, int index, bool challenge) ://squid
 	Enemy(path, index, challenge){
 
-	mTag = "Boss";
+	mTag = "Squid";
 
 	mTexture[0] = new Texture("InvaderSprites.png", 7, 225, 18, 18);
 	mTexture[1] = new Texture("InvaderSprites.png", 40, 225, 18, 18);
@@ -287,7 +287,7 @@ Boss::Boss(int path, int index, bool challenge) ://squid
 		texture->Scale(Vector2(1.7f, 1.7f));
 	}
 
-	mType = Enemy::Boss;
+	mType = Enemy::Squid;
 
 	mCurrentPath = 0;
 
@@ -309,7 +309,7 @@ Boss::Boss(int path, int index, bool challenge) ://squid
 	mWasHit = false;
 }
 
-Boss::~Boss() {
+Squid::~Squid() {
 	delete mCaptureBeam;
 	mCaptureBeam = nullptr;
 }

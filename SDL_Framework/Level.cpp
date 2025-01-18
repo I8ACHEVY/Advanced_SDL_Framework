@@ -280,12 +280,12 @@ void Level::HandleEnemySpawning() {
 				     if (type.compare("Butterfly") == 0) {
 						if (!mChallengeStage) {
 							
-							mFormationCrabs[index] = new Butterfly(path, index, false);
+							mFormationCrabs[index] = new Crab(path, index, false);
 							mCrabCount += 1;
 						}
 						else {
 							//TODO: Change the challenge boolean to true once Challenge logic is implemented
-							mEnemies.push_back(new Butterfly(path, index, false));
+							mEnemies.push_back(new Crab(path, index, false));
 						}
 					}
 					else if (type.compare("Octopus") == 0) {
@@ -299,11 +299,11 @@ void Level::HandleEnemySpawning() {
 					}
 					else if (type.compare("Boss") == 0) {
 						if (!mChallengeStage) {
-							mFormationSquids[index] = new Boss(path, index, false);
+							mFormationSquids[index] = new Squid(path, index, false);
 							mSquidCount ++;
 						}
 						else {
-							mEnemies.push_back(new Boss(path, index, false));
+							mEnemies.push_back(new Squid(path, index, false));
 						}
 					}
 
@@ -346,23 +346,23 @@ void Level::HandleEnemySpawning() {
 }
 
 bool Level::EnemyFlyingIn() {
-	for (Butterfly* butterfly : mFormationCrabs) {
-		if (butterfly != nullptr &&
-			butterfly->CurrentState() == Enemy::FlyIn) {
+	for (Crab* crab : mFormationCrabs) {
+		if (crab != nullptr &&
+			crab->CurrentState() == Enemy::FlyIn) {
 			return true;
 		}
 	}
 
-	for (Octopus* wasp : mFormationOctopi) {
-		if (wasp != nullptr &&
-			wasp->CurrentState() == Enemy::FlyIn) {
+	for (Octopus* octopus : mFormationOctopi) {
+		if (octopus != nullptr &&
+			octopus->CurrentState() == Enemy::FlyIn) {
 			return true;
 		}
 	}
 
-	for (Boss* boss : mFormationSquids) {
-		if (boss != nullptr &&
-			boss->CurrentState() == Enemy::FlyIn) {
+	for (Squid* squid : mFormationSquids) {
+		if (squid != nullptr &&
+			squid->CurrentState() == Enemy::FlyIn) {
 			return true;
 		}
 	}
@@ -383,23 +383,23 @@ void Level::HandleEnemyFormation() {
 
 	bool levelCleared = mSpawningFinished;
 
-	for (Butterfly* butterfly : mFormationCrabs) {
-		if (butterfly != nullptr) {
-			butterfly->Update();
+	for (Crab* crab : mFormationCrabs) {
+		if (crab != nullptr) {
+			crab->Update();
 
-			if (butterfly->CurrentState() != Enemy::Dead ||
-				butterfly->InDeathAnimation()) {
+			if (crab->CurrentState() != Enemy::Dead ||
+				crab->InDeathAnimation()) {
 				levelCleared = false;
 			}
 		}
 	}
 
-	for (Octopus* wasp : mFormationOctopi) {
-		if (wasp != nullptr) {
-			wasp->Update();
+	for (Octopus* octopus : mFormationOctopi) {
+		if (octopus != nullptr) {
+			octopus->Update();
 
-			if (wasp->CurrentState() != Enemy::Dead ||
-				wasp->InDeathAnimation()) {
+			if (octopus->CurrentState() != Enemy::Dead ||
+				octopus->InDeathAnimation()) {
 				levelCleared = false;
 			}
 		}
@@ -416,12 +416,12 @@ void Level::HandleEnemyFormation() {
 		}
 	}
 
-	for (Boss* boss : mFormationSquids) {
-		if (boss != nullptr) {
-			boss->Update();
+	for (Squid* squid : mFormationSquids) {
+		if (squid != nullptr) {
+			squid->Update();
 
-			if (boss->CurrentState() != Enemy::Dead ||
-				boss->InDeathAnimation()) {
+			if (squid->CurrentState() != Enemy::Dead ||
+				squid->InDeathAnimation()) {
 				levelCleared = false;
 			}
 		}
@@ -430,7 +430,8 @@ void Level::HandleEnemyFormation() {
 	if (!mFormation->Locked()) {
 		if (mCrabCount == MAX_CRABS &&
 			mOctopusCount == MAX_OCTOPI &&
-			mSquidCount == MAX_SQUIDS ) { //&& mRedShipCount == MAX_REDSHIPS
+			mSquidCount == MAX_SQUIDS && 
+			mShipCount == MAX_SHIPS){
 			if (!EnemyFlyingIn()) {
 				mFormation->Lock();
 			}
@@ -630,15 +631,15 @@ void Level::Render() {
 
 	else {
 		if (!mChallengeStage) {
-			for (Butterfly* butterfly : mFormationCrabs) {
-				if (butterfly != nullptr) {
-					butterfly->Render();
+			for (Crab* crab : mFormationCrabs) {
+				if (crab != nullptr) {
+					crab->Render();
 				}
 			}
 
-			for (Octopus* wasp : mFormationOctopi) {
-				if (wasp != nullptr) {
-					wasp->Render();
+			for (Octopus* octopus : mFormationOctopi) {
+				if (octopus != nullptr) {
+					octopus->Render();
 				}
 			}
 
@@ -648,9 +649,9 @@ void Level::Render() {
 				}
 			}
 
-			for (Boss* boss : mFormationSquids) {
-				if (boss != nullptr) {
-					boss->Render();
+			for (Squid* squid : mFormationSquids) {
+				if (squid != nullptr) {
+					squid->Render();
 				}
 			}
 
