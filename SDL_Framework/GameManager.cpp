@@ -196,7 +196,7 @@ namespace SDL_Framework {
 		mRandom = Random::Instance();
 		mScreenManager = ScreenManager::Instance();
 
-		mBorderTexture = mAssetManager->GetTexture("Border.png");
+		//mBorderTexture = mAssetManager->GetTexture("InvaderSprites.png");// , 5, 993, 258, 225);
 
 		if (!mBorderTexture) {
 			std::cerr << "Failed to load border texture: " << IMG_GetError() << std::endl;

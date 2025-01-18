@@ -105,7 +105,7 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) :
 			mFormationSquids[i] = nullptr;
 		}
 
-		for (int i = 0; i < MAX_REDSHIPS; i++) {
+		for (int i = 0; i < MAX_SHIPS; i++) {
 			mFormationShip[i] = nullptr;
 		}
 	}
@@ -176,7 +176,7 @@ Level::~Level() {
 		mFormationSquids[i] = nullptr;
 	}
 
-	for (int i = 0; i < MAX_REDSHIPS; i++) {
+	for (int i = 0; i < MAX_SHIPS; i++) {
 		delete mFormationShip[i];
 		mFormationShip[i] = nullptr;
 	}
@@ -507,7 +507,7 @@ void Level::HandleEnemyDiving() {
 		if (mShipDiveTimer >= mShipDiveDelay) {
 			bool skipped = false;
 
-			for (int i = MAX_REDSHIPS - 1; i >= 0; i--) {
+			for (int i = MAX_SHIPS - 1; i >= 0; i--) {
 				if (mFormationShip[i] != nullptr
 					&& mFormationShip[i]->CurrentState() == Enemy::InFormation) {
 					if (!mSkipFirstShip || (mSkipFirstShip && skipped)) {

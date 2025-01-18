@@ -158,13 +158,13 @@ Octopus::Octopus(int path, int index, bool challenge, bool diver) :
 
 	mTag = "Octopus";
 
-	mTexture[0] = new Texture("AnimatedEnemies.png", 0, 40, 52, 40);
-	mTexture[1] = new Texture("AnimatedEnemies.png", 52, 40, 52, 40);
+	mTexture[0] = new Texture("InvaderSprites.png", 147, 226, 26, 24);
+	mTexture[1] = new Texture("InvaderSprites.png", 179, 226, 26, 24);
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);
 		texture->Position(Vec2_Zero);
-		texture->Scale(Vector2(0.7f, 0.7f));
+		texture->Scale(Vector2(1.7f, 1.7f));
 
 	}
 

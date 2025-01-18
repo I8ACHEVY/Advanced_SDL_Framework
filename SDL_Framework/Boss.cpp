@@ -273,18 +273,18 @@ void Boss::RenderDiveState() {
 	
 }
 
-Boss::Boss(int path, int index, bool challenge) :
+Boss::Boss(int path, int index, bool challenge) ://squid
 	Enemy(path, index, challenge){
 
 	mTag = "Boss";
 
-	mTexture[0] = new Texture("Bosses.png", 0, 0, 64, 64);
-	mTexture[1] = new Texture("Bosses.png", 64, 0, 64, 64);
+	mTexture[0] = new Texture("InvaderSprites.png", 7, 225, 18, 18);
+	mTexture[1] = new Texture("InvaderSprites.png", 40, 225, 18, 18);
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);
 		texture->Position(Vec2_Zero);
-		texture->Scale(Vector2(0.7f, 0.7f));
+		texture->Scale(Vector2(1.7f, 1.7f));
 	}
 
 	mType = Enemy::Boss;

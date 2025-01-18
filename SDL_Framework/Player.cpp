@@ -82,10 +82,10 @@ Player::Player() {
 	mMoveSpeed = 250.0f;
 	mMoveBounds = Vector2(323.0f, 1065.0f);
 
-	mShip = new Texture("PlayerShips.png", 0, 0, 60, 64);
+	mShip = new Texture("InvaderSprites.png", 278, 228, 28, 17);
 	mShip->Parent(this);
 	mShip->Position(Vec2_Zero);
-	mShip->Scale(Vector2(0.7f, 0.7f));
+	//mShip->Scale(Vector2(0.7f, 0.7f));
 
 
 	mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,

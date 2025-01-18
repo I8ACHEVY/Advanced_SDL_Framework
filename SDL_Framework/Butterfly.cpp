@@ -2,7 +2,7 @@
 #include "BoxCollider.h"
 #include "AudioManager.h"
 
-std::vector<std::vector<Vector2>> Butterfly::sDivePaths;
+std::vector<std::vector<Vector2>> Butterfly::sDivePaths; 
 
 void Butterfly::CreateDivePaths() {
 	int currentPath = 0;
@@ -255,18 +255,18 @@ void Butterfly::RenderDiveState(){
 	
 }
 
-Butterfly::Butterfly(int path, int index, bool challenge) :
+Butterfly::Butterfly(int path, int index, bool challenge) ://crab
 Enemy(path, index, challenge) 
 {
 	mTag = "Butterfly";
 
-	mTexture[0] = new Texture("AnimatedEnemies.png", 0, 0, 52, 40);
-	mTexture[1] = new Texture("AnimatedEnemies.png", 52, 0, 52, 40);
+	mTexture[0] = new Texture("InvaderSprites.png", 74, 225, 24, 24);
+	mTexture[1] = new Texture("InvaderSprites.png", 107, 225, 24, 24);
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);
 		texture->Position(Vec2_Zero);
-		texture->Scale(Vector2(0.7f, 0.7f));
+		texture->Scale(Vector2(1.7f, 1.7f));
 	}
 	
 	mType = Enemy::Butterfly;

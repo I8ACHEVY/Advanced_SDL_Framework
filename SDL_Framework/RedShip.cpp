@@ -260,8 +260,8 @@ RedShip::RedShip(int path, int index, bool challenge, Player* player) :
 	mTag = "RedShip";
 
 	//if (mCaptureBeam && mCaptureBeam->Zombie()) {
-		mTexture[0] = new Texture("PlayerShips.png", 60, 0, 60, 64);
-		mTexture[1] = new Texture("PlayerShips.png", 60, 0, 60, 64);
+		mTexture[0] = new Texture("InvaderSprites.png", 215, 223, 50, 24);
+		mTexture[1] = new Texture("InvaderSprites.png", 215, 223, 50, 24);
 	//}
 	//else {
 	//	mTexture[0] = new Texture("PlayerShips.png", 60, 64, 60, 64);		//invisable texture

@@ -31,7 +31,6 @@ namespace SDL_Framework {
 
 		bool mIsCapturing;
 		CaptureBeam* mCaptureBeam;
-		//RedShip* mRedShip;
 
 		void HandleCaptureBeam();
 
