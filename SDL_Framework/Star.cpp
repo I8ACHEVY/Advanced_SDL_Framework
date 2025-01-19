@@ -7,10 +7,6 @@ void Star::Scroll(bool scroll) {
 	sScroll = scroll;
 }
 
-void Star::Visible(bool visible) {
-	mVisible = visible;
-}
-
 Star::Star(int layer) : Texture("Stars.png", 0,0,4,4) {
 	mTimer = Timer::Instance();
 	mRandom = Random::Instance();
