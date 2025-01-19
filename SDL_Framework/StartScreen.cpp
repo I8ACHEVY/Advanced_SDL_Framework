@@ -141,6 +141,7 @@ void StartScreen::Update() {
 }
 
 void StartScreen::Render() {
+
 	mPlayer1->Render();
 	mPlayer2->Render();
 	mHiScore->Render();
@@ -165,6 +166,7 @@ void StartScreen::Render() {
 }
 
 StartScreen::~StartScreen() {
+
 	delete mTopBar;
 	mTopBar = nullptr;
 	delete mPlayer1;

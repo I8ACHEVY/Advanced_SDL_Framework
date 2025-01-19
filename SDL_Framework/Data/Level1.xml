@@ -11,32 +11,32 @@
 	</Spawn>
 	
 	<Spawn path="1" priority="0">
-		<Enemy type="Butterfly" index="0"/>
-		<Enemy type="Butterfly" index="1"/>
-		<Enemy type="Butterfly" index="2"/>
-		<Enemy type="Butterfly" index="3"/>
+		<Enemy type="Crab" index="0"/>
+		<Enemy type="Crab" index="1"/>
+		<Enemy type="Crab" index="2"/>
+		<Enemy type="Crab" index="3"/>
 	</Spawn>
 
 	<Spawn path="2" priority="1">
-		<Enemy type="Boss" index="2"/>
-		<Enemy type="Butterfly" index="4"/>
-		<Enemy type="Boss" index="0"/>
-		<Enemy type="Butterfly" index="5"/>
-		<Enemy type="Boss" index="1"/>
-		<Enemy type="Butterfly" index="6"/>
-		<Enemy type="Boss" index="3"/>
-		<Enemy type="Butterfly" index="7"/>
+		<Enemy type="Squid" index="2"/>
+		<Enemy type="Crab" index="4"/>
+		<Enemy type="Squid" index="0"/>
+		<Enemy type="Crab" index="5"/>
+		<Enemy type="Squid" index="1"/>
+		<Enemy type="Crab" index="6"/>
+		<Enemy type="Squid" index="3"/>
+		<Enemy type="Crab" index="7"/>
 	</Spawn>
 
 	<Spawn path="3" priority="2">
-		<Enemy type="Butterfly" index="8"/>
-		<Enemy type="Butterfly" index="9"/>
-		<Enemy type="Butterfly" index="10"/>
-		<Enemy type="Butterfly" index="11"/>
-		<Enemy type="Butterfly" index="12"/>
-		<Enemy type="Butterfly" index="13"/>
-		<Enemy type="Butterfly" index="14"/>
-		<Enemy type="Butterfly" index="15"/>
+		<Enemy type="Crab" index="8"/>
+		<Enemy type="Crab" index="9"/>
+		<Enemy type="Crab" index="10"/>
+		<Enemy type="Crab" index="11"/>
+		<Enemy type="Crab" index="12"/>
+		<Enemy type="Crab" index="13"/>
+		<Enemy type="Crab" index="14"/>
+		<Enemy type="Crab" index="15"/>
 	</Spawn>
 
 	<Spawn path="0" priority="3">

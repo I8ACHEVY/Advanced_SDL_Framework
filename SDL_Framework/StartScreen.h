@@ -20,6 +20,7 @@ public:
 	void Render() override;
 
 private:
+
 	Timer* mTimer;
 	InputManager* mInputManager;
 

@@ -10,6 +10,8 @@ class Star : public Texture {
 public:
 	static void Scroll(bool scroll);
 
+	static void Visible(bool Visible);
+
 	Star(int layer);
 	~Star();
 
