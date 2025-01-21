@@ -22,6 +22,14 @@ ScreenManager::ScreenManager() {
 	mPlayScreen = new PlayScreen();
 
 	mCurrentScreen = Start;
+
+	
+	//mBackground = mAssetManager->GetTexture("invaders.png");
+	//mBackground->Position(Vec2_Zero);
+	//mBackground->Scale(Vector2(1.5f, 1.5f));
+
+	//SDL_Rect srcRect = { 993, 12, 257, 224 };
+	
 }
 
 ScreenManager::~ScreenManager() {
@@ -29,6 +37,11 @@ ScreenManager::~ScreenManager() {
 
 	BackgroundStars::Release();
 	mBackgroundStars = nullptr;
+
+	//if (mBackground != nullptr) {
+	//	SDL_DestroyTexture(mBackground);
+	//	mBackground = nullptr;
+	//}
 
 	delete mStartScreen;
 	mStartScreen = nullptr;
@@ -68,16 +81,25 @@ void ScreenManager::Update() {
 }
 
 void ScreenManager::Render() {
-	mBackgroundStars->Render();
+	//mBackground = mAssetManager->GetTexture("invaders.png");
+	//mAssetManager = AssetManager::Instance();
+	//SDL_Rect destRect = { 0, 0, 1400, 1024 };
+
+	//mGraphic->DrawTexture(mBackground, nullptr, &destRect);
 
 	switch (mCurrentScreen) {
 		
 	case ScreenManager::Start:
 		mStartScreen->Render();
+		mBackgroundStars->Render();
 		break;
 
 	case ScreenManager::Play:
 		mPlayScreen->Render();
+		//mBackground->Render();
+		
+		//mGraphic->Render();
+
 		break;
 
 	default:

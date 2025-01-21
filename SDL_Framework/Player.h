@@ -28,15 +28,6 @@ public:
 
 	bool WasHit();
 
-	void SetIsCapturing(bool value);// { mIsCapturing = value; }
-	bool IsCapturing() const;// { return mIsCapturing; }
-	
-	void SetCaptureRange(bool value);
-	bool CaptureRange() const;
-
-	void SetZombie(bool value);// { mZombie = value; }
-	bool Zombie() const;// { return mZombie; }
-
 	bool IgnoreCollision() override;
 	void Hit(PhysEntity* other) override;
 
@@ -45,9 +36,6 @@ private:
 	Bullet* mBullets[MAX_BULLETS];
 
 	bool mWasHit;
-	bool mIsCapturing;
-	bool mZombie;
-	bool mCaptureRange;
 
 	Timer* mTimer;
 	InputManager* mInput;

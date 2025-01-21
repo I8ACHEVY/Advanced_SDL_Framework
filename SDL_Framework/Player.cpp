@@ -3,55 +3,27 @@
 
 
 void Player::HandleMovement() {
-	//if (CaptureRange()) {
-	//	if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
-	//		Translate(-Vec2_Right * (mMoveSpeed * 0.2f) * mTimer->DeltaTime(), World);
-	//	}
-	//	else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
-	//		Translate(Vec2_Right * (mMoveSpeed * 0.2f) * mTimer->DeltaTime(), World);
-	//	}
 
-	//	Vector2 pos = Position(Local);
-	//	if (pos.x < mMoveBounds.x) {
-	//		pos.x = mMoveBounds.x;
-	//	}
-
-	//	else if (pos.x > mMoveBounds.y) {
-	//		pos.x = mMoveBounds.y;
-	//	}
-
-	//	Position(pos);
-	//
-	//}
-
-	if (!CaptureRange()) {
-
-		if (IsCapturing()) {
-			return;
-		}
-
-		else {
-			if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
-				Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
-			}
-			else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
-				Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
-			}
-
-			Vector2 pos = Position(Local);
-			if (pos.x < mMoveBounds.x) {
-				pos.x = mMoveBounds.x;
-			}
-
-			else if (pos.x > mMoveBounds.y) {
-				pos.x = mMoveBounds.y;
-			}
-
-			Position(pos);
-		}
+	if (mInput->KeyDown(SDL_SCANCODE_A) || mInput->KeyDown(SDL_SCANCODE_LEFT)) {
+		Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
+	}
+	else if (mInput->KeyDown(SDL_SCANCODE_D) || mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
+		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime(), World);
 	}
 
+	Vector2 pos = Position(Local);
+	if (pos.x < mMoveBounds.x) {
+		pos.x = mMoveBounds.x;
+	}
+
+	else if (pos.x > mMoveBounds.y) {
+		pos.x = mMoveBounds.y;
+	}
+
+	Position(pos);
 }
+
+
 
 void Player::HandleFiring() {
 	if (mInput->KeyPressed(SDL_SCANCODE_SPACE) || mInput->MouseButtonPressed(InputManager::Left)) {
@@ -74,7 +46,6 @@ Player::Player() {
 	mVisible = false;
 	mAnimating = false;
 	mWasHit = false;
-	//mIsCapturing = false;
 
 	mScore = 0;
 	mLives = 2;
@@ -85,7 +56,7 @@ Player::Player() {
 	mShip = new Texture("InvaderSprites.png", 278, 228, 28, 17);
 	mShip->Parent(this);
 	mShip->Position(Vec2_Zero);
-	//mShip->Scale(Vector2(0.7f, 0.7f));
+	mShip->Scale(Vector2(1.5f, 1.5f));
 
 
 	mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
@@ -151,29 +122,6 @@ bool Player::WasHit() {
 	return mWasHit;
 }
 
-void Player::SetCaptureRange(bool value) {
-	mCaptureRange = value;
-}
-bool Player::CaptureRange() const {
-	return mCaptureRange;
-}
-
-void Player::SetIsCapturing(bool value) { 
-	mIsCapturing = value;
-}
-
-bool Player::IsCapturing() const {
-	return mIsCapturing;
-}
-
-void Player::SetZombie(bool value) {
-	mZombie = value;
-}
-
-bool Player::Zombie() const {
-	return mZombie;
-}
-
 bool Player::IgnoreCollision() {
 	return !mVisible || mAnimating || !Active();
 }
@@ -185,32 +133,26 @@ void Player::Hit(PhysEntity* other) {
 	if (other->GetTag() == "Capture") {
 		mAnimating = false;
 		mWasHit = false;
-		mCaptureRange = true;
 	
 	}
 	else if (other->GetTag() == "Crab" || 
 		other->GetTag() == "Octopus" || 
-		other->GetTag() == "Boss" ||
+		other->GetTag() == "Squid" ||
 		other->GetTag() == "RedShip") {
 
-		 if (!IsCapturing()){
 			mLives -= 1;
 			mAnimating = true;
 			mDeathAnimation->ResetAnimation();
 			mAudio->PlaySFX("PlayerExplosion.wav", 0, -1);
 			mWasHit = true;
-		}
 	}
 
 }
 
 void Player::Update() {
-	if (mAnimating && !IsCapturing()){
+	if (mAnimating){
 		mDeathAnimation->Update();
 		mAnimating = mDeathAnimation->IsAnimating();
-		SetCaptureRange(false);
-		SetIsCapturing(false);
-		SetZombie(false);
 
 		if (mWasHit) {
 			mWasHit = false;
@@ -218,16 +160,8 @@ void Player::Update() {
 	}
 	else {
 		if (Active()) {
-			if (IsCapturing()) {
-
-				HandleFiring();
-			}
-			else {
-				if (!IsCapturing()) {
-					HandleMovement();
-					HandleFiring();
-				}
-			}
+			HandleMovement();
+			HandleFiring();
 		}
 	}
 

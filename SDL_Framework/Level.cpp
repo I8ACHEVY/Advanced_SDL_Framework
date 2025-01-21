@@ -4,13 +4,12 @@ void Level::StartStage() {
 	mStageStarted = true;
 }
 
-Level::Level(int stage, PlaySideBar* sideBar, Player* player) : 
-	zPlayer(player){
+Level::Level(int stage, PlaySideBar* sideBar, Player* player){
 
 	mTimer = Timer::Instance();
 	mSideBar = sideBar;
 	mSideBar->SetLevel(stage);
-	mBackgroundStars = BackgroundStars::Instance();
+	//mBackgroundStars = BackgroundStars::Instance ();
 
 	mStage = stage;
 	mStageStarted = false;
@@ -143,7 +142,7 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player) :
 Level::~Level() {
 	mTimer = nullptr;
 	mSideBar = nullptr;
-	mBackgroundStars = nullptr;
+	//mBackgroundStars = nullptr;
 	mPlayer = nullptr;
 
 	delete mStageLabel;
@@ -197,7 +196,6 @@ void Level::HandleStartLabels() {
 	mLabelTimer += mTimer->DeltaTime();
 
 	if (mLabelTimer >= mStageLabelOffScreen) {
-		mBackgroundStars->Scroll(true);
 		mPlayer->Active(true);
 		mPlayer->SetVisible(true);
 
@@ -220,7 +218,6 @@ void Level::HandleCollisions() {
 			mPlayerHit = true;
 			mRespawnTimer = 0.0f;
 			mPlayer->Active(false);
-			mBackgroundStars->Scroll(false);
 		}
 	}
 }
@@ -236,7 +233,6 @@ void Level::HandlePlayerDeath() {
 				mPlayer->Active(true);
 				mPlayer->SetVisible(true);
 				mPlayerHit = false;
-				mBackgroundStars->Scroll(true);
 			}
 		}
 		else {
@@ -309,11 +305,11 @@ void Level::HandleEnemySpawning() {
 
 					else if (type.compare("RedShip") == 0) {
 						 if (!mChallengeStage) {
-							 mFormationShip[index] = new RedShip(path, index, false, zPlayer);
+							 mFormationShip[index] = new RedShip(path, index, false);
 							 mShipCount++;
 						 }
 						 else {
-							 mEnemies.push_back(new RedShip(path, index, false, zPlayer));
+							 mEnemies.push_back(new RedShip(path, index, false));
 						 }
 					 }
 

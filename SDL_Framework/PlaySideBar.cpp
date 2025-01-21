@@ -51,10 +51,10 @@ PlaySideBar::PlaySideBar() {
 	mShips->Position(-710.0f, 894.0f);
 
 	for (int i = 0; i < MAX_SHIP_TEXTURES; i++) {
-		mShipTextures[i] = new Texture("PlayerShips.png", 0, 0, 60, 64);
+		mShipTextures[i] = new Texture("InvaderSprites.png", 278, 228, 28, 17);
 		mShipTextures[i]->Parent(mShips);
 		mShipTextures[i]->Position(-45.0f * (i % 5), 894.0f * (i / 5));
-		mShipTextures[i]->Scale(Vector2(0.6f, 0.6f));
+		mShipTextures[i]->Scale(Vector2(1.5f, 1.5f));
 	}
 
 	mTotalShipsLabel = new Scoreboard();

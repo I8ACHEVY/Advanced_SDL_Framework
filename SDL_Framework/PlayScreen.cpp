@@ -4,7 +4,7 @@ PlayScreen::PlayScreen() {
 	mTimer = Timer::Instance();
 	mAudio = AudioManager::Instance();
 
-	mStars = BackgroundStars::Instance();
+	//mStars = BackgroundStars::Instance();
 
 	mSideBar = new PlaySideBar();
 	mSideBar->Parent(this);
@@ -58,7 +58,6 @@ void PlayScreen::StartNewGame() {
 	mSideBar->SetPlayerScore(mPlayer->Score());
 	mSideBar->SetLevel(0);
 
-	mStars->Scroll(false);
 	mGameStarted = false;
 	mLevelStarted = false;
 	mLevelStartTimer = 0.0f;

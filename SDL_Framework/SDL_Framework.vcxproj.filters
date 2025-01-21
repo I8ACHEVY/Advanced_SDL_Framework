@@ -129,9 +129,6 @@
     <ClCompile Include="Tinyxml2.cpp">
       <Filter>TinyXML</Filter>
     </ClCompile>
-    <ClCompile Include="CaptureBeam.cpp">
-      <Filter>Source Files\Space_Invaders CPP</Filter>
-    </ClCompile>
     <ClCompile Include="RedShip.cpp">
       <Filter>Source Files\Space_Invaders CPP</Filter>
     </ClCompile>
@@ -241,9 +238,6 @@
     </ClInclude>
     <ClInclude Include="Tinyxml2.h">
       <Filter>TinyXML</Filter>
-    </ClInclude>
-    <ClInclude Include="CaptureBeam.h">
-      <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
     <ClInclude Include="RedShip.h">
       <Filter>Header Files\Space_Invaders H</Filter>

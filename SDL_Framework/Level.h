@@ -29,7 +29,6 @@ private:
 	PlaySideBar* mSideBar;
 	BackgroundStars* mBackgroundStars;
 	Player* mPlayer;
-	Player* zPlayer;
 	Formation* mFormation;
 
 	static const int MAX_CRABS = 22;

@@ -21,10 +21,14 @@ private:
 	Screens mCurrentScreen;
 
 	static ScreenManager* sInstance;
-	
+
+	AssetManager* mAssetManager;
 	BackgroundStars* mBackgroundStars;
 	InputManager* mInput;
 
 	StartScreen* mStartScreen;
 	PlayScreen* mPlayScreen;
+	//Graphics* mGraphic;
+
+	//SDL_Texture* mBackground;
 };

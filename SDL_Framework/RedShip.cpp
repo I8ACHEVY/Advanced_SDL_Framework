@@ -254,20 +254,14 @@ void RedShip::RenderDiveState() {
 
 }
 
-RedShip::RedShip(int path, int index, bool challenge, Player* player) :
-	Enemy(path, index, challenge), zPlayer(player) {
+RedShip::RedShip(int path, int index, bool challenge) :
+	Enemy(path, index, challenge) {
 
 	mTag = "RedShip";
 
-	//if (mCaptureBeam && mCaptureBeam->Zombie()) {
+	
 		mTexture[0] = new Texture("InvaderSprites.png", 215, 223, 50, 24);
-
 		mTexture[1] = new Texture("InvaderSprites.png", 215, 223, 50, 24);
-	//}
-	//else {
-	//	mTexture[0] = new Texture("PlayerShips.png", 60, 64, 60, 64);		//invisable texture
-	//	mTexture[1] = new Texture("PlayerShips.png", 60, 64, 60, 64);
-	//}
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);
@@ -277,11 +271,11 @@ RedShip::RedShip(int path, int index, bool challenge, Player* player) :
 
 	mType = Enemy::RedShips;
 
-	//if (mCaptureBeam && mCaptureBeam->Zombie()) {
+
 		AddCollider(new BoxCollider(Vector2(10.0f, 45.0f)));
 		AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(12.0f, 5.0f));
 		AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(-12.0f, 5.0f));
-	//}
+
 
 	//mId = PhysicsManager::Instance()->RegisterEntity(this,
 	//
@@ -316,11 +310,6 @@ RedShip::~RedShip() {
 	}
 }
 
-void RedShip::CapturedPlayer() {
-	if (zPlayer->Zombie())
-	UpdateTexture(mIndex);
-}
-
 void RedShip::UpdateTexture(int index) {
 	//if (index == mBossIndex + 1) {
 	//	if (mCaptureBeam->Zombie()) {
@@ -337,25 +326,5 @@ void RedShip::UpdateTexture(int index) {
 }
 
 bool RedShip::IgnoreCollision(PhysEntity* Entity) {
-	return !zPlayer->Zombie() || !Active();
+	return !Active();
 }
-
-/* XML RedShip flyIn spawning
-
-<Spawn path="0" priority="5">
-	<Enemy type="RedShip" index="0"/>
-</Spawn>
-
-<Spawn path="1" priority="5">
-	<Enemy type="RedShip" index="1"/>
-</Spawn>
-
-<Spawn path="2" priority="5">
-	<Enemy type="RedShip" index="2"/>
-</Spawn>
-
-<Spawn path="3" priority="5">
-	<Enemy type="RedShip" index="3"/>
-</Spawn>
-
-*/

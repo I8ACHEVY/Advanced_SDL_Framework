@@ -3,10 +3,6 @@
 
 bool Star::sScroll = false;
 
-void Star::Scroll(bool scroll) {
-	sScroll = scroll;
-}
-
 Star::Star(int layer) : Texture("Stars.png", 0,0,4,4) {
 	mTimer = Timer::Instance();
 	mRandom = Random::Instance();
@@ -32,17 +28,6 @@ Star::~Star() {
 	mRandom = nullptr;
 }
 
-void Star::ScrollStar() {
-	Translate(Vec2_Up * mScrollSpeed);
-
-	Vector2 pos = Position(Local);
-	if (pos.y > Graphics::Instance()->SCREEN_HEIGHT * 0.95) {
-		pos.y = 190.0f;
-		pos.x = (float)(mRandom->RandomInt() % (int)(Graphics::Instance()->SCREEN_WIDTH * 0.58f) + 292.0f);
-		Position(pos);
-	}
-}
-
 void Star::Update() {
 	mFlickerTime += mTimer->DeltaTime();
 
@@ -51,13 +36,10 @@ void Star::Update() {
 		mFlickerTime = 0.0f;
 		mFlickerTime = 0.0f;
 	}
-
-	if (sScroll) {
-		ScrollStar();
-	}
 }
 
 void Star::Render() {
+
 	if (mVisible) {
 		Texture::Render();
 	}

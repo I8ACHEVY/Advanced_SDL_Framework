@@ -6,8 +6,6 @@ public:
 	static BackgroundStars* Instance();
 	static void Release();
 
-	void Scroll(bool scroll);
-
 	void Update();
 	void Render();
 

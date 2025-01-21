@@ -15,10 +15,6 @@ void BackgroundStars::Release() {
 	sInstance = nullptr;
 }
 
-void BackgroundStars::Scroll(bool scroll) {
-	Star::Scroll(scroll);
-}
-
 void BackgroundStars::Update() {
 	for (auto layer : mLayers) {
 		layer->Update();

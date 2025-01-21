@@ -131,26 +131,18 @@ void Squid::CreateDivePaths() {
 }
 
 void Squid::Dive(int type) {
-	mCaptureDive = type != 0;
+	//mCaptureDive = type != 0;
 
 	Enemy::Dive();
 
-	if (mCaptureDive) {
-		mCapturing = false;
-		mCurrentPath = 2 + Random::Instance()->RandomRange(0, 1);
-		mCaptureBeam->ResetAnimation();
-	}
-	else {
-		mCurrentPath = mIndex % 2;
-	}
+	mCurrentPath = mIndex % 2;
 }
 
 void Squid::Hit(PhysEntity* other) {
 	if (mWasHit) {
 		Enemy::Hit(other);
 		AudioManager::Instance()->PlaySFX("BossDestroyed.wav", 0, 2);
-		sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 150 :
-			mCaptureDive ? 400 : 800);
+		sPlayer->AddScore(mCurrentState == Enemy::InFormation ? 150 : 400);
 		Enemy::Hit(other);
 	}
 	else {
@@ -183,57 +175,18 @@ void Squid::HandleDiveState() {
 
 		Vector2 waypointPos = mDiveStartPosition + sDivePaths
 			[mCurrentPath][mCurrentWayPoint];
-	
+
 		Vector2 dist = waypointPos - Position();
-	
+
 		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
 
 		if (sPlayer->IsVisible()) {
 
 			Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
 		}
-	
+
 		if ((waypointPos - Position()).MagnitudeSqr() < EPSILON * mSpeed / 25) {
 			mCurrentWayPoint++;
-		}
-
-		if (mCurrentWayPoint == sDivePaths[mCurrentPath].size()) {
-			if (mCaptureDive) {
-				mCapturing = true;
-				Rotation(180.0f);
-
-			}
-			else {
-				Position(Vector2(WorldFormationPosition().x, 20.0f));
-			}
-		}
-	}
-	else {
-		if (!mCaptureDive || !mCapturing) {
-			Vector2 dist = WorldFormationPosition() - Position();
-
-			Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-			Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
-
-			if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25) {
-				JoinFormation();
-			}
-		}
-		else {
-			HandleCaptureBeam();
-		}
-	}
-}
-
-void Squid::HandleCaptureBeam() {
-	mCaptureBeam->PhysEntity::Update();
-	mCaptureBeam->AnimatedTexture::Update();
-
-	if (!mCaptureBeam->IsAnimating()) {
-		Translate(Vec2_Up * mSpeed * mTimer->DeltaTime(), World);
-		if (Position().y >= 580.0f) {
-			Position(WorldFormationPosition().x, -20.0f);
-			mCapturing = false;
 		}
 	}
 }
@@ -241,15 +194,7 @@ void Squid::HandleCaptureBeam() {
 void Squid::RenderDiveState() {
 	mTexture[0]->Render();
 
-	if (mCapturing && mCaptureBeam->IsAnimating()) {
-		mCaptureBeam->Render();
-	}
-
 	int currentPath = mIndex % 2;
-	
-	if (mCaptureDive) {
-		currentPath += 2;
-	}
 	
 	//for (int i = 0; i < sDivePaths[currentPath].size() - 1; i++) {		// Dive path debugging
 	//	Graphics::Instance()->DrawLine(
@@ -291,25 +236,11 @@ Squid::Squid(int path, int index, bool challenge) ://squid
 
 	mCurrentPath = 0;
 
-	mCaptureDive = false;
-	mCurrentPath = 0;
-	mCapturing = false;
-
-	mCaptureBeam = new CaptureBeam();
-	mCaptureBeam->PhysEntity::Parent(this);
-	mCaptureBeam->PhysEntity::Position(0.0f, -140.0f);
-	mCaptureBeam->PhysEntity::Rotation(180.0f);
-
-	mCaptureBeam->AnimatedTexture::Parent(this);
-	mCaptureBeam->AnimatedTexture::Position(0.0f, -140.0f);
-	mCaptureBeam->AnimatedTexture::Rotation(180.0f);
-
 	AddCollider(new BoxCollider(mTexture[1]->ScaledDimensions()));
 
 	mWasHit = false;
 }
 
 Squid::~Squid() {
-	delete mCaptureBeam;
-	mCaptureBeam = nullptr;
+
 }

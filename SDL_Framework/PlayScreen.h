@@ -19,6 +19,7 @@ public:
 	void Render() override;
 
 private:
+
 	Timer* mTimer;
 	AudioManager* mAudio;
 
