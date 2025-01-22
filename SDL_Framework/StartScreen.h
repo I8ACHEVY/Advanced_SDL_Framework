@@ -43,15 +43,16 @@ private:
 	AnimatedTexture* mAnimatedLogo;
 
 	GameEntity* mPlayModes;
-	Texture* mOnePlayerMode;
-	Texture* mTwoPlayerMode;
+	Texture* mStartMode;
+	Texture* mOptionsMode;
+	Texture* mCreditsMode;
 	Texture* mCursor;
 	Vector2 mCursorStartPos;
 	Vector2 mCursorOffsetPos;
 	int mSelectedMode;
 
 	GameEntity* mBottomBar;
-	Texture* mNamco;
+	Texture* mTaito;
 	Texture* mDates;
 	Texture* mRights;
 };

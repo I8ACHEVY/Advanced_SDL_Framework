@@ -48,15 +48,15 @@ Player::Player() {
 	mWasHit = false;
 
 	mScore = 0;
-	mLives = 2;
+	mLives = 20;
 
 	mMoveSpeed = 250.0f;
-	mMoveBounds = Vector2(323.0f, 1065.0f);
+	mMoveBounds = Vector2(300.0f, 780.0f);
 
-	mShip = new Texture("InvaderSprites.png", 278, 228, 28, 17);
-	mShip->Parent(this);
-	mShip->Position(Vec2_Zero);
-	mShip->Scale(Vector2(1.5f, 1.5f));
+	mTank = new Texture("InvaderSprites.png", 278, 228, 28, 17);
+	mTank->Parent(this);
+	mTank->Position(Vec2_Zero);
+	//mShip->Scale(Vector2(1.5f, 1.5f));
 
 
 	mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
@@ -82,8 +82,8 @@ Player::~Player() {
 	mInput = nullptr;
 	mAudio = nullptr;
 
-	delete mShip;
-	mShip = nullptr;
+	delete mTank;
+	mTank = nullptr;
 
 	delete mDeathAnimation;
 	mDeathAnimation = nullptr;
@@ -176,7 +176,7 @@ void Player::Render() {
 			mDeathAnimation->Render();
 		}
 		else {
-			mShip->Render();
+			mTank->Render();
 		}
 
 		PhysEntity::Render();

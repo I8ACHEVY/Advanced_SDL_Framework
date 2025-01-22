@@ -9,8 +9,8 @@ namespace SDL_Framework
 {
 	class Graphics{
 	public:
-		static const int SCREEN_WIDTH = 1400;	//1024
-		static const int SCREEN_HEIGHT = 1024;	//896
+		static const int SCREEN_WIDTH = 1070;
+		static const int SCREEN_HEIGHT = 1040;
 		const char* WINDOW_TITLE = "Space Invaders";
 
 		static Graphics* Instance();

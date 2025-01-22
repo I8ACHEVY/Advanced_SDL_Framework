@@ -21,7 +21,7 @@ void Scoreboard::Score(int score) {
 
 	if (score == 0) {
 		for (int i = 0; i < 2; i++) {
-			mScore.push_back(new Texture("0", "emulogic.ttf", 20, mColor));
+			mScore.push_back(new Texture("0", "emulogic.ttf", 15, mColor));
 			mScore[i]->Parent(this);
 			mScore[i]->Position(Vector2(-20.0f * i, 0.0f));
 		}
@@ -31,7 +31,7 @@ void Scoreboard::Score(int score) {
 		unsigned lastIndex = (unsigned)str.length() - 1;
 
 		for (int i = 0; i <= lastIndex; i++) {
-			mScore.push_back(new Texture(str.substr(i, 1), "emulogic.ttf", 20, mColor));
+			mScore.push_back(new Texture(str.substr(i, 1), "emulogic.ttf", 15, mColor));
 			mScore[i]->Parent(this);
 			mScore[i]->Position(Vector2(-20.0f * (lastIndex - i), 0.0f));
 		}

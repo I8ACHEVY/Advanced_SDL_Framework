@@ -13,14 +13,14 @@ namespace SDL_Framework {
 
 		void UpdateTexture(int index);
 
-		static void CreateDivePaths();
+		//static void CreateDivePaths();
 
-		void Dive(int type = 0) override;
+		//void Dive(int type = 0) override;
 
 		void Hit(PhysEntity* other) override;
 		bool IgnoreCollision(PhysEntity* Entity);
 
-		RedShip(int path, int index, bool challenge);
+		RedShip(int index, bool challenge);
 		~RedShip();
 
 	private:
@@ -38,8 +38,8 @@ namespace SDL_Framework {
 
 		Vector2 LocalFormationPosition() override;
 
-		void HandleDiveState() override;
+		//void HandleDiveState() override;
 
-		void RenderDiveState() override;
+		//void RenderDiveState() override;
 	};
 }

@@ -10,6 +10,6 @@ public:
 	void Render();
 
 private:
-	static const int STAR_COUNT = 30;
+	static const int STAR_COUNT = 50;
 	Star* mStars[STAR_COUNT];
 };

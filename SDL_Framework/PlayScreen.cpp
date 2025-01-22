@@ -4,15 +4,13 @@ PlayScreen::PlayScreen() {
 	mTimer = Timer::Instance();
 	mAudio = AudioManager::Instance();
 
-	//mStars = BackgroundStars::Instance();
-
 	mSideBar = new PlaySideBar();
 	mSideBar->Parent(this);
 	mSideBar->Position(Graphics::SCREEN_WIDTH * 0.87f, Graphics::SCREEN_HEIGHT * 0.05f);
 
-	mStartLabel = new Texture("START", "emulogic.ttf", 32, { 150, 0, 0 });
+	mStartLabel = new Texture("START", "emulogic.ttf", 32, { 0, 128, 0 });
 	mStartLabel->Parent(this);
-	mStartLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f);
+	mStartLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.6f);
 
 	mLevel = nullptr;
 	mLevelStartDelay = 1.0f;
@@ -20,18 +18,16 @@ PlayScreen::PlayScreen() {
 
 	mPlayer = nullptr;
 
-	Enemy::CreatePaths();
-	Octopus::CreateDivePaths();
-	Crab::CreateDivePaths();
-	RedShip::CreateDivePaths();
-	Squid::CreateDivePaths();
+	//Enemy::CreatePaths();
+	//Octopus::CreateDivePaths();
+	//Crab::CreateDivePaths();
+	//RedShip::CreateDivePaths();
+	//Squid::CreateDivePaths();
 }
 
 PlayScreen::~PlayScreen() {
 	mTimer = nullptr;
 	mAudio = nullptr;
-
-	mStars = nullptr;
 
 	delete mSideBar;
 	mSideBar = nullptr;
@@ -54,7 +50,7 @@ void PlayScreen::StartNewGame() {
 	mPlayer->Active(false);
 
 	mSideBar->SetHighScore(645987);	//CREATE SAVE SYSTEM
-	mSideBar->SetShips(mPlayer->Lives());
+	mSideBar->SetTanks(mPlayer->Lives());
 	mSideBar->SetPlayerScore(mPlayer->Score());
 	mSideBar->SetLevel(0);
 

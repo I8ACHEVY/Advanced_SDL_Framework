@@ -23,7 +23,6 @@ private:
 	Timer* mTimer;
 	AudioManager* mAudio;
 
-	BackgroundStars* mStars;
 	PlaySideBar* mSideBar;
 
 	Player* mPlayer;

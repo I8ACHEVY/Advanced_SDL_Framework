@@ -5,11 +5,10 @@
 class Octopus : public Enemy {
 
 public:
-	static void CreateDivePaths();
 
 	void Hit(PhysEntity* other) override;
 
-	Octopus(int path, int index, bool challenge, bool diver);
+	Octopus(int index, bool challenge);
 	~Octopus();
 
 private:
@@ -18,10 +17,6 @@ private:
 	bool mDiver;
 	bool mWasHit;
 
-	void FlyInComplete() override;
 	Vector2 LocalFormationPosition() override;
 
-	void HandleDiveState() override;
-
-	void RenderDiveState() override;
 };

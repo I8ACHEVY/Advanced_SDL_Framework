@@ -1,6 +1,5 @@
 #pragma once
 #include "PlaySideBar.h"
-#include "BackgroundStar.h"
 #include "Player.h"
 #include "Crab.h"
 #include "Octopus.h"
@@ -27,7 +26,6 @@ public:
 private:
 	Timer* mTimer;
 	PlaySideBar* mSideBar;
-	BackgroundStars* mBackgroundStars;
 	Player* mPlayer;
 	Formation* mFormation;
 

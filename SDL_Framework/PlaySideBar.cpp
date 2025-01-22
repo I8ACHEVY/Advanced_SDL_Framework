@@ -7,30 +7,30 @@ PlaySideBar::PlaySideBar() {
 	mTopBackground = new Texture("Black.png");
 	mTopBackground->Parent(this);
 	mTopBackground->Scale(Vector2(8.5f, 1.0f));
-	mTopBackground->Position(0.0f, 0.0f); 
+	mTopBackground->Position(0.0f, 200.0f); 
 
 	mBottomBackground = new Texture("Black.png");
 	mBottomBackground->Parent(this);
 	mBottomBackground->Scale(Vector2(8.5f, 1.0f));
 	mBottomBackground->Position(-520.0f, 910.0f);
 
-	mHighLabel = new Texture("HIGH SCORE", "emulogic.ttf", 20, { 150, 0, 0 });
+	mHighLabel = new Texture("HIGH SCORE", "emulogic.ttf", 12, { 0, 128, 0 });
 	mHighLabel->Parent(this);
-	mHighLabel->Position(-520.0f, 150.0f);
+	mHighLabel->Position(-390.0f, 350.0f);
 
-	mP1ScoreLabel = new Texture("P1 SCORE", "emulogic.ttf", 20, { 150, 0, 0 });
+	mP1ScoreLabel = new Texture("SCORE<1>", "emulogic.ttf", 12, { 0, 128, 0 });
 	mP1ScoreLabel->Parent(this);
-	mP1ScoreLabel->Position(-800.0f, 150.0f);
+	mP1ScoreLabel->Position(-580.0f, 350.0f);
 
-	mP2ScoreLabel = new Texture("P2 SCORE", "emulogic.ttf", 20, { 150, 0, 0 });
+	mP2ScoreLabel = new Texture("SCORE<2>", "emulogic.ttf", 12, { 0, 128, 0 });
 	mP2ScoreLabel->Parent(this);
-	mP2ScoreLabel->Position(-230.0f, 150.0f);
+	mP2ScoreLabel->Position(-200.0f, 350.0f);
 
 	mHighScoreBoard = new Scoreboard();
 	mHighScoreBoard->Parent(this);
-	mHighScoreBoard->Position(-470.0f, 180.0f);
+	mHighScoreBoard->Position(-343.0f, 380.0f);
 
-	mOneUpLabel = new Texture("1UP", "emulogic.ttf", 20, { 150, 0, 0 });
+	mOneUpLabel = new Texture("1UP", "emulogic.ttf", 20, { 0, 128, 0 });
 	mOneUpLabel->Parent(this);
 	mOneUpLabel->Position(-590.0f, 894.0f);
 
@@ -40,30 +40,30 @@ PlaySideBar::PlaySideBar() {
 
 	mPlayer1Score = new Scoreboard();
 	mPlayer1Score->Parent(this);
-	mPlayer1Score->Position(-800.0f, 180.0f);
+	mPlayer1Score->Position(-580.0f, 380.0f);
 
 	mPlayer2Score = new Scoreboard();
 	mPlayer2Score->Parent(this);
-	mPlayer2Score->Position(-230.0f, 180.0f);
+	mPlayer2Score->Position(-200.0f, 380.0f);
 
-	mShips = new GameEntity();
-	mShips->Parent(this);
-	mShips->Position(-710.0f, 894.0f);
+	mTanks = new GameEntity();
+	mTanks->Parent(this);
+	mTanks->Position(-510.0f, 836.0f);
 
-	for (int i = 0; i < MAX_SHIP_TEXTURES; i++) {
-		mShipTextures[i] = new Texture("InvaderSprites.png", 278, 228, 28, 17);
-		mShipTextures[i]->Parent(mShips);
-		mShipTextures[i]->Position(-45.0f * (i % 5), 894.0f * (i / 5));
-		mShipTextures[i]->Scale(Vector2(1.5f, 1.5f));
+	for (int i = 0; i < MAX_TANK_TEXTURES; i++) {
+		mTankTextures[i] = new Texture("InvaderSprites.png", 278, 228, 28, 17);
+		mTankTextures[i]->Parent(mTanks);
+		mTankTextures[i]->Position(-30.0f * (i % 5), 894.0f * (i / 5));
+		//mTankTextures[i]->Scale(Vector2(1.5f, 1.5f));
 	}
 
-	mTotalShipsLabel = new Scoreboard();
-	mTotalShipsLabel->Parent(this);
-	mTotalShipsLabel->Position(-650.0f, 894.0f);
+	mTotalTanksLabel = new Scoreboard();
+	mTotalTanksLabel->Parent(this);
+	mTotalTanksLabel->Position(-460.0f, 836.0f);
 
 	mFlags = new GameEntity();
 	mFlags->Parent(this);
-	mFlags->Position(-520.0f, 900.0f);
+	mFlags->Position(-320.0f, 836.0f);
 
 	mFlagTimer = 0.0f;
 	mFlagInterval = 0.25f;
@@ -100,13 +100,13 @@ PlaySideBar::~PlaySideBar() {
 	delete mPlayer2Score;
 	mPlayer2Score = nullptr;
 
-	delete mShips;
-	mShips = nullptr;
+	delete mTanks;
+	mTanks = nullptr;
 
-	delete mTotalShipsLabel;
-	mTotalShipsLabel = nullptr;
+	delete mTotalTanksLabel;
+	mTotalTanksLabel = nullptr;
 
-	for (auto texture : mShipTextures) {
+	for (auto texture : mTankTextures) {
 		delete texture;
 		texture = nullptr;
 	}
@@ -192,11 +192,11 @@ void PlaySideBar::AddFlag(std::string filename, float width, int value) {
 	mAudio->PlaySFX("FlagSound.wav", 0, -1);
 }
 
-void PlaySideBar::SetShips(int ships) {
-	mTotalShips = ships;
+void PlaySideBar::SetTanks(int tanks) {
+	mTotalTanks = tanks;
 
-	if (ships > MAX_SHIP_TEXTURES) {
-		mTotalShipsLabel->Score(ships);
+	if (tanks > MAX_TANK_TEXTURES) {
+		mTotalTanksLabel->Score(tanks);
 	}
 }
 
@@ -249,12 +249,12 @@ void PlaySideBar::Render() {
 	mPlayer1Score->Render();
 	mPlayer2Score->Render();
 
-	for (int i = 0; i < MAX_SHIP_TEXTURES && i < mTotalShips; i ++) {
-		mShipTextures[i]->Render();
+	for (int i = 0; i < MAX_TANK_TEXTURES && i < mTotalTanks; i ++) {
+		mTankTextures[i]->Render();
 	}
 
-	if (mTotalShips > MAX_SHIP_TEXTURES) {
-		mTotalShipsLabel->Render();
+	if (mTotalTanks > MAX_TANK_TEXTURES) {
+		mTotalTanksLabel->Render();
 	}
 
 	for (auto flag : mFlagTextures) {

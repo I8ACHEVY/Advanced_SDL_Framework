@@ -11,8 +11,8 @@ Star::Star(int layer) : Texture("Stars.png", 0,0,4,4) {
 
 	mSourceRect.x = starColor * 4;
 
-	Position(Vector2((float)(mRandom->RandomInt() % (int)(Graphics::Instance()->SCREEN_WIDTH * 0.58f) + 292.0f),
-		(float)(mRandom->RandomInt() % (int)(Graphics::Instance()->SCREEN_HEIGHT * 0.7f) + 220.0f)));
+	Position(Vector2((float)(mRandom->RandomInt() % (int)(Graphics::Instance()->SCREEN_WIDTH * 0.75f) + 140.0f),
+		(float)(mRandom->RandomInt() % (int)(Graphics::Instance()->SCREEN_HEIGHT * 0.7f) + 270.0f)));
 
 	mFlickerTime = 0.0f;
 	mFlickerSpeed = mRandom->RandomRange(0.15f, 1.0f);

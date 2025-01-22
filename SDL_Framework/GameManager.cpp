@@ -61,98 +61,6 @@ namespace SDL_Framework {
 				mAudioManager->Mute();
 			}
 		}
-
-		/*
-		if (mInputManager->KeyDown(SDL_SCANCODE_Q)) {
-			//mTex->Rotate(-260.0f * mTimer->DeltaTime());
-		}
-		else if (mInputManager->KeyDown(SDL_SCANCODE_E)) {
-			//mTex->Rotate(260.0f * mTimer->DeltaTime());
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_Z)) {
-			mScaleTimeZ += mTimer->DeltaTime();
-		}
-		else if (mInputManager->KeyDown(SDL_SCANCODE_C)) {
-			mScaleTimeC += mTimer->DeltaTime();
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_Z)) {
-			float scaleFactor = 1.5f - mScaleTimeZ * 0.3f;
-			if (scaleFactor > 0.1f) {
-				//mTex->Scale(Vector2(scaleFactor, scaleFactor));
-			}
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_C)) {
-			float scaleFactor = 1.5f + mScaleTimeC * 0.3f;
-			//mTex->Scale(Vector2(scaleFactor, scaleFactor));
-		}
-
-		if (mInputManager->KeyReleased(SDL_SCANCODE_Z)) {
-			mScaleTimeZ = 0.0f;
-		}
-
-		if (mInputManager->KeyReleased(SDL_SCANCODE_C)) {
-			mScaleTimeC = 0.0f;
-		}
-
-		//SECOND SET OF MOVEMENT FOR SECOND TEXTURE (IJKL and KeyPad Numbers 8,6,2,4)
-		//SECOND SET OF ROTATION (U LEFT, O RIGHT)
-		//SECOND SET OF SCALING (M DOWN, . UP)
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_I) || mInputManager->KeyDown(SDL_SCANCODE_KP_8)) {
-			mRedShip->Translate(Vector2(0, -40.0f) * mTimer->DeltaTime(), GameEntity::World);
-		}
-		else if (mInputManager->KeyDown(SDL_SCANCODE_K) || mInputManager->KeyDown(SDL_SCANCODE_KP_2)) {
-			//mRedShip->Translate(Vector2(0, 40.0f) * mTimer->DeltaTime(), GameEntity::World);
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_J) || mInputManager->KeyDown(SDL_SCANCODE_KP_4)) {
-			//mRedShip->Translate(Vector2(-40.0F, 0) * mTimer->DeltaTime(), GameEntity::World);
-		}
-		else if (mInputManager->KeyDown(SDL_SCANCODE_L) || mInputManager->KeyDown(SDL_SCANCODE_KP_6)) {
-			//mRedShip->Translate(Vector2(40.0F, 0) * mTimer->DeltaTime(), GameEntity::World);
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_U)) {
-			//mRedShip->Rotate(-260.0f * mTimer->DeltaTime());
-		}
-		else if (mInputManager->KeyDown(SDL_SCANCODE_O)) {
-			//mRedShip->Rotate(260.0f * mTimer->DeltaTime());
-		}
-
-		if (mInputManager->MouseButtonReleased(InputManager::Left)) {
-			std::cout << "Left mouse button released!" << std::endl;
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_M)) {
-			mScaleTimeM += mTimer->DeltaTime();
-		}
-		else if (mInputManager->KeyDown(SDL_SCANCODE_PERIOD)) {
-			mScaleTimePER += mTimer->DeltaTime();
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_M)) {
-			float scaleFactor = 1.5f - mScaleTimeM * 0.3f;
-			if (scaleFactor > 0.1f) {
-				//mRedShip->Scale(Vector2(scaleFactor, scaleFactor));
-			}
-		}
-
-		if (mInputManager->KeyDown(SDL_SCANCODE_PERIOD)) {
-			float scaleFactor = 1.5f + mScaleTimePER * 0.3f;
-			//mRedShip->Scale(Vector2(scaleFactor, scaleFactor));
-		}
-
-		if (mInputManager->KeyReleased(SDL_SCANCODE_M)) {
-			mScaleTimeM = 0.0f;
-		}
-
-		if (mInputManager->KeyReleased(SDL_SCANCODE_PERIOD)) {
-			mScaleTimePER = 0.0f;
-		}
-		*/
 	}
 
 	void GameManager::LateUpdate() {
@@ -166,11 +74,10 @@ namespace SDL_Framework {
 
 		mScreenManager->Render();
 
-		if (mBorderTexture) {		//border 
-			SDL_Rect srcRect = { 993, 12, 257, 224 };
-			SDL_Rect destRect = { 0, 0, 1400, 1024 };
+		if (mBorderTexture) {
+			SDL_Rect destRect = { 0, 0, 1070, 1040 };
 		
-			mGraphics->DrawTexture(mBorderTexture, &srcRect, &destRect);
+			//mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
 		}
 
 		mGraphics->Render();
@@ -191,7 +98,7 @@ namespace SDL_Framework {
 		mRandom = Random::Instance();
 		mScreenManager = ScreenManager::Instance();
 
-		mBorderTexture = mAssetManager->GetTexture("InvaderSprites.png");
+		mBorderTexture = mAssetManager->GetTexture("Border.png");
 
 		if (!mBorderTexture) {
 			std::cerr << "Failed to load border texture: " << IMG_GetError() << std::endl;
@@ -252,6 +159,3 @@ namespace SDL_Framework {
 		SDL_Quit();
 	}
 }
-
-// Notes
-// SDL_SetRenderDrawColor(mRenderer, 255, 0, 0, 255); //Colour red

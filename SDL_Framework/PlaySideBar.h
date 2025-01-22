@@ -10,7 +10,7 @@ public:
 	PlaySideBar();
 	~PlaySideBar();
 
-	void SetShips(int ships);
+	void SetTanks(int tanks);
 	void SetPlayerScore(int score);
 	void SetHighScore(int score);
 
@@ -20,7 +20,7 @@ public:
 	void Render() override;
 
 private:
-	static const int MAX_SHIP_TEXTURES = 5;
+	static const int MAX_TANK_TEXTURES = 5;
 
 	Timer* mTimer;
 	AudioManager* mAudio;
@@ -41,11 +41,11 @@ private:
 	Scoreboard* mPlayer1Score;
 	Scoreboard* mPlayer2Score;
 
-	GameEntity* mShips;
-	Texture* mShipTextures[MAX_SHIP_TEXTURES];
-	Scoreboard* mTotalShipsLabel;
+	GameEntity* mTanks;
+	Texture* mTankTextures[MAX_TANK_TEXTURES];
+	Scoreboard* mTotalTanksLabel;
 
-	int mTotalShips;
+	int mTotalTanks;
 
 	GameEntity* mFlags;
 	std::vector<Texture*> mFlagTextures;

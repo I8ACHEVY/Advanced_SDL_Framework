@@ -10,10 +10,10 @@ StartScreen::StartScreen() {
 	mAnimationTimer = 0.0f;
 	mAnimationDone = false;
 
-mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 210.0f);
-mPlayer1 = new Texture("1UP", "emulogic.ttf", 20, { 200, 0, 0 });
-mPlayer2 = new Texture("2UP", "emulogic.ttf", 20, { 200, 0, 0 });
-mHiScore = new Texture("HI SCORE", "emulogic.ttf", 20, { 200, 0, 0 });
+mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 410.0f);
+mPlayer1 = new Texture("1UP", "emulogic.ttf", 15, { 0, 128, 0 });
+mPlayer2 = new Texture("2UP", "emulogic.ttf", 15, { 0, 128, 0 });
+mHiScore = new Texture("HI SCORE", "emulogic.ttf", 15, { 0, 128, 0 });
 mPlayer1Score = new Scoreboard({ 255, 255, 255 });
 mPlayer2Score = new Scoreboard({ 255, 255, 255 });
 mTopScore = new Scoreboard();
@@ -29,15 +29,15 @@ mTopScore->Parent(mTopBar);
 mPlayer1->Position(-Graphics::SCREEN_WIDTH * 0.2f, 0.0f);
 mPlayer2->Position(Graphics::SCREEN_WIDTH * 0.2f, 0.0f);
 mHiScore->Position(0, 0.0f);
-mPlayer1Score->Position(Graphics::SCREEN_WIDTH * -0.19f, 40.0f);
-mPlayer2Score->Position(Graphics::SCREEN_WIDTH * 0.21f, 40.0f);
-mTopScore->Position(Graphics::SCREEN_WIDTH * 0.03f, 40.0f);
+mPlayer1Score->Position(Graphics::SCREEN_WIDTH * -0.19f, 30.0f);
+mPlayer2Score->Position(Graphics::SCREEN_WIDTH * 0.21f, 30.0f);
+mTopScore->Position(Graphics::SCREEN_WIDTH * 0.045f, 30.0f);
 
 mTopScore->Score(645987);	//CREATE SAVE SYSTEM
 
-mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.4f);
-mLogo = new Texture("GalagaLogo.png", 0, 0, 360, 180);
-mAnimatedLogo = new AnimatedTexture("GalagaLogo.png", 0, 0, 360, 180, 3, 0.5f,
+mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.49f, Graphics::SCREEN_HEIGHT * 0.55f);
+mLogo = new Texture("InvaderSprites.png", 10, 0, 520, 184);
+mAnimatedLogo = new AnimatedTexture("InvaderSprites.png", 10, 0, 520, 184, 0, 0.5f,
 	AnimatedTexture::Vertical);
 
 mLogoHolder->Parent(this);
@@ -48,37 +48,41 @@ mLogo->Position(Vec2_Zero);
 mAnimatedLogo->Position(Vec2_Zero);
 
 
-mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.6f);
-mOnePlayerMode = new Texture("1 Player", "emulogic.ttf", 20, { 230, 230, 230 });
-mTwoPlayerMode = new Texture("2 Player", "emulogic.ttf", 20, { 230, 230, 230 });
+mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.7f);
+mStartMode = new Texture("Start", "emulogic.ttf", 15, { 230, 230, 230 });
+mOptionsMode = new Texture("Options", "emulogic.ttf", 15, { 230, 230, 230 });
+mCreditsMode = new Texture("Credits", "emulogic.ttf", 15, { 230, 230, 230 });
 mCursor = new Texture("Cursor.png");
+mCursor->Scale(Vector2(0.5f, 0.5f));
 
 mPlayModes->Parent(this);
-mOnePlayerMode->Parent(mPlayModes);
-mTwoPlayerMode->Parent(mPlayModes);
+mStartMode->Parent(mPlayModes);
+mOptionsMode->Parent(mPlayModes);
+mCreditsMode->Parent(mPlayModes);
 mCursor->Parent(mPlayModes);
 
-mOnePlayerMode->Position(0.0f, -28.0f);
-mTwoPlayerMode->Position(0.0f, 28.0f);
-mCursor->Position(-120.0f, -28.0f);
+mStartMode->Position(0.0f, -28.0f);
+mOptionsMode->Position(0.0f, 10.0f);
+mCreditsMode->Position(0.0f, 50.0f);
+mCursor->Position(-90.0f, -28.0f);
 
 mSelectedMode = 0;
-mCursorOffsetPos = Vector2(0.0f, 55.0f);
+mCursorOffsetPos = Vector2(0.0f, 40.0f);
 mCursorStartPos = mCursor->Position(Local);
 
 mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.8f);
-mNamco = new Texture("namco", "namco__.ttf", 24, { 200, 0, 0 });
-mDates = new Texture("1981 - 1985 NAMCO LTD.", "emulogic.ttf", 20, { 230, 230, 230 });
-mRights = new Texture("ALL RIGHTS RESERVED", "emulogic.ttf", 20, { 230, 230, 230 });
+mTaito = new Texture("taito", "namco__.ttf", 15, { 0, 128, 0 });
+mDates = new Texture("1978 - 1997 taito corp.", "emulogic.ttf", 12, { 230, 230, 230 });
+mRights = new Texture("ALL RIGHTS RESERVED", "emulogic.ttf", 12, { 230, 230, 230 });
 
 mBottomBar->Parent(this);
-mNamco->Parent(mBottomBar);
+mTaito->Parent(mBottomBar);
 mDates->Parent(mBottomBar);
 mRights->Parent(mBottomBar);
 
-mNamco->Position(Vec2_Zero);
-mDates->Position(0.0f, 50.0f);
-mRights->Position(0.0f, 90.0f);
+mTaito->Position(Vec2_Zero);
+mDates->Position(0.0f, 30.0f);
+mRights->Position(0.0f, 60.0f);
 
 ResetAnimation();
 }
@@ -101,9 +105,9 @@ void StartScreen::ChangeSelectedMode(int change) {
 	mSelectedMode += change;
 
 	if (mSelectedMode < 0) {
-		mSelectedMode = 1;
+		mSelectedMode = 2;
 	}
-	else if (mSelectedMode > 1) {
+	else if (mSelectedMode > 2) {
 		mSelectedMode = 0;
 	}
 
@@ -156,11 +160,12 @@ void StartScreen::Render() {
 		mAnimatedLogo->Render();
 	}
 
-	mOnePlayerMode->Render();
-	mTwoPlayerMode->Render();
+	mStartMode->Render();
+	mOptionsMode->Render();
+	mCreditsMode->Render();
 	mCursor->Render();
 
-	mNamco->Render();
+	mTaito->Render();
 	mDates->Render();
 	mRights->Render();
 }
@@ -191,17 +196,19 @@ StartScreen::~StartScreen() {
 
 	delete mPlayModes;
 	mPlayModes = nullptr;
-	delete mOnePlayerMode;
-	mOnePlayerMode = nullptr;
-	delete mTwoPlayerMode;
-	mTwoPlayerMode = nullptr;
+	delete mStartMode;
+	mStartMode = nullptr;
+	delete mOptionsMode;
+	mOptionsMode = nullptr;
+	delete mCreditsMode;
+	mCreditsMode = nullptr;
 	delete mCursor;
 	mCursor = nullptr;
 
 	delete mBottomBar;
 	mBottomBar = nullptr;
-	delete mNamco;
-	mNamco = nullptr;
+	delete mTaito;
+	mTaito = nullptr;
 	delete mDates;
 	mDates = nullptr;
 	delete mRights;

@@ -14,7 +14,7 @@ public:
 	enum States { FlyIn, InFormation, Diving, Dead };
 	enum Types { Crab, Octopus, Squid, RedShips};
 
-	static void CreatePaths();
+	//static void CreatePaths();
 	static void SetFormation(Formation* formation);
 	static void CurrentPlayer(Player* player);
 
@@ -22,10 +22,10 @@ public:
 	Types Type();
 	int Index();
 
-	Enemy(int path, int Index, bool Challenge);
+	Enemy(int Index, bool Challenge);
 	virtual ~Enemy();
 
-	virtual void Dive(int type = 0);
+	//virtual void Dive(int type = 0);
 	virtual void Hit(PhysEntity* other) override;
 	bool InDeathAnimation();
 
@@ -51,9 +51,9 @@ protected:
 
 	bool mChallengeStage;
 
-	Vector2 mDiveStartPosition;
+	//Vector2 mDiveStartPosition;
 
-	unsigned mCurrentPath;
+	//unsigned mCurrentPath;
 
 	unsigned mCurrentWayPoint;
 	const float EPSILON = 50.0f;
@@ -70,23 +70,23 @@ protected:
 
 	virtual void HandleFlyInState();
 	virtual void HandleInFormationState();
-	virtual void HandleDiveState() = 0;
+	//virtual void HandleDiveState() = 0;
 	virtual void HandleDeadState();
 
 	void HandleStates();
 
 	virtual void RenderFlyInState();
 	virtual void RenderInFormationState();
-	virtual void RenderDiveState() = 0;
+	//virtual void RenderDiveState() = 0;
 	virtual void RenderDeadState();
 
 	void RenderStates();
 
 	bool IgnoreCollision() override;
 
-	//void HandleFiring();
-	//void FireBullet(Vector2 position, Vector2 direction);
-	//static const int MAX_BULLETS = 2;
-	//Bullet* mBullets[MAX_BULLETS];
+	void HandleFiring();
+	void FireBullet(Vector2 position, Vector2 direction);
+	static const int MAX_BULLETS = 2;
+	Bullet* mBullets[MAX_BULLETS];
 	//AudioManager* mAudio;
 };
