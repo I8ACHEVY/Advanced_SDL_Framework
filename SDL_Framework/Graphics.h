@@ -38,9 +38,9 @@ namespace SDL_Framework
 		virtual void Render() = 0;
 
 		SDL_Texture* LoadTexture(std::string path);
+		SDL_Surface* LoadSurface(std::string path);
 		SDL_Texture* CreateTextTexture(TTF_Font* font, std::string text, SDL_Color color);
-		SDL_Surface* GetSurfaceTexture(std::string filepath);
-		SDL_Surface* GetSurfaceText(TTF_Font* font, std::string text, SDL_Color color);
+		SDL_Surface* CreateTextSurface(TTF_Font* font, std::string text, SDL_Color color);
 
 	protected:
 		static Graphics* sInstance;

@@ -204,7 +204,7 @@ namespace SDL_Framework {
 
 		if (mSurfaceTextures[fullPath] == nullptr) {
 			//We have not yet created this image
-			mSurfaceTextures[fullPath] = Graphics::Instance()->GetSurfaceTexture(fullPath);
+			mSurfaceTextures[fullPath] = Graphics::Instance()->LoadSurface(fullPath);
 		}
 
 		if (mSurfaceTextures[fullPath] != nullptr && managed) {
@@ -223,7 +223,7 @@ namespace SDL_Framework {
 
 		if (mSurfaceText[key] == nullptr) {
 			TTF_Font* font = GetFont(filename, size);
-			mSurfaceText[key] = Graphics::Instance()->GetSurfaceText(font, text, color);
+			mSurfaceText[key] = Graphics::Instance()->CreateTextSurface(font, text, color);
 		}
 
 		if (mSurfaceText[key] != nullptr && managed) {

@@ -1,11 +1,11 @@
-#include "GLTexture.h"
 #include "GLGraphics.h"
+#include "GLTexture.h"
 
 namespace SDL_Framework {
-	GLTexture::GLTexture(std::string filename, bool managed) :
-		Texture(filename, managed) {
-		SetSurfaceTexture(filename, managed);
 
+	GLTexture::GLTexture(std::string filename, bool managed)
+		: Texture(filename, managed) {
+		SetSurfaceTexture(filename, managed);
 		Data = mSurface->pixels;
 
 		WrapS = GL_CLAMP_TO_BORDER;
@@ -18,11 +18,9 @@ namespace SDL_Framework {
 		mHeight = mSurface->h;
 	}
 
-	GLTexture::GLTexture(std::string filename, int x, int y,
-		int w, int h, bool managed) :
-		Texture(filename, x, y, w, h, managed) {
+	GLTexture::GLTexture(std::string filename, int x, int y, int w, int h, bool managed)
+		: Texture(filename, x, y, w, h, managed) {
 		SetSurfaceTexture(filename, managed);
-
 		Data = mSurface->pixels;
 
 		WrapS = GL_CLAMP_TO_BORDER;
@@ -32,9 +30,8 @@ namespace SDL_Framework {
 		FilterMin = GL_LINEAR;
 	}
 
-	GLTexture::GLTexture(std::string text, std::string fontPath,
-		int size, SDL_Color color, bool managed) :
-		Texture(text, fontPath, size, color, managed) {
+	GLTexture::GLTexture(std::string text, std::string fontPath, int size, SDL_Color color, bool managed)
+		: Texture(text, fontPath, size, color, managed) {
 		SetSurfaceTextTexture(text, fontPath, size, color, managed);
 
 		WrapS = GL_CLAMP_TO_BORDER;
@@ -47,82 +44,76 @@ namespace SDL_Framework {
 		mHeight = mSurface->h;
 	}
 
+	GLTexture::~GLTexture() {
+		AssetManager::Instance()->DestroySurface(mSurface);
+		mSurface = nullptr;
+	}
+
+	void GLTexture::Generate() {
+		SDL_PixelFormat format = *mSurface->format;
+
+		GLint nOfColors = format.BytesPerPixel;
+		if (nOfColors == 4) {
+			if (format.Rmask == 0x000000FF) {
+				Mode = GL_RGBA;
+			}
+			else {
+				Mode = GL_BGRA;
+			}
+		}
+		else if (nOfColors == 3) {
+			if (format.Rmask == 0x000000FF) {
+				Mode = GL_RGB;
+			}
+			else {
+				Mode = GL_BGR;
+			}
+		}
+		else {
+			Mode = GL_RGBA;
+		}
+
+		glGenTextures(1, &ID);
+		glBindTexture(GL_TEXTURE_2D, ID);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, WrapS);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, WrapT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, FilterMin);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, FilterMag);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, nOfColors, mSurface->w, mSurface->h, 0, Mode, GL_UNSIGNED_BYTE, Data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+
 	void GLTexture::Bind() {
 		glBindTexture(GL_TEXTURE_2D, ID);
 	}
 
 	void GLTexture::SetSurfaceTexture(std::string filename, bool managed) {
 		mSurface = AssetManager::Instance()->GetSurfaceTexture(filename, managed);
-
+		Data = mSurface->pixels;
 		if (mSurface != nullptr) {
 			Generate();
 		}
 		else {
-			std::cerr << "mSurface nullptr in SetSurfaceTexture!" << std::endl;
+			std::cerr << "Unable to set surface " << filename << " in GLTexture! Surface is null." << std::endl;
 		}
 	}
 
-	void GLTexture::SetSurfaceTextTexture(std::string text, std::string filename,
-		int size, SDL_Color color, bool managed) {
+	void GLTexture::SetSurfaceTextTexture(std::string text, std::string filename, int size, SDL_Color color, bool managed) {
 		mSurface = AssetManager::Instance()->GetSurfaceText(text, filename, size, color, managed);
-
+		Data = mSurface->pixels;
 		if (mSurface != nullptr) {
 			Generate();
 		}
 		else {
-			std::cerr << "mSurface nullptr in SetSurfaceTextTexture!" << std::endl;
+			std::cerr << "Unable to set surface text " << filename << " in GLTexture! Surface is null." << std::endl;
 		}
-	}
-
-	void GLTexture::Generate() {
-		GLint mode;
-		GLint nOfColors = mSurface->format->BytesPerPixel;
-
-		if (nOfColors == 4) { //Contains an alpha channel
-			if (mSurface->format->Rmask == 0x000000ff) { //this is a byte
-				mode = GL_RGBA;
-			}
-			else {
-				mode = GL_BGRA;
-			}
-		}
-		else if (nOfColors == 3) { //no alpha channel
-			if (mSurface->format->Rmask == 0x000000ff) { //this is a byte
-				mode = GL_RGB;
-			}
-			else {
-				mode = GL_BGR;
-			}
-		}
-		else {
-			mode = GL_RGBA;
-		}
-
-		glGenTextures(1, &ID);
-		glBindTexture(GL_TEXTURE_2D, ID);
-
-		//Set texture wrapping/filtering options (on the currently bound texture object)
-		glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-		glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-		glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		//Load and generate the texture
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h,
-			0, GL_RGBA, GL_UNSIGNED_BYTE, mSurface->pixels);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-
-	GLTexture::~GLTexture() {
-	
-		AssetManager::Instance()->DestroySurface(mSurface);
-		mSurface = nullptr;
 	}
 
 	void GLTexture::Render() {
 		UpdateDstRect();
 
-		GLGraphics::Instance()->DrawSprite(this, mClipped ? &mSourceRect : nullptr,
-			&mDestinationRect, Rotation(World), Flip);
+		GLGraphics::Instance()->DrawSprite(this, mClipped ? &mSourceRect : nullptr, &mDestinationRect, Rotation(World), Flip);
 	}
 }
