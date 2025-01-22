@@ -53,7 +53,7 @@ protected:
 
 	//Vector2 mDiveStartPosition;
 
-	//unsigned mCurrentPath;
+	unsigned mCurrentPath;
 
 	unsigned mCurrentWayPoint;
 	const float EPSILON = 50.0f;

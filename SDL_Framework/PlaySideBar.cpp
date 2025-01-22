@@ -32,7 +32,7 @@ PlaySideBar::PlaySideBar() {
 
 	mOneUpLabel = new Texture("1UP", "emulogic.ttf", 20, { 0, 255, 0 });
 	mOneUpLabel->Parent(this);
-	mOneUpLabel->Position(-590.0f, 894.0f);
+	mOneUpLabel->Position(-400.0f, 836.0f);
 
 	mBlinkTimer = 0.0f;
 	mBlinkInterval = 0.5f;
@@ -218,7 +218,7 @@ void PlaySideBar::SetLevel(int level) {
 void PlaySideBar::Update() {
 	mBlinkTimer += mTimer->DeltaTime();
 
-	if (mBlinkInterval >= mBlinkInterval) {
+	if (mBlinkTimer >= mBlinkInterval) {
 		mOneUpLabelVisible = !mOneUpLabelVisible;
 		mBlinkTimer = 0.0f;
 	}

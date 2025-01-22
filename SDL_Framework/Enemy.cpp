@@ -190,34 +190,34 @@ void Enemy::Render() {
 	//}
 }
 
-//void Enemy::HandleFlyInState() {
-//	if (mCurrentWayPoint < sPaths[mCurrentPath].size()) {
-//		Vector2 dist = sPaths[mCurrentPath][mCurrentWayPoint] - Position();
-//
-//		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-//		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
-//
-//		if ((sPaths[mCurrentPath][mCurrentWayPoint] - Position()).MagnitudeSqr()
-//			< EPSILON * mSpeed / 25.0f) {
-//
-//			mCurrentWayPoint++;
-//		}
-//
-//		if (mCurrentWayPoint >= sPaths[mCurrentPath].size()) {
-//			PathComplete();
-//		}
-//	}
-//	else {
-//		Vector2 dist = WorldFormationPosition() - Position();
-//
-//		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
-//		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
-//
-//		if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
-//			FlyInComplete();
-//		}
-//	}
-//}
+void Enemy::HandleFlyInState() {
+	if (mCurrentWayPoint < sPaths[mCurrentPath].size()) {
+		Vector2 dist = sPaths[mCurrentPath][mCurrentWayPoint] - Position();
+
+		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
+		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+
+		if ((sPaths[mCurrentPath][mCurrentWayPoint] - Position()).MagnitudeSqr()
+			< EPSILON * mSpeed / 25.0f) {
+
+			mCurrentWayPoint++;
+		}
+
+		if (mCurrentWayPoint >= sPaths[mCurrentPath].size()) {
+			PathComplete();
+		}
+	}
+	else {
+		Vector2 dist = WorldFormationPosition() - Position();
+
+		Translate(dist.Normalized() * mSpeed * mTimer->DeltaTime(), World);
+		Rotation(atan2(dist.y, dist.x) * RAD_TO_DEG + 90.0f);
+
+		if (dist.MagnitudeSqr() < EPSILON * mSpeed / 25.0f) {
+			FlyInComplete();
+		}
+	}
+}
 
 void Enemy::HandleInFormationState() {
 	Position(LocalFormationPosition());
