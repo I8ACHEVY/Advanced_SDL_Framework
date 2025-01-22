@@ -11,9 +11,9 @@ StartScreen::StartScreen() {
 	mAnimationDone = false;
 
 mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 410.0f);
-mPlayer1 = new Texture("1UP", "emulogic.ttf", 15, { 0, 128, 0 });
-mPlayer2 = new Texture("2UP", "emulogic.ttf", 15, { 0, 128, 0 });
-mHiScore = new Texture("HI SCORE", "emulogic.ttf", 15, { 0, 128, 0 });
+mPlayer1 = new Texture("1UP", "emulogic.ttf", 15, { 0, 255, 0 });
+mPlayer2 = new Texture("2UP", "emulogic.ttf", 15, { 0, 255, 0 });
+mHiScore = new Texture("HI SCORE", "emulogic.ttf", 15, { 0, 255, 0 });
 mPlayer1Score = new Scoreboard({ 255, 255, 255 });
 mPlayer2Score = new Scoreboard({ 255, 255, 255 });
 mTopScore = new Scoreboard();
@@ -71,7 +71,7 @@ mCursorOffsetPos = Vector2(0.0f, 40.0f);
 mCursorStartPos = mCursor->Position(Local);
 
 mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.8f);
-mTaito = new Texture("taito", "namco__.ttf", 15, { 0, 128, 0 });
+mTaito = new Texture("taito", "namco__.ttf", 15, { 0, 255, 0 });
 mDates = new Texture("1978 - 1997 taito corp.", "emulogic.ttf", 12, { 230, 230, 230 });
 mRights = new Texture("ALL RIGHTS RESERVED", "emulogic.ttf", 12, { 230, 230, 230 });
 

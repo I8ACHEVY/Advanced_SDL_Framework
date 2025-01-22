@@ -14,15 +14,15 @@ PlaySideBar::PlaySideBar() {
 	mBottomBackground->Scale(Vector2(8.5f, 1.0f));
 	mBottomBackground->Position(-520.0f, 910.0f);
 
-	mHighLabel = new Texture("HIGH SCORE", "emulogic.ttf", 12, { 0, 128, 0 });
+	mHighLabel = new Texture("HIGH SCORE", "emulogic.ttf", 12, { 0, 255, 0 });
 	mHighLabel->Parent(this);
 	mHighLabel->Position(-390.0f, 350.0f);
 
-	mP1ScoreLabel = new Texture("SCORE<1>", "emulogic.ttf", 12, { 0, 128, 0 });
+	mP1ScoreLabel = new Texture("SCORE<1>", "emulogic.ttf", 12, { 0, 255, 0 });
 	mP1ScoreLabel->Parent(this);
 	mP1ScoreLabel->Position(-580.0f, 350.0f);
 
-	mP2ScoreLabel = new Texture("SCORE<2>", "emulogic.ttf", 12, { 0, 128, 0 });
+	mP2ScoreLabel = new Texture("SCORE<2>", "emulogic.ttf", 12, { 0, 255, 0 });
 	mP2ScoreLabel->Parent(this);
 	mP2ScoreLabel->Position(-200.0f, 350.0f);
 
@@ -30,7 +30,7 @@ PlaySideBar::PlaySideBar() {
 	mHighScoreBoard->Parent(this);
 	mHighScoreBoard->Position(-343.0f, 380.0f);
 
-	mOneUpLabel = new Texture("1UP", "emulogic.ttf", 20, { 0, 128, 0 });
+	mOneUpLabel = new Texture("1UP", "emulogic.ttf", 20, { 0, 255, 0 });
 	mOneUpLabel->Parent(this);
 	mOneUpLabel->Position(-590.0f, 894.0f);
 

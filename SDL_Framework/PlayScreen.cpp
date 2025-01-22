@@ -8,7 +8,7 @@ PlayScreen::PlayScreen() {
 	mSideBar->Parent(this);
 	mSideBar->Position(Graphics::SCREEN_WIDTH * 0.87f, Graphics::SCREEN_HEIGHT * 0.05f);
 
-	mStartLabel = new Texture("START", "emulogic.ttf", 32, { 0, 128, 0 });
+	mStartLabel = new Texture("START", "emulogic.ttf", 32, { 0, 255, 0 });
 	mStartLabel->Parent(this);
 	mStartLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.6f);
 
