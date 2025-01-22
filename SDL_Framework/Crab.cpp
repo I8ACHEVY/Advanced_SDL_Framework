@@ -26,8 +26,8 @@ Enemy(index, challenge)
 {
 	mTag = "Crab";
 
-	mTexture[0] = new Texture("InvaderSprites.png", 74, 225, 24, 24);
-	mTexture[1] = new Texture("InvaderSprites.png", 107, 225, 24, 24);
+	mTexture[0] = new GLTexture("InvaderSprites.png", 74, 225, 24, 24);
+	mTexture[1] = new GLTexture("InvaderSprites.png", 107, 225, 24, 24);
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);

@@ -26,6 +26,7 @@ namespace SDL_Framework {
 		virtual void RunAnimation();
 
 		Timer* mTimer;
+		Animation mAnim;
 		int mStartx;
 		int mStarty;
 

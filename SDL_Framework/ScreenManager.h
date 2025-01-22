@@ -2,6 +2,9 @@
 #include "StartScreen.h"
 #include "BackgroundStar.h"
 #include "PlayScreen.h"
+#include "OptionScreen.h"
+#include "CreditScreen.h"
+#include "HighScoreTable.h"
 
 
 class ScreenManager {
@@ -17,7 +20,7 @@ private:
 	ScreenManager();
 	~ScreenManager();
 
-	enum Screens { Start, Play };
+	enum Screens { Start, Play, Option, Credit, HighScore };
 	Screens mCurrentScreen;
 
 	static ScreenManager* sInstance;
@@ -28,6 +31,9 @@ private:
 
 	StartScreen* mStartScreen;
 	PlayScreen* mPlayScreen;
+	OptionScreen* mOptionScreen;
+	CreditScreen* mCreditScreen;
+	HighScoreTable* mHighScoreTable;
 	//Graphics* mGraphic;
 
 	//SDL_Texture* mBackground;

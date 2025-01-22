@@ -1,4 +1,4 @@
-// SDL_Framework.cpp : Kyle Bowman 11-04-2024
+// OpenGL : Kyle Bowman 01/06/2025
 //
 
 #include "GameManager.h"

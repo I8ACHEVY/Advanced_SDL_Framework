@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Space_Invaders H">
       <UniqueIdentifier>{082f297e-338a-492c-a124-cfc93b11c562}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{d81834e0-3e65-4926-86d9-2dffe4ef6981}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Space_Invaders_V1.cpp">
@@ -131,6 +134,33 @@
     </ClCompile>
     <ClCompile Include="RedShip.cpp">
       <Filter>Source Files\Space_Invaders CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditScreen.cpp">
+      <Filter>Source Files\Space_Invaders CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionScreen.cpp">
+      <Filter>Source Files\Space_Invaders CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="HighScoreTable.cpp">
+      <Filter>Source Files\Space_Invaders CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GLGraphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLGraphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLAnimatedTexture.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +272,33 @@
     <ClInclude Include="RedShip.h">
       <Filter>Header Files\Space_Invaders H</Filter>
     </ClInclude>
+    <ClInclude Include="CreditScreen.h">
+      <Filter>Header Files\Space_Invaders H</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionScreen.h">
+      <Filter>Header Files\Space_Invaders H</Filter>
+    </ClInclude>
+    <ClInclude Include="HighScoreTable.h">
+      <Filter>Header Files\Space_Invaders H</Filter>
+    </ClInclude>
+    <ClInclude Include="GLGraphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLGraphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GLAnimatedTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Data\Level1.xml">
@@ -256,5 +313,13 @@
     <Xml Include="Data\Level3.xml">
       <Filter>Data</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\fs.shader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\vs.shader">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

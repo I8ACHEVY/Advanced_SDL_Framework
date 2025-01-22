@@ -1,18 +1,15 @@
 #pragma once
 #include "AnimatedTexture.h"
 #include "InputManager.h"
-#include "ScoreBoard.h"
 
 using namespace SDL_Framework;
 
-class StartScreen : public GameEntity {
+class OptionScreen : public GameEntity {
 public:
-	StartScreen();
-	~StartScreen();
+	OptionScreen();
+	~OptionScreen();
 
 	void ChangeSelectedMode(int change);
-
-	void ResetAnimation();
 
 	int SelectedMode();
 
@@ -21,30 +18,16 @@ public:
 
 private:
 
-	Timer* mTimer;
 	InputManager* mInputManager;
 
-	Vector2 mAnimationStartPos;
-	Vector2 mAnimationEndPos;
-	float mAnimationTotalTime;
-	float mAnimationTimer;
-	bool mAnimationDone;
-
 	GameEntity* mTopBar;
-	Texture* mPlayer1;
-	Texture* mPlayer2;
-	Texture* mHiScore;
-	Scoreboard* mPlayer1Score;
-	Scoreboard* mPlayer2Score;
-	Scoreboard* mTopScore;
-
-	GameEntity* mLogoHolder;
-	Texture* mLogo;
-	AnimatedTexture* mAnimatedLogo;
+	Texture* mVolume;
+	Texture* mMute;
+	Texture* mOptMenu;
 
 	GameEntity* mPlayModes;
 	Texture* mStartMode;
-	Texture* mOptionsMode;
+	Texture* mBackMode;
 	Texture* mCreditsMode;
 	Texture* mHighScoreMode;
 	Texture* mCursor;
@@ -57,3 +40,4 @@ private:
 	Texture* mDates;
 	Texture* mRights;
 };
+

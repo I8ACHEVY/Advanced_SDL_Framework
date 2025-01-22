@@ -77,7 +77,7 @@ namespace SDL_Framework {
 		if (mBorderTexture) {
 			SDL_Rect destRect = { 0, 0, 1070, 1040 };
 		
-			//mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
+			mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
 		}
 
 		mGraphics->Render();

@@ -37,8 +37,8 @@ Squid::Squid(int index, bool challenge) :
 
 	mTag = "Squid";
 
-	mTexture[0] = new Texture("InvaderSprites.png", 7, 225, 18, 18);
-	mTexture[1] = new Texture("InvaderSprites.png", 40, 225, 18, 18);
+	mTexture[0] = new GLTexture("InvaderSprites.png", 7, 225, 18, 18);
+	mTexture[1] = new GLTexture("InvaderSprites.png", 40, 225, 18, 18);
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);

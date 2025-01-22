@@ -20,6 +20,9 @@ ScreenManager::ScreenManager() {
 
 	mStartScreen = new StartScreen();
 	mPlayScreen = new PlayScreen();
+	mOptionScreen = new OptionScreen();
+	mCreditScreen = new CreditScreen();
+	mHighScoreTable = new HighScoreTable();
 
 	mCurrentScreen = Start;
 
@@ -48,6 +51,15 @@ ScreenManager::~ScreenManager() {
 
 	delete mPlayScreen;
 	mPlayScreen = nullptr;
+
+	delete mOptionScreen;
+	mOptionScreen = nullptr;
+
+	delete mCreditScreen;
+	mCreditScreen = nullptr;
+
+	delete mHighScoreTable;
+	mHighScoreTable = nullptr;
 }
 
 void ScreenManager::Update() {
@@ -58,10 +70,22 @@ void ScreenManager::Update() {
 		mStartScreen->Update();
 
 		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
-			
-			mCurrentScreen = Play;
-			mStartScreen->ResetAnimation();
-			mPlayScreen->StartNewGame();
+			int selectedMode = mStartScreen->SelectedMode();
+
+			if (selectedMode == 0) {
+				mCurrentScreen = Play;
+				mStartScreen->ResetAnimation();
+				mPlayScreen->StartNewGame();
+			}
+			if (selectedMode == 1) {
+				mCurrentScreen = Option;
+			}
+			if (selectedMode == 2) {
+				mCurrentScreen = Credit;
+			}
+			if (selectedMode == 3) {
+				mCurrentScreen = HighScore;
+			}
 		}
 
 		break;
@@ -72,6 +96,75 @@ void ScreenManager::Update() {
 		if (mPlayScreen->GameOver()) {
 			mCurrentScreen = Start;
 		}
+		break;
+
+	case ScreenManager::Option:
+		mOptionScreen->Update();
+
+		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
+			int selectedMode = mOptionScreen->SelectedMode();
+
+			if (selectedMode == 0) {
+				mCurrentScreen = Play;
+				mPlayScreen->StartNewGame();
+			}
+			if (selectedMode == 1) {
+				mCurrentScreen = Credit;
+			}
+			if (selectedMode == 2) {
+				mCurrentScreen = HighScore;
+			}
+			if (selectedMode == 3) {
+				mCurrentScreen = Start;
+			}
+		}
+
+		break;
+
+	case ScreenManager::Credit:
+		mCreditScreen->Update();
+
+		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
+			int selectedMode = mCreditScreen->SelectedMode();
+
+			if (selectedMode == 0) {
+				mCurrentScreen = Play;
+				mPlayScreen->StartNewGame();
+			}
+			if (selectedMode == 1) {
+				mCurrentScreen = Option;
+			}
+			if (selectedMode == 2) {
+				mCurrentScreen = HighScore;
+			}
+			if (selectedMode == 3) {
+				mCurrentScreen = Start;
+			}
+		}
+
+		break;
+
+	case ScreenManager::HighScore:
+		mHighScoreTable->Update();
+
+		if (mInput->KeyPressed(SDL_SCANCODE_RETURN)) {
+			int selectedMode = mHighScoreTable->SelectedMode();
+
+			if (selectedMode == 0) {
+				mCurrentScreen = Play;
+				mPlayScreen->StartNewGame();
+			}
+			if (selectedMode == 1) {
+				mCurrentScreen = Option;
+			}
+			if (selectedMode == 2) {
+				mCurrentScreen = Credit;
+			}
+			if (selectedMode == 3) {
+				mCurrentScreen = Start;
+			}
+		}
+
 		break;
 
 	default:
@@ -97,9 +190,23 @@ void ScreenManager::Render() {
 	case ScreenManager::Play:
 		mPlayScreen->Render();
 		//mBackground->Render();
-		
 		//mGraphic->Render();
 
+		break;
+
+	case ScreenManager::Option:
+		mOptionScreen->Render();
+		mBackgroundStars->Render();
+		break;
+
+	case ScreenManager::Credit:
+		mCreditScreen->Render();
+		mBackgroundStars->Render();
+		break;
+
+	case ScreenManager::HighScore:
+		mHighScoreTable->Render();
+		mBackgroundStars->Render();
 		break;
 
 	default:

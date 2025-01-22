@@ -15,21 +15,21 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player){
 
 	mLabelTimer = 0.0f;
 
-	mStageLabel = new Texture("STAGE", "emulogic.ttf", 20, { 75, 75, 200 });
+	mStageLabel = new GLTexture("STAGE", "emulogic.ttf", 20, { 0, 255, 0 });
 	mStageLabel->Parent(this);
-	mStageLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f);
+	mStageLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.6f);
 
-	mStageNumber = new Scoreboard({ 75, 75, 200 });
+	mStageNumber = new Scoreboard({ 0, 255, 0});
 	mStageNumber->Score(stage);
 	mStageNumber->Parent(this);
-	mStageNumber->Position(Graphics::SCREEN_WIDTH * 0.56f, Graphics::SCREEN_HEIGHT * 0.5f);
+	mStageNumber->Position(Graphics::SCREEN_WIDTH * 0.56f, Graphics::SCREEN_HEIGHT * 0.6f);
 
 	mStageLabelOnScreen = 0.0f;
 	mStageLabelOffScreen = 1.5f;
 
-	mReadyLabel = new Texture("READY", "emulogic.ttf", 32, { 150, 0,0 });
+	mReadyLabel = new GLTexture("READY", "emulogic.ttf", 32, { 150, 0,0 });
 	mReadyLabel->Parent(this);
-	mReadyLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f);
+	mReadyLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.6f);
 
 	mReadyLabelOnScreen = mStageLabelOffScreen;
 	mReadyLabelOffScreen = mReadyLabelOnScreen + 3.0f;
@@ -39,7 +39,7 @@ Level::Level(int stage, PlaySideBar* sideBar, Player* player){
 	mRespawnDelay = 3.0f;
 	mRespawnLabelOnScreen = 2.0f;
 
-	mGameOverLabel = new Texture("GAME OVER!!", "emulogic.ttf", 32, { 150, 0, 0 });
+	mGameOverLabel = new GLTexture("GAME OVER!!", "emulogic.ttf", 32, { 150, 0, 0 });
 	mGameOverLabel->Parent(this);
 	mGameOverLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f);
 

@@ -10,16 +10,17 @@ namespace SDL_Framework {
 			int height, bool managed = true);
 		Texture(std::string text, std::string fontPath, int size, 
 			SDL_Color color, bool managed = true);	// Text obj
-		~Texture();
+		virtual ~Texture();
 
 		Vector2 ScaledDimensions();
 		void Render() override;
 
 		void SetSourceRect(SDL_Rect* sourceRect);
+
+		virtual void Render() override;
 	
 	protected:
 		SDL_Texture* mTex;
-		SDL_Texture* mRedShip;
 		Graphics* mGraphics;
 
 		int mWidth;
@@ -28,5 +29,7 @@ namespace SDL_Framework {
 		bool mClipped;
 		SDL_Rect mSourceRect;
 		SDL_Rect mDestinationRect;
+
+		void UpdateDstRect();
 	};
 }

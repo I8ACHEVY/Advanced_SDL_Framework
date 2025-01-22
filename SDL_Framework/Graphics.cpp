@@ -1,13 +1,15 @@
-#include "Graphics.h"
+#include "SDLGraphics.h"
+#include "GLGraphics.h"
 
 namespace SDL_Framework
 {
 	Graphics* Graphics::sInstance = nullptr;
 	bool Graphics::sInitialized = false;
+	Graphics::RenderMode Graphics::sMode = Graphics::RenderMode::SDL;
 
 	Graphics* Graphics::Instance() { 
 		if (sInstance == nullptr) {
-			sInstance = new Graphics();
+			sInstance = new GLGraphics();
 		}
 		return sInstance;
 	}
@@ -112,7 +114,7 @@ namespace SDL_Framework
 			SDL_WINDOWPOS_UNDEFINED,
 			SCREEN_WIDTH,
 			SCREEN_HEIGHT,
-			SDL_WINDOW_SHOWN
+			SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL
 		);
 
 		if (mWindow == nullptr)
@@ -127,7 +129,7 @@ namespace SDL_Framework
 		{
 			std::cerr << "Unable to get renderer. SDL_Error: "
 				      << SDL_GetError() << std::endl;
-			SDL_DestroyWindow(mWindow); 
+	
 			return false;
 		}
 

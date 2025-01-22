@@ -13,7 +13,7 @@ PlayScreen::PlayScreen() {
 	mStartLabel->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.6f);
 
 	mLevel = nullptr;
-	mLevelStartDelay = 1.0f;
+	mLevelStartDelay = 6.0f;
 	mLevelStarted = false;
 
 	mPlayer = nullptr;

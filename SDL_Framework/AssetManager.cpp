@@ -1,4 +1,5 @@
 #include "AssetManager.h"
+#include <fstream>
 
 namespace SDL_Framework {
 	AssetManager* AssetManager::sInstance = nullptr;
@@ -13,6 +14,57 @@ namespace SDL_Framework {
 	void AssetManager::Release() {
 		delete sInstance;
 		sInstance = nullptr;
+	}
+
+	void AssetManager::LoadShader(const GLchar* vShader, const GLchar* fShader,
+		const GLchar* gShader, std::string name) {
+		std::string vFileContents;
+		std::string fFileContents;
+		std::string gFileContents;
+
+		try {
+			//Open files
+			std::fstream vShaderFile(vShader);
+			std::fstream fShaderFile(fShader);
+			std::stringstream vBuffer;
+			std::stringstream fBuffer;
+			//Read file's buffer content into its related stream
+			vBuffer << vShaderFile.rdbuf();
+			vShaderFile.close();
+			vFileContents = vBuffer.str();
+
+			fBuffer << fShaderFile.rdbuf();
+			fShaderFile.close();
+			fFileContents = fBuffer.str();
+
+			if (gShader != nullptr) {
+				std::fstream gShaderFile(gShader);
+				std::stringstream gBuffer;
+
+				gBuffer << gShaderFile.rdbuf();
+				gShaderFile.close();
+				gFileContents = gBuffer.str();
+			}
+
+			const GLchar* vShaderCode = vFileContents.c_str();
+			const GLchar* fShaderCode = fFileContents.c_str();
+			const GLchar* gShaderCode = gFileContents.c_str();
+
+			mShaders[name].Compile(vShaderCode, fShaderCode,
+				gShader != nullptr ? gShaderCode : nullptr);
+		}
+		catch (std::exception e) {
+			std::cerr << "Unable to read shader files for shader "
+				<< name << "!" << std::endl;
+		}
+	}
+
+	ShaderUtil AssetManager::GetShaderUtil(std::string name) {
+		if (mShaders.find(name) == mShaders.end()) {
+			std::cerr << "GetShaderUtil:: Unable to find shader " <<
+				name << "!" << std::endl;
+		}
+		return mShaders[name];
 	}
 
 	AssetManager::AssetManager() {
@@ -116,6 +168,41 @@ namespace SDL_Framework {
 			mSFXRefCount[mSFX[fullPath]] += 1;
 		}
 		return mSFX[fullPath];
+	}
+
+	SDL_Surface* AssetManager::GetSurfaceTexture(std::string filename, bool managed) {
+		std::string fullPath = SDL_GetBasePath();
+		fullPath.append("Assets/" + filename);
+
+		if (mSurfaceTextures[fullPath] == nullptr) {
+			//We have not yet created this image
+			mSurfaceTextures[fullPath] = Graphics::Instance()->GetSurfaceTexture(fullPath);
+		}
+
+		if (mSurfaceTextures[fullPath] != nullptr && managed) {
+			mSurfaceRefCount[mSurfaceTextures[fullPath]] += 1;
+		}
+
+		return mSurfaceTextures[fullPath];
+	}
+
+	SDL_Surface* AssetManager::GetSurfaceText(std::string text, std::string filename,
+		int size, SDL_Color color, bool managed) {
+		std::stringstream ss;
+
+		ss << size << (int)color.r << (int)color.g << (int)color.b;
+		std::string key = text + filename + ss.str();
+
+		if (mSurfaceText[key] == nullptr) {
+			TTF_Font* font = GetFont(filename, size);
+			mSurfaceText[key] = Graphics::Instance()->GetSurfaceText(font, text, color);
+		}
+
+		if (mSurfaceText[key] != nullptr && managed) {
+			mSurfaceRefCount[mSurfaceText[key]] += 1;
+		}
+
+		return mSurfaceText[key];
 	}
 
 	void AssetManager::DestroyTexture(SDL_Texture* texture) {

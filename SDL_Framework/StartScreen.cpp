@@ -52,6 +52,7 @@ mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIG
 mStartMode = new Texture("Start", "emulogic.ttf", 15, { 230, 230, 230 });
 mOptionsMode = new Texture("Options", "emulogic.ttf", 15, { 230, 230, 230 });
 mCreditsMode = new Texture("Credits", "emulogic.ttf", 15, { 230, 230, 230 });
+mHighScoreMode = new Texture("HighScores", "emulogic.ttf", 15, { 230, 230, 230 });
 mCursor = new Texture("Cursor.png");
 mCursor->Scale(Vector2(0.5f, 0.5f));
 
@@ -59,15 +60,17 @@ mPlayModes->Parent(this);
 mStartMode->Parent(mPlayModes);
 mOptionsMode->Parent(mPlayModes);
 mCreditsMode->Parent(mPlayModes);
+mHighScoreMode->Parent(mPlayModes);
 mCursor->Parent(mPlayModes);
 
 mStartMode->Position(0.0f, -28.0f);
-mOptionsMode->Position(0.0f, 10.0f);
-mCreditsMode->Position(0.0f, 50.0f);
+mOptionsMode->Position(0.0f, 0.0f);
+mCreditsMode->Position(0.0f, 30.0f);
+mHighScoreMode->Position(0.0f, 60.0f);
 mCursor->Position(-90.0f, -28.0f);
 
 mSelectedMode = 0;
-mCursorOffsetPos = Vector2(0.0f, 40.0f);
+mCursorOffsetPos = Vector2(0.0f, 29.0f);
 mCursorStartPos = mCursor->Position(Local);
 
 mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.8f);
@@ -105,9 +108,9 @@ void StartScreen::ChangeSelectedMode(int change) {
 	mSelectedMode += change;
 
 	if (mSelectedMode < 0) {
-		mSelectedMode = 2;
+		mSelectedMode = 3;
 	}
-	else if (mSelectedMode > 2) {
+	else if (mSelectedMode > 3) {
 		mSelectedMode = 0;
 	}
 
@@ -163,6 +166,7 @@ void StartScreen::Render() {
 	mStartMode->Render();
 	mOptionsMode->Render();
 	mCreditsMode->Render();
+	mHighScoreMode->Render();
 	mCursor->Render();
 
 	mTaito->Render();
@@ -202,6 +206,8 @@ StartScreen::~StartScreen() {
 	mOptionsMode = nullptr;
 	delete mCreditsMode;
 	mCreditsMode = nullptr;
+	delete mHighScoreMode;
+	mHighScoreMode = nullptr;
 	delete mCursor;
 	mCursor = nullptr;
 
