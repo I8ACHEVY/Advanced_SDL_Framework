@@ -1,5 +1,5 @@
 #pragma once
-#include "AnimatedTexture.h"
+#include "GLAnimatedTexture.h"
 #include "InputManager.h"
 #include "AudioManager.h"
 #include "BoxCollider.h"
@@ -44,8 +44,8 @@ private:
 	bool mVisible;
 	bool mAnimating;
 
-	Texture* mTank;
-	AnimatedTexture* mDeathAnimation;
+	GLTexture* mTank;
+	GLAnimatedTexture* mDeathAnimation;
 
 	int mScore;
 	int mLives;

@@ -78,6 +78,34 @@ namespace SDL_Framework {
 			}
 		}
 		mTextures.clear();
+
+		for (auto text : mText) {
+			if (text.second != nullptr) {
+				SDL_DestroyTexture(text.second);
+			}
+		}
+		mText.clear();
+
+		for (auto font : mFonts) {
+			if (font.second != nullptr) {
+				TTF_CloseFont(font.second);
+			}
+		}
+		mFonts.clear();
+
+		for (auto mus : mMusic) {
+			if (mus.second != nullptr) {
+				Mix_FreeMusic(mus.second);
+			}
+		}
+		mMusic.clear();
+
+		for (auto sfx : mSFX) {
+			if (sfx.second != nullptr) {
+				Mix_FreeChunk(sfx.second);
+			}
+		}
+		mSFX.clear();
 	}
 	SDL_Texture* AssetManager::GetTexture(std::string fileName, bool managed) {
 		std::string fullPath = SDL_GetBasePath();
@@ -220,6 +248,21 @@ namespace SDL_Framework {
 		}
 	}
 
+	void AssetManager::DestroySurface(SDL_Surface* surface) {
+		std::map<SDL_Surface*, unsigned>::iterator it = mSurfaceRefCount.find(surface);
+
+		if (it != mSurfaceRefCount.end()) {
+			it->second -= 1;
+			if (it->second == 0) {
+				UnloadSurface(it->first);
+				mSurfaceRefCount.erase(it->first);
+			}
+		}
+		else {
+			UnloadSurface(surface);
+		}
+	}
+
 	void AssetManager::DestroyMusic(Mix_Music* music) {
 		std::map<Mix_Music*, unsigned int>::iterator it = mMusicRefCount.find(music);
 
@@ -233,6 +276,23 @@ namespace SDL_Framework {
 		}
 		else {
 			UnloadMusic(music);
+		}
+	}
+
+	void AssetManager::UnloadSurface(SDL_Surface* surface) {
+		bool found = false;
+		std::string key;
+		std::map<std::string, SDL_Surface*>::iterator it;
+
+		for (it = mSurfaceTextures.begin(); it != mSurfaceTextures.end() && !found; it++) {
+			if ((found = it->second == surface)) {
+				SDL_FreeSurface(it->second);
+				key = it->first;
+			}
+		}
+
+		if (found) {
+			mSurfaceTextures.erase(key);
 		}
 	}
 

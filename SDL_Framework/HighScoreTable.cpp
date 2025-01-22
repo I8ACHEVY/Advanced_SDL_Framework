@@ -6,7 +6,7 @@ HighScoreTable::HighScoreTable() {
 	mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 410.0f);
 	//mPlayer1 = new Texture("1UP", "emulogic.ttf", 15, { 0, 255, 0 });
 	//mPlayer2 = new Texture("2UP", "emulogic.ttf", 15, { 0, 255, 0 });
-	mHighScores = new Texture("HighScore Table", "emulogic.ttf", 32, { 0, 255, 0 });
+	mHighScores = new GLTexture("HighScore Table", "emulogic.ttf", 32, { 0, 255, 0 });
 
 	mTopBar->Parent(this);
 	//mPlayer1->Parent(mTopBar);
@@ -18,11 +18,11 @@ HighScoreTable::HighScoreTable() {
 	mHighScores->Position(0, 0.0f);
 
 	mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.7f);
-	mStartMode = new Texture("Start", "emulogic.ttf", 15, { 230, 230, 230 });
-	mOptionsMode = new Texture("Options", "emulogic.ttf", 15, { 230, 230, 230 });
-	mCreditsMode = new Texture("Credits", "emulogic.ttf", 15, { 230, 230, 230 });
-	mBackMode = new Texture("Back", "emulogic.ttf", 15, { 230, 230, 230 });
-	mCursor = new Texture("Cursor.png");
+	mStartMode = new GLTexture("Start", "emulogic.ttf", 15, { 230, 230, 230 });
+	mOptionsMode = new GLTexture("Options", "emulogic.ttf", 15, { 230, 230, 230 });
+	mCreditsMode = new GLTexture("Credits", "emulogic.ttf", 15, { 230, 230, 230 });
+	mBackMode = new GLTexture("Back", "emulogic.ttf", 15, { 230, 230, 230 });
+	mCursor = new GLTexture("Cursor.png");
 	mCursor->Scale(Vector2(0.5f, 0.5f));
 
 	mPlayModes->Parent(this);
@@ -43,9 +43,9 @@ HighScoreTable::HighScoreTable() {
 	mCursorStartPos = mCursor->Position(Local);
 
 	mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.8f);
-	mTaito = new Texture("taito", "namco__.ttf", 15, { 0, 255, 0 });
-	mDates = new Texture("1978 - 1997 taito corp.", "emulogic.ttf", 12, { 230, 230, 230 });
-	mRights = new Texture("ALL RIGHTS RESERVED", "emulogic.ttf", 12, { 230, 230, 230 });
+	mTaito = new GLTexture("taito", "namco__.ttf", 15, { 0, 255, 0 });
+	mDates = new GLTexture("1978 - 1997 taito corp.", "emulogic.ttf", 12, { 230, 230, 230 });
+	mRights = new GLTexture("ALL RIGHTS RESERVED", "emulogic.ttf", 12, { 230, 230, 230 });
 
 	mBottomBar->Parent(this);
 	mTaito->Parent(mBottomBar);

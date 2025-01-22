@@ -4,42 +4,42 @@
 
 
 namespace SDL_Framework {
-	class AnimatedTexture : public Texture {
-	public:
-		enum WrapMode { Once = 0, Loop};
-		enum AnimDir { Horizontal = 0, Vertical };
+	struct Animation {
+		enum class WrapModes { Once = 0, Loop = 1 } wrapMode;
+		enum class Layouts { Horizontal = 0, Vertical = 1 } layout;
 
-		AnimatedTexture(std::string filename, int x, int y, int width, int height,
-			int frameCount, float animSpeed, AnimDir animationDir, bool manmaged = true);
+		unsigned startX, startY;
 
-		~AnimatedTexture();
+		unsigned frameCount; // total frames
 
-		void SetWrapMode(WrapMode mode);
+		float speed; // in seconds
+		float timePerFrame; // time to display
+		float frameTimer; // time displayed
 
-		bool IsAnimating();
+		bool done;
+	};
 
-		virtual void ResetAnimation();
-
-		void Update();
-
+	class AnimatedTexture :
+		public Texture
+	{
 	protected:
+		Timer* mTimer;
+
 		virtual void RunAnimation();
 
-		Timer* mTimer;
+	private:
 		Animation mAnim;
-		int mStartx;
-		int mStarty;
 
-		int mFrameCount;
+	public:
+		AnimatedTexture(std::string filename, int x, int y, int w, int h, int frameCount, float animationSpeed, Animation::Layouts layout, bool managed = false);
+		~AnimatedTexture();
 
-		float mAnimationSpeed;
-		float mTimePerFrame;
-		float mAnimationTimer;
+		void SetWrapMode(Animation::WrapModes mode);
 
-		WrapMode mWrapMode;
-		AnimDir mAnimationDirection;
+		virtual void ResetAnimation();
+		bool IsAnimating();
 
-		bool mAnimationDone;
+		void Update();
 	};
 }
 

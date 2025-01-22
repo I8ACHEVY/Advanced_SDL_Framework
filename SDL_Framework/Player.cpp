@@ -53,17 +53,17 @@ Player::Player() {
 	mMoveSpeed = 250.0f;
 	mMoveBounds = Vector2(300.0f, 780.0f);
 
-	mTank = new Texture("InvaderSprites.png", 278, 228, 28, 17);
+	mTank = new GLTexture("InvaderSprites.png", 278, 228, 28, 17);
 	mTank->Parent(this);
 	mTank->Position(Vec2_Zero);
 	//mShip->Scale(Vector2(1.5f, 1.5f));
 
 
-	mDeathAnimation = new AnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
-		AnimatedTexture::Horizontal);
+	mDeathAnimation = new GLAnimatedTexture("PlayerExplosion.png", 0, 0, 128, 128, 4, 1.0f,
+		Animation::Layouts::Horizontal);
 	mDeathAnimation->Parent(this);
 	mDeathAnimation->Position(Vec2_Zero);
-	mDeathAnimation->SetWrapMode(AnimatedTexture::Once);
+	mDeathAnimation->SetWrapMode(Animation::WrapModes::Once);
 
 	AddCollider(new BoxCollider(Vector2(10.0f, 45.0f)));
 	AddCollider(new BoxCollider(Vector2(18.0f, 32.0f)), Vector2(12.0f, 5.0f));

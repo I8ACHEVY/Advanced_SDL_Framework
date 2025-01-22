@@ -27,7 +27,7 @@ namespace SDL_Framework {
 		}
 	}
 
-	AnimatedGLTexture::AnimatedGLTexture(std::string filename, int x, int y, int w, int h, int frameCount, float animationSpeed, Animation::Layouts layout, bool managed)
+	GLAnimatedTexture::GLAnimatedTexture(std::string filename, int x, int y, int w, int h, int frameCount, float animationSpeed, Animation::Layouts layout, bool managed)
 		: GLTexture(filename, x, y, w, h, managed) {
 		mTimer = Timer::Instance();
 
@@ -45,22 +45,22 @@ namespace SDL_Framework {
 		mAnim.done = false;
 	}
 
-	AnimatedGLTexture::~AnimatedGLTexture() {}
+	GLAnimatedTexture::~GLAnimatedTexture() {}
 
-	void AnimatedGLTexture::SetWrapMode(Animation::WrapModes wrapMode) {
+	void GLAnimatedTexture::SetWrapMode(Animation::WrapModes wrapMode) {
 		mAnim.wrapMode = wrapMode;
 	}
 
-	void AnimatedGLTexture::ResetAnimation() {
+	void GLAnimatedTexture::ResetAnimation() {
 		mAnim.frameTimer = 0.0f;
 		mAnim.done = false;
 	}
 
-	bool AnimatedGLTexture::IsAnimating() {
+	bool GLAnimatedTexture::IsAnimating() {
 		return !mAnim.done;
 	}
 
-	void AnimatedGLTexture::Update() {
+	void GLAnimatedTexture::Update() {
 		RunAnimation();
 	}
 }

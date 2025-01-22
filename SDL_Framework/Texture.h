@@ -9,15 +9,13 @@ namespace SDL_Framework {
 		Texture(std::string filename, int x, int y, int width, 
 			int height, bool managed = true);
 		Texture(std::string text, std::string fontPath, int size, 
-			SDL_Color color, bool managed = true);	// Text obj
+			SDL_Color color, bool managed = true);
 		virtual ~Texture();
 
 		Vector2 ScaledDimensions();
-		void Render() override;
+		virtual void Render() override;
 
 		void SetSourceRect(SDL_Rect* sourceRect);
-
-		virtual void Render() override;
 	
 	protected:
 		SDL_Texture* mTex;

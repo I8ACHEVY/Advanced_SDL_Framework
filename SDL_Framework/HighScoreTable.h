@@ -1,5 +1,5 @@
 #pragma once
-#include "AnimatedTexture.h"
+#include "GLAnimatedTexture.h"
 #include "InputManager.h"
 
 using namespace SDL_Framework;
@@ -21,23 +21,23 @@ private:
 	InputManager* mInputManager;
 
 	GameEntity* mTopBar;
-	Texture* mVolume;
-	Texture* mMute;
-	Texture* mHighScores;
+	GLTexture* mVolume;
+	GLTexture* mMute;
+	GLTexture* mHighScores;
 
 	GameEntity* mPlayModes;
-	Texture* mStartMode;
-	Texture* mOptionsMode;
-	Texture* mBackMode;
-	Texture* mCreditsMode;
-	Texture* mCursor;
+	GLTexture* mStartMode;
+	GLTexture* mOptionsMode;
+	GLTexture* mBackMode;
+	GLTexture* mCreditsMode;
+	GLTexture* mCursor;
 	Vector2 mCursorStartPos;
 	Vector2 mCursorOffsetPos;
 	int mSelectedMode;
 
 	GameEntity* mBottomBar;
-	Texture* mTaito;
-	Texture* mDates;
-	Texture* mRights;
+	GLTexture* mTaito;
+	GLTexture* mDates;
+	GLTexture* mRights;
 };
 

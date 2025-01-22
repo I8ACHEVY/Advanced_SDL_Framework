@@ -3,7 +3,7 @@
 
 bool Star::sScroll = false;
 
-Star::Star(int layer) : Texture("Stars.png", 0,0,4,4) {
+Star::Star(int layer) : GLTexture("Stars.png", 0,0,4,4) {
 	mTimer = Timer::Instance();
 	mRandom = Random::Instance();
 

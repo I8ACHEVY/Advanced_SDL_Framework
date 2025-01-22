@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BezierPath.h"
-#include "AnimatedTexture.h"
+#include "GLAnimatedTexture.h"
 #include "PhysicsEntity.h"
 #include "Player.h"
 #include "Formation.h"
@@ -39,9 +39,9 @@ protected:
 
 	Timer* mTimer;
 
-	Texture* mTexture[2];
+	GLTexture* mTexture[2];
 
-	AnimatedTexture* mDeathAnimation;
+	GLAnimatedTexture* mDeathAnimation;
 
 	States mCurrentState;
 

@@ -28,8 +28,8 @@ Octopus::Octopus(int index, bool challenge) :
 
 	mTag = "Octopus";
 
-	mTexture[0] = new Texture("InvaderSprites.png", 147, 226, 26, 24);
-	mTexture[1] = new Texture("InvaderSprites.png", 179, 226, 26, 24);
+	mTexture[0] = new GLTexture("InvaderSprites.png", 147, 226, 26, 24);
+	mTexture[1] = new GLTexture("InvaderSprites.png", 179, 226, 26, 24);
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);

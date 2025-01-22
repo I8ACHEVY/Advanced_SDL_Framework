@@ -36,6 +36,7 @@ namespace SDL_Framework {
 		~AssetManager();
 
 		void UnloadTexture(SDL_Texture* texture);
+		void UnloadSurface(SDL_Surface* surface);
 		void UnloadMusic(Mix_Music* music);
 		void UnloadSFX(Mix_Chunk* sfx);
 
@@ -44,10 +45,12 @@ namespace SDL_Framework {
 		static AssetManager* sInstance;
 
 		std::map<std::string, SDL_Texture*> mTextures;
+		std::map<std::string, SDL_Surface*> mSurfaceTextures;
 		std::map<std::string, TTF_Font*> mFonts;
 		std::map<std::string, Mix_Music*> mMusic;
 		std::map<std::string, Mix_Chunk*> mSFX;
-		std::map<std::string, SDL_Surface*> mSurfaceTextures;
+
+		std::map<std::string, SDL_Texture*> mText;
 		std::map<std::string, SDL_Surface*> mSurfaceText;
 
 		std::map<std::string, ShaderUtil> mShaders;

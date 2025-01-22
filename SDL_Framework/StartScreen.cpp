@@ -11,9 +11,9 @@ StartScreen::StartScreen() {
 	mAnimationDone = false;
 
 mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 410.0f);
-mPlayer1 = new Texture("1UP", "emulogic.ttf", 15, { 0, 255, 0 });
-mPlayer2 = new Texture("2UP", "emulogic.ttf", 15, { 0, 255, 0 });
-mHiScore = new Texture("HI SCORE", "emulogic.ttf", 15, { 0, 255, 0 });
+mPlayer1 = new GLTexture("1UP", "emulogic.ttf", 15, { 0, 255, 0 });
+mPlayer2 = new GLTexture("2UP", "emulogic.ttf", 15, { 0, 255, 0 });
+mHiScore = new GLTexture("HI SCORE", "emulogic.ttf", 15, { 0, 255, 0 });
 mPlayer1Score = new Scoreboard({ 255, 255, 255 });
 mPlayer2Score = new Scoreboard({ 255, 255, 255 });
 mTopScore = new Scoreboard();
@@ -36,9 +36,9 @@ mTopScore->Position(Graphics::SCREEN_WIDTH * 0.045f, 30.0f);
 mTopScore->Score(645987);	//CREATE SAVE SYSTEM
 
 mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.49f, Graphics::SCREEN_HEIGHT * 0.55f);
-mLogo = new Texture("InvaderSprites.png", 10, 0, 520, 184);
-mAnimatedLogo = new AnimatedTexture("InvaderSprites.png", 10, 0, 520, 184, 0, 0.5f,
-	AnimatedTexture::Vertical);
+mLogo = new GLTexture("InvaderSprites.png", 10, 0, 520, 184);
+mAnimatedLogo = new GLAnimatedTexture("InvaderSprites.png", 10, 0, 520, 184, 0, 0.5f,
+	Animation::Layouts::Vertical);
 
 mLogoHolder->Parent(this);
 mLogo->Parent(mLogoHolder);
@@ -49,11 +49,11 @@ mAnimatedLogo->Position(Vec2_Zero);
 
 
 mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.7f);
-mStartMode = new Texture("Start", "emulogic.ttf", 15, { 230, 230, 230 });
-mOptionsMode = new Texture("Options", "emulogic.ttf", 15, { 230, 230, 230 });
-mCreditsMode = new Texture("Credits", "emulogic.ttf", 15, { 230, 230, 230 });
-mHighScoreMode = new Texture("HighScores", "emulogic.ttf", 15, { 230, 230, 230 });
-mCursor = new Texture("Cursor.png");
+mStartMode = new GLTexture("Start", "emulogic.ttf", 15, { 230, 230, 230 });
+mOptionsMode = new GLTexture("Options", "emulogic.ttf", 15, { 230, 230, 230 });
+mCreditsMode = new GLTexture("Credits", "emulogic.ttf", 15, { 230, 230, 230 });
+mHighScoreMode = new GLTexture("HighScores", "emulogic.ttf", 15, { 230, 230, 230 });
+mCursor = new GLTexture("Cursor.png");
 mCursor->Scale(Vector2(0.5f, 0.5f));
 
 mPlayModes->Parent(this);
@@ -74,9 +74,9 @@ mCursorOffsetPos = Vector2(0.0f, 29.0f);
 mCursorStartPos = mCursor->Position(Local);
 
 mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.8f);
-mTaito = new Texture("taito", "namco__.ttf", 15, { 0, 255, 0 });
-mDates = new Texture("1978 - 1997 taito corp.", "emulogic.ttf", 12, { 230, 230, 230 });
-mRights = new Texture("ALL RIGHTS RESERVED", "emulogic.ttf", 12, { 230, 230, 230 });
+mTaito = new GLTexture("taito", "namco__.ttf", 15, { 0, 255, 0 });
+mDates = new GLTexture("1978 - 1997 taito corp.", "emulogic.ttf", 12, { 230, 230, 230 });
+mRights = new GLTexture("ALL RIGHTS RESERVED", "emulogic.ttf", 12, { 230, 230, 230 });
 
 mBottomBar->Parent(this);
 mTaito->Parent(mBottomBar);

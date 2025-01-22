@@ -5,9 +5,9 @@ OptionScreen::OptionScreen() {
 	mInputManager = InputManager::Instance();
 
 	mTopBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, 430.0f);
-	mVolume = new Texture("Volume: Use - or + to change Volume Level", "emulogic.ttf", 15, { 0, 255, 0 });
-	mMute = new Texture("Mute: Use M to mute and unmute audio", "emulogic.ttf", 15, { 0, 255, 0 });
-	mOptMenu = new Texture("Options Menu", "emulogic.ttf", 32, { 0, 255, 0 });
+	mVolume = new GLTexture("Volume: Use - or + to change Volume Level", "emulogic.ttf", 15, { 0, 255, 0 });
+	mMute = new GLTexture("Mute: Use M to mute and unmute audio", "emulogic.ttf", 15, { 0, 255, 0 });
+	mOptMenu = new GLTexture("Options Menu", "emulogic.ttf", 32, { 0, 255, 0 });
 
 	mTopBar->Parent(this);
 	mVolume->Parent(mTopBar);
@@ -19,11 +19,11 @@ OptionScreen::OptionScreen() {
 	mOptMenu->Position(0, 0.0f);
 
 	mPlayModes = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.7f);
-	mStartMode = new Texture("Start", "emulogic.ttf", 15, { 230, 230, 230 });
-	mCreditsMode = new Texture("Credits", "emulogic.ttf", 15, { 230, 230, 230 });
-	mHighScoreMode = new Texture("HighScores", "emulogic.ttf", 15, { 230, 230, 230 });
-	mBackMode = new Texture("Back", "emulogic.ttf", 15, { 230, 230, 230 });
-	mCursor = new Texture("Cursor.png");
+	mStartMode = new GLTexture("Start", "emulogic.ttf", 15, { 230, 230, 230 });
+	mCreditsMode = new GLTexture("Credits", "emulogic.ttf", 15, { 230, 230, 230 });
+	mHighScoreMode = new GLTexture("HighScores", "emulogic.ttf", 15, { 230, 230, 230 });
+	mBackMode = new GLTexture("Back", "emulogic.ttf", 15, { 230, 230, 230 });
+	mCursor = new GLTexture("Cursor.png");
 	mCursor->Scale(Vector2(0.5f, 0.5f));
 
 	mPlayModes->Parent(this);
@@ -44,9 +44,9 @@ OptionScreen::OptionScreen() {
 	mCursorStartPos = mCursor->Position(Local);
 
 	mBottomBar = new GameEntity(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.8f);
-	mTaito = new Texture("taito", "namco__.ttf", 15, { 0, 255, 0 });
-	mDates = new Texture("1978 - 1997 taito corp.", "emulogic.ttf", 12, { 230, 230, 230 });
-	mRights = new Texture("ALL RIGHTS RESERVED", "emulogic.ttf", 12, { 230, 230, 230 });
+	mTaito = new GLTexture("taito", "namco__.ttf", 15, { 0, 255, 0 });
+	mDates = new GLTexture("1978 - 1997 taito corp.", "emulogic.ttf", 12, { 230, 230, 230 });
+	mRights = new GLTexture("ALL RIGHTS RESERVED", "emulogic.ttf", 12, { 230, 230, 230 });
 
 	mBottomBar->Parent(this);
 	mTaito->Parent(mBottomBar);

@@ -90,10 +90,10 @@ Enemy::Enemy(int index, bool challenge) :
 
 	mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Hostile);
 
-	mDeathAnimation = new AnimatedTexture("EnemyExplosion.png", 0, 0, 128, 128, 5, 1.0f, AnimatedTexture::Horizontal);
+	mDeathAnimation = new GLAnimatedTexture("EnemyExplosion.png", 0, 0, 128, 128, 5, 1.0f, Animation::Layouts::Horizontal);
 	mDeathAnimation->Parent(this);
 	mDeathAnimation->Position(Vec2_Zero);
-	mDeathAnimation->SetWrapMode(AnimatedTexture::Once);
+	mDeathAnimation->SetWrapMode(Animation::WrapModes::Once);
 
 	//for (int i = 0; i < MAX_BULLETS; i++) {
 	//	mBullets[i] = new Bullet(true);

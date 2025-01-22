@@ -1,5 +1,5 @@
 #pragma once
-#include "Texture.h"
+#include "GLTexture.h"
 
 namespace SDL_Framework {
 	

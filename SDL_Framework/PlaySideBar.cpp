@@ -4,25 +4,25 @@ PlaySideBar::PlaySideBar() {
 	mTimer = Timer::Instance();
 	mAudio = AudioManager::Instance();
 
-	mTopBackground = new Texture("Black.png");
+	mTopBackground = new GLTexture("Black.png");
 	mTopBackground->Parent(this);
 	mTopBackground->Scale(Vector2(8.5f, 1.0f));
 	mTopBackground->Position(0.0f, 200.0f); 
 
-	mBottomBackground = new Texture("Black.png");
+	mBottomBackground = new GLTexture("Black.png");
 	mBottomBackground->Parent(this);
 	mBottomBackground->Scale(Vector2(8.5f, 1.0f));
 	mBottomBackground->Position(-520.0f, 910.0f);
 
-	mHighLabel = new Texture("HIGH SCORE", "emulogic.ttf", 12, { 0, 255, 0 });
+	mHighLabel = new GLTexture("HIGH SCORE", "emulogic.ttf", 12, { 0, 255, 0 });
 	mHighLabel->Parent(this);
 	mHighLabel->Position(-390.0f, 350.0f);
 
-	mP1ScoreLabel = new Texture("SCORE<1>", "emulogic.ttf", 12, { 0, 255, 0 });
+	mP1ScoreLabel = new GLTexture("SCORE<1>", "emulogic.ttf", 12, { 0, 255, 0 });
 	mP1ScoreLabel->Parent(this);
 	mP1ScoreLabel->Position(-580.0f, 350.0f);
 
-	mP2ScoreLabel = new Texture("SCORE<2>", "emulogic.ttf", 12, { 0, 255, 0 });
+	mP2ScoreLabel = new GLTexture("SCORE<2>", "emulogic.ttf", 12, { 0, 255, 0 });
 	mP2ScoreLabel->Parent(this);
 	mP2ScoreLabel->Position(-200.0f, 350.0f);
 
@@ -30,7 +30,7 @@ PlaySideBar::PlaySideBar() {
 	mHighScoreBoard->Parent(this);
 	mHighScoreBoard->Position(-343.0f, 380.0f);
 
-	mOneUpLabel = new Texture("1UP", "emulogic.ttf", 20, { 0, 255, 0 });
+	mOneUpLabel = new GLTexture("1UP", "emulogic.ttf", 20, { 0, 255, 0 });
 	mOneUpLabel->Parent(this);
 	mOneUpLabel->Position(-400.0f, 836.0f);
 
@@ -51,7 +51,7 @@ PlaySideBar::PlaySideBar() {
 	mTanks->Position(-510.0f, 836.0f);
 
 	for (int i = 0; i < MAX_TANK_TEXTURES; i++) {
-		mTankTextures[i] = new Texture("InvaderSprites.png", 278, 228, 28, 17);
+		mTankTextures[i] = new GLTexture("InvaderSprites.png", 278, 228, 28, 17);
 		mTankTextures[i]->Parent(mTanks);
 		mTankTextures[i]->Position(-30.0f * (i % 5), 894.0f * (i / 5));
 		//mTankTextures[i]->Scale(Vector2(1.5f, 1.5f));
@@ -184,7 +184,7 @@ void PlaySideBar::AddFlag(std::string filename, float width, int value) {
 		break;
 	}
 
-	mFlagTextures.push_back(new Texture(filename, x, 0, (int)width - 2, 64));
+	mFlagTextures.push_back(new GLTexture(filename, x, 0, (int)width - 2, 64));
 	mFlagTextures[index]->Parent(mFlags);
 	mFlagTextures[index]->Position(mFlagXOffset, mFlagYOffset);
 	mFlagXOffset += width * 0.5f;

@@ -2,7 +2,7 @@
 #include "AnimatedTexture.h"
 #include "GLTexture.h"
 
-namespace SDLFramework {
+namespace SDL_Framework {
 
 	class GLAnimatedTexture
 		: public GLTexture {
@@ -15,7 +15,7 @@ namespace SDLFramework {
 		virtual void RunAnimation();
 
 	public:
-		GLAnimatedTexture(std::string filename, int x, int y, int w, int h, int frameCount, float animationSpeed, Animation::Layouts layout, bool managed = false);
+		GLAnimatedTexture(std::string filename, int x, int y, int w, int h, int frameCount, float animationSpeed, Animation::Layouts animationDir, bool managed = false);
 		~GLAnimatedTexture();
 
 		void SetWrapMode(Animation::WrapModes mode);

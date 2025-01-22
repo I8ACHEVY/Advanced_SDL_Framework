@@ -1,5 +1,5 @@
 #pragma once
-#include "AnimatedTexture.h"
+#include "GLAnimatedTexture.h"
 #include "InputManager.h"
 #include "ScoreBoard.h"
 
@@ -31,29 +31,29 @@ private:
 	bool mAnimationDone;
 
 	GameEntity* mTopBar;
-	Texture* mPlayer1;
-	Texture* mPlayer2;
-	Texture* mHiScore;
+	GLTexture* mPlayer1;
+	GLTexture* mPlayer2;
+	GLTexture* mHiScore;
 	Scoreboard* mPlayer1Score;
 	Scoreboard* mPlayer2Score;
 	Scoreboard* mTopScore;
 
 	GameEntity* mLogoHolder;
 	Texture* mLogo;
-	AnimatedTexture* mAnimatedLogo;
+	GLAnimatedTexture* mAnimatedLogo;
 
 	GameEntity* mPlayModes;
-	Texture* mStartMode;
-	Texture* mOptionsMode;
-	Texture* mCreditsMode;
-	Texture* mHighScoreMode;
-	Texture* mCursor;
+	GLTexture* mStartMode;
+	GLTexture* mOptionsMode;
+	GLTexture* mCreditsMode;
+	GLTexture* mHighScoreMode;
+	GLTexture* mCursor;
 	Vector2 mCursorStartPos;
 	Vector2 mCursorOffsetPos;
 	int mSelectedMode;
 
 	GameEntity* mBottomBar;
-	Texture* mTaito;
-	Texture* mDates;
-	Texture* mRights;
+	GLTexture* mTaito;
+	GLTexture* mDates;
+	GLTexture* mRights;
 };

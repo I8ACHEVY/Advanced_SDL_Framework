@@ -25,15 +25,15 @@ private:
 	Timer* mTimer;
 	AudioManager* mAudio;
 
-	Texture* mTopBackground;
-	Texture* mBottomBackground;
+	GLTexture* mTopBackground;
+	GLTexture* mBottomBackground;
 
-	Texture* mHighLabel;
-	Texture* mP1ScoreLabel;
-	Texture* mP2ScoreLabel;
+	GLTexture* mHighLabel;
+	GLTexture* mP1ScoreLabel;
+	GLTexture* mP2ScoreLabel;
 	Scoreboard* mHighScoreBoard;
 
-	Texture* mOneUpLabel;
+	GLTexture* mOneUpLabel;
 	float mBlinkTimer;
 	float mBlinkInterval;
 	bool mOneUpLabelVisible;
@@ -42,7 +42,7 @@ private:
 	Scoreboard* mPlayer2Score;
 
 	GameEntity* mTanks;
-	Texture* mTankTextures[MAX_TANK_TEXTURES];
+	GLTexture* mTankTextures[MAX_TANK_TEXTURES];
 	Scoreboard* mTotalTanksLabel;
 
 	int mTotalTanks;

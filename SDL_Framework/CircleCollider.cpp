@@ -9,11 +9,11 @@ namespace SDL_Framework {
 
 		if (DEBUG_COLLIDERS) {
 			if (broadPhase) {
-				SetDebugTexture(new Texture("BroadPhaseCollider.png"));
+				SetDebugTexture(new GLTexture("BroadPhaseCollider.png"));
 			}
 
 			else {
-				SetDebugTexture(new Texture("CircleCollider.png"));
+				SetDebugTexture(new GLTexture("CircleCollider.png"));
 			}
 
 			mDebugTexture->Scale(Vec2_One * (radius * 2 / 50.0f));

@@ -15,4 +15,4 @@ namespace SDL_Framework {
 	private:
 
 	};
-
+}

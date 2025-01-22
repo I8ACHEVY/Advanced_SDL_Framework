@@ -23,6 +23,6 @@ private:
 
 	static const int OFFSCREEN_BUFFER = 180;	
 	Timer* mTimer;
-	Texture* mTexture;
+	GLTexture* mTexture;
 	float mSpeed;
 };

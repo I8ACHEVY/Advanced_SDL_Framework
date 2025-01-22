@@ -132,8 +132,8 @@ RedShip::RedShip(int index, bool challenge) :
 	mTag = "RedShip";
 
 	
-		mTexture[0] = new Texture("InvaderSprites.png", 215, 223, 50, 24);
-		mTexture[1] = new Texture("InvaderSprites.png", 215, 223, 50, 24);
+		mTexture[0] = new GLTexture("InvaderSprites.png", 215, 223, 50, 24);
+		mTexture[1] = new GLTexture("InvaderSprites.png", 215, 223, 50, 24);
 
 	for (auto texture : mTexture) {
 		texture->Parent(this);

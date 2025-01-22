@@ -29,7 +29,7 @@ namespace SDL_Framework {
 		static const int MAX_BULLETS = 2;
 		Bullet* mBullets[MAX_BULLETS];
 
-		Texture* mRedShip;
+		GLTexture* mRedShip;
 		PhysEntity* mCollider;
 
 		bool mVisible;
