@@ -17,10 +17,10 @@ Star::Star(int layer) : GLTexture("Stars.png", 0,0,4,4) {
 	mFlickerTime = 0.0f;
 	mFlickerSpeed = mRandom->RandomRange(0.15f, 1.0f);
 
-	float inverseLayer = 1.0f / layer;
+	float inverseLayer = (layer == 0) ? 1.0f : 1.0f / layer;
 	Scale(Vec2_One * inverseLayer);
 
-	mScrollSpeed = 4.0f / layer;
+	mScrollSpeed = (layer == 0) ? 4.0f : 4.0f / layer;
 }
 
 Star::~Star() {
@@ -39,8 +39,11 @@ void Star::Update() {
 }
 
 void Star::Render() {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	if (mVisible) {
 		GLTexture::Render();
 	}
+	glDisable(GL_BLEND);
 }
