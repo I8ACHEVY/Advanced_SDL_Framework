@@ -45,8 +45,14 @@ namespace SDL_Framework {
 	}
 
 	GLTexture::~GLTexture() {
-		AssetManager::Instance()->DestroySurface(mSurface);
-		mSurface = nullptr;
+		if (mSurface) {
+			AssetManager::Instance()->DestroySurface(mSurface);
+			mSurface = nullptr;
+		}
+		if (ID) {
+			glDeleteTextures(1, &ID);
+			ID = 0;
+		}
 	}
 
 	void GLTexture::Generate() {
@@ -73,6 +79,8 @@ namespace SDL_Framework {
 			Mode = GL_RGBA;
 		}
 
+		glPixelStorei(GL_UNPACK_ROW_LENGTH, mSurface->pitch / mSurface->format->BytesPerPixel);
+
 		glGenTextures(1, &ID);
 		glBindTexture(GL_TEXTURE_2D, ID);
 
@@ -90,7 +98,7 @@ namespace SDL_Framework {
 	}
 
 	void GLTexture::SetSurfaceTexture(std::string filename, bool managed) {
-		mSurface = AssetManager::Instance()->GetSurfaceTexture(filename, managed);
+		mSurface = AssetManager::Instance()->GetSurface(filename, managed);
 		Data = mSurface->pixels;
 		if (mSurface != nullptr) {
 			Generate();
@@ -101,7 +109,7 @@ namespace SDL_Framework {
 	}
 
 	void GLTexture::SetSurfaceTextTexture(std::string text, std::string filename, int size, SDL_Color color, bool managed) {
-		mSurface = AssetManager::Instance()->GetSurfaceText(text, filename, size, color, managed);
+		mSurface = AssetManager::Instance()->GetTextSurface(text, filename, size, color, managed);
 		Data = mSurface->pixels;
 		if (mSurface != nullptr) {
 			Generate();

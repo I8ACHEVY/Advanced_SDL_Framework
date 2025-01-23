@@ -2,139 +2,73 @@
 #include "AssetManager.h"
 #include "MathHelper.h"
 
+#include <GL/glew.h>
+#include <glm.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <gtx/transform.hpp>
+
 namespace SDL_Framework {
-	GLGraphics* GLGraphics::Instance() {
-		if (sInstance == nullptr) {
-			Graphics::Instance();
-		}
+	void GLGraphics::DrawSprite(GLTexture* texture, SDL_Rect* srcRect, SDL_Rect* dstRect, float angle, SDL_RendererFlip flip) {
+		float rad = angle * DEG_TO_RAD;
+		Vector2 pos = texture->Position(GameEntity::Space::World);
 
-		return static_cast<GLGraphics*>(sInstance);
-	}
+		InitRenderData(texture, srcRect, texture->ID, flip);
 
-	GLGraphics::GLGraphics() {
-		sInitialized = Init();
-	}
+		shaderUtil.Use();
+		glBindTexture(GL_TEXTURE_2D, texture->ID);
 
-	GLGraphics::~GLGraphics() {
-		//SDL_GL_DeleteContext(mWindow);
-	}
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	void GLGraphics::ClearBackBuffer() {
-		glClearDepth(1.0f);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	}
+		glm::mat4 scaleMatrix = glm::scale(glm::vec3(dstRect->w, dstRect->h, 1.0f));
+		glm::mat4 rotateMatrix = glm::rotate(rad, glm::vec3(0.0f, 0.0f, 1.0f));
+		glm::mat4 translateMatrix = glm::translate(glm::vec3(pos.x, pos.y, 0.0f));
 
-	void GLGraphics::Render() {
-		//glBegin(GL_TRIANGLES);
-		////If we want color, color NEEDS to be applied first
-		//glColor3f(1.0f, 0.0f, 0.0f);
+		GLint loc = shaderUtil.GetUniformLocation("tSampler");
+		glUniform1i(loc, 0);
 
-		//glVertex2f(0.0f, 0.0f);
-		//glVertex2f(0.0f, 500.0);
-		//glVertex2f(500.0f, 500.0f);
+		loc = shaderUtil.GetUniformLocation("scaleMatrix");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &(scaleMatrix[0][0]));
+		loc = shaderUtil.GetUniformLocation("rotateMatrix");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &(rotateMatrix[0][0]));
+		loc = shaderUtil.GetUniformLocation("translateMatrix");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &(translateMatrix[0][0]));
 
-		//glEnd();
+		loc = shaderUtil.GetUniformLocation("proj");
+		glUniformMatrix4fv(loc, 1, GL_FALSE, &(orthoMatrix[0][0]));
 
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
-
-		SDL_GL_SwapWindow(mWindow);
-	}
-
-	bool GLGraphics::Init() {
-		mGLContext = SDL_GL_CreateContext(mWindow);
-		if (mGLContext == nullptr) {
-			std::cerr << "SDL_GL_Context could not be created!" << SDL_GetError() << std::endl;
-			return false;
-		}
-
-		GLenum error = glewInit();
-		if (error != GLEW_OK) {
-			std::cerr << "Could not initialize glew!" << glewGetErrorString(error) << std::endl;
-		}
-
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-		InitLoadShaderData();
-
-		return true;
-	}
-
-	void GLGraphics::InitLoadShaderData() {
-		std::string basepath = SDL_GetBasePath();
-		basepath.append("Assets/");
-
-		std::string vShaderPath = basepath.append("Shaders/vs.shader");
-		std::string fShaderPath = basepath.append("Shaders/fs.shader");
-
-		AssetManager::Instance()->LoadShader(vShaderPath.c_str(), fShaderPath.c_str(),
-			nullptr, "Sprite-Default");
-		mShaderUtil = AssetManager::Instance()->GetShaderUtil("Sprite-Default");
-		orthoMatrix = glm::ortho(0.0f, (float)SCREEN_WIDTH,
-			(float)SCREEN_HEIGHT, 0.0f, -1.0f, 1.0f);
-
-		mShaderUtil.Use();
-		mShaderUtil.SetVector2f("vertexPosition", glm::vec2(0, 0));
-		mShaderUtil.SetMatrix4f("proj", orthoMatrix);
-	}
-
-	void GLGraphics::DrawSprite(GLTexture* glTex, SDL_Rect* srcRect,
-		SDL_Rect* dstRect, float angle, SDL_RendererFlip flip) {
-		float x = -1;
-		float y = -1;
-		float w = 1;
-		float h = 1;
-
-		if (glTex->ID == 0) {
-			glGenBuffers(1, &glTex->ID);
-		}
-
-		float vertexData[12];
-
-		//First triangle
-		vertexData[0] = x + w;
-		vertexData[1] = y + h;
-
-		vertexData[2] = x;
-		vertexData[3] = y + h;
-
-		vertexData[4] = x;
-		vertexData[5] = y;
-
-		//Second Triangle
-		vertexData[6] = x;
-		vertexData[7] = y;
-
-		vertexData[8] = x + w;
-		vertexData[9] = y;
-
-		vertexData[10] = x + w;
-		vertexData[11] = y + h;
-
-		glBindBuffer(GL_ARRAY_BUFFER, glTex->ID);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData),
-			vertexData, GL_STATIC_DRAW);
-
+		glBindBuffer(GL_ARRAY_BUFFER, texture->ID);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glDisableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
 
-		//This is us unbinding everything aka a reset to our buffer
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
+
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(2);
+
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void GLGraphics::InitRenderData(Texture* texture, SDL_Rect* srcRect,
-		float angle, float x, float y, float w, float h, GLuint quadVAO, SDL_RendererFlip flip) {
-		GLTexture* glTex = dynamic_cast<GLTexture*>(texture);
+	void GLGraphics::InitRenderData(Texture* texture, SDL_Rect* srcRect, GLuint quadVAO, SDL_RendererFlip flip) {
+		GLTexture* glTexture = dynamic_cast<GLTexture*>(texture);
 
-		if (!glTex) {
-			std::cerr << "TEXTURE ERROR" << std::endl;
+		if (glTexture == nullptr) {
+			std::cerr << "InitRenderData:: Unable to cast input texture to GLTexture pointer." << std::endl;
 			return;
 		}
 
-		float height = glTex->mSurface->h;
-		float width = glTex->mSurface->w;
+		float height = (float)glTexture->mSurface->h;
+		float width = (float)glTexture->mSurface->w;
 
 		if (quadVAO == 0) {
 			glGenBuffers(1, &quadVAO);
@@ -145,14 +79,11 @@ namespace SDL_Framework {
 		glm::vec2 bottomLeft = glm::vec2(0, 0);
 		glm::vec2 bottomRight = glm::vec2(1, 0);
 
-		if (srcRect) {
-			topRight = glm::vec2((srcRect->x + srcRect->w) / width,
-				(srcRect->y + srcRect->h) / height);
-			topLeft = glm::vec2(srcRect->x / width,
-				(srcRect->y + srcRect->h) / height);
+		if (srcRect != nullptr) {
+			topRight = glm::vec2((srcRect->x + srcRect->w) / width, (srcRect->y + srcRect->h) / height);
+			topLeft = glm::vec2(srcRect->x / width, (srcRect->y + srcRect->h) / height);
 			bottomLeft = glm::vec2(srcRect->x / width, srcRect->y / height);
-			bottomRight = glm::vec2((srcRect->x + srcRect->w) / width,
-				srcRect->y / height);
+			bottomRight = glm::vec2((srcRect->x + srcRect->w) / width, srcRect->y / height);
 		}
 
 		if (flip == SDL_FLIP_HORIZONTAL) {
@@ -165,31 +96,73 @@ namespace SDL_Framework {
 			std::swap(topLeft.y, bottomLeft.y);
 		}
 
-		Vertex vertexData[6];
-		vertexData[0].SetPosition(x + w, y + h);
-		vertexData[0].SetUV(topRight.x, topRight.y);
+		Vertex vertData[6];
+		vertData[0].SetPosition(0.5f, 0.5f);
+		vertData[0].SetUV(topRight.x, topRight.y);
 
-		vertexData[1].SetPosition(x, y + h);
-		vertexData[1].SetUV(topLeft.x, topLeft.y);
+		vertData[1].SetPosition(-0.5f, 0.5f);
+		vertData[1].SetUV(topLeft.x, topLeft.y);
 
-		vertexData[2].SetPosition(x, y);
-		vertexData[2].SetUV(bottomLeft.x, bottomLeft.y);
+		vertData[2].SetPosition(-0.5f, -0.5f);
+		vertData[2].SetUV(bottomLeft.x, bottomLeft.y);
 
-		vertexData[3].SetPosition(x, y);
-		vertexData[3].SetUV(bottomLeft.x, bottomLeft.y);
+		vertData[3].SetPosition(-0.5f, -0.5f);
+		vertData[3].SetUV(bottomLeft.x, bottomLeft.y);
 
-		vertexData[4].SetPosition(x + w, y);
-		vertexData[4].SetUV(bottomRight.x, bottomRight.y);
+		vertData[4].SetPosition(0.5f, -0.5f);
+		vertData[4].SetUV(bottomRight.x, bottomRight.y);
 
-		vertexData[5].SetPosition(x + w, y + h);
-		vertexData[5].SetUV(topRight.x, topRight.y);
+		vertData[5].SetPosition(0.5f, 0.5f);
+		vertData[5].SetUV(topRight.x, topRight.y);
 
 		for (int i = 0; i < 6; i++) {
-			vertexData[i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+			vertData[i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 		}
 
 		glBindBuffer(GL_ARRAY_BUFFER, quadVAO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertData), vertData, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	void GLGraphics::InitLoadShaderData() {
+		std::string basePath = SDL_GetBasePath();
+		basePath.append("Assets/");
+
+		std::string vShaderPath = basePath + "Shaders/vs.shader";
+		std::string fShaderPath = basePath + "Shaders/fs.shader";
+
+		AssetManager::Instance()->LoadShader(vShaderPath.c_str(), fShaderPath.c_str(), nullptr, "Sprite-Default");
+		shaderUtil = AssetManager::Instance()->GetShaderUtil("Sprite-Default");
+		orthoMatrix = glm::ortho(0.0f, (float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f, -1.0f, 1.0f);
+
+		shaderUtil.Use();
+		shaderUtil.SetVector2f("vertexPosition", glm::vec2(0, 0));
+		shaderUtil.SetMatrix4f("proj", orthoMatrix);
+	}
+
+	void GLGraphics::ClearBackBuffer() {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
+	void GLGraphics::Render() {
+		SDL_GL_SwapWindow(mWindow);
+	}
+
+	bool GLGraphics::Init() {
+		if (!sInitialized) {
+			return false;
+		}
+
+		InitLoadShaderData();
+
+		return true;
+	}
+
+	GLGraphics::GLGraphics() {
+		sInitialized = Init();
+	}
+
+	GLGraphics::~GLGraphics() {
+
 	}
 }

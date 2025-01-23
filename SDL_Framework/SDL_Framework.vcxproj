@@ -113,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\OpenGL\glew-2.1.0\include\GL;C:\OpenGL\glm;C:\SDL2\include;C:\SDL2\SDL2_image-2.8.2\include;C:\SDL2\SDL2_ttf-2.22.0\include;C:\SDL2\SDL2_mixer-2.8.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\OpenGL\glew-2.1.0\include;C:\OpenGL\glm;C:\SDL2\include;C:\SDL2\SDL2_image-2.8.2\include;C:\SDL2\SDL2_ttf-2.22.0\include;C:\SDL2\SDL2_mixer-2.8.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,7 +138,7 @@ xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\OpenGL\glew-2.1.0\include\GL;C:\OpenGL\glm;C:\SDL2\include;C:\SDL2\SDL2_image-2.8.2\include;C:\SDL2\SDL2_ttf-2.22.0\include;C:\SDL2\SDL2_mixer-2.8.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\OpenGL\glew-2.1.0\include;C:\OpenGL\glm;C:\SDL2\include;C:\SDL2\SDL2_image-2.8.2\include;C:\SDL2\SDL2_ttf-2.22.0\include;C:\SDL2\SDL2_mixer-2.8.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -169,8 +169,6 @@ xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="HighScoreTable.cpp" />
     <ClCompile Include="OptionScreen.cpp" />
-    <ClCompile Include="SDLGraphics.cpp" />
-    <ClCompile Include="SDLTexture.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
     <ClCompile Include="Squid.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
@@ -215,8 +213,6 @@ xcopy "$(ProjectDir)\Data\*" "$(OutDir)Data\" /y /s
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="HighScoreTable.h" />
     <ClInclude Include="OptionScreen.h" />
-    <ClInclude Include="SDLGraphics.h" />
-    <ClInclude Include="SDLTexture.h" />
     <ClInclude Include="ShaderUtil.h" />
     <ClInclude Include="Squid.h" />
     <ClInclude Include="BoxCollider.h" />

@@ -6,59 +6,58 @@
 #include <sstream>
 
 namespace SDL_Framework {
-	class AssetManager {
-	public:
-		static AssetManager* Instance();
-		static void Release();
 
-		ShaderUtil GetShaderUtil(std::string name);
-		void LoadShader(const GLchar* vShaderFile, const GLchar* fShaderFile,
-			const GLchar* gShaderFile = nullptr, std::string name = "Default");
+	class AssetManager
+	{
+	private:
+		static AssetManager* sInstance;
 
-		SDL_Texture* GetTexture(std::string filename, bool managed = true);
-		SDL_Texture* GetText(std::string text, std::string filename, int size,
-			SDL_Color color, bool managed = true);
+		std::map<std::string, SDL_Texture*> mTextures;
+		std::map<std::string, SDL_Surface*> mSurfaces;
+		std::map<std::string, TTF_Font*> mFonts;
+		std::map<std::string, SDL_Texture*> mText;
+		std::map<std::string, SDL_Surface*> mSurfaceText;
+		std::map<std::string, Mix_Music*> mMusic;
+		std::map<std::string, Mix_Chunk*> mSFX;
 
-		Mix_Music* GetMusic(std::string filename, bool managed = true);	//Mix_LoadMUS
-		Mix_Chunk* GetSFX(std::string filename, bool managed = true);		//Mix_LoadWAV
+		std::map<SDL_Texture*, unsigned> mTextureRefCount;
+		std::map<SDL_Surface*, unsigned> mSurfaceRefCount;
+		std::map<Mix_Music*, unsigned> mMusicRefCount;
+		std::map<Mix_Chunk*, unsigned> mSFXRefCount;
 
-		SDL_Surface* GetSurfaceTexture(std::string filename, bool managed = true);
-		SDL_Surface* GetSurfaceText(std::string text, std::string filename,
-			int size, SDL_Color color, bool managed = true);
-
-		void DestroyTexture(SDL_Texture* texture);
-		void DestroyMusic(Mix_Music* music);
-		void DestroySFX(Mix_Chunk* sfx);
-		void DestroySurface(SDL_Surface* surface);
+		std::map<std::string, ShaderUtil> mShaders;
 
 	private:
-		AssetManager();
-		~AssetManager();
+		TTF_Font* GetFont(std::string filename, int size);
 
 		void UnloadTexture(SDL_Texture* texture);
 		void UnloadSurface(SDL_Surface* surface);
 		void UnloadMusic(Mix_Music* music);
-		void UnloadSFX(Mix_Chunk* sfx);
+		void UnloadSFX(Mix_Chunk* chunk);
 
-		TTF_Font* GetFont(std::string filename, int size);
+		AssetManager();
+		~AssetManager();
 
-		static AssetManager* sInstance;
+	public:
+		static AssetManager* Instance();
+		static void Release();
 
-		std::map<std::string, SDL_Texture*> mTextures;
-		std::map<std::string, SDL_Surface*> mSurfaceTextures;
-		std::map<std::string, TTF_Font*> mFonts;
-		std::map<std::string, Mix_Music*> mMusic;
-		std::map<std::string, Mix_Chunk*> mSFX;
+		SDL_Texture* GetTexture(std::string filename, bool managed = true);
+		SDL_Texture* GetText(std::string text, std::string filename, int size, SDL_Color color, bool managed = true);
+		SDL_Surface* GetSurface(std::string filename, bool managed = true);
+		SDL_Surface* GetTextSurface(std::string text, std::string filename, int size, SDL_Color color, bool managed = true);
 
-		std::map<std::string, SDL_Texture*> mText;
-		std::map<std::string, SDL_Surface*> mSurfaceText;
+		Mix_Music* GetMusic(std::string filename, bool managed = true);
+		Mix_Chunk* GetSFX(std::string filename, bool managed = true);
 
-		std::map<std::string, ShaderUtil> mShaders;
+		void LoadShader(const GLchar* vertShader, const GLchar* fragShader, const GLchar* geomShader = nullptr, std::string name = "Default");
+		ShaderUtil GetShaderUtil(std::string name);
 
-		std::map<Mix_Music*, unsigned int> mMusicRefCount;
-		std::map<Mix_Chunk*, unsigned int> mSFXRefCount;
-		std::map<SDL_Texture*, unsigned int> mTextureRefCount;
-		std::map<SDL_Surface*, unsigned> mSurfaceRefCount;
+		void DestroyTexture(SDL_Texture* texture);
+		void DestroySurface(SDL_Surface* surface);
+
+		void DestroyMusic(Mix_Music* music);
+		void DestroySFX(Mix_Chunk* sfx);
 	};
 }
 

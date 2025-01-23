@@ -11,6 +11,8 @@ namespace SDL_Framework {
 		mSourceRect = SDL_Rect();
 		mDestinationRect.w = mWidth;
 		mDestinationRect.h = mHeight;
+
+		mFlip = SDL_FLIP_NONE;
 	}
 
 	Texture::Texture(std::string filename, int x, int y, int width, int height, bool managed) {
@@ -28,6 +30,8 @@ namespace SDL_Framework {
 		mSourceRect.y = y;
 		mSourceRect.w = width;
 		mSourceRect.h = height;
+
+		mFlip = SDL_FLIP_NONE;
 	}
 
 	Texture::Texture(std::string text, std::string fontPath, int size, 
@@ -80,5 +84,20 @@ namespace SDL_Framework {
 		mDestinationRect.y = (int)(pos.y - mHeight * scale.y * 0.5f);
 		mDestinationRect.w = (int)(mWidth * scale.x);
 		mDestinationRect.h = (int)(mHeight * scale.y);
+	}
+
+	void Texture::Flip(bool hFlip, bool vFlip) {
+		if (hFlip && vFlip) {
+			mFlip = (SDL_RendererFlip)(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+		}
+		else if (hFlip) {
+			mFlip = SDL_FLIP_HORIZONTAL;
+		}
+		else if (vFlip) {
+			mFlip = SDL_FLIP_VERTICAL;
+		}
+		else {
+			mFlip = SDL_FLIP_NONE;
+		}
 	}
 }

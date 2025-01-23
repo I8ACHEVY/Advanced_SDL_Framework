@@ -4,7 +4,7 @@
 #include <SDL_ttf.h>
 #include <iostream>
 #include <string>
-#include <glew.h>
+#include <GL/glew.h>
 #include <glm.hpp>
 
 namespace SDL_Framework
@@ -34,8 +34,8 @@ namespace SDL_Framework
 
 		void DrawLine(float startX, float startY, float endX, float endY);
 
-		virtual void ClearBackBuffer() = 0;
-		virtual void Render() = 0;
+		virtual void ClearBackBuffer();
+		virtual void Render();
 
 		SDL_Texture* LoadTexture(std::string path);
 		SDL_Surface* LoadSurface(std::string path);
@@ -47,8 +47,8 @@ namespace SDL_Framework
 		static bool sInitialized;
 		static RenderMode sMode;
 
-		SDL_Window* mWindow = nullptr;
-		SDL_Renderer* mRenderer = nullptr;
+		SDL_Window* mWindow;
+		SDL_Renderer* mRenderer;
 
 		SDL_GLContext mGLContext;
 

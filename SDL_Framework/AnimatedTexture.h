@@ -2,8 +2,8 @@
 #include "Texture.h"
 #include "Timer.h"
 
-
 namespace SDL_Framework {
+
 	struct Animation {
 		enum class WrapModes { Once = 0, Loop = 1 } wrapMode;
 		enum class Layouts { Horizontal = 0, Vertical = 1 } layout;
@@ -42,4 +42,3 @@ namespace SDL_Framework {
 		void Update();
 	};
 }
-

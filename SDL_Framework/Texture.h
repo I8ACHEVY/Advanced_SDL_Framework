@@ -13,9 +13,12 @@ namespace SDL_Framework {
 		virtual ~Texture();
 
 		Vector2 ScaledDimensions();
-		virtual void Render() override;
 
 		void SetSourceRect(SDL_Rect* sourceRect);
+
+		void Flip(bool hFlip, bool vFLip);
+
+		virtual void Render() override;
 	
 	protected:
 		SDL_Texture* mTex;
@@ -27,6 +30,7 @@ namespace SDL_Framework {
 		bool mClipped;
 		SDL_Rect mSourceRect;
 		SDL_Rect mDestinationRect;
+		SDL_RendererFlip mFlip;
 
 		void UpdateDstRect();
 	};

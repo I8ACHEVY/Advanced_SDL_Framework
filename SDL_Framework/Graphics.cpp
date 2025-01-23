@@ -1,4 +1,4 @@
-#include "SDLGraphics.h"
+#include "Graphics.h"
 #include "GLGraphics.h"
 
 namespace SDL_Framework
@@ -16,7 +16,7 @@ namespace SDL_Framework
 		if (sInstance == nullptr) {
 			switch (sMode) {
 			case RenderMode::SDL:
-				sInstance = new SDLGraphics();
+				sInstance = new Graphics();
 				break;
 			case RenderMode::GL:
 				sInstance = new GLGraphics();

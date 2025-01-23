@@ -1,37 +1,35 @@
 #pragma once
 #include "Graphics.h"
-#include "glew.h"
-//#include <glm.hpp>
-//#include <gtc/matrix_transform.hpp>
-#include "ShaderUtil.h"
 #include "GLTexture.h"
-
+#include "ShaderUtil.h"
 
 namespace SDL_Framework {
 
-	class GLGraphics : public Graphics {
-	public:
-		static GLGraphics* Instance();
+	class GLGraphics
+		: public Graphics {
+		friend class Graphics;
 
-		GLGraphics();
-		~GLGraphics();
+	private:
+		SDL_GLContext mGLContext;
+		ShaderUtil shaderUtil;
+
+		glm::mat4 orthoMatrix;
+
+	public:
+		void InitRenderData(Texture* texture, SDL_Rect* srcRect, GLuint quadVAO, SDL_RendererFlip flip = SDL_FLIP_NONE);
+		void InitLoadShaderData();
+
+		// Inherited from Graphics
+		virtual void DrawSprite(GLTexture* texture, SDL_Rect* srcRect = nullptr, SDL_Rect* dstRect = nullptr, float angle = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE) override;
 
 		virtual void ClearBackBuffer() override;
 		virtual void Render() override;
 
-		virtual void DrawSprite(GLTexture* glTex, SDL_Rect* srcRect = nullptr,
-			SDL_Rect* dstRect = nullptr, float angle = 0.0f,
-			SDL_RendererFlip flip = SDL_FLIP_NONE);
-
-		void InitRenderData(Texture* texture, SDL_Rect* srcRect, float angle,
-			float x, float y, float w, float h, GLuint quadVAO, SDL_RendererFlip flip);
-		void InitLoadShaderData();
-
-	protected:
+	private:
+		//Inherited from Graphics
 		virtual bool Init() override;
 
-		SDL_GLContext mGLContext;
-		glm::mat4 orthoMatrix;
-		ShaderUtil mShaderUtil;
+		GLGraphics();
+		~GLGraphics();
 	};
 }

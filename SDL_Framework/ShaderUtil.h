@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <glew.h>
+#include <GL/glew.h>
 #include <glm.hpp>
 
 namespace SDL_Framework {

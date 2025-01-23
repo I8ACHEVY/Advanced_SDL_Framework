@@ -1,5 +1,5 @@
 #pragma once
-#include <glew.h>
+#include <GL/glew.h>
 #include "Texture.h"
 
 namespace SDL_Framework {
@@ -12,7 +12,7 @@ namespace SDL_Framework {
 		GLuint FilterMag, FilterMin;
 
 		int Mode;
-		bool Rendererd;
+		bool Rendered;
 		void* Data;
 		SDL_RendererFlip Flip;
 		SDL_Surface* mSurface;
