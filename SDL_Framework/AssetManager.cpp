@@ -203,8 +203,19 @@ namespace SDL_Framework {
 		fullPath.append("Assets/" + filename);
 
 		if (mSurfaceTextures[fullPath] == nullptr) {
-			//We have not yet created this image
-			mSurfaceTextures[fullPath] = Graphics::Instance()->LoadSurface(fullPath);
+			SDL_Surface* loadedSurface = Graphics::Instance()->LoadSurface(fullPath);
+			if (loadedSurface != nullptr) {
+				if (loadedSurface->format->format == SDL_PIXELFORMAT_INDEX8) {
+					SDL_Surface* convertedSurface = SDL_ConvertSurfaceFormat(loadedSurface, SDL_PIXELFORMAT_ABGR8888, 0);
+					SDL_FreeSurface(loadedSurface);
+					loadedSurface = convertedSurface;
+				}
+				mSurfaceTextures[fullPath] = loadedSurface;
+			}
+			else {
+				std::cerr << "Unable to load image " << fullPath << "! SDL_image Error: " << IMG_GetError() << std::endl;
+				return nullptr;
+			}
 		}
 
 		if (mSurfaceTextures[fullPath] != nullptr && managed) {

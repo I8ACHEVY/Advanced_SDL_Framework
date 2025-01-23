@@ -16,23 +16,22 @@ namespace SDL_Framework {
 		GLGraphics();
 		~GLGraphics();
 
-		void ClearBackBuffer() override;
-		void Render() override;
+		virtual void ClearBackBuffer() override;
+		virtual void Render() override;
 
-		void DrawTexture(GLTexture* glTex, SDL_Rect* srcRect = nullptr,
+		virtual void DrawSprite(GLTexture* glTex, SDL_Rect* srcRect = nullptr,
 			SDL_Rect* dstRect = nullptr, float angle = 0.0f,
 			SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 		void InitRenderData(Texture* texture, SDL_Rect* srcRect, float angle,
 			float x, float y, float w, float h, GLuint quadVAO);
+		void InitLoadShaderData();
 
 	protected:
-		bool Init() override;
+		virtual bool Init() override;
 
-		SDL_GLContext glContext;
+		SDL_GLContext mGLContext;
 		glm::mat4 orthoMatrix;
 		ShaderUtil mShaderUtil;
-
-		void InitLoadShaderData();
 	};
 }

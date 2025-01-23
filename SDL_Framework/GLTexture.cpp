@@ -50,11 +50,11 @@ namespace SDL_Framework {
 	}
 
 	void GLTexture::Generate() {
-		SDL_PixelFormat format = *mSurface->format;
+		SDL_PixelFormat* format = mSurface->format;
 
-		GLint nOfColors = format.BytesPerPixel;
+		GLint nOfColors = format->BytesPerPixel;
 		if (nOfColors == 4) {
-			if (format.Rmask == 0x000000FF) {
+			if (format->Rmask == 0x000000FF) {
 				Mode = GL_RGBA;
 			}
 			else {
@@ -62,7 +62,7 @@ namespace SDL_Framework {
 			}
 		}
 		else if (nOfColors == 3) {
-			if (format.Rmask == 0x000000FF) {
+			if (format->Rmask == 0x000000FF) {
 				Mode = GL_RGB;
 			}
 			else {

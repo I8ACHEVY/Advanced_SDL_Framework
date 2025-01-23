@@ -16,7 +16,7 @@ namespace SDL_Framework {
 	}
 
 	GLGraphics::~GLGraphics() {
-		SDL_GL_DeleteContext(mWindow);
+		//SDL_GL_DeleteContext(mWindow);
 	}
 
 	void GLGraphics::ClearBackBuffer() {
@@ -42,8 +42,8 @@ namespace SDL_Framework {
 	}
 
 	bool GLGraphics::Init() {
-		glContext = SDL_GL_CreateContext(mWindow);
-		if (glContext == nullptr) {
+		mGLContext = SDL_GL_CreateContext(mWindow);
+		if (mGLContext == nullptr) {
 			std::cerr << "SDL_GL_Context could not be created!" << SDL_GetError() << std::endl;
 			return false;
 		}
@@ -78,7 +78,7 @@ namespace SDL_Framework {
 		mShaderUtil.SetMatrix4f("proj", orthoMatrix);
 	}
 
-	void GLGraphics::DrawTexture(GLTexture* glTex, SDL_Rect* srcRect,
+	void GLGraphics::DrawSprite(GLTexture* glTex, SDL_Rect* srcRect,
 		SDL_Rect* dstRect, float angle, SDL_RendererFlip flip) {
 		float x = -1;
 		float y = -1;
