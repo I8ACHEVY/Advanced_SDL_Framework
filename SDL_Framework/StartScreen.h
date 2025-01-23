@@ -39,7 +39,7 @@ private:
 	Scoreboard* mTopScore;
 
 	GameEntity* mLogoHolder;
-	Texture* mLogo;
+	GLTexture* mLogo;
 	GLAnimatedTexture* mAnimatedLogo;
 
 	GameEntity* mPlayModes;

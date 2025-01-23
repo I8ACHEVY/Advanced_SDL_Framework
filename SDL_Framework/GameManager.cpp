@@ -3,7 +3,7 @@
 
 namespace SDL_Framework {
 	GameManager* GameManager::sInstance = nullptr;
-	SDL_Texture* borderTexture = nullptr;
+	GLTexture* borderTexture = nullptr;
 
 	GameManager* GameManager::Instance() {
 		if (sInstance == nullptr) {
@@ -75,15 +75,15 @@ namespace SDL_Framework {
 		mScreenManager->Render();
 
 		if (mBorderTexture) {
-			SDL_Rect destRect = { 0, 0, 1070, 1040 };
 		
-			mGraphics->DrawTexture(mBorderTexture, nullptr, &destRect);
+			mBorderTexture->Render();// (0, 0, 1070, 1040);
 		}
 
 		mGraphics->Render();
 	}
 
 	GameManager::GameManager() : mQuit(false), mBorderTexture (nullptr) {
+		Graphics::SetMode(Graphics::RenderMode::GL);
 		mGraphics = Graphics::Instance();
 
 		if (!Graphics::Initialized()) {
@@ -98,7 +98,7 @@ namespace SDL_Framework {
 		mRandom = Random::Instance();
 		mScreenManager = ScreenManager::Instance();
 
-		mBorderTexture = mAssetManager->GetTexture("Border.png");
+		mBorderTexture = new GLTexture("Border.png");
 
 		if (!mBorderTexture) {
 			std::cerr << "Failed to load border texture: " << IMG_GetError() << std::endl;
@@ -151,7 +151,7 @@ namespace SDL_Framework {
 		mScreenManager = nullptr;
 
 		if (mBorderTexture != nullptr) {
-			SDL_DestroyTexture(mBorderTexture);
+			delete mBorderTexture;
 			mBorderTexture = nullptr;
 		}
 

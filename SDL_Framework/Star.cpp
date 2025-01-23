@@ -41,6 +41,6 @@ void Star::Update() {
 void Star::Render() {
 
 	if (mVisible) {
-		Texture::Render();
+		GLTexture::Render();
 	}
 }
