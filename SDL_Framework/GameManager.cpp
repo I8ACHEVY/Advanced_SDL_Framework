@@ -74,15 +74,15 @@ namespace SDL_Framework {
 
 		mScreenManager->Render();
 
-		if (mBorderTexture) {
-		
-			mBorderTexture->Render();// (0, 0, 1070, 1040);
-		}
+		//if (mBorderTexture) {
+		//
+		//	mBorderTexture->Render();// (0, 0, 1070, 1040);
+		//}
 
 		mGraphics->Render();
 	}
 
-	GameManager::GameManager() : mQuit(false), mBorderTexture (nullptr) {
+	GameManager::GameManager() : mQuit(false){//, mBorderTexture(nullptr) {
 		Graphics::SetMode(Graphics::RenderMode::GL);
 		mGraphics = Graphics::Instance();
 
@@ -98,11 +98,11 @@ namespace SDL_Framework {
 		mRandom = Random::Instance();
 		mScreenManager = ScreenManager::Instance();
 
-		mBorderTexture = new GLTexture("Border.png");
-
-		if (!mBorderTexture) {
-			std::cerr << "Failed to load border texture: " << IMG_GetError() << std::endl;
-		}
+		//mBorderTexture = new GLTexture("Border.png");
+		//
+		//if (!mBorderTexture) {
+		//	std::cerr << "Failed to load border texture: " << IMG_GetError() << std::endl;
+		//}
 
 		mPhysicsManager->SetLayerCollisionMask(PhysicsManager::CollisionLayers::Friendly,
 			PhysicsManager::CollisionFlags::Hostile |
@@ -150,10 +150,10 @@ namespace SDL_Framework {
 		ScreenManager::Release();
 		mScreenManager = nullptr;
 
-		if (mBorderTexture != nullptr) {
-			delete mBorderTexture;
-			mBorderTexture = nullptr;
-		}
+		//if (mBorderTexture != nullptr) {
+		//	delete mBorderTexture;
+		//	mBorderTexture = nullptr;
+		//}
 
 		// terminate SDL subsystems
 		SDL_Quit();
