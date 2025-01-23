@@ -39,7 +39,7 @@ protected:
 
 	Timer* mTimer;
 
-	GLTexture* mTexture[2];
+	Texture* mTexture[2];
 
 	GLAnimatedTexture* mDeathAnimation;
 

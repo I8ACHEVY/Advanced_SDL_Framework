@@ -1,7 +1,7 @@
 #pragma once
 #include "Enemy.h"
 #include "Random.h"
-#include "Texture.h"
+#include "GLTexture.h"
 
 namespace SDL_Framework {
 

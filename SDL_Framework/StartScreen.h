@@ -31,29 +31,29 @@ private:
 	bool mAnimationDone;
 
 	GameEntity* mTopBar;
-	GLTexture* mPlayer1;
-	GLTexture* mPlayer2;
-	GLTexture* mHiScore;
+	Texture* mPlayer1;
+	Texture* mPlayer2;
+	Texture* mHiScore;
 	Scoreboard* mPlayer1Score;
 	Scoreboard* mPlayer2Score;
 	Scoreboard* mTopScore;
 
 	GameEntity* mLogoHolder;
-	GLTexture* mLogo;
+	Texture* mLogo;
 	GLAnimatedTexture* mAnimatedLogo;
 
 	GameEntity* mPlayModes;
-	GLTexture* mStartMode;
-	GLTexture* mOptionsMode;
-	GLTexture* mCreditsMode;
-	GLTexture* mHighScoreMode;
-	GLTexture* mCursor;
+	Texture* mStartMode;
+	Texture* mOptionsMode;
+	Texture* mCreditsMode;
+	Texture* mHighScoreMode;
+	Texture* mCursor;
 	Vector2 mCursorStartPos;
 	Vector2 mCursorOffsetPos;
 	int mSelectedMode;
 
 	GameEntity* mBottomBar;
-	GLTexture* mTaito;
-	GLTexture* mDates;
-	GLTexture* mRights;
+	Texture* mTaito;
+	Texture* mDates;
+	Texture* mRights;
 };

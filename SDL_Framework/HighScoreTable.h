@@ -21,23 +21,23 @@ private:
 	InputManager* mInputManager;
 
 	GameEntity* mTopBar;
-	GLTexture* mVolume;
-	GLTexture* mMute;
-	GLTexture* mHighScores;
+	Texture* mVolume;
+	Texture* mMute;
+	Texture* mHighScores;
 
 	GameEntity* mPlayModes;
-	GLTexture* mStartMode;
-	GLTexture* mOptionsMode;
-	GLTexture* mBackMode;
-	GLTexture* mCreditsMode;
-	GLTexture* mCursor;
+	Texture* mStartMode;
+	Texture* mOptionsMode;
+	Texture* mBackMode;
+	Texture* mCreditsMode;
+	Texture* mCursor;
 	Vector2 mCursorStartPos;
 	Vector2 mCursorOffsetPos;
 	int mSelectedMode;
 
 	GameEntity* mBottomBar;
-	GLTexture* mTaito;
-	GLTexture* mDates;
-	GLTexture* mRights;
+	Texture* mTaito;
+	Texture* mDates;
+	Texture* mRights;
 };
 

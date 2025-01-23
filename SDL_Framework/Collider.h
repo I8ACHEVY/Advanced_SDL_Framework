@@ -20,9 +20,9 @@ namespace SDL_Framework {
 		ColliderType mType;
 
 		static const bool DEBUG_COLLIDERS = false;
-		GLTexture* mDebugTexture;
+		Texture* mDebugTexture;
 
-		void SetDebugTexture(GLTexture* texture);
+		void SetDebugTexture(Texture* texture);
 	};
 
 }

@@ -44,7 +44,7 @@ private:
 	bool mVisible;
 	bool mAnimating;
 
-	GLTexture* mTank;
+	Texture* mTank;
 	GLAnimatedTexture* mDeathAnimation;
 
 	int mScore;

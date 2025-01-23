@@ -36,8 +36,8 @@ mTopScore->Position(Graphics::SCREEN_WIDTH * 0.045f, 30.0f);
 mTopScore->Score(645987);	//CREATE SAVE SYSTEM
 
 mLogoHolder = new GameEntity(Graphics::SCREEN_WIDTH * 0.49f, Graphics::SCREEN_HEIGHT * 0.55f);
-mLogo = new GLTexture("InvaderSprites.png", 10, 0, 520, 184);
-mAnimatedLogo = new GLAnimatedTexture("InvaderSprites.png", 10, 0, 520, 184, 0, 0.5f,
+mLogo = new GLTexture("InvaderSprites.png", -10, 0, 520, 184);
+mAnimatedLogo = new GLAnimatedTexture("InvaderSprites.png", -10, 0, 520, 184, 0, 0.5f,
 	Animation::Layouts::Vertical);
 
 mLogoHolder->Parent(this);

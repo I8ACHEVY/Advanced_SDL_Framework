@@ -27,7 +27,7 @@ private:
 
 	Player* mPlayer;
 
-	GLTexture* mStartLabel;
+	Texture* mStartLabel;
 
 	Level* mLevel;
 
