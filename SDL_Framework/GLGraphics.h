@@ -1,8 +1,8 @@
 #pragma once
 #include "Graphics.h"
 #include "glew.h"
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
+//#include <glm.hpp>
+//#include <gtc/matrix_transform.hpp>
 #include "ShaderUtil.h"
 #include "GLTexture.h"
 
@@ -24,7 +24,7 @@ namespace SDL_Framework {
 			SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 		void InitRenderData(Texture* texture, SDL_Rect* srcRect, float angle,
-			float x, float y, float w, float h, GLuint quadVAO);
+			float x, float y, float w, float h, GLuint quadVAO, SDL_RendererFlip flip);
 		void InitLoadShaderData();
 
 	protected:

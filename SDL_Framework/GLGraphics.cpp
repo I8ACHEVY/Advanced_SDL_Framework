@@ -125,7 +125,7 @@ namespace SDL_Framework {
 	}
 
 	void GLGraphics::InitRenderData(Texture* texture, SDL_Rect* srcRect,
-		float angle, float x, float y, float w, float h, GLuint quadVAO) {
+		float angle, float x, float y, float w, float h, GLuint quadVAO, SDL_RendererFlip flip) {
 		GLTexture* glTex = dynamic_cast<GLTexture*>(texture);
 
 		if (!glTex) {
@@ -155,24 +155,41 @@ namespace SDL_Framework {
 				srcRect->y / height);
 		}
 
+		if (flip == SDL_FLIP_HORIZONTAL) {
+			std::swap(topRight.x, topLeft.x);
+			std::swap(bottomRight.x, bottomLeft.x);
+		}
+
+		if (flip == SDL_FLIP_VERTICAL) {
+			std::swap(topRight.y, bottomRight.y);
+			std::swap(topLeft.y, bottomLeft.y);
+		}
+
 		Vertex vertexData[6];
 		vertexData[0].SetPosition(x + w, y + h);
 		vertexData[0].SetUV(topRight.x, topRight.y);
+
 		vertexData[1].SetPosition(x, y + h);
 		vertexData[1].SetUV(topLeft.x, topLeft.y);
+
 		vertexData[2].SetPosition(x, y);
 		vertexData[2].SetUV(bottomLeft.x, bottomLeft.y);
 
 		vertexData[3].SetPosition(x, y);
 		vertexData[3].SetUV(bottomLeft.x, bottomLeft.y);
+
 		vertexData[4].SetPosition(x + w, y);
 		vertexData[4].SetUV(bottomRight.x, bottomRight.y);
+
 		vertexData[5].SetPosition(x + w, y + h);
 		vertexData[5].SetUV(topRight.x, topRight.y);
 
+		for (int i = 0; i < 6; i++) {
+			vertexData[i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+		}
+
 		glBindBuffer(GL_ARRAY_BUFFER, quadVAO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
-
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 }
